@@ -1,0 +1,36 @@
+Copyright (c) 2026 Ignacio Zúñiga
+
+Todos los derechos reservados.
+
+Este proyecto, incluyendo su código fuente, diseño, estructura,
+contenido original y elementos desarrollados por el autor, está
+protegido por las leyes aplicables de propiedad intelectual.
+
+La aplicación puede ser utilizada gratuitamente por los usuarios
+para fines personales y de entretenimiento.
+
+Sin autorización previa y expresa del autor, queda prohibido:
+
+- Copiar total o parcialmente el código fuente.
+- Redistribuir el código fuente o el proyecto.
+- Modificar y publicar versiones derivadas.
+- Comercializar, vender o sublicenciar el proyecto o su código.
+- Utilizar el proyecto o partes sustanciales de este para crear
+  una aplicación derivada.
+- Presentar el proyecto o partes sustanciales del mismo como
+  una obra propia.
+
+El acceso público al código fuente en este repositorio no implica
+la concesión de una licencia para copiar, modificar, distribuir
+o reutilizar dicho código.
+
+Los nombres, imágenes, logotipos, fotografías, marcas y otros
+elementos pertenecientes a terceros permanecen sujetos a los
+derechos de sus respectivos propietarios.
+
+El autor se reserva todos los derechos no concedidos expresamente
+en este documento.
+
+Para solicitar autorización para utilizar, modificar, distribuir
+o reutilizar el proyecto, deberá contactarse previamente con el
+autor.
