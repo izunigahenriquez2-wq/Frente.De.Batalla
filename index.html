@@ -857,6 +857,30 @@ body.pton{overflow:hidden}
 .pt-cred{display:flex;flex-wrap:wrap;gap:6px;max-height:34vh;overflow:auto;margin:0 0 10px}
 .pt-cred span{font-size:13px;padding:3px 9px;border-radius:999px;background:#f1eafb;color:#4a3f6b;font-weight:700}
 
+/* ===== decoración (Bases Secretas) ===== */
+#pt .pt-itl{position:absolute;inset:0;pointer-events:none}
+#pt .pt-ito{position:absolute;image-rendering:pixelated;pointer-events:auto;transform-origin:50% 50%;-webkit-tap-highlight-color:transparent;cursor:pointer;touch-action:manipulation}
+#pt .pt-ito[data-k^="mat_"],#pt .pt-ito[data-k="cojin"]{cursor:default}
+.pt-room.edit .pt-ito{cursor:grab;touch-action:none}
+.pt-room.edit .pt-ito.sel{filter:drop-shadow(0 0 0 #fff) drop-shadow(0 0 5px #ffd24d) drop-shadow(0 0 2px #fff)}
+.pt-room.edit .pt-ito.ok{filter:drop-shadow(0 0 6px #5dff8a)}.pt-room.edit .pt-ito.bad{filter:drop-shadow(0 0 6px #ff4d6a);opacity:.75}
+.pt-room.edit .pt-pet,.pt-room.edit .pt-poop{pointer-events:none}
+#pt .pt-gd{position:absolute;inset:0;pointer-events:none;z-index:99998}
+#pt .pt-gd i{position:absolute;border:2px dashed rgba(255,255,255,.7);background-image:linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(0deg,rgba(255,255,255,.35) 1px,transparent 1px);box-shadow:0 0 0 1px rgba(60,40,100,.25)}
+#pt .pt-gd i.w{border-color:rgba(255,236,160,.8)}
+#pt .pt-room.edit .pt-dock,#pt .pt-room.visit .pt-dock{display:none}
+.pt-edbar{grid-area:dock;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;padding:10px;background:rgba(255,255,255,.9);border-top:2px solid var(--line)}
+.pt-edh{font-size:.82rem;color:#4a3f6b;text-align:center;flex:1 1 100%}.pt-edb{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.pt-edbar .pt-btn.ok{background:#7cc79a;color:#fff}.pt-edbar .pt-btn[disabled]{opacity:.45}
+.pt-ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;max-height:50vh;overflow:auto;margin:8px 0}
+.pt-ar{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:12px;border:2px solid var(--line);background:#fff;color:#4a3f6b;font-size:.72rem}
+.pt-ar b{font-size:.74rem}.pt-icn{image-rendering:pixelated;display:block;max-height:52px;object-fit:contain}
+.pt-fur{display:flex;align-items:center;justify-content:center;background:#f6f0ff}
+.pt-chipsr{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}#pt .pt-chipsr button{padding:5px 10px;border-radius:999px;border:2px solid var(--line);background:#fff;font-size:.74rem;color:#4a3f6b}#pt .pt-chipsr button.on{background:#b58df0;color:#fff;border-color:#b58df0}
+.pt-tip{background:#fff7d6;border:2px solid #f2cd5e;border-radius:12px;padding:8px 10px;font-size:.8rem;color:#5a4a10;margin-bottom:6px}
+
+#pt .pt-room.edit .pt-panel,#pt .pt-room.visit .pt-panel{display:none}
+
 /* ===== mochila (Pokemon Rivals) ===== */
 .pbscn{position:relative;width:100%;height:clamp(430px,calc(100vh - 350px),860px);border-radius:16px;overflow:hidden;--bs:clamp(70px,min(19cqw,30cqh),190px);background:linear-gradient(180deg,#5fae3f,#3f8a35);container-type:size;box-shadow:0 10px 0 rgba(20,20,60,.25),inset 0 0 0 4px rgba(255,255,255,.25);user-select:none}
 .pbgrass{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 110'%3E%3Cpath d='M0 110L10 18L22 110ZM18 110L34 30L42 110ZM40 110L52 6L64 110ZM60 110L78 26L88 110ZM82 110L98 12L110 110ZM100 110L114 36L124 110Z' fill='%234d9438'/%3E%3Cpath d='M8 110L20 44L28 110ZM30 110L44 52L52 110ZM70 110L84 48L92 110ZM92 110L106 56L114 110Z' fill='%2378c04e'/%3E%3C/svg%3E") repeat-x bottom/150px auto,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 110'%3E%3Cpath d='M0 110L10 18L22 110ZM18 110L34 30L42 110ZM40 110L52 6L64 110ZM60 110L78 26L88 110ZM82 110L98 12L110 110ZM100 110L114 36L124 110Z' fill='%234d9438'/%3E%3Cpath d='M8 110L20 44L28 110ZM30 110L44 52L52 110ZM70 110L84 48L92 110ZM92 110L106 56L114 110Z' fill='%2378c04e'/%3E%3C/svg%3E") repeat-x 40px 108%/200px auto;opacity:.95}
@@ -3838,7 +3862,7 @@ function ptOpen(){
   }
 }
 function ptClose(){
-  ptCloseModal();if(GS)gSaveNow();PT.o=0;PT.init=0;
+  PT.visit=null;PT.ed=null;ptCloseModal();if(GS)gSaveNow();PT.o=0;PT.init=0;
   const el=ptEl();if(el){el.hidden=true;el.innerHTML=''}
   document.body.classList.remove('pton');
 }
@@ -3902,9 +3926,9 @@ function ptHatch(id,cb){
 
 /* ===================== HABITACIÓN ===================== */
 function ptRoom(){
-  const el=ptEl(),p=GS.pet;
+  const el=ptEl(),p=GS.pet;ptDecoMigrate();PT.visit=null;PT.ed=null;PT.use=null;
   el.innerHTML=`<div class="pt-room" id="ptrm">
-  <header class="pt-hud"><button class="pt-btn" onclick="ptClose()">‹ Menú</button><b class="pt-title">Mi Pokémon</b><span class="pt-sp1"></span><span class="pt-coin"><i class="pt-cn"></i><b id="ptcoins">0</b></span><button class="pt-btn" onclick="ptShop()">Tienda</button><button class="pt-btn ic" onclick="ptSettings()" aria-label="Ajustes">⚙</button></header>
+  <header class="pt-hud"><button class="pt-btn" onclick="ptClose()">‹ Menú</button><b class="pt-title">Mi Pokémon</b><span class="pt-sp1"></span><span class="pt-coin"><i class="pt-cn"></i><b id="ptcoins">0</b></span><button class="pt-btn" onclick="ptDecoEdit(1)">🛋 Decorar</button><button class="pt-btn" onclick="ptShop()">Tienda</button><button class="pt-btn ic" onclick="ptSettings()" aria-label="Ajustes">⚙</button></header>
   <section class="pt-scene" id="ptsc">
    <canvas id="ptcv" class="pt-cv"></canvas>
    <div id="ptpet" class="pt-pet" onpointerdown="ptTap(event)"><div class="pt-ex">!</div><div class="pt-sh"></div><div class="pt-pb"></div><div class="pt-zz"><i>z</i><i>z</i><i>Z</i></div></div>
@@ -3915,7 +3939,7 @@ function ptRoom(){
    <button onclick="ptAct('eat')"><i>🍎</i>Comer</button><button onclick="ptAct('play')"><i>⚽</i>Jugar</button><button onclick="ptAct('train')"><i>💪</i>Entrenar</button>
    <button onclick="ptAct('praise')"><i>💖</i>Elogiar</button><button onclick="ptAct('scold')"><i>☝️</i>Regañar</button><button id="ptslp" onclick="ptAct('sleep')"><i>🌙</i>Dormir</button>
   </nav></div><div class="pt-toasts"></div>`;
-  PT.init=0;PT.hash='';PT.pk='';PT.sp=0;PT.lie=0;PT.busy=0;PT.inst=p.sl?1:0;ptSync(1);ptCvInit();
+  PT.init=0;PT.hash='';PT.pk='';PT.sp=0;PT.lie=0;PT.busy=0;PT.inst=p.sl?1:0;ptSync(1);ptCvInit();ptDecoInit();
 }
 function ptCoins(){const c=document.getElementById('ptcoins');if(c)c.textContent=GS.coins}
 
@@ -3946,7 +3970,7 @@ function ptSync(force){
   ptCoins();
   // panel
   const opts=GEV[p.sp]?gEvoOpts(p):[],can=opts.some(o=>o.ok),w=ptWeight(p);
-  const h=[ptNm(p),p.sp,p.lv,Math.floor(p.xp),Math.round(p.sat),Math.round(p.joy),Math.round(p.en),Math.round(p.bond),p.cm,Math.round(p.dc),p.fz,p.df,p.sd,p.iq,Math.round(p.wt*10),ptMood(p),can,p.g].join('|');
+  const h=[ptNm(p),p.sp,p.lv,Math.floor(p.xp),Math.round(p.sat),Math.round(p.joy),Math.round(p.en),Math.round(p.bond),p.cm,Math.round(p.dc),p.fz,p.df,p.sd,p.iq,Math.round(p.wt*10),ptMood(p),can,p.g,ptComfort()].join('|');
   if(h===PT.hash&&!force)return;PT.hash=h;
   const m=BYID[p.sp],gs=p.g==='m'?'♂':p.g==='f'?'♀':'';
   const lvl=p.lv>=GMAXLV?'Nv. máx.':'Nv. '+p.lv;
@@ -3954,7 +3978,7 @@ function ptSync(force){
   <div class="pt-id"><div class="pt-port">${ptAni(p.sp)}</div><div class="pt-idt"><b>${esc(ptNm(p))}<button class="pt-ed" onclick="ptRename()" aria-label="Cambiar apodo">✎</button></b><div class="pt-ty">${m.t.map(t=>tchip(t)).join('')}</div><small>${esc(m.n)} ${gs} · ${lvl} · <span class="pt-mood">${ptMood(p)}</span></small></div></div>
   <div class="pt-xpb"><i style="width:${p.lv>=GMAXLV?100:p.xp/gxp(p.lv)*100}%"></i></div>
   <div class="pt-bars">${ptBar('Saciedad',p.sat,'#8fd6ad')}${ptBar('Ánimo',p.joy,'#f4a8c0')}${ptBar('Energía',p.en,'#f2cd5e')}${ptBar('Vínculo',p.bond,'#b58df0')}</div>
-  <div class="pt-chips"><span style="--c:${w[1]}">${(p.wt).toFixed(1)} kg · ${w[0]}</span><span title="Errores de cuidado">Errores ${p.cm}</span><span title="Disciplina">Disciplina ${Math.round(p.dc)}</span></div>
+  <div class="pt-chips"><span style="--c:${w[1]}">${(p.wt).toFixed(1)} kg · ${w[0]}</span><span title="Errores de cuidado">Errores ${p.cm}</span><span title="Disciplina">Disciplina ${Math.round(p.dc)}</span><span title="Puntos de estilo de tu habitación: más estilo, Pokémon más contento">Estilo ★${ptComfort()}</span></div>
   <div class="pt-stats">${PTST.map(s=>`<div><span>${s[1]}</span><div><i style="width:${p[s[0]]}%;background:${s[2]}"></i></div><b>${p[s[0]]}</b></div>`).join('')}</div>
   <button class="pt-evo ${can?'rd':''}" onclick="ptEvoModal()">${GEV[p.sp]?(can?'¡Puede evolucionar!':'Ver evolución'):'Etapa final'}</button>`;
 }
@@ -3977,14 +4001,17 @@ function ptMove(dt){
   if(p.sl||PT.busy){const k=Math.exp(-dt*9);PT.vx*=k;PT.vy*=k}
   else{
     const dx=PT.tx-PT.x,dy=PT.ty-PT.y,d=Math.hypot(dx,dy);
-    if(d<6){PT.wt-=dt;if(PT.wt<=0){if(Math.random()<.35)PT.wt=1+Math.random()*2.5;else{PT.tx=x0+Math.random()*(x1-x0);PT.ty=y0+Math.random()*(y1-y0);PT.wt=.8+Math.random()*1.8}}}
+    if(d<6){if(PT.use&&!PT.use.t0&&!PT.ed)ptUseStart();PT.wt-=dt;if(PT.wt<=0){PT.use=null;if(Math.random()<.35)PT.wt=1+Math.random()*2.5;else{if(!PT.ed&&ptDecoPick(x0,x1,y0,y1)){PT.wt=.5}else{let tr=0,qx,qy;do{qx=x0+Math.random()*(x1-x0);qy=y0+Math.random()*(y1-y0)}while(ptSolidAt(qx,qy)&&++tr<12);PT.tx=qx;PT.ty=qy;PT.use=null;PT.wt=.8+Math.random()*1.8}}}}
     const tired=p.en<20||p.sat<15;
     const maxv=(tired?26:52)*(ps/110+.45);
     const want=d>4?Math.min(maxv,d*2.6):0;
     const wx=d>0?dx/d*want:0,wy=d>0?dy/d*want*.85:0;
     const k=1-Math.exp(-dt*5);PT.vx+=(wx-PT.vx)*k;PT.vy+=(wy-PT.vy)*k;
   }
-  PT.x=gClamp(PT.x+PT.vx*dt,x0,x1);PT.y=gClamp(PT.y+PT.vy*dt,y0,y1);
+  if(!p.sl&&!PT.busy&&ptSolidAt(PT.x,PT.y))ptEject();
+  let nx=gClamp(PT.x+PT.vx*dt,x0,x1),ny=gClamp(PT.y+PT.vy*dt,y0,y1);
+  if(!p.sl&&!PT.busy&&ptSolidAt(nx,ny)){if(!ptSolidAt(nx,PT.y))ny=PT.y;else if(!ptSolidAt(PT.x,ny))nx=PT.x;else{nx=PT.x;ny=PT.y;PT.vx=PT.vy=0;PT.wt=0;PT.use=null}}
+  PT.x=nx;PT.y=ny;try{ptDecoTick(performance.now()/1000)}catch(e){}
   pe.style.transform=`translate3d(${(PT.x-ps/2).toFixed(1)}px,${(PT.y-ps*.95).toFixed(1)}px,0)`;
   pe.style.zIndex=Math.round(PT.y*10);
   if(Math.abs(PT.vx)>9){const fl=PT.vx>0;if(fl!==PT.fl){PT.fl=fl;pe.querySelector('.pt-pb').classList.toggle('fl',fl)}}
@@ -4020,7 +4047,7 @@ function ptSim(dt,off){
     if(p.en>=100){p.sl=0;if(!off){ptToast(ptNm(p)+' se despertó descansado');ptS('ok')}}
   }else{
     const over=p.wt/p.wb>1.45,thin=p.wt/p.wb<.7;
-    p.sat-=.062*dt*k;p.joy-=(.034+p.po*.03)*dt*k;p.en-=(.028+(thin?.012:0))*dt*k;
+    p.sat-=.062*dt*k;p.joy-=(.034*(typeof ptComfMul==='function'?ptComfMul():1)+p.po*.03)*dt*k;p.en-=(.028+(thin?.012:0))*dt*k;
     p.wt=Math.max(p.wb*.45,p.wt-p.wb*.00006*dt*k);
     if(off){p.sat=Math.max(p.sat,25);p.joy=Math.max(p.joy,30);p.en=Math.max(p.en,off?20:0)}
     if(over)p.joy-=.01*dt*k;
@@ -4478,7 +4505,8 @@ const PTD={
  pecera:{n:'Pecera',p:200,d:'Con un pececito que nada.'}
 };
 function ptRoomCfg(){
-  const r=(GS&&GS.room)||{},o={deco:Array.isArray(r.deco)?r.deco:[]};
+  if(PT.visit)return {wall:PT.visit.wall,floor:PT.visit.floor,rug:PT.visit.rug,bed:PT.visit.bed,view:PT.visit.view,deco:[]};
+  const r=(GS&&GS.room)||{},o={deco:[],view:(typeof PTV!=='undefined'&&PTV[r.view]&&(PTV[r.view].p===0||(r.own||[]).includes('view:'+r.view)))?r.view:'cielo'};
   for(const k of ['wall','floor','rug','bed'])o[k]=PTR[k].o[r[k]]?r[k]:PTR[k].def;
   return o;
 }
@@ -4519,6 +4547,8 @@ function ptCvDraw(){
   // ventana
   const ww=Math.max(28,Math.min(64,Math.round(w*.22))),wh=Math.round(ww*.86),wx=Math.round(w*.09),wy=Math.round(h*.09);
   R(wx-3,wy-3,ww+6,wh+6,'#d8bfd0');R(wx-2,wy-2,ww+4,wh+4,'#fff');
+  PT.win={x:(wx-4)*s,y:(wy-3)*s,w:(ww+8)*s,h:(wh+10)*s};
+  if(cfg.view&&cfg.view!=='cielo'){ptDrawView(c,R,E,wx,wy,ww,wh,night,t,cfg.view)}else{
   const sky=night?['#1f2260','#2a2d73','#383a86','#4a4a98']:['#8fd0f7','#a6dcfa','#bfe7fc','#d4f0fd'];
   for(let i=0;i<4;i++)R(wx,wy+Math.round(wh*i/4),ww,Math.ceil(wh/4),sky[i]);
   if(night){
@@ -4530,65 +4560,9 @@ function ptCvDraw(){
       const cl=(x,y,a,b)=>{const X=Math.max(wx,x),X2=Math.min(wx+ww,x+a);if(X2>X)R(X,y,X2-X,b,'#fff')};
       const yy=wy+wh*y0;cl(cx,yy,cw*ww,3);cl(cx+cw*ww*.2,yy-2,cw*ww*.5,2)}
   }
+  }
   R(wx+Math.floor(ww/2)-1,wy,2,wh,'#fff');R(wx,wy+Math.floor(wh/2)-1,ww,2,'#fff');
   R(wx-4,wy+wh+3,ww+8,3,'#fff');R(wx-4,wy+wh+6,ww+8,1,'#d8bfd0');
-  // cuadros
-  for(const [fx,fy,a,b,c1] of [[.42,.12,12,15,'#9fd0f0'],[.52,.09,16,12,'#bfe5d0']]){
-    const x=Math.round(w*fx),y=Math.round(h*fy);R(x-2,y-2,a+4,b+4,'#d8bfd0');R(x,y,a,b,'#fff');R(x+2,y+2,a-4,b-4,c1);R(x+2,y+b-5,a-4,3,'#7cc79a');R(x+a-6,y+3,2,2,'#fff6c9')
-  }
-  // estante
-  const shx=Math.round(w*.68),shy=Math.round(h*.27),shw=Math.round(w*.22);
-  R(shx,shy,shw,3,'#c99d72');R(shx,shy+3,shw,1,'#a87f56');R(shx+2,shy+4,2,3,'#a87f56');R(shx+shw-4,shy+4,2,3,'#a87f56');
-  R(shx+3,shy-9,4,9,'#8fc1f2');R(shx+7,shy-12,4,12,'#f2a08a');R(shx+11,shy-8,4,8,'#9fdcb0');R(shx+4,shy-7,2,1,'#fff');
-  R(shx+shw-12,shy-6,8,6,'#e6a08c');R(shx+shw-11,shy-6,6,1,'#c9806c');E(shx+shw-8,shy-9,3,3,'#7cc79a');R(shx+shw-9,shy-12,2,2,'#7cc79a');
-  // decoración comprada (pared)
-  if(cfg.deco.includes('reloj')){
-    const cx=Math.round(w*.36),cy=Math.round(h*.09),r=6;E(cx,cy,r+1,r+1,'#4a3f6b');E(cx,cy,r,r,'#fff');
-    const d=new Date(),mm=d.getMinutes(),hh=(d.getHours()%12)+mm/60;
-    const ha=(hh/12)*Math.PI*2-Math.PI/2,ma=(mm/60)*Math.PI*2-Math.PI/2;
-    for(let k=1;k<=3;k++)R(cx+Math.cos(ha)*k*.9,cy+Math.sin(ha)*k*.9,1,1,'#4a3f6b');
-    for(let k=1;k<=5;k++)R(cx+Math.cos(ma)*k,cy+Math.sin(ma)*k,1,1,'#e8506f');
-    R(cx,cy,1,1,'#4a3f6b');
-  }
-  if(cfg.deco.includes('guirnalda')){
-    const cols=['#f2736f','#f2cd5e','#8fd6ad','#8fb2f0','#f4a8c0'];
-    let px=0,py=1;for(let x=0;x<w;x++){const y=2+Math.round(Math.sin(x/w*Math.PI*8)*-2+2);R(x,y,1,1,'#4a3f6b');if(x%9===4){const on=Math.sin(t*3+x)>-.2;const col=cols[(x/9|0)%5];R(x-1,y+1,3,3,on?col:'#8a8aa8');if(on)R(x,y+1,1,1,'#fff')}}
-  }
-  // lámpara
-  const lx=Math.round(w*.05),ly=hz-Math.round(h*.2);
-  R(lx+3,ly+8,2,Math.round(h*.2)-8-3,'#a58bd6');R(lx,hz-6,8,3,'#a58bd6');
-  if(night){E(lx+4,ly+4,12,10,'rgba(255,236,160,.25)');E(lx+4,ly+4,8,6,'rgba(255,236,160,.3)')}
-  R(lx-1,ly+2,10,7,'#ffe9a8');R(lx+1,ly,6,2,'#ffe9a8');R(lx-1,ly+8,10,1,'#e8c870');R(lx+2,ly+3,2,2,'#fff6cf');
-  // planta
-  const px=Math.round(w*.93),py=hz-4;
-  R(px-6,py-9,12,9,'#e6a08c');R(px-7,py-11,14,3,'#d9806c');R(px-6,py-9,2,9,'#f0b8a4');
-  for(const [dx,dy,hh] of [[-5,-18,11],[-1,-25,18],[3,-20,13],[-8,-14,6],[7,-14,6]]){R(px+dx,py+dy-6,3,hh,'#7cc79a');R(px+dx,py+dy-6,1,hh,'#98dbb2')}
-  // muebles de suelo
-  if(cfg.deco.includes('sofa')){
-    const sw=Math.max(34,Math.round(w*.2)),sx=Math.round(w*.52),sy=hz-8,sh=Math.round(sw*.42);
-    R(sx,sy,sw,sh*.6,'#7c88d8');R(sx+2,sy+2,sw-4,sh*.4,'#98a4ec');
-    R(sx-3,sy+sh*.3,5,sh*.7,'#6a76c6');R(sx+sw-2,sy+sh*.3,5,sh*.7,'#6a76c6');
-    R(sx+2,sy+sh*.5,sw-4,sh*.4,'#aab4f4');R(sx+2,sy+sh*.5,sw-4,1,'#c9d0fa');R(sx+sw/2,sy+sh*.5,1,sh*.4,'#8e9ae4');
-    R(sx,sy+sh*.9,3,3,'#4a3f6b');R(sx+sw-3,sy+sh*.9,3,3,'#4a3f6b');
-    R(sx+4,sy+sh*.38,7,5,'#f4a8c0');
-  }
-  if(cfg.deco.includes('cofre')){
-    const cx=Math.round(w*.3),cy=hz-1,cw=24;
-    E(cx+cw/2,cy+11,cw*.55,3,'rgba(60,40,70,.2)');
-    R(cx,cy,cw,11,'#b97a3f');R(cx,cy+1,cw,1,'#d49a5a');R(cx,cy-5,cw,6,'#a86a30');R(cx+1,cy-6,cw-2,2,'#c98a4e');
-    R(cx,cy+4,cw,1,'#7a4a1e');R(cx+cw/2-2,cy-1,4,5,'#e2b04a');R(cx+cw/2-1,cy+1,2,2,'#8a6416');
-    E(cx+6,cy-8,3,3,'#e8506f');R(cx+5,cy-9,2,1,'#fff');E(cx+17,cy-7,3,3,'#8fb2f0');
-  }
-  if(cfg.deco.includes('pecera')){
-    const fx=Math.round(w*.82),fy=hz-2,fw=20;
-    R(fx,fy+8,fw,3,'#a97442');R(fx+2,fy+11,3,8,'#8a5a34');R(fx+fw-5,fy+11,3,8,'#8a5a34');
-    R(fx+1,fy-10,fw-2,18,'#5aa8d8');R(fx+2,fy-9,fw-4,16,'#9fd8f2');R(fx+2,fy-9,fw-4,3,'#c8eeff');
-    R(fx+1,fy+6,fw-2,2,'#e8d8a0');R(fx+4,fy+2,2,5,'#4fb870');R(fx+fw-7,fy+4,2,3,'#4fb870');
-    const ax=fx+3+((Math.sin(t*.8)+1)/2)*(fw-9),ay=fy-3+Math.sin(t*1.7)*2;
-    R(ax,ay,4,2,'#f29a3a');R(ax+(Math.cos(t*.8)>0?-1:4),ay,1,2,'#f2cd5e');R(ax+(Math.cos(t*.8)>0?3:0),ay,1,1,'#fff');
-    R(fx,fy-11,fw,1,'#8fa0c0');
-    if(Math.sin(t*2)>.7)R(ax+1,ay-4,1,1,'#fff');
-  }
   // alfombra
   const rcx=Math.round(w*.5),rcy=Math.round(h*.8);
   E(rcx,rcy,Math.round(w*.31),Math.round(h*.16),rg.c[0]);E(rcx,rcy-1,Math.round(w*.31),Math.round(h*.16)-1,rg.c[1]);
@@ -4609,6 +4583,7 @@ function ptCvDraw(){
     for(let k=bx+6;k<bx+bwd-2;k+=7)R(k,y0+bh*.22,2,bh*.42,'rgba(255,255,255,.16)');
     R(bx,y0+bh*.64,bwd,2,'rgba(0,0,0,.18)');
   }
+  try{ptDecoBgFx(c,s,night)}catch(e){}
 }
 
 /* ---- manta superpuesta (cubre al Pokémon dormido) ---- */
@@ -4691,29 +4666,9 @@ function ptShop(tab){
   const sec=(t,ids)=>`<h4>${t}</h4><div class="pt-list">${ids.map(i=>row(i,GFOOD[i]?GFOOD[i].p:GPRICE(i))).join('')}</div>`;
   let body;
   if(T==='obj')body=sec('Comida',[9101,9102,9106,9107,9103,9104,9105])+sec('Piedras evolutivas',GSTONES)+sec('Objetos de evolución',[9001,...GHELD]);
-  else{
-    const cfg=ptRoomCfg();
-    const sw=(cat,o)=>cat==='bed'?`<i class="pt-sw" style="background:linear-gradient(90deg,${o.c[0]} 0 22%,${o.c[3]} 22% 42%,${o.c[1]} 42%)"></i>`:`<i class="pt-sw" style="background:linear-gradient(135deg,${o.c[0]} 0 34%,${o.c[1]} 34% 67%,${o.c[2]} 67%)"></i>`;
-    body=['wall','floor','rug','bed'].map(cat=>`<h4>${PTR[cat].n}</h4><div class="pt-opts">${Object.keys(PTR[cat].o).map(k=>{
-      const o=PTR[cat].o[k],own=ptOwn(cat,k),on=cfg[cat]===k;
-      return `<div class="pt-op ${on?'on':''}">${sw(cat,o)}<b>${o.n}</b>`+(on?`<span class="pt-eq">Puesto</span>`:own?`<button class="pt-go s" onclick="ptRoomSet('${cat}','${k}')">Poner</button>`:`<button class="pt-go s" ${GS.coins>=o.p?'':'disabled'} onclick="ptRoomSet('${cat}','${k}')">${o.p}</button>`)+`</div>`}).join('')}</div>`).join('')+
-      `<h4>Muebles y adornos</h4><div class="pt-list">${Object.keys(PTD).map(k=>{
-        const d=PTD[k],own=ptOwn('deco',k),on=cfg.deco.includes(k);
-        return `<div class="pt-it"><div class="pt-ic i"><svg viewBox="0 0 8 8" width="32" height="32" shape-rendering="crispEdges">${ptDecoIcon(k)}</svg></div><div><b>${d.n}</b><small>${d.d}</small></div>`+
-          (own?`<button class="pt-go s" onclick="ptRoomSet('deco','${k}')">${on?'Quitar':'Poner'}</button>`:`<button class="pt-go s" ${GS.coins>=d.p?'':'disabled'} onclick="ptRoomSet('deco','${k}')">${d.p}</button>`)+`</div>`}).join('')}</div>`;
-  }
+  else body=ptShopRoom();
   const m=ptModal(`<div class="pt-shh"><h3>Tienda</h3><span class="pt-coin"><i class="pt-cn"></i><b>${GS.coins}</b></span></div><div class="pt-stabs"><button class="${T==='obj'?'on':''}" onclick="ptShop('obj')">Objetos</button><button class="${T==='room'?'on':''}" onclick="ptShop('room')">Habitación</button></div><div class="pt-scr">${body}</div><div class="pt-row"><button class="pt-btn" onclick="ptCloseModal()">Cerrar</button></div>`,'shop');
   const s=m.querySelector('.pt-scr');if(s)s.scrollTop=PT.ssy||0;PT.ssy=0;
-}
-function ptDecoIcon(k){
-  const P={
-   reloj:[[1,1,6,6,'#4a3f6b'],[2,2,4,4,'#fff'],[4,2,1,3,'#4a3f6b'],[4,4,2,1,'#e8506f']],
-   guirnalda:[[0,2,8,1,'#4a3f6b'],[1,3,1,2,'#f2736f'],[3,3,1,2,'#f2cd5e'],[5,3,1,2,'#8fd6ad'],[7,3,1,2,'#8fb2f0']],
-   sofa:[[1,2,6,3,'#7c88d8'],[0,3,1,4,'#6a76c6'],[7,3,1,4,'#6a76c6'],[1,4,6,2,'#aab4f4'],[1,6,1,1,'#4a3f6b'],[6,6,1,1,'#4a3f6b']],
-   cofre:[[1,2,6,2,'#a86a30'],[1,4,6,3,'#b97a3f'],[3,3,2,2,'#e2b04a'],[2,1,2,1,'#e8506f']],
-   pecera:[[1,1,6,5,'#5aa8d8'],[2,2,4,3,'#9fd8f2'],[3,3,2,1,'#f29a3a'],[1,6,6,1,'#a97442'],[2,7,1,1,'#8a5a34'],[5,7,1,1,'#8a5a34']]
-  }[k]||[];
-  return P.map(r=>`<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}" fill="${r[4]}"/>`).join('');
 }
 function ptRoomSet(cat,key){
   const r=GS.room;r.own=r.own||[];
@@ -4726,6 +4681,400 @@ function ptRoomSet(cat,key){
   }
   ptS('ok');gSaveNow();ptCvDraw();if(PT.lie)ptBlanket(true,1);
   const s=document.querySelector('#ptmod .pt-scr');PT.ssy=s?s.scrollTop:0;PT.sTabPrev=PT.stab;ptShop();ptCoins();
+}
+
+/* ===================== MI POKÉMON · catálogo y arte de muebles (estilo Bases Secretas) =====================
+   Cada pieza se dibuja en un lienzo propio de 16 px por casilla; el motor la escala y la ordena por profundidad.
+   L: floor (mueble sólido) · mat (alfombra/cojín, se camina encima) · top (pequeño, va sobre mesas) · wall (pared)
+   w,h: casillas de huella · vh: alto visual en casillas · sf: altura (px) de la superficie donde se apoyan objetos
+   st: puntos de estilo (suben el ánimo) · act: acción al tocarlo · use: lo que hace el Pokémon con él */
+const PTO='#4a3f6b';
+const PTX={
+ /* ---- muebles ---- */
+ sofa:{n:'Sofá',d:'Para descansar junto a la pared.',p:180,cat:'mue',L:'floor',w:3,h:1,vh:1.65,st:8,use:'sit',art(R,E){
+  R(1,24,46,2,'rgba(60,40,70,.22)');R(2,2,44,12,'#7c88d8');R(4,3,40,3,'#98a4ec');R(0,9,6,15,'#6a76c6');R(1,9,3,2,'#8e9ae4');R(42,9,6,15,'#6a76c6');R(43,9,3,2,'#8e9ae4');
+  R(6,13,36,9,'#aab4f4');R(6,13,36,1,'#c9d0fa');R(24,14,1,8,'#8e9ae4');R(6,21,36,1,'#8590dc');R(3,24,3,2,PTO);R(42,24,3,2,PTO);R(9,8,8,6,'#f4a8c0');R(9,8,8,1,'#ffd0e0');R(10,13,6,1,'#d98aa8')}},
+ silla:{n:'Silla',d:'Una silla de madera cómoda.',p:60,cat:'mue',L:'floor',w:1,h:1,vh:1.5,st:3,use:'sit',art(R){
+  R(2,22,12,2,'rgba(60,40,70,.22)');R(3,1,10,10,'#a97442');R(4,2,8,8,'#d49a5a');R(4,2,8,1,'#e8b878');R(2,11,12,4,'#b97a3f');R(2,11,12,1,'#e0a566');R(2,14,12,1,'#8a5a34');R(3,15,2,8,'#8a5a34');R(11,15,2,8,'#8a5a34')}},
+ escritorio:{n:'Escritorio',d:'Con cajones. Admite objetos encima.',p:140,cat:'mue',L:'floor',w:2,h:1,vh:1.4,sf:9,st:6,art(R){
+  R(1,21,30,2,'rgba(60,40,70,.22)');R(0,8,32,4,'#c98a4e');R(0,8,32,1,'#e8b878');R(0,12,32,1,'#8a5a34');R(1,13,3,9,'#a97442');R(20,13,11,9,'#b97a3f');R(20,13,11,1,'#8a5a34');R(24,16,3,1,'#e2b04a');R(24,20,3,1,'#e2b04a');R(21,17,9,1,'#8a5a34');R(4,13,15,2,'#a97442')}},
+ mesa:{n:'Mesa baja',d:'Una mesita redonda. Admite objetos encima.',p:100,cat:'mue',L:'floor',w:2,h:1,vh:1.1,sf:7,st:4,art(R,E){
+  R(2,16,28,2,'rgba(60,40,70,.2)');R(1,5,30,4,'#e8c890');R(1,5,30,1,'#fff3d4');R(2,9,28,1,'#b89060');R(5,10,3,7,'#a97442');R(24,10,3,7,'#a97442');R(6,16,2,1,'#6a4424');R(25,16,2,1,'#6a4424')}},
+ librero:{n:'Librero',d:'Libros de todos los colores.',p:170,cat:'mue',L:'floor',w:2,h:1,vh:2.5,st:9,art(R){
+  R(0,0,32,39,'#a97442');R(2,2,28,35,'#6a4424');R(0,0,32,2,'#d49a5a');R(0,12,32,2,'#a97442');R(0,25,32,2,'#a97442');R(1,37,30,2,'#8a5a34');
+  const cs=['#e8506f','#f2cd5e','#5aa8d8','#7cc79a','#b58df0','#f29a3a'];
+  [[3,14],[3,27]].forEach(([_,y0],r)=>{let x=3;for(let i=0;i<6;i++){const w=2+((i*7+r*3)%3),h=8+((i*5+r)%4);R(x,y0+11-h-(r?0:0),w,h,cs[(i+r*2)%6]);R(x,y0+11-h,1,h,'rgba(255,255,255,.3)');x+=w+1}});
+  let x=3;for(let i=0;i<5;i++){const w=3,h=7+(i%3);R(x,11-h+2,w,h,cs[(i+3)%6]);R(x,11-h+2,1,h,'rgba(255,255,255,.3)');x+=w+1}
+  R(20,3,8,8,'#8fc1f2');R(21,4,6,2,'#d0e8ff')}},
+ tv:{n:'Televisor',d:'Tócalo para encenderlo. A tu Pokémon le encanta.',p:240,cat:'apa',L:'floor',w:2,h:1,vh:1.8,st:10,act:'tv',use:'watch',art(R,E,t,u){
+  R(2,27,28,2,'rgba(60,40,70,.22)');R(9,23,14,4,'#4a3f6b');R(6,26,20,2,'#3a3158');R(0,1,32,22,'#3a3f5c');R(0,1,32,1,'#5a608a');R(2,3,28,17,u.on?'#101a2a':'#1c2236');
+  if(u.on){const cs=['#e8506f','#f2cd5e','#7cc79a','#5aa8d8','#b58df0','#fff'];const o=Math.floor(t*3)%6;for(let i=0;i<7;i++)R(2+i*4,3,4,17,cs[(i+o)%6]);R(2,3,28,6,'rgba(255,255,255,.18)');R(2,15,28,5,'rgba(0,0,0,.25)');R(8+Math.floor(Math.sin(t*2)*4+4),9,9,6,'#fff6c8');R(10+Math.floor(Math.sin(t*2)*4+4),10,2,2,'#e8506f')}
+  else{R(3,4,10,2,'rgba(255,255,255,.12)');R(3,6,5,1,'rgba(255,255,255,.1)')}
+  R(25,21,3,1,u.on?'#7cf09a':'#e8506f')}},
+ radio:{n:'Equipo de música',d:'Tócalo para poner música.',p:120,cat:'apa',L:'floor',w:1,h:1,vh:1.1,sf:0,st:5,act:'radio',use:'dance',art(R,E,t,u){
+  R(1,15,14,2,'rgba(60,40,70,.22)');R(1,6,14,9,'#e8704a');R(1,6,14,1,'#ffb090');R(1,14,14,1,'#b04a2a');R(3,8,6,5,'#4a3f6b');for(let i=0;i<3;i++)for(let j=0;j<2;j++)R(4+i*2,9+j*2,1,1,'#8a84c8');
+  R(11,8,3,3,'#ffd36e');R(11,12,3,1,'#ffd36e');R(12,1,1,5,'#c0c0d0');R(11,1,3,1,'#c0c0d0');
+  if(u.on){for(let k=0;k<3;k++){const y=(t*6+k*5)%16,x=3+k*4+Math.sin(t*3+k)*2;if(y<14){R(x,5-y*.3+2,2,2,['#f4a8c0','#8fd6ad','#f2cd5e'][k]);R(x+1,3-y*.3+2,1,3,['#f4a8c0','#8fd6ad','#f2cd5e'][k])}}}}},
+ lampara:{n:'Lámpara de pie',d:'Tócala para apagar o encender. Brilla de noche.',p:90,cat:'apa',L:'floor',w:1,h:1,vh:2.4,st:5,act:'lamp',art(R,E,t,u){
+  R(4,36,8,2,'#a58bd6');R(3,37,10,1,'rgba(60,40,70,.25)');R(7,12,2,24,'#a58bd6');R(7,12,1,24,'#c2aef0');
+  if(u.on!==0){R(1,4,14,9,'#ffe9a8');R(4,2,8,2,'#ffe9a8');R(1,12,14,1,'#e8c870');R(5,5,3,3,'#fff6cf')}else{R(1,4,14,9,'#d8cfa8');R(4,2,8,2,'#d8cfa8');R(1,12,14,1,'#b8ae88')}}},
+ planta:{n:'Planta',d:'Verde y alegre. Tócala para regarla.',p:60,cat:'pla',L:'floor',w:1,h:1,vh:1.85,st:4,act:'water',use:'sniff',art(R){
+  R(2,28,12,2,'rgba(60,40,70,.22)');R(3,20,10,9,'#e6a08c');R(2,18,12,3,'#d9806c');R(3,20,2,9,'#f0b8a4');
+  for(const [dx,dy,hh] of [[3,6,12],[7,1,17],[11,5,13],[1,11,7],[13,12,7]]){R(dx,dy,3,hh,'#7cc79a');R(dx,dy,1,hh,'#98dbb2')}}},
+ arbolito:{n:'Arbolito',d:'Un arbolito bonsái de interior.',p:120,cat:'pla',L:'floor',w:1,h:1,vh:2.5,st:7,act:'water',use:'sniff',art(R,E){
+  R(2,38,12,2,'rgba(60,40,70,.22)');R(3,32,10,7,'#b97a3f');R(2,31,12,2,'#d49a5a');R(7,20,2,12,'#8a5a34');
+  E(8,13,7,8,'#4fb870');E(5,10,4,5,'#6fd08a');E(11,9,4,5,'#3f9a5c');E(8,7,3,3,'#8ee0a4');R(4,4,2,2,'#f4a8c0');R(11,14,2,2,'#f4a8c0')}},
+ cofre:{n:'Cofre de juguetes',d:'Tócalo: a veces guarda una sorpresa.',p:120,cat:'jug',L:'floor',w:2,h:1,vh:1.3,sf:6,st:5,act:'chest',use:'sniff',art(R,E,t,u){
+  R(0,19,32,2,'rgba(60,40,70,.22)');R(0,8,32,11,'#b97a3f');R(0,9,32,1,'#d49a5a');R(0,4,32,5,'#a86a30');R(1,3,30,2,'#c98a4e');R(0,12,32,1,'#7a4a1e');R(14,6,4,6,'#e2b04a');R(15,8,2,2,'#8a6416');
+  if(u.open){R(2,0,28,3,'#c98a4e');E(8,0,3,3,'#e8506f');E(23,0,3,3,'#8fb2f0')}}},
+ pecera:{n:'Pecera',d:'Con peces que nadan. Tócala para darles de comer.',p:200,cat:'jug',L:'floor',w:1,h:1,vh:1.7,st:8,act:'fish',use:'watch',art(R,E,t,u){
+  R(1,25,14,2,'rgba(60,40,70,.22)');R(1,17,14,3,'#a97442');R(2,20,3,6,'#8a5a34');R(11,20,3,6,'#8a5a34');
+  R(0,1,16,16,'#5aa8d8');R(1,2,14,14,'#9fd8f2');R(1,2,14,3,'#c8eeff');R(1,14,14,2,'#e8d8a0');R(3,10,2,5,'#4fb870');R(11,11,2,4,'#4fb870');R(7,13,2,2,'#e8506f');
+  const ax=2+((Math.sin(t*.8)+1)/2)*9,ay=6+Math.sin(t*1.7)*2,r=Math.cos(t*.8)>0;
+  R(ax,ay,4,2,'#f29a3a');R(ax+(r?-1:4),ay,1,2,'#f2cd5e');R(ax+(r?3:0),ay,1,1,'#fff');
+  const bx=11+Math.sin(t*2)*1,by=12-((t*3)%10);R(bx,by,1,1,'#fff');
+  if(u.fed){for(let k=0;k<4;k++)R(4+k*3,2+((t*8+k*3)%10),1,1,'#f2cd5e')}}},
+ snorlax:{n:'Peluche gigante',d:'Un oso dormilón enorme y blandito.',p:200,cat:'jug',L:'floor',w:2,h:1,vh:1.6,st:9,act:'squeak',use:'sit',art(R,E){
+  R(2,24,28,2,'rgba(60,40,70,.22)');E(16,15,14,10,'#3d6e7a');E(16,17,9,7,'#f2ead2');E(16,6,8,6,'#3d6e7a');E(16,8,6,4,'#f2ead2');R(8,0,3,4,'#3d6e7a');R(21,0,3,4,'#3d6e7a');R(12,6,2,1,PTO);R(18,6,2,1,PTO);R(14,9,4,1,PTO);R(3,18,5,5,'#f2ead2');R(24,18,5,5,'#f2ead2')}},
+ pelota:{n:'Poké Ball de juguete',d:'Tócala: tu Pokémon corre a jugar con ella.',p:40,cat:'jug',L:'floor',w:1,h:1,vh:.75,solid:0,st:2,act:'ball',use:'play',art(R,E,t,u){
+  const b=u.bn?Math.abs(Math.sin(t*9))*5:0;R(4,11,8,1,'rgba(60,40,70,.25)');E(8,7-b,4,4,'#e8506f');R(4,7-b,8,1,PTO);E(8,9-b,3,2,'#fff');R(7,6-b,2,3,'#fff');R(7,7-b,2,1,PTO);R(5,4-b,2,1,'rgba(255,255,255,.7)')}},
+ /* ---- alfombras y cojines (se camina encima) ---- */
+ mat_poke:{n:'Alfombra Poké Ball',d:'Una alfombra redonda enorme.',p:130,cat:'alf',L:'mat',w:2,h:2,vh:2,st:6,art(R,E){
+  E(16,16,15,14,'#4a3f6b');E(16,16,14,13,'#fff');for(let y=-13;y<0;y++){const dx=Math.floor(14*Math.sqrt(1-y*y/169));R(16-dx,16+y,dx*2+1,1,'#e8506f')}R(2,15,28,2,PTO);E(16,16,4,4,PTO);E(16,16,3,3,'#fff');E(16,16,1,1,'#c9c2f0')}},
+ mat_estrella:{n:'Alfombra Estrella',d:'Con una estrella dorada.',p:90,cat:'alf',L:'mat',w:2,h:1,vh:1,st:4,art(R){
+  R(0,1,32,14,'#6a5cb8');R(1,2,30,12,'#8a7cd8');R(1,2,30,1,'#b8acf0');const c='#ffd84d';R(15,3,2,10,c);R(11,6,10,4,c);R(13,4,6,8,c);R(12,7,8,2,'#fff1a0')}},
+ mat_corazon:{n:'Alfombra Corazón',d:'Pequeña y tierna.',p:60,cat:'alf',L:'mat',w:1,h:1,vh:1,st:3,art(R,E){
+  R(0,2,16,12,'#f2a0b8');R(1,3,14,10,'#f8c0d0');E(5,7,3,3,'#e8506f');E(11,7,3,3,'#e8506f');R(3,8,10,3,'#e8506f');R(5,11,6,1,'#e8506f');R(7,12,2,1,'#e8506f')}},
+ cojin:{n:'Cojín grande',d:'Tu Pokémon se sienta a descansar.',p:50,cat:'alf',L:'mat',w:1,h:1,vh:.9,st:4,use:'sit',art(R,E){
+  E(8,10,7,4,'rgba(60,40,70,.2)');E(8,8,7,4,'#f4a8c0');E(8,7,6,3,'#fbd0de');R(5,5,2,1,'#fff');R(8,12,1,0,'#f4a8c0');R(7,6,2,2,'#e8506f')}},
+ /* ---- objetos pequeños (sobre mesas o en el suelo) ---- */
+ peluche:{n:'Peluche Pikachu',d:'Un muñeco amarillo. Tócalo.',p:80,cat:'jug',L:'top',w:1,h:1,vh:1,st:4,act:'squeak',art(R,E){
+  R(4,15,8,1,'rgba(60,40,70,.2)');E(8,10,5,5,'#ffd84d');E(8,5,4,4,'#ffd84d');R(3,0,2,5,'#ffd84d');R(3,0,2,2,PTO);R(11,0,2,5,'#ffd84d');R(11,0,2,2,PTO);R(5,5,1,1,PTO);R(10,5,1,1,PTO);R(4,7,2,2,'#e8506f');R(10,7,2,2,'#e8506f');R(7,7,2,1,PTO);R(2,11,2,2,'#c9941a')}},
+ maceta:{n:'Maceta pequeña',d:'Un cactus con florecita.',p:30,cat:'pla',L:'top',w:1,h:1,vh:.9,st:2,act:'water',art(R,E){
+  R(4,13,8,1,'rgba(60,40,70,.2)');R(4,9,8,5,'#e6a08c');R(3,8,10,2,'#d9806c');R(6,2,4,7,'#4fb870');R(6,2,1,7,'#7cd890');R(3,4,3,2,'#4fb870');R(10,5,3,2,'#4fb870');R(7,0,2,2,'#f4a8c0')}},
+ trofeo:{n:'Trofeo',d:'Un trofeo dorado de campeón.',p:100,cat:'jug',L:'top',w:1,h:1,vh:1,st:6,art(R,E){
+  R(4,15,8,1,'rgba(60,40,70,.2)');R(5,13,6,2,'#8a6416');R(7,10,2,3,'#e2b04a');R(4,2,8,8,'#ffd84d');R(4,2,8,1,'#fff1a0');R(2,3,2,4,'#e2b04a');R(12,3,2,4,'#e2b04a');R(6,4,1,5,'#fff1a0');R(8,5,3,3,'#e2b04a')}},
+ libros:{n:'Pila de libros',d:'Para los Pokémon estudiosos.',p:25,cat:'mue',L:'top',w:1,h:1,vh:.8,st:2,art(R){
+  R(2,12,12,1,'rgba(60,40,70,.2)');R(2,9,12,3,'#5aa8d8');R(2,9,12,1,'#8fc1f2');R(3,6,10,3,'#e8506f');R(3,6,10,1,'#f4a0a8');R(2,3,11,3,'#7cc79a');R(2,3,11,1,'#a8e0bc')}},
+ /* ---- pared ---- */
+ reloj:{n:'Reloj de pared',d:'Marca la hora real.',p:90,cat:'par',L:'wall',w:1,h:1,vh:1,st:4,anim:1,art(R,E){
+  E(8,8,7,7,PTO);E(8,8,6,6,'#fff');const d=new Date(),mm=d.getMinutes(),hh=(d.getHours()%12)+mm/60,ha=hh/12*Math.PI*2-Math.PI/2,ma=mm/60*Math.PI*2-Math.PI/2;
+  for(let k=1;k<=3;k++)R(8+Math.cos(ha)*k*1.2,8+Math.sin(ha)*k*1.2,1,1,PTO);for(let k=1;k<=5;k++)R(8+Math.cos(ma)*k,8+Math.sin(ma)*k,1,1,'#e8506f');R(8,8,1,1,PTO);R(8,3,1,1,'#bbb');R(8,12,1,1,'#bbb');R(3,8,1,1,'#bbb');R(12,8,1,1,'#bbb')}},
+ guirnalda:{n:'Guirnalda de luces',d:'Luces de colores que parpadean.',p:110,cat:'par',L:'wall',w:12,h:1,vh:.75,st:7,anim:1,art(R,E,t){
+  const cols=['#f2736f','#f2cd5e','#8fd6ad','#8fb2f0','#f4a8c0'],W=192;for(let x=0;x<W;x++){const y=1+Math.round(Math.sin(x/W*Math.PI*8)*-2+2);R(x,y,1,1,PTO);if(x%9===4){const on=Math.sin(t*3+x)>-.2;R(x-1,y+1,3,3,on?cols[(x/9|0)%5]:'#8a8aa8');if(on)R(x,y+1,1,1,'#fff')}}}},
+ poster_ball:{n:'Póster Poké Ball',d:'Un clásico para cualquier entrenador.',p:60,cat:'par',L:'wall',w:1,h:2,vh:2,st:4,art(R,E){
+  R(1,1,14,30,'#e8dcc0');R(2,2,12,28,'#fff6e0');E(8,13,5,5,PTO);E(8,13,4,4,'#fff');for(let y=-4;y<0;y++){const dx=Math.floor(4*Math.sqrt(1-y*y/16));R(8-dx,13+y,dx*2+1,1,'#e8506f')}R(4,13,8,1,PTO);E(8,13,1,1,'#fff');R(4,22,8,1,PTO);R(5,25,6,1,'#a98fd8');R(0,0,16,1,'#c9b88c')}},
+ poster_estrellas:{n:'Póster estrellado',d:'Un cielo nocturno enmarcado.',p:60,cat:'par',L:'wall',w:2,h:1,vh:1,st:4,art(R){
+  R(1,1,30,14,'#d8bfd0');R(2,2,28,12,'#2a2d73');R(2,2,28,3,'#383a86');for(const [x,y] of [[5,4],[11,9],[18,5],[24,10],[27,4],[8,11],[15,12]])R(x,y,1,1,'#fff');R(22,5,1,3,'#fff6d6');R(21,6,3,1,'#fff6d6');R(25,8,3,3,'#fff6d6');R(26,8,3,3,'#2a2d73')}},
+ poster_mapa:{n:'Mapa de regiones',d:'Kanto, Johto, Hoenn y Sinnoh.',p:70,cat:'par',L:'wall',w:2,h:2,vh:2,st:5,art(R,E){
+  R(1,1,30,30,'#d8c8a0');R(2,2,28,28,'#f2e6c4');E(10,10,5,4,'#9fdcb0');E(22,9,5,5,'#8fc1f2');E(11,22,5,4,'#f2cd5e');E(23,22,5,5,'#f4a8c0');R(8,8,1,1,'#e8506f');R(21,8,1,1,'#e8506f');R(10,21,1,1,'#e8506f');R(22,21,1,1,'#e8506f');R(4,4,24,1,'#c9b88c');for(let i=0;i<5;i++)R(8+i*4,27,2,1,'#a89870')}},
+ cuadro:{n:'Cuadro de paisaje',d:'Colinas verdes bajo el sol.',p:80,cat:'par',L:'wall',w:2,h:1,vh:1,st:4,art(R,E){
+  R(0,0,32,16,'#d8bfd0');R(1,1,30,14,'#fff');R(3,3,26,10,'#bfe5f5');E(22,6,2,2,'#ffe37a');R(3,9,26,4,'#7cc79a');E(10,10,6,3,'#98dbb2');E(22,11,7,3,'#6db66c');R(3,12,26,1,'#4fa870')}},
+ estante:{n:'Estante',d:'Con libros y adornos.',p:70,cat:'par',L:'wall',w:2,h:1,vh:1,st:5,art(R,E){
+  R(0,12,32,3,'#c99d72');R(0,15,32,1,'#a87f56');R(3,15,2,1,'#a87f56');R(27,15,2,1,'#a87f56');R(3,3,4,9,'#8fc1f2');R(7,0,4,12,'#f2a08a');R(11,4,4,8,'#9fdcb0');R(4,5,2,1,'#fff');R(20,6,8,6,'#e6a08c');R(21,6,6,1,'#c9806c');E(24,4,3,3,'#7cc79a')}},
+ bandera:{n:'Banderín',d:'Colores de tu equipo.',p:60,cat:'par',L:'wall',w:1,h:2,vh:2,st:3,art(R){
+  R(2,0,12,2,'#c9b88c');R(3,2,10,22,'#e8506f');R(3,2,2,22,'#f4808f');R(4,24,8,2,'#e8506f');R(5,26,6,2,'#e8506f');R(6,28,4,2,'#e8506f');R(7,30,2,1,'#e8506f');R(6,8,5,6,'#ffd84d');R(8,6,2,3,'#ffd84d');R(7,13,2,4,'#ffd84d')}},
+ espejo:{n:'Espejo',d:'Refleja la luz de la habitación.',p:100,cat:'par',L:'wall',w:1,h:2,vh:2,st:5,art(R,E){
+  E(8,16,7,14,'#d8bfd0');E(8,16,6,13,'#e6f6ff');E(8,16,5,11,'#bfe5f5');R(5,8,1,5,'#fff');R(6,7,1,2,'#fff')}},
+ neon:{n:'Neón corazón',d:'Brilla suavemente.',p:130,cat:'par',L:'wall',w:1,h:1,vh:1,st:6,anim:1,art(R,E,t){
+  const on=Math.sin(t*2.2)>-.7,c=on?'#ff7aa8':'#c05880';R(2,3,12,2,'rgba(0,0,0,.15)');E(5,5,3,3,c);E(11,5,3,3,c);R(3,7,10,3,c);R(5,10,6,2,c);R(7,12,2,1,c);if(on){R(5,4,2,1,'#ffd0e0');R(11,4,2,1,'#ffd0e0')}}}
+};
+const PTCATS=[['mue','Muebles'],['apa','Aparatos'],['pla','Plantas'],['jug','Juguetes'],['alf','Alfombras'],['par','Pared']];
+/* vistas de la ventana */
+const PTV={cielo:{n:'Cielo',p:0},ciudad:{n:'Ciudad',p:120},playa:{n:'Playa',p:140},nieve:{n:'Nieve',p:140},espacio:{n:'Espacio',p:180}};
+
+/* ===================== MI POKÉMON · motor de decoración (rejilla, capas, profundidad, interacción) ===================== */
+const PTCOLS=12,PTROWS=5,PTWR=6;
+/* ---------- datos ---------- */
+function ptRoomItems(){return PT.visit?PT.visit.it:((GS&&GS.room&&GS.room.items)||[])}
+function ptInv(){const r=GS.room;r.inv=r.inv||{};return r.inv}
+function ptAvail(k){let n=ptInv()[k]||0;for(const i of ptRoomItems())if(i.k===k)n--;return n}
+function ptDecoMigrate(){
+  const r=GS.room;if(r.v>=3)return;
+  r.items=[];r.inv=r.inv||{};r.own=r.own||[];
+  const giveP=(k,x,y,n)=>{r.inv[k]=(r.inv[k]||0)+(n||1);r.items.push({k,x,y,f:0})};
+  giveP('lampara',0,0);giveP('planta',11,0);giveP('estante',8,1);giveP('cuadro',5,1);giveP('cuadro',3,2);
+  const old={reloj:['wall',4,3],guirnalda:['wall',0,4],sofa:['floor',5,0],cofre:['floor',2,0],pecera:['floor',9,0]};
+  for(const o of r.own){if(o.startsWith('deco:')){const k=o.slice(5);if(!PTX[k])continue;r.inv[k]=Math.max(r.inv[k]||0,1);
+    if((r.deco||[]).includes(k)&&old[k])r.items.push({k,x:old[k][1],y:old[k][2],f:0})}}
+  r.deco=[];r.v=3;
+}
+/* ---------- geometría ---------- */
+function ptGeo(){
+  const W=PT.cw||600,H=PT.ch||400,hz=Math.round(H*.6),fh=H-hz-10;
+  let th=fh/PTROWS,tw=Math.min(W/PTCOLS,th*1.3);if(th>tw*1.15)th=tw*1.15;
+  const gx0=(W-PTCOLS*tw)/2,gy0=H-8-PTROWS*th,wb=hz-8;
+  const wr=Math.max(2,Math.min(PTWR,Math.floor((wb-2)/tw)));
+  return {W,H,hz,tw,th,gx0,gy0,wb,wr};
+}
+function ptItRect(it,g){   /* huella en píxeles de pantalla */
+  const d=PTX[it.k];g=g||ptGeo();
+  if(d.L==='wall'){const wy=Math.min(it.y,g.wr-d.h);return {l:g.gx0+it.x*g.tw,t:g.wb-(wy+d.h)*g.tw,r:g.gx0+(it.x+d.w)*g.tw,b:g.wb-wy*g.tw}}
+  return {l:g.gx0+it.x*g.tw,t:g.gy0+it.y*g.th,r:g.gx0+(it.x+d.w)*g.tw,b:g.gy0+(it.y+d.h)*g.th}
+}
+const ptOv=(a,b)=>a.l<b.r-.5&&a.r>b.l+.5&&a.t<b.b-.5&&a.b>b.t+.5;
+function ptTableAt(x,y,skip){const L=ptRoomItems();for(let i=0;i<L.length;i++){if(i===skip)continue;const d=PTX[L[i].k];if(d.L==='floor'&&d.sf&&x>=L[i].x&&x<L[i].x+d.w&&y>=L[i].y&&y<L[i].y+d.h)return i}return -1}
+function ptCanPlace(k,x,y,skip){
+  const d=PTX[k],g=ptGeo(),L=ptRoomItems(),me={k,x,y},rc=ptItRect(me,g);
+  if(x<0||y<0||x+d.w>PTCOLS)return false;
+  if(d.L==='wall'){
+    if(y+d.h>g.wr)return false;
+    if(PT.win&&ptOv(rc,{l:PT.win.x,t:PT.win.y,r:PT.win.x+PT.win.w,b:PT.win.y+PT.win.h}))return false;
+    for(let i=0;i<L.length;i++)if(i!==skip&&PTX[L[i].k].L==='wall'&&ptOv(rc,ptItRect(L[i],g)))return false;
+    return true}
+  if(y+d.h>PTROWS)return false;
+  const b=ptBed();if(d.L!=='top'&&ptOv(rc,{l:b.cx-b.w/2,t:b.cy-b.h*.5+2,r:b.cx+b.w/2,b:b.cy+b.h*.5}))return false;
+  for(let i=0;i<L.length;i++){if(i===skip)continue;const o=L[i],od=PTX[o.k];
+    if(d.L==='top'){if(od.L==='top'&&o.x===x&&o.y===y)return false;if(od.L==='floor'&&od.solid!==0&&!od.sf&&x>=o.x&&x<o.x+od.w&&y>=o.y&&y<o.y+od.h)return false}
+    else if(od.L===d.L&&ptOv(rc,ptItRect(o,g)))return false}
+  return true}
+function ptFreeSpot(k){const d=PTX[k];const rows=d.L==='wall'?PTWR:PTROWS;
+  for(let y=0;y<rows;y++)for(let x=0;x<=PTCOLS-d.w;x++)if(ptCanPlace(k,x,y,-1))return [x,y];return null}
+/* ---------- dibujo de una pieza ---------- */
+function ptArtDraw(cv,k,u,t){
+  const d=PTX[k],cw=d.w*16,ch=Math.round(d.vh*16);if(cv.width!==cw)cv.width=cw;if(cv.height!==ch)cv.height=ch;
+  const c=cv.getContext('2d');c.clearRect(0,0,cw,ch);
+  const R=(x,y,a,b,col)=>{c.fillStyle=col;c.fillRect(Math.round(x),Math.round(y),Math.round(a),Math.round(b))};
+  const E=(cx,cy,rx,ry,col)=>{c.fillStyle=col;for(let dy=-ry;dy<=ry;dy++){const dx=Math.floor(rx*Math.sqrt(Math.max(0,1-(dy*dy)/(ry*ry+.0001))));c.fillRect(Math.round(cx-dx),Math.round(cy+dy),dx*2+1,1)}};
+  /* las piezas se dibujan con el borde inferior alineado: desplazamos si el arte es más bajo que el lienzo */
+  d.art(R,E,t,u||{});
+}
+const ptIconCache={};
+function ptItemIcon(k,px){
+  if(!ptIconCache[k]){const cv=document.createElement('canvas');ptArtDraw(cv,k,{},0);ptIconCache[k]=cv.toDataURL()}
+  const d=PTX[k];const s=Math.max(1,Math.floor((px||44)/Math.max(d.w*16,Math.round(d.vh*16))*1));
+  return `<img class="pt-icn" src="${ptIconCache[k]}" style="width:${Math.min(px||44,d.w*16*Math.max(1,s))}px" alt="">`;
+}
+/* ---------- capa de piezas en pantalla ---------- */
+function ptDecoLayer(){const sc=document.getElementById('ptsc');if(!sc)return null;let l=document.getElementById('ptit');if(!l){l=document.createElement('div');l.id='ptit';l.className='pt-itl';sc.insertBefore(l,sc.querySelector('#ptpet'))}return l}
+function ptDecoRender(){
+  const l=ptDecoLayer();if(!l||!PT.cw)return;
+  const g=ptGeo(),L=ptRoomItems(),sc=g.tw/16;PT.ust=PT.ust||{};
+  const keep=new Set();
+  L.forEach((it,i)=>{
+    const d=PTX[it.k];if(!d)return;keep.add(it);
+    let cv=it._cv;if(!cv||!cv.isConnected){cv=it._cv=document.createElement('canvas');cv.className='pt-ito';l.appendChild(cv);
+      cv.addEventListener('pointerdown',e=>ptItDown(e,it))}
+    cv.dataset.k=it.k;
+    const u=it._u=it._u||{};ptArtDraw(cv,it.k,u,performance.now()/1000);
+    const w=d.w*g.tw,h=Math.round(d.vh*16)*sc;let left,top,z;
+    if(d.L==='wall'){const rc=ptItRect(it,g);left=rc.l;top=rc.t;z=1}
+    else if(d.L==='mat'){const rc=ptItRect(it,g);left=rc.l;top=rc.b-h;z=1}
+    else if(d.L==='top'){
+      const ti=ptTableAt(it.x,it.y,-1),rcB=ti>=0?ptItRect(L[ti],g):null;
+      const cx=g.gx0+it.x*g.tw,by=ti>=0?rcB.b-PTX[L[ti].k].sf*sc+1:g.gy0+(it.y+1)*g.th;
+      left=cx;top=by-h;z=Math.round((ti>=0?rcB.b:by)*10)+2}
+    else{const rc=ptItRect(it,g);left=rc.l;top=rc.b-h;z=Math.round(rc.b*10)}
+    cv.style.cssText=`left:${left.toFixed(1)}px;top:${top.toFixed(1)}px;width:${w.toFixed(1)}px;height:${h.toFixed(1)}px;z-index:${z};transform:${it.f?'scaleX(-1)':'none'}`;
+    cv.classList.toggle('sel',!!(PT.ed&&PT.ed.on&&PT.ed.sel===it));
+  });
+  [...l.children].forEach(c=>{if(!L.some(it=>it._cv===c))c.remove()});
+  PT.geoK=g.W+'|'+g.H;
+}
+function ptDecoTick(t){
+  const l=document.getElementById('ptit');if(!l)return;
+  const g=PT.cw+'|'+PT.ch;if(PT.geoK!==g||PT.dirty){PT.dirty=0;ptDecoRender()}
+  if(t-(PT.anT||0)<.12)return;PT.anT=t;
+  for(const it of ptRoomItems()){const u=it._u||{},d=PTX[it.k];if(!it._cv||!d)continue;
+    if(d.anim||it.k==='pecera'||(it.k==='tv'&&u.on)||(it.k==='radio'&&u.on)||(it.k==='pelota'&&u.bn)||(it.k==='cofre'&&u.open)||(it.k==='pecera'))ptArtDraw(it._cv,it.k,u,t)}
+}
+/* ---------- tocar piezas ---------- */
+function ptItDown(e,it){
+  if(PT.ed&&PT.ed.on){ptEdDown(e,it);return}
+  e.stopPropagation();ptItTap(it)
+}
+function ptItTap(it){
+  const p=GS.pet,u=it._u=it._u||{},d=PTX[it.k],now=Date.now();
+  const em=(t)=>{if(PT.cw){const r=ptItRect(it);const sc=document.getElementById('ptsc');if(!sc)return;const e=document.createElement('div');e.className='pt-em';e.textContent=t;e.style.left=((r.l+r.r)/2)+'px';e.style.top=(r.t-6)+'px';sc.appendChild(e);setTimeout(()=>e.remove(),1300)}};
+  const joy=(n)=>{if(!PT.visit&&p&&!p.sl){p.joy=Math.min(100,p.joy+n);gSaveSoon()}};
+  switch(d.act){
+   case 'tv':u.on=!u.on;ptS(u.on?'ok':'tap');if(u.on)em('📺');break;
+   case 'radio':u.on=!u.on;if(u.on){ptMelody();em('♪');joy(.5)}else ptS('tap');break;
+   case 'lamp':u.on=u.on===0?1:0;ptS('tap');PT.cvt=0;break;
+   case 'water':if(u.wt&&now<u.wt)return em('🌿');u.wt=now+60000;ptSparks&&0;em('💧');ptS('pop');joy(.8);break;
+   case 'chest':{if(u.open){u.open=0;ptS('tap');break}u.open=1;ptS('ok');setTimeout(()=>{u.open=0},1600);
+     if(!PT.visit&&(!GS.room.chT||now>GS.room.chT)){GS.room.chT=now+20*60000;const c=1+((Math.random()*3)|0);GS.coins+=c;ptCoins();ptToast('¡El cofre tenía '+c+' moneda'+(c>1?'s':'')+'!');gSaveSoon();em('✨')}else em('♡');break}
+   case 'fish':u.fed=1;setTimeout(()=>{u.fed=0},2500);ptS('pop');em('🐟');joy(.5);break;
+   case 'ball':u.bn=1;setTimeout(()=>{u.bn=0},1800);ptS('pop');ptHop();em('⚽');joy(.8);break;
+   case 'squeak':ptTone(880,.08,'square',.05);ptTone(1180,.1,'square',.04,.09);em('♡');joy(.5);break;
+   default:return;
+  }
+  PT.dirty=1;
+}
+function ptMelody(){const n=[392,494,587,784,659,523,587,440];n.forEach((f,i)=>ptTone(f,.16,'triangle',.05,i*.17))}
+/* ---------- colisión y uso por el Pokémon ---------- */
+function ptSolids(){const g=ptGeo(),o=[];for(const it of ptRoomItems()){const d=PTX[it.k];if(d&&d.L==='floor'&&d.solid!==0){const r=ptItRect(it,g);o.push({l:r.l-2,r:r.r+2,t:r.t+g.th*.15,b:r.b})}}return o}
+function ptSolidAt(x,y,S){
+  if(!S){const key=(PT.cw||0)+'|'+(PT.ch||0)+'|'+ptRoomItems().map(i=>i.k+i.x+','+i.y).join(';');if(PT.solK!==key){PT.solK=key;PT.sol=ptSolids()}S=PT.sol}
+  for(const r of S)if(x>r.l&&x<r.r&&y>r.t&&y<r.b)return true;return false}
+function ptEject(){PT.solK='';ptSolidAt(0,0);for(const r of PT.sol)if(PT.x>r.l&&PT.x<r.r&&PT.y>r.t&&PT.y<r.b){PT.y=Math.min((PT.ch||400)-12,r.b+4);PT.tx=PT.x;PT.ty=PT.y;PT.vx=PT.vy=0}}
+function ptUseSpots(){
+  const g=ptGeo(),out=[],now=Date.now();
+  for(const it of ptRoomItems()){const d=PTX[it.k],u=it._u||{};if(!d||!d.use||it.cd>now)continue;
+    if(d.use==='dance'&&!u.on&&Math.random()<.5)continue;
+    const r=ptItRect(it,g);let x=(r.l+r.r)/2,y=d.L==='mat'?(r.t+r.b)/2:r.b+g.th*.5;if(d.use==='play')x+=g.tw*.8*(Math.random()<.5?-1:1);
+    out.push({it,x,y,use:d.use})}
+  return out}
+function ptDecoPick(x0,x1,y0,y1){
+  if(Math.random()>.55)return false;const S=ptUseSpots();if(!S.length)return false;
+  const s=S[(Math.random()*S.length)|0];if(ptSolidAt(s.x,Math.min(s.y,y1)))return false;
+  PT.tx=gClamp(s.x,x0,x1);PT.ty=gClamp(s.y,y0,y1);PT.use={it:s.it,use:s.use,t0:0};return true}
+function ptUseStart(){
+  const U=PT.use;if(!U||U.t0)return;U.t0=Date.now();const it=U.it,u=it._u=it._u||{},p=GS.pet;
+  const r=ptItRect(it),cx=(r.l+r.r)/2;ptFace(cx>PT.x);it.cd=Date.now()+25000;
+  const dur=({watch:5,sit:7,dance:5,play:3.5,sniff:3})[U.use]||4;PT.wt=dur;
+  const joy=(n,b)=>{p.joy=Math.min(100,p.joy+n);if(b)p.bond=Math.min(100,p.bond+b)};
+  if(U.use==='watch'){if(it.k==='tv'&&!u.on){u.on=1;ptS('ok')}ptEmote(it.k==='tv'?'📺':'🐟');joy(1.5,.1)}
+  else if(U.use==='sit'){ptEmote('♡');joy(1,.1);p.en=Math.min(100,p.en+2);PT.use.sit=1}
+  else if(U.use==='dance'){u.on=1;ptMelody();ptEmote('♪');joy(2,.15);for(let i=0;i<5;i++)setTimeout(ptHop,i*900)}
+  else if(U.use==='play'){u.bn=1;setTimeout(()=>{u.bn=0},3000);ptEmote('⚽');joy(2.5,.15);for(let i=0;i<4;i++)setTimeout(ptHop,i*800)}
+  else if(U.use==='sniff'){ptEmote('✿');joy(.6)}
+  PT.dirty=1;gSaveSoon();
+}
+function ptComfort(){let s=0;for(const it of ptRoomItems()){const d=PTX[it.k];if(d)s+=d.st||0}return s}
+function ptComfMul(){return 1-Math.min(.28,ptComfort()/260)}
+/* ---------- efectos de iluminación en el fondo ---------- */
+function ptDecoBgFx(c,s,night){
+  if(!PT.cw)return;const g=ptGeo();
+  const E=(cx,cy,rx,ry,col)=>{c.fillStyle=col;for(let dy=-ry;dy<=ry;dy++){const dx=Math.floor(rx*Math.sqrt(Math.max(0,1-(dy*dy)/(ry*ry+.0001))));c.fillRect(Math.round(cx-dx),Math.round(cy+dy),dx*2+1,1)}};
+  for(const it of ptRoomItems()){const d=PTX[it.k],u=it._u||{};if(!d)continue;const r=ptItRect(it,g);
+    if(it.k==='lampara'&&u.on!==0&&night){const cx=(r.l+r.r)/2/s,cy=(r.b-g.tw*1.6)/s;E(cx,cy,g.tw*2.2/s,g.tw*1.5/s,'rgba(255,236,160,.13)');E(cx,cy,g.tw*1.4/s,g.tw*.95/s,'rgba(255,236,160,.17)');E(cx,r.b/s,g.tw*1.5/s,g.th*.6/s,'rgba(255,236,160,.12)')}
+    if(it.k==='neon'){const cx=(r.l+r.r)/2/s,cy=(r.t+r.b)/2/s;E(cx,cy,g.tw*1.1/s,g.tw*.9/s,night?'rgba(255,122,168,.2)':'rgba(255,122,168,.08)')}
+  }
+}
+/* ---------- vistas de la ventana ---------- */
+function ptDrawView(c,R,E,wx,wy,ww,wh,night,t,v){
+  const fill=(cols)=>{for(let i=0;i<cols.length;i++)R(wx,wy+Math.round(wh*i/cols.length),ww,Math.ceil(wh/cols.length),cols[i])};
+  if(v==='ciudad'){
+    fill(night?['#1a1850','#262268','#3a2f80','#58409a']:['#9fd6f5','#b8e2f8','#d6f0fc','#f4e2c8']);
+    const bs=[[.04,.5,.14,'#4a5588'],[.2,.3,.16,'#3e4878'],[.38,.55,.12,'#5a6498'],[.52,.4,.18,'#44507e'],[.74,.6,.14,'#4a5588'],[.86,.35,.14,'#3a4472']];
+    for(const [fx,fy,fw,col] of bs){const bx=wx+ww*fx,by=wy+wh*fy,bw=ww*fw;R(bx,by,bw,wh-(by-wy),col);for(let yy=by+3;yy<wy+wh-3;yy+=4)for(let xx=bx+2;xx<bx+bw-2;xx+=4){const on=night?((xx*7+yy*3)%5>1):((xx+yy)%7===0);R(xx,yy,1.5,1.5,on?(night?'#ffe08a':'#ffffff'):'rgba(0,0,0,.18)')}}
+    if(night)R(wx+ww*.8,wy+wh*.12,2,2,'#fff6d6')}
+  else if(v==='playa'){
+    fill(night?['#1f2260','#2d3180','#3a4a9a','#2a3a80']:['#8fd0f7','#a6dcfa','#7cc8e8','#4fb0d8']);
+    const sy=wy+wh*.5;R(wx,sy,ww,wh*.28,night?'#2c5fa0':'#5ab8e0');for(let x=0;x<ww;x+=6)R(wx+x+((t*6)%6),sy+3+((x/6|0)%2)*3,3,1,'rgba(255,255,255,.55)');
+    R(wx,wy+wh*.78,ww,wh*.22,night?'#8a7a5a':'#f2dca0');R(wx,wy+wh*.78,ww,1,'rgba(255,255,255,.5)');
+    if(night)E(wx+ww*.7,wy+wh*.22,Math.max(3,ww*.09),Math.max(3,ww*.09),'#fff6d6');else{E(wx+ww*.72,wy+wh*.24,Math.max(4,ww*.1),Math.max(4,ww*.1),'#ffe37a')}
+    R(wx+ww*.15,wy+wh*.55,2,wh*.25,'#7a5a34');R(wx+ww*.1,wy+wh*.5,10,3,'#4fb870');R(wx+ww*.17,wy+wh*.48,8,3,'#6fd08a')}
+  else if(v==='nieve'){
+    fill(night?['#262a5c','#343a74','#4a5290','#6a72b0']:['#cfd9e8','#dde6f2','#eaf0f8','#f6f9fc']);
+    R(wx,wy+wh*.7,ww,wh*.3,night?'#aab4d8':'#fff');for(const [fx,h] of [[.15,.5],[.45,.4],[.78,.55]]){R(wx+ww*fx,wy+wh*(.72-h*.5),3,wh*h*.5,'#3f7a5a');R(wx+ww*fx-3,wy+wh*(.78-h*.5),9,wh*h*.3,'#4a8a68');R(wx+ww*fx-1,wy+wh*(.74-h*.5),5,2,'#fff')}
+    for(let i=0;i<14;i++){const x=((i*37)%100)/100*ww+Math.sin(t*1.3+i)*2,y=((t*8+i*23)%100)/100*wh;R(wx+x,wy+y,1.5,1.5,'#fff')}}
+  else if(v==='espacio'){
+    fill(['#0a0a24','#10103a','#181650','#1c1a5c']);
+    for(let i=0;i<22;i++){const x=((i*53)%100)/100*ww,y=((i*29)%100)/100*wh;if(Math.sin(t*2+i)>-.5)R(wx+x,wy+y,1,1,'#fff')}
+    E(wx+ww*.65,wy+wh*.38,Math.max(5,ww*.17),Math.max(5,ww*.17),'#c8886a');E(wx+ww*.6,wy+wh*.34,Math.max(3,ww*.09),Math.max(3,ww*.07),'#e0a888');R(wx+ww*.45,wy+wh*.43,ww*.4,1,'rgba(255,230,200,.55)');
+    const sx=((t*14)%(ww+20))-10;R(wx+sx,wy+wh*.15+sx*.1,3,1,'#fff');R(wx+sx-3,wy+wh*.15+sx*.1-.3,3,1,'rgba(255,255,255,.4)')}
+}
+
+/* ===================== MI POKÉMON · modo Decorar, tienda de muebles y visitas ===================== */
+function ptDecoInit(){PT.ed=null;PT.sol=[];PT.solK='';PT.dirty=1;PT.geoK='';ptDecoRender();ptEdBarDraw()}
+/* ---------- modo decorar ---------- */
+function ptDecoEdit(on){
+  if(PT.visit)return;const rm=document.getElementById('ptrm'),sc=document.getElementById('ptsc');if(!rm||!sc)return;
+  if(on&&(GS.pet.sl||PT.busy))return ptToast(GS.pet.sl?'Está durmiendo: despiértalo para decorar':'Espera un momento…');
+  PT.ed=on?{on:1,sel:null}:null;rm.classList.toggle('edit',!!on);ptGridDraw();ptEdBarDraw();
+  if(on)PT.tx=PT.x,PT.ty=PT.y;else{ptEject();gSaveNow()}
+  ptDecoRender();
+}
+function ptGridDraw(){
+  const sc=document.getElementById('ptsc');if(!sc)return;let g=document.getElementById('ptgd');
+  if(!PT.ed){if(g)g.remove();return}
+  const G=ptGeo();if(!g){g=document.createElement('div');g.id='ptgd';g.className='pt-gd';sc.appendChild(g)}
+  g.innerHTML=`<i class="f" style="left:${G.gx0}px;top:${G.gy0}px;width:${PTCOLS*G.tw}px;height:${PTROWS*G.th}px;background-size:${G.tw}px ${G.th}px"></i><i class="w" style="left:${G.gx0}px;top:${G.wb-G.wr*G.tw}px;width:${PTCOLS*G.tw}px;height:${G.wr*G.tw}px;background-size:${G.tw}px ${G.tw}px"></i>`;
+}
+function ptEdBarDraw(){
+  const rm=document.getElementById('ptrm');if(!rm)return;let b=document.getElementById('ptedb');
+  if(!PT.ed&&!PT.visit){if(b)b.remove();return}
+  if(!b){b=document.createElement('div');b.id='ptedb';b.className='pt-edbar';rm.appendChild(b)}
+  if(PT.visit){b.innerHTML=`<span class="pt-edh">Visitando la habitación de <b>${esc(PT.visit.nm||'un entrenador')}</b></span><button class="pt-btn" onclick="ptVisitEnd()">← Volver a la mía</button>`;return}
+  const s=PT.ed.sel,d=s&&PTX[s.k];
+  b.innerHTML=`<div class="pt-edh">${d?`<b>${d.n}</b> · arrástralo para moverlo`:'Toca un mueble para elegirlo y arrástralo para colocarlo'}</div>
+  <div class="pt-edb"><button class="pt-btn" onclick="ptEdAdd()">＋ Añadir</button><button class="pt-btn" ${d?'':'disabled'} onclick="ptEdFlip()">↔ Girar</button><button class="pt-btn" ${d?'':'disabled'} onclick="ptEdStow()">📦 Guardar</button><button class="pt-btn ok" onclick="ptDecoEdit(0)">✓ Listo</button></div>`;
+}
+function ptEdSel(it){PT.ed.sel=it;ptEdBarDraw();ptDecoRender()}
+function ptEdFlip(){const s=PT.ed&&PT.ed.sel;if(!s)return;s.f=s.f?0:1;ptS('tap');gSaveSoon();ptDecoRender()}
+function ptEdStow(){const s=PT.ed&&PT.ed.sel;if(!s)return;const L=GS.room.items,i=L.indexOf(s);if(i>=0)L.splice(i,1);if(s._cv)s._cv.remove();PT.ed.sel=null;ptS('pop');gSaveSoon();ptEdBarDraw();ptDecoRender()}
+function ptEdAdd(){
+  const inv=ptInv(),rows=Object.keys(PTX).filter(k=>ptAvail(k)>0);
+  const h=rows.length?rows.map(k=>`<button class="pt-ar" onclick="ptEdPlace('${k}')">${ptItemIcon(k,44)}<b>${PTX[k].n}</b><small>×${ptAvail(k)}</small></button>`).join(''):`<p class="pt-mu">No tienes muebles guardados. ¡Compra más en la tienda!</p>`;
+  ptModal(`<h3>Colocar un mueble</h3><div class="pt-ag">${h}</div><div class="pt-row"><button class="pt-btn" onclick="ptCloseModal();ptShop('room')">Ir a la tienda</button><button class="pt-btn" onclick="ptCloseModal()">Cerrar</button></div>`,'shop');
+}
+function ptEdPlace(k){
+  const sp=ptFreeSpot(k);if(!sp){return ptToast('No hay espacio libre para eso',1)}
+  const it={k,x:sp[0],y:sp[1],f:0};GS.room.items.push(it);ptCloseModal();ptS('pop');gSaveSoon();ptEdSel(it);ptEject();
+}
+/* arrastrar */
+function ptEdDown(e,it){
+  e.preventDefault();e.stopPropagation();ptEdSel(it);
+  const sc=document.getElementById('ptsc'),d=PTX[it.k],g=ptGeo();
+  const D=PT.dg={it,ox:it.x,oy:it.y,moved:0,sx:e.clientX,sy:e.clientY,x:it.x,y:it.y};
+  const mv=ev=>{
+    const r=sc.getBoundingClientRect(),px=ev.clientX-r.left,py=ev.clientY-r.top;
+    if(Math.hypot(ev.clientX-D.sx,ev.clientY-D.sy)>6)D.moved=1;if(!D.moved)return;
+    const G=ptGeo();let nx=Math.round((px-G.gx0)/G.tw-d.w/2),ny;
+    if(d.L==='wall')ny=Math.round((G.wb-py)/G.tw-d.h/2);else ny=Math.round((py-G.gy0)/G.th-d.h/2);
+    const rows=d.L==='wall'?G.wr:PTROWS;nx=Math.max(0,Math.min(PTCOLS-d.w,nx));ny=Math.max(0,Math.min(rows-d.h,ny));
+    D.x=nx;D.y=ny;it.x=nx;it.y=ny;D.ok=ptCanPlace(it.k,nx,ny,GS.room.items.indexOf(it));
+    ptDecoRender();if(it._cv){it._cv.classList.toggle('bad',!D.ok);it._cv.classList.toggle('ok',!!D.ok)}
+  };
+  const up=()=>{
+    removeEventListener('pointermove',mv);removeEventListener('pointerup',up);removeEventListener('pointercancel',up);
+    if(D.moved){if(!D.ok){it.x=D.ox;it.y=D.oy;ptS('bad')}else{ptS('tap');gSaveSoon()}}
+    if(it._cv){it._cv.classList.remove('bad','ok')}PT.dg=null;ptEject();ptDecoRender();
+  };
+  addEventListener('pointermove',mv);addEventListener('pointerup',up);addEventListener('pointercancel',up);
+}
+/* ---------- tienda ---------- */
+function ptShopRoom(){
+  const cfg=ptRoomCfg(),own=(c,k)=>PTR[c].o[k].p===0||(GS.room.own||[]).includes(c+':'+k);
+  const sw=(cat,o)=>cat==='bed'?`<i class="pt-sw" style="background:linear-gradient(90deg,${o.c[0]} 0 22%,${o.c[3]} 22% 42%,${o.c[1]} 42%)"></i>`:`<i class="pt-sw" style="background:linear-gradient(135deg,${o.c[0]} 0 34%,${o.c[1]} 34% 67%,${o.c[2]} 67%)"></i>`;
+  const opt=(cat,k,o,on,ow,fn)=>`<div class="pt-op ${on?'on':''}">${cat==='view'?`<i class="pt-sw" style="background:${({cielo:'linear-gradient(#8fd0f7,#d4f0fd)',ciudad:'linear-gradient(#9fd6f5 50%,#4a5588 50%)',playa:'linear-gradient(#8fd0f7 50%,#5ab8e0 50%,#f2dca0 75%)',nieve:'linear-gradient(#cfd9e8 65%,#fff 65%)',espacio:'radial-gradient(circle at 70% 40%,#c8886a 14%,#10103a 15%)'})[k]}"></i>`:sw(cat,o)}<b>${o.n}</b>`+(on?`<span class="pt-eq">Puesto</span>`:ow?`<button class="pt-go s" onclick="${fn}('${cat}','${k}')">Poner</button>`:`<button class="pt-go s" ${GS.coins>=o.p?'':'disabled'} onclick="${fn}('${cat}','${k}')">${o.p}</button>`)+`</div>`;
+  let h=`<div class="pt-tip">🛋️ Compra muebles y ve a <b>Decorar</b> (botón de arriba) para colocarlos como quieras. Cuanto más bonita la habitación, más contento vive tu Pokémon.</div>`;
+  const cat=PT.scat||'mue';
+  h+=`<h4>Muebles y adornos</h4><div class="pt-chipsr">${PTCATS.map(c=>`<button class="${cat===c[0]?'on':''}" onclick="PT.scat='${c[0]}';PT.stabKeep=1;ptShop();PT.stabKeep=0">${c[1]}</button>`).join('')}</div><div class="pt-list">`+
+   Object.keys(PTX).filter(k=>PTX[k].cat===cat).map(k=>{const d=PTX[k],have=(GS.room.inv||{})[k]||0;
+    return `<div class="pt-it"><div class="pt-ic i pt-fur">${ptItemIcon(k,44)}</div><div><b>${d.n}${have?` <em>×${have}</em>`:''}</b><small>${d.d} · ${d.L==='wall'?'Pared':d.L==='mat'?'Suelo plano':d.L==='top'?'Sobre mesas':'Suelo'} · ★${d.st}</small></div><button class="pt-go s" ${GS.coins>=d.p?'':'disabled'} onclick="ptBuyFur('${k}')">${d.p}</button></div>`}).join('')+`</div>`;
+  h+=['wall','floor','rug','bed'].map(c=>`<h4>${PTR[c].n}</h4><div class="pt-opts">${Object.keys(PTR[c].o).map(k=>opt(c,k,PTR[c].o[k],cfg[c]===k,own(c,k),'ptRoomSet')).join('')}</div>`).join('');
+  h+=`<h4>Vista de la ventana</h4><div class="pt-opts">${Object.keys(PTV).map(k=>opt('view',k,PTV[k],cfg.view===k,PTV[k].p===0||(GS.room.own||[]).includes('view:'+k),'ptViewSet')).join('')}</div>`;
+  h+=`<h4>Compartir</h4><div class="pt-row"><button class="pt-btn" onclick="ptCodeModal()">Código de mi habitación / Visitar</button></div>`;
+  return h;
+}
+function ptBuyFur(k){
+  const d=PTX[k];if(GS.coins<d.p)return;GS.coins-=d.p;const i=ptInv();i[k]=(i[k]||0)+1;ptS('up');gSaveNow();
+  const s=document.querySelector('#ptmod .pt-scr');PT.ssy=s?s.scrollTop:0;PT.sTabPrev=PT.stab;ptShop();ptCoins();ptToast(d.n+' comprado. Colócalo en «Decorar»');
+}
+function ptViewSet(_,k){
+  const r=GS.room;r.own=r.own||[];if(PTV[k].p&&!r.own.includes('view:'+k)){if(GS.coins<PTV[k].p)return;GS.coins-=PTV[k].p;r.own.push('view:'+k);ptS('up')}
+  r.view=k;ptS('ok');gSaveNow();ptCvDraw();const s=document.querySelector('#ptmod .pt-scr');PT.ssy=s?s.scrollTop:0;PT.sTabPrev=PT.stab;ptShop();ptCoins();
+}
+/* ---------- compartir y visitar ---------- */
+function ptRoomCode(){
+  const c=ptRoomCfg(),o={n:(GS.pet&&GS.pet.nm)||'',w:c.wall,f:c.floor,r:c.rug,b:c.bed,v:c.view,it:GS.room.items.map(i=>[i.k,i.x,i.y,i.f?1:0])};
+  return 'FB1.'+btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/=+$/,'');
+}
+function ptCodeModal(){
+  const code=ptRoomCode();
+  ptModal(`<h3>Código de tu habitación</h3><p class="pt-mu">Compártelo con tus amigos: pueden <b>visitarla</b> (solo mirar y tocar, sin cambiar nada).</p><textarea id="ptcd" class="pt-in" rows="3" readonly onclick="this.select()">${code}</textarea><div class="pt-row"><button class="pt-btn" onclick="ptCodeCopy()">Copiar</button></div><h3 style="margin-top:14px">Visitar otra habitación</h3><textarea id="ptcv2" class="pt-in" rows="2" placeholder="Pega aquí el código de un amigo"></textarea><div class="pt-row"><button class="pt-btn" onclick="ptCloseModal()">Cerrar</button><button class="pt-btn ok" onclick="ptVisitGo()">Visitar</button></div>`,'shop');
+}
+function ptCodeCopy(){const t=document.getElementById('ptcd');if(!t)return;t.select();try{navigator.clipboard.writeText(t.value);ptToast('Código copiado')}catch(e){document.execCommand&&document.execCommand('copy');ptToast('Código copiado')}}
+function ptVisitGo(){
+  const t=(document.getElementById('ptcv2')||{}).value||'';
+  try{
+    const s=t.trim();if(!/^FB1\./.test(s))throw 0;
+    const o=JSON.parse(decodeURIComponent(escape(atob(s.slice(4).replace(/-/g,'+').replace(/_/g,'/')))));
+    if(!o||!Array.isArray(o.it)||o.it.length>80)throw 0;
+    const ok=(c,k)=>PTR[c]&&PTR[c].o[k]?k:PTR[c].def;
+    const it=o.it.filter(a=>PTX[a[0]]&&Number.isInteger(a[1])&&Number.isInteger(a[2])&&a[1]>=0&&a[2]>=0&&a[1]<PTCOLS&&a[2]<8).map(a=>({k:a[0],x:a[1],y:a[2],f:a[3]?1:0}));
+    PT.visit={nm:String(o.n||'').slice(0,14),wall:ok('wall',o.w),floor:ok('floor',o.f),rug:ok('rug',o.r),bed:ok('bed',o.b),view:PTV[o.v]?o.v:'cielo',it};
+  }catch(e){return ptToast('Ese código no es válido',1)}
+  ptCloseModal();ptDecoEdit(0);const pe=document.getElementById('ptpet');if(pe)pe.style.display='none';
+  document.getElementById('ptrm').classList.add('visit');ptDecoClear();ptCvDraw();ptEdBarDraw();ptDecoRender();ptToast('¡Bienvenido! Toca los muebles para probarlos');
+}
+function ptDecoClear(){const l=document.getElementById('ptit');if(l)l.innerHTML=''}
+function ptVisitEnd(){
+  PT.visit=null;const pe=document.getElementById('ptpet');if(pe)pe.style.display='';
+  document.getElementById('ptrm').classList.remove('visit');ptDecoClear();ptEdBarDraw();ptCvDraw();ptDecoRender();
 }
 
 /* Sprites Mystery Dungeon: SpriteCollab (PMDCollab), CC BY-NC 4.0. [fila,ancho,alto,cuadros,ancla x,ancla y,duraciones ms,base] */
