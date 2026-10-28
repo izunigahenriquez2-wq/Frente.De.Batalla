@@ -1,0 +1,26 @@
+'use strict';
+(()=>{
+const N={role:'none',peer:null,links:new Map(),roster:[],code:'',id:'host',running:false,callbacks:{},lastInput:0};
+const safeProfile=p=>({base:window.KANTO_DEX?.[+p?.base]?.buyable?+p.base:25,job:!!window.RPG_CLASSES?.[p?.job]?p.job:'striker',name:String(p?.name||'Explorador').replace(/[<>]/g,'').slice(0,18)});
+N.on=c=>N.callbacks=c;
+N.close=()=>{const old=N.peer;N.peer=null;N.role='none';old?.destroy();N.links.clear();N.role='none';N.roster=[];N.running=false;N.code='';};
+N.send=(link,data)=>{try{if(link?.open)link.send(data);}catch{}};
+N.broadcast=data=>{for(const link of N.links.values())N.send(link,data);};
+N.lobby=()=>{const data={type:'lobby',code:N.code,roster:N.roster};N.broadcast(data);N.callbacks.lobby?.(data);};
+function peerError(e){const texts={'peer-unavailable':'No se encontró esa sala. Revisa el código y que el anfitrión siga conectado.','network':'No se pudo contactar al servidor de salas. Puedes jugar en solitario o cooperativo local.','unavailable-id':'Ese código ya existe. Vuelve a crear una sala.','browser-incompatible':'Este navegador no admite el cooperativo WebRTC.','webrtc':'La conexión directa falló. Puede ser una restricción de la red.'};N.callbacks.error?.(texts[e.type]||'No se pudo establecer la conexión: '+(e.type||'red'));}
+N.host=profile=>{N.close();if(!window.Peer){N.callbacks.error?.('No se cargó el módulo online. Comprueba la carpeta vendor.');return;}N.role='host';N.code=Math.random().toString(36).slice(2,8).toUpperCase();N.id='host';N.roster=[{pid:'host',profile:safeProfile(profile),ready:false}];const peer=N.peer=new Peer('ecos-rpg-'+N.code,{debug:0});peer.on('open',()=>N.lobby());peer.on('error',peerError);peer.on('connection',link=>{let welcomed=false;const timer=setTimeout(()=>{if(!welcomed)link.close();},10000);link.on('data',m=>{if(!m||typeof m!=='object')return;
+ if(m.type==='hello'&&!welcomed){if(N.running||N.roster.length>=4){N.send(link,{type:'reject',text:N.running?'La expedición ya empezó.':'Sala completa: máximo 4 jugadores.'});setTimeout(()=>link.close(),250);return;}if(m.protocol!==5){N.send(link,{type:'reject',text:'Todos deben usar la misma versión del juego.'});return;}welcomed=true;clearTimeout(timer);N.links.set(link.peer,link);N.roster.push({pid:link.peer,profile:safeProfile(m.profile),ready:false});N.send(link,{type:'welcome',pid:link.peer});N.lobby();}
+ else if(welcomed&&!N.running&&m.type==='profile'){const p=N.roster.find(p=>p.pid===link.peer);if(p){p.profile=safeProfile(m.profile);p.ready=false;N.lobby();}}
+ else if(welcomed&&!N.running&&m.type==='ready'){const p=N.roster.find(p=>p.pid===link.peer);if(p){p.ready=!!m.ready;N.lobby();}}
+ else if(welcomed&&m.type==='input'){const mask=Number.isInteger(m.mask)?m.mask&4095:0;N.callbacks.input?.(link.peer,mask);}
+ else if(welcomed&&m.type==='action'){if(['item','equip','talent','evolve','branch','drop','transfer','event'].includes(m.action))N.callbacks.action?.(link.peer,m.action,String(m.key||'').slice(0,120));}
+ });link.on('close',()=>{clearTimeout(timer);N.links.delete(link.peer);N.roster=N.roster.filter(p=>p.pid!==link.peer);if(N.running)N.callbacks.left?.(link.peer);else N.lobby();});link.on('error',()=>link.close());});};
+N.join=(code,profile)=>{N.close();if(!window.Peer){N.callbacks.error?.('No se cargó el módulo online.');return;}const clean=String(code).trim().toUpperCase();if(!/^[A-Z0-9]{6}$/.test(clean)){N.callbacks.error?.('El código debe tener seis letras o números.');return;}N.role='client';N.code=clean;const peer=N.peer=new Peer(undefined,{debug:0});peer.on('error',peerError);peer.on('open',()=>{const link=peer.connect('ecos-rpg-'+clean,{reliable:true,serialization:'json'});N.links.set('host',link);const timer=setTimeout(()=>{if(!N.running&&!N.roster.length)N.callbacks.error?.('La sala no respondió. La red puede bloquear la conexión directa.');},15000);link.on('open',()=>N.send(link,{type:'hello',protocol:5,profile:safeProfile(profile)}));link.on('data',m=>{if(!m||typeof m!=='object')return;if(m.type==='welcome')N.id=m.pid;else if(m.type==='lobby'){clearTimeout(timer);N.roster=m.roster;N.callbacks.lobby?.(m);}else if(m.type==='reject'){clearTimeout(timer);N.callbacks.error?.(m.text);}else if(m.type==='world'){N.running=true;N.callbacks.world?.(m.world);}else if(m.type==='state')N.callbacks.state?.(m.state);else if(m.type==='event-open')N.callbacks.event?.(m.event);else if(m.type==='ended')N.callbacks.ended?.(m.win);else if(m.type==='pause')N.callbacks.pause?.(m.paused);});link.on('close',()=>{clearTimeout(timer);if(N.peer!==peer||N.role!=='client')return;N.callbacks.error?.('Se perdió la conexión con el anfitrión. Tus Poké acreditados se conservan.');});link.on('error',peerError);});};
+N.profile=profile=>{if(N.running)return;if(N.role==='host'){N.roster[0].profile=safeProfile(profile);N.roster[0].ready=false;N.lobby();}else N.send(N.links.get('host'),{type:'profile',profile});};
+N.ready=value=>{if(N.running)return;if(N.role==='host'){N.roster[0].ready=!!value;N.lobby();}else N.send(N.links.get('host'),{type:'ready',ready:!!value});};
+N.input=mask=>N.send(N.links.get('host'),{type:'input',mask});
+N.action=(action,key)=>N.send(N.links.get('host'),{type:'action',action,key});
+N.world=world=>{N.running=true;N.broadcast({type:'world',world});};
+N.state=state=>N.broadcast({type:'state',state});
+window.ECOS_NET=N;
+})();
