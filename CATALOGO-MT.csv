@@ -1,0 +1,79 @@
+﻿Movimiento;Categoría;Rareza;Primer piso;Potencia;PM;Recarga (s);Efecto
+Golpe Aéreo;physical;poco común;8;60;24;9.4;Golpe frontal a corta distancia.
+Agilidad;status;común;1;0;18;10;Aumenta la movilidad durante 6 s.
+Ventisca;special;épica;35;110;36;11.4;"Impacto de área centrado en el usuario; requiere línea de visión."
+Demolición;physical;rara;18;75;28;10.0;Golpe frontal a corta distancia.
+Rayo Burbuja;special;poco común;8;65;26;9.6;Abanico de proyectiles.
+Corpulencia;status;poco común;12;0;22;13;Durante 8 s, daño físico +25% y daño recibido −20%.
+Terratemblor;physical;poco común;8;60;24;9.4;Ralentiza enemigos próximos durante 5 s.
+Paz Mental;status;rara;18;0;24;14;Durante 8 s, daño especial +30% y daño recibido −20%.
+Corte;physical;común;1;50;22;9.0;Golpe frontal a corta distancia.
+Pulso Umbrío;special;rara;18;80;29;10.2;Impacto penetrante en línea hacia el objetivo.
+Rizo Defensa;status;común;1;0;18;10;"Protección durante 4 s; Guardián extiende el efecto al equipo cercano."
+Despejar;status;común;1;0;18;10;Revela trampas y la posición de las escaleras.
+Excavar;physical;rara;18;80;29;10.2;Embestida con protección breve.
+Doble Equipo;status;poco común;12;0;24;16;"Crea un sustituto temporal que usa tu ataque; adaptación RPG."
+Danza Dragón;status;rara;28;0;30;16;Durante 6 s, daño físico +25% y velocidad +25%.
+Pulso Dragón;special;rara;18;85;30;10.4;Impacto penetrante en línea hacia el objetivo.
+Puño Drenaje;physical;rara;18;75;28;10.0;Zona de drenaje que recupera PS al causar daño.
+Terremoto;physical;épica;35;100;38;13;"Impacto de área centrado en el usuario; requiere línea de visión."
+Eco Voz;special;común;1;40;20;8.6;Onda sonora: daña y reduce la velocidad de enemigos próximos.
+Electrotela;special;poco común;8;55;23;9.2;Ralentiza enemigos próximos durante 5 s.
+Energibola;special;rara;18;90;32;10.6;Proyectil dirigido.
+Llamarada;special;épica;35;110;36;11.4;Impacto penetrante en línea hacia el objetivo.
+Giro Fuego;special;común;1;35;18;8.4;Zona persistente que inflige daño.
+Nitrocarga;physical;común;1;50;22;9.0;Aumenta la movilidad durante 6 s.
+Lanzallamas;special;rara;18;90;32;10.6;Fuego sostenido en un cono corto.
+Vuelo;physical;rara;18;90;32;10.6;Embestida con protección breve.
+Foco Energía;status;común;1;0;18;10;Potencia el daño durante 6 s.
+Gigadrenado;special;rara;18;75;28;10.0;Zona de drenaje que recupera PS al causar daño.
+Onda Ígnea;special;épica;35;95;33;10.8;"Impacto de área centrado en el usuario; requiere línea de visión."
+Hidrobomba;special;épica;35;110;36;11.4;Impacto penetrante en línea hacia el objetivo.
+Hiperrayo;special;épica;55;150;48;20;Impacto penetrante en línea hacia el objetivo.
+Vozarrón;special;rara;18;90;32;10.6;Onda sonora: daña y reduce la velocidad de enemigos próximos.
+Rayo Hielo;special;rara;18;90;32;10.6;Impacto penetrante en línea hacia el objetivo.
+Viento Hielo;special;poco común;8;55;23;9.2;Ralentiza enemigos próximos durante 5 s.
+Defensa Férrea;status;común;1;0;18;10;"Protección durante 4 s; Guardián extiende el efecto al equipo cercano."
+Chupavidas;physical;rara;18;80;29;10.2;Zona de drenaje que recupera PS al causar daño.
+Pantalla de Luz;status;poco común;12;0;22;14;"Protección durante 4 s; Guardián extiende el efecto al equipo cercano."
+Garra Metal;physical;común;1;50;22;9.0;Golpe frontal a corta distancia.
+Metrónomo;status;común;1;0;18;10;Activa al azar uno de varios movimientos.
+Mimético;status;común;1;0;18;10;"Copia el movimiento del objetivo; sin cambiar el sprite."
+Disparo Lodo;special;poco común;8;55;23;9.2;Ralentiza enemigos próximos durante 5 s.
+Bofetón Lodo;special;común;1;20;15;7.8;Abanico de proyectiles.
+Maquinación;status;rara;25;0;28;16;Durante 8 s, daño especial +50%. No aumenta el daño físico.
+Pin Misil;physical;común;1;25;16;8.0;Abanico de proyectiles.
+Protección;status;poco común;8;0;22;14;"Protección durante 4 s; Guardián extiende el efecto al equipo cercano."
+Psíquico;special;rara;18;90;32;10.6;Impacto penetrante en línea hacia el objetivo.
+Reflejo;status;poco común;12;0;22;14;"Protección durante 4 s; Guardián extiende el efecto al equipo cercano."
+Descanso;status;poco común;8;0;28;20;Recupera 45% de PS y duerme al usuario 2 s.
+Avalancha;physical;rara;18;75;28;10.0;Proyectil dirigido.
+Golpe Roca;physical;común;1;40;20;8.6;Golpe frontal a corta distancia.
+Tumba Rocas;physical;poco común;8;60;24;9.4;Ralentiza enemigos próximos durante 5 s.
+Canon;special;poco común;8;60;24;9.4;Onda sonora: daña y reduce la velocidad de enemigos próximos.
+Velo Sagrado;status;común;1;0;18;10;"Protección durante 4 s; Guardián extiende el efecto al equipo cercano."
+Bucle Arena;physical;común;1;35;18;8.4;Zona persistente que inflige daño.
+Cara Susto;status;común;1;0;18;10;Ralentiza enemigos próximos durante 5 s.
+Chirrido;status;común;1;0;18;10;Onda sonora: daña y reduce la velocidad de enemigos próximos.
+Bola Sombra;special;rara;18;80;29;10.2;Proyectil dirigido.
+Garra Umbría;physical;poco común;8;70;27;9.8;Golpe frontal a corta distancia.
+Bomba Lodo;special;rara;18;90;32;10.6;Proyectil dirigido.
+Onda Tóxica;special;épica;35;95;33;10.8;"Impacto de área centrado en el usuario; requiere línea de visión."
+Alarido;special;poco común;8;55;23;9.2;Onda sonora: daña y reduce la velocidad de enemigos próximos.
+Ovocuración;status;común;1;0;26;14;"Cura instantánea: 30% de PS; Soporte comparte la curación a 300 px."
+Rayo Solar;special;épica;50;120;39;11.8;Impacto penetrante en línea hacia el objetivo.
+Fuerza;physical;rara;18;80;29;10.2;Golpe frontal a corta distancia.
+Sustituto;status;rara;20;0;30;18;"Crea un sustituto temporal que usa tu ataque; adaptación RPG."
+Surf;special;rara;18;90;32;10.6;"Impacto de área centrado en el usuario; requiere línea de visión."
+Meteoros;special;poco común;8;60;24;9.4;Abanico de proyectiles.
+Danza Espada;status;rara;18;0;27;16;Durante 8 s, daño físico +50%. No aumenta el daño especial.
+Viento Afín;status;común;1;0;18;10;Aumenta la movilidad durante 6 s.
+Teletransporte;status;común;1;0;18;10;Salta en la dirección de movimiento con protección breve.
+Trueno;special;épica;35;110;36;11.4;Impacto penetrante en línea hacia el objetivo.
+Onda Trueno;status;común;1;0;18;10;Parálisis breve a enemigos próximos.
+Rayo;special;rara;18;90;32;10.6;Impacto penetrante en línea hacia el objetivo.
+Tóxico;status;rara;18;0;24;12;Envenena durante 7 s.
+Hidropulso;special;poco común;8;60;24;9.4;Impacto penetrante en línea hacia el objetivo.
+Torbellino;special;común;1;35;18;8.4;Zona persistente que inflige daño.
+Avivar;status;común;1;0;18;10;Potencia el daño durante 6 s.
+Tijera X;physical;rara;18;80;29;10.2;Golpe frontal a corta distancia.

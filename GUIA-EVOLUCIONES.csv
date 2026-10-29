@@ -1,0 +1,75 @@
+﻿Número;Forma base;Precio Poké;Rareza;Evolución durante la partida
+1;Bulbasaur;0;Gratuito;Ivysaur (Nv. 16) → Venusaur (Nv. 36)
+4;Charmander;0;Gratuito;Charmeleon (Nv. 16) → Charizard (Nv. 36)
+7;Squirtle;0;Gratuito;Wartortle (Nv. 16) → Blastoise (Nv. 36)
+10;Caterpie;120;común;Metapod (Nv. 16) → Butterfree (Nv. 36)
+13;Weedle;120;común;Kakuna (Nv. 16) → Beedrill (Nv. 36)
+16;Pidgey;120;común;Pidgeotto (Nv. 16) → Pidgeot (Nv. 36)
+19;Rattata;120;común;Raticate (Nv. 26)
+21;Spearow;120;común;Fearow (Nv. 26)
+23;Ekans;120;común;Arbok (Nv. 26)
+25;Pikachu;0;Gratuito;Raichu (Nv. 26)
+27;Sandshrew;120;común;Sandslash (Nv. 26)
+29;Nidoran♀;120;común;Nidorina (Nv. 16) → Nidoqueen (Nv. 36)
+32;Nidoran♂;120;común;Nidorino (Nv. 16) → Nidoking (Nv. 36)
+35;Clefairy;420;poco común;Clefable (Nv. 26)
+37;Vulpix;120;común;Ninetales (Nv. 26)
+39;Jigglypuff;120;común;Wigglytuff (Nv. 26)
+41;Zubat;120;común;Golbat (Nv. 26)
+43;Oddish;120;común;Gloom (Nv. 16) → Vileplume (Nv. 36)
+46;Paras;120;común;Parasect (Nv. 26)
+48;Venonat;120;común;Venomoth (Nv. 26)
+50;Diglett;120;común;Dugtrio (Nv. 26)
+52;Meowth;120;común;Persian (Nv. 26)
+54;Psyduck;120;común;Golduck (Nv. 26)
+56;Mankey;120;común;Primeape (Nv. 26)
+58;Growlithe;120;común;Arcanine (Nv. 26)
+60;Poliwag;120;común;Poliwhirl (Nv. 16) → Poliwrath (Nv. 36)
+63;Abra;120;común;Kadabra (Nv. 16) → Alakazam (Nv. 36)
+66;Machop;120;común;Machoke (Nv. 16) → Machamp (Nv. 36)
+69;Bellsprout;120;común;Weepinbell (Nv. 16) → Victreebel (Nv. 36)
+72;Tentacool;120;común;Tentacruel (Nv. 26)
+74;Geodude;120;común;Graveler (Nv. 16) → Golem (Nv. 36)
+77;Ponyta;300;común;Rapidash (Nv. 26)
+79;Slowpoke;120;común;Slowbro (Nv. 26)
+81;Magnemite;120;común;Magneton (Nv. 26)
+83;Farfetch'd;1180;raro;Sin evolución en Kanto
+84;Doduo;120;común;Dodrio (Nv. 26)
+86;Seel;120;común;Dewgong (Nv. 26)
+88;Grimer;120;común;Muk (Nv. 26)
+90;Shellder;120;común;Cloyster (Nv. 26)
+92;Gastly;120;común;Haunter (Nv. 16) → Gengar (Nv. 36)
+95;Onix;1200;raro;Sin evolución en Kanto
+96;Drowzee;120;común;Hypno (Nv. 26)
+98;Krabby;120;común;Kingler (Nv. 26)
+100;Voltorb;120;común;Electrode (Nv. 26)
+102;Exeggcute;420;poco común;Exeggutor (Nv. 26)
+104;Cubone;120;común;Marowak (Nv. 26)
+106;Hitmonlee;1420;raro;Sin evolución en Kanto
+107;Hitmonchan;1420;raro;Sin evolución en Kanto
+108;Lickitung;1200;raro;Sin evolución en Kanto
+109;Koffing;120;común;Weezing (Nv. 26)
+111;Rhyhorn;420;poco común;Rhydon (Nv. 26)
+113;Chansey;2700;épico;Sin evolución en Kanto
+114;Tangela;1360;raro;Sin evolución en Kanto
+115;Kangaskhan;2820;épico;Sin evolución en Kanto
+116;Horsea;120;común;Seadra (Nv. 26)
+118;Goldeen;120;común;Seaking (Nv. 26)
+120;Staryu;120;común;Starmie (Nv. 26)
+122;Mr. Mime;2730;épico;Sin evolución en Kanto
+123;Scyther;2850;épico;Sin evolución en Kanto
+124;Jynx;1420;raro;Sin evolución en Kanto
+125;Electabuzz;2820;épico;Sin evolución en Kanto
+126;Magmar;2840;épico;Sin evolución en Kanto
+127;Pinsir;2850;épico;Sin evolución en Kanto
+128;Tauros;2820;épico;Sin evolución en Kanto
+129;Magikarp;120;común;Gyarados (Nv. 26)
+131;Lapras;2960;épico;Sin evolución en Kanto
+132;Ditto;2400;épico;Sin evolución en Kanto
+133;Eevee;0;Gratuito;Vaporeon (Nv. 26) / Jolteon (Nv. 26) / Flareon (Nv. 26)
+137;Porygon;1240;raro;Sin evolución en Kanto
+138;Omanyte;1120;raro;Omastar (Nv. 26)
+140;Kabuto;1120;raro;Kabutops (Nv. 26)
+142;Aerodactyl;2900;épico;Sin evolución en Kanto
+143;Snorlax;2970;épico;Sin evolución en Kanto
+147;Dratini;3600;épico;Dragonair (Nv. 16) → Dragonite (Nv. 36)
