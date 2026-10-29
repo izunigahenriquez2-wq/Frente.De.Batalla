@@ -1,0 +1,79 @@
+﻿Movimiento;ID Pokemon;Tipo;Potencia;PM;Recarga segundos;Rareza;Primer piso;Efecto RPG
+Agilidad;97;psychic;0;18;10;común;1;Aumenta la movilidad durante 6 s.
+Avivar;526;normal;0;18;10;común;1;Potencia el daño durante 6 s.
+Bofetón Lodo;189;ground;20;15;7.8;común;1;Abanico de proyectiles.
+Bucle Arena;328;ground;35;18;8.4;común;1;Zona persistente que inflige daño.
+Cara Susto;184;normal;0;18;10;común;1;Ralentiza enemigos próximos durante 5 s.
+Chirrido;103;normal;0;18;10;común;1;Onda sonora: daña y reduce la velocidad de enemigos próximos.
+Corte;15;normal;50;22;9.0;común;1;Golpe frontal a corta distancia.
+Defensa Férrea;334;steel;0;18;10;común;1;"Protección durante 4 s; Guardián extiende el efecto al equipo cercano."
+Despejar;432;flying;0;18;10;común;1;Revela trampas y la posición de las escaleras.
+Eco Voz;497;normal;40;20;8.6;común;1;Onda sonora: daña y reduce la velocidad de enemigos próximos.
+Foco Energía;116;normal;0;18;10;común;1;Potencia el daño durante 6 s.
+Garra Metal;232;steel;50;22;9.0;común;1;Golpe frontal a corta distancia.
+Giro Fuego;83;fire;35;18;8.4;común;1;Zona persistente que inflige daño.
+Golpe Roca;249;fighting;40;20;8.6;común;1;Golpe frontal a corta distancia.
+Metrónomo;118;normal;0;18;10;común;1;Activa al azar uno de varios movimientos.
+Mimético;102;normal;0;18;10;común;1;"Copia el movimiento del objetivo; sin cambiar el sprite."
+Nitrocarga;488;fire;50;22;9.0;común;1;Aumenta la movilidad durante 6 s.
+Onda Trueno;86;electric;0;18;10;común;1;Parálisis breve a enemigos próximos.
+Ovocuración;135;normal;0;26;14;común;1;"Cura instantánea: 30% de PS; Soporte comparte la curación a 300 px."
+Pin Misil;42;bug;25;16;8.0;común;1;Abanico de proyectiles.
+Rizo Defensa;111;normal;0;18;10;común;1;"Protección durante 4 s; Guardián extiende el efecto al equipo cercano."
+Teletransporte;100;psychic;0;18;10;común;1;Salta en la dirección de movimiento con protección breve.
+Torbellino;250;water;35;18;8.4;común;1;Zona persistente que inflige daño.
+Velo Sagrado;219;normal;0;18;10;común;1;"Protección durante 4 s; Guardián extiende el efecto al equipo cercano."
+Viento Afín;366;flying;0;18;10;común;1;Aumenta la movilidad durante 6 s.
+Alarido;555;dark;55;23;9.2;poco común;8;Onda sonora: daña y reduce la velocidad de enemigos próximos.
+Canon;496;normal;60;24;9.4;poco común;8;Onda sonora: daña y reduce la velocidad de enemigos próximos.
+Descanso;156;psychic;0;28;20;poco común;8;Recupera 45% de PS y duerme al usuario 2 s.
+Disparo Lodo;341;ground;55;23;9.2;poco común;8;Ralentiza enemigos próximos durante 5 s.
+Electrotela;527;electric;55;23;9.2;poco común;8;Ralentiza enemigos próximos durante 5 s.
+Garra Umbría;421;ghost;70;27;9.8;poco común;8;Golpe frontal a corta distancia.
+Golpe Aéreo;332;flying;60;24;9.4;poco común;8;Golpe frontal a corta distancia.
+Hidropulso;352;water;60;24;9.4;poco común;8;Impacto penetrante en línea hacia el objetivo.
+Meteoros;129;normal;60;24;9.4;poco común;8;Abanico de proyectiles.
+Protección;182;normal;0;22;14;poco común;8;"Protección durante 4 s; Guardián extiende el efecto al equipo cercano."
+Rayo Burbuja;61;water;65;26;9.6;poco común;8;Abanico de proyectiles.
+Terratemblor;523;ground;60;24;9.4;poco común;8;Ralentiza enemigos próximos durante 5 s.
+Tumba Rocas;317;rock;60;24;9.4;poco común;8;Ralentiza enemigos próximos durante 5 s.
+Viento Hielo;196;ice;55;23;9.2;poco común;8;Ralentiza enemigos próximos durante 5 s.
+Corpulencia;339;fighting;0;22;13;poco común;12;Potencia el daño durante 6 s.
+Doble Equipo;104;normal;0;24;16;poco común;12;"Crea un sustituto temporal que usa tu ataque; adaptación RPG."
+Pantalla de Luz;113;psychic;0;22;14;poco común;12;"Protección durante 4 s; Guardián extiende el efecto al equipo cercano."
+Reflejo;115;psychic;0;22;14;poco común;12;"Protección durante 4 s; Guardián extiende el efecto al equipo cercano."
+Avalancha;157;rock;75;28;10.0;rara;18;Proyectil dirigido.
+Bola Sombra;247;ghost;80;29;10.2;rara;18;Proyectil dirigido.
+Bomba Lodo;188;poison;90;32;10.6;rara;18;Proyectil dirigido.
+Chupavidas;141;bug;80;29;10.2;rara;18;Zona de drenaje que recupera PS al causar daño.
+Danza Espada;14;normal;0;27;16;rara;18;Potencia el daño durante 6 s.
+Demolición;280;fighting;75;28;10.0;rara;18;Golpe frontal a corta distancia.
+Energibola;412;grass;90;32;10.6;rara;18;Proyectil dirigido.
+Excavar;91;ground;80;29;10.2;rara;18;Embestida con protección breve.
+Fuerza;70;normal;80;29;10.2;rara;18;Golpe frontal a corta distancia.
+Gigadrenado;202;grass;75;28;10.0;rara;18;Zona de drenaje que recupera PS al causar daño.
+Lanzallamas;53;fire;90;32;10.6;rara;18;Fuego sostenido en un cono corto.
+Paz Mental;347;psychic;0;24;14;rara;18;Potencia el daño durante 6 s.
+Psíquico;94;psychic;90;32;10.6;rara;18;Impacto penetrante en línea hacia el objetivo.
+Pulso Dragón;406;dragon;85;30;10.4;rara;18;Impacto penetrante en línea hacia el objetivo.
+Pulso Umbrío;399;dark;80;29;10.2;rara;18;Impacto penetrante en línea hacia el objetivo.
+Puño Drenaje;409;fighting;75;28;10.0;rara;18;Zona de drenaje que recupera PS al causar daño.
+Rayo;85;electric;90;32;10.6;rara;18;Impacto penetrante en línea hacia el objetivo.
+Rayo Hielo;58;ice;90;32;10.6;rara;18;Impacto penetrante en línea hacia el objetivo.
+Surf;57;water;90;32;10.6;rara;18;"Impacto de área centrado en el usuario; requiere línea de visión."
+Tijera X;404;bug;80;29;10.2;rara;18;Golpe frontal a corta distancia.
+Tóxico;92;poison;0;24;12;rara;18;Envenena durante 7 s.
+Vozarrón;304;normal;90;32;10.6;rara;18;Onda sonora: daña y reduce la velocidad de enemigos próximos.
+Vuelo;19;flying;90;32;10.6;rara;18;Embestida con protección breve.
+Sustituto;164;normal;0;30;18;rara;20;"Crea un sustituto temporal que usa tu ataque; adaptación RPG."
+Maquinación;417;dark;0;28;16;rara;25;Potencia el daño durante 6 s.
+Danza Dragón;349;dragon;0;30;16;rara;28;Potencia el daño durante 6 s.
+Hidrobomba;56;water;110;36;11.4;épica;35;Impacto penetrante en línea hacia el objetivo.
+Llamarada;126;fire;110;36;11.4;épica;35;Impacto penetrante en línea hacia el objetivo.
+Onda Tóxica;482;poison;95;33;10.8;épica;35;"Impacto de área centrado en el usuario; requiere línea de visión."
+Onda Ígnea;257;fire;95;33;10.8;épica;35;"Impacto de área centrado en el usuario; requiere línea de visión."
+Terremoto;89;ground;100;38;13;épica;35;"Impacto de área centrado en el usuario; requiere línea de visión."
+Trueno;87;electric;110;36;11.4;épica;35;Impacto penetrante en línea hacia el objetivo.
+Ventisca;59;ice;110;36;11.4;épica;35;"Impacto de área centrado en el usuario; requiere línea de visión."
+Rayo Solar;76;grass;120;39;11.8;épica;50;Impacto penetrante en línea hacia el objetivo.
+Hiperrayo;63;normal;150;48;20;épica;55;Impacto penetrante en línea hacia el objetivo.
