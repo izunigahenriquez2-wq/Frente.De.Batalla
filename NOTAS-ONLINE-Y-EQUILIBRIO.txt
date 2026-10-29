@@ -1,0 +1,15 @@
+NOTAS DE REVISIÓN — 29/10/2026 (Pokémon Echoe's, versión 6.1)
+
+ONLINE (rpg-net.js) — probado con navegadores reales conectados por WebRTC (servidor de señalización local):
+- CORREGIDO: el invitado se desconectaba al iniciar la expedición. La "foto" del mundo pesa ~29 KB y el canal JSON de PeerJS
+  solo admite ~16 KB ("Message too big for JSON channel"). La conexión del invitado ahora usa serialización binaria.
+- Comprobado con 4 jugadores: entran a la sala, inician, se mueven y se ven entre sí; el 5.º recibe "Sala completa: máximo 4 jugadores"
+  (antes se mostraba "se perdió la conexión"); tras cortar la conexión, "Reconectar al equipo" devuelve al jugador a la partida.
+- Sin validar todavía: redes distintas, móviles, NAT estrictos.
+
+EQUILIBRIO — simulación con un bot sencillo (sin equipo, talentos ni ramas):
+- En la versión 5 el desequilibrio era grande (piso medio por clase 3,6–21; por especie 9–19). En la versión 6.1 ese bot muere en los pisos 3–6
+  con todas las clases (mismo resultado para todas), así que NO sirve para comparar clases de esta versión y no se aplicaron ajustes.
+- Recomendación: medir con partidas humanas o un bot que use MT, equipo, talentos y esquiva (tests/balance-campaign.cjs).
+
+NOMBRE: el juego se muestra como "Pokémon Echoe's" (título, cabecera, menú, guía y tarjeta del index).

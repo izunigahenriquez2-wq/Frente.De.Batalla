@@ -60,17 +60,17 @@ N.host=profile=>{
  });
 };
 function connectGuest(){
- const peer=N.peer=new Peer(undefined,options());watchSignal(peer);let linked=false;
+ const peer=N.peer=new Peer(undefined,options());watchSignal(peer);let linked=false,rejected=false;
  peer.on('error',e=>{if(N.peer===peer)peerError(e);});
  peer.on('open',()=>{
   if(N.peer!==peer||linked)return;linked=true;
-  const link=peer.connect('ecos-rpg-'+N.code,{reliable:true,serialization:'json'});N.links.set('host',link);
+  const link=peer.connect('ecos-rpg-'+N.code,{reliable:true,serialization:'binary'});N.links.set('host',link);
   const timer=setTimeout(()=>{if(N.peer===peer&&N.links.get('host')===link)N.callbacks.error?.('La sala no respondió. Comprueba la red y vuelve a intentar.');},15000);
   link.on('open',()=>N.send(link,{type:'hello',protocol:PROTOCOL,profile:N.profileData,resumeToken:N.resumeToken}));
   link.on('data',m=>{if(N.peer!==peer||N.links.get('host')!==link||!m||typeof m!=='object')return;
    if(m.type==='welcome'){clearTimeout(timer);N.id=m.pid;N.resumeToken=m.resumeToken||'';}
    else if(m.type==='lobby'){clearTimeout(timer);N.roster=m.roster;N.callbacks.lobby?.(m);}
-   else if(m.type==='reject'){clearTimeout(timer);N.callbacks.error?.(m.text);}
+   else if(m.type==='reject'){clearTimeout(timer);rejected=true;N.callbacks.error?.(m.text);}
    else if(m.type==='world'){N.running=true;N.callbacks.world?.(m.world);}
    else if(m.type==='state')N.callbacks.state?.(m.state);
    else if(m.type==='event-open')N.callbacks.event?.(m.event);
@@ -78,7 +78,7 @@ function connectGuest(){
    else if(m.type==='ended')N.callbacks.ended?.(m.win);
    else if(m.type==='pause')N.callbacks.pause?.(m.paused);
   });
-  link.on('close',()=>{clearTimeout(timer);if(N.peer!==peer||N.role!=='client'||N.links.get('host')!==link)return;N.links.delete('host');N.callbacks.error?.('Se perdió la conexión con el anfitrión. Puedes volver al mismo explorador mientras la expedición siga abierta.');});
+  link.on('close',()=>{clearTimeout(timer);if(rejected||N.peer!==peer||N.role!=='client'||N.links.get('host')!==link)return;N.links.delete('host');N.callbacks.error?.('Se perdió la conexión con el anfitrión. Puedes volver al mismo explorador mientras la expedición siga abierta.');});
   link.on('error',e=>{clearTimeout(timer);if(N.peer===peer)peerError(e);});
  });
 }
