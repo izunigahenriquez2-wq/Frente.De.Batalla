@@ -1,0 +1,78 @@
+ECOS DE LA MAZMORRA · VERSIÓN 8 · 2D
+
+Extrae TODO el ZIP manteniendo sus rutas. Publica en un servidor HTTP/HTTPS y abre dungeon.html. index.html permanece intacto. Recarga con Ctrl+F5.
+
+Q: elegir sustitución desde nivel 10. E: desde nivel 20. Usa Desarrollo para ver las opciones; evolucionar permite nuevas elecciones. Las decisiones duran esa expedición.
+180 formas jugables, 74 reclutables, 11 clases. Tres fases: 16/36; dos fases: 26. Familias Kanto ampliadas con bebés y evoluciones de otras regiones.
+Atlas del gremio: 126 recursos originales con créditos. Visitantes en pisos pares sin jefe; una elección por equipo.
+Online: protocolo 9, todos deben actualizar. Simulación de cuatro instancias aprobada; conexión entre dispositivos reales pendiente de validación.
+
+Consulta el informe incluido para alcance, pruebas y trabajo pendiente.
+
+NOTAS HISTÓRICAS (el modo 3D mencionado a continuación ya no se carga):
+
+ECOS DE LA MAZMORRA · VERSIÓN 7
+
+INSTALACIÓN
+Extrae TODO el ZIP en la misma carpeta que index.html y publica los archivos manteniendo sus rutas. Abre dungeon.html desde el portal o desde un servidor web (por ejemplo GitHub Pages). No basta con reemplazar solamente el HTML del juego. index.html es idéntico al entregado en la versión 5; no se modificaron los otros juegos.
+
+NOVEDADES 7
+• Arreglado el lienzo 2D oculto que podía cubrir la escena 3D. Capas con visibilidad explícita.
+• Barra compacta de diez casillas con iconos, teclas y recarga; fondo exterior transparente.
+• Menos experiencia, básico reducido, técnicas ofensivas reforzadas y enemigos más rápidos.
+• Jefes siempre al menos cinco niveles sobre el jugador conectado más alto, tres fases, ataques anunciados, recuperación y tambaleo por técnicas.
+• Todos los participantes online deben actualizar: protocolo 8.
+• Tras publicar, recarga con Ctrl+F5. Los archivos propios llevan versión en su URL.
+
+CORRECCIONES CONSERVADAS DE 6.1
+• Corrección del atlas de Tierra Oculta en las tres vistas; interpolación de actores y proyectiles; pérdida de contexto gráfico con alternativa compatible.
+• Danza Espada, Corpulencia, Paz Mental, Danza Dragón, Maquinación y Tambor tienen efectos diferenciados. Consulta el catálogo.
+• Correcciones de pausa online, mensajes de pisos antiguos, elección de obstáculos para invitados y recargas compartidas.
+
+NOVEDADES CONSERVADAS
+• Puertas que abren y cierran pasos reales, algunas con llaves consumibles.
+• Atajos de vegetación o escombros: movimiento aprendido, especialidad de clase o esfuerzo con coste de PM. Aparecen en determinados pisos normales; los jefes no los usan.
+• Suspender y guardar desde Pausa. Continúa desde el menú; conserva mapa, niebla, enemigos, botín, habilidades, evolución y recursos. Disponible en solitario y cooperativo LOCAL; no para partidas online. Se guarda en este navegador/dispositivo y en este dominio. No es guardado en la nube. No borres los datos del sitio.
+• Barra de diez espacios: básico, dos movimientos de especie, una técnica de clase y seis espacios configurables para MT/equipo. Se inicia con cuatro movimientos, uno de ellos desde Nv. 8; los demás se consiguen explorando.
+• Libro de técnicas, compatibilidad de MT por especie, rareza y aparición por piso. Las MT aprendidas duran esta expedición. Los movimientos de equipo requieren mantener equipado el objeto.
+• Bulbasaur Soporte usa Síntesis; Squirtle Soporte usa Acua Aro. Todas las clases usan nombres de movimientos reales. Algunos movimientos concedidos por la clase son adaptaciones RPG; la ficha lo indica.
+• 135 definiciones de técnicas reales y 78 movimientos en el catálogo de MT. No todos aparecen en cada partida. Incluye movimientos de varias generaciones; no es un simulador exacto de Esmeralda.
+• Regeneración base: 0,9 PM/s en combate y 2,2 fuera. El equipo añade como máximo 1 PM/s. Recarga global de habilidades: 0,9 s. Éter y otras recuperaciones de PM comparten 8 s de recarga. Repetir una técnica en la barra no elimina su recarga.
+• Enemigos con funciones: curación, control de zonas, carga anunciada, protección, explosión y reposicionamiento. Su combinación varía por bioma.
+• Curva de experiencia reajustada para los 80 pisos. No es necesario eliminar todos los enemigos para ascender, pero evitar demasiado combate aumenta la diferencia de nivel.
+
+PRESENTACIÓN
+Ajustes permite alternar escenario 3D y vista cenital. El escenario usa Three.js con suelo, paredes, cámara ortográfica y sprites Pokémon. Si WebGL no está disponible, usa una proyección inclinada compatible dibujada en Canvas. Esta vista compatible NO es renderizado 3D acelerado. La vista cenital conserva Phaser.
+Se incluyen sprites animados de Blanco y Negro en el selector y libro de técnicas. La caminata conserva Mundo Misterioso, porque sus hojas incluyen direcciones y acciones. No se generan Pokémon ni efectos con IA.
+Verificación: la vista inclinada compatible y la interfaz se probaron en navegador. El navegador de pruebas tiene WebGL desactivado; la ruta 3D acelerada requiere comprobación adicional en hardware compatible.
+
+CONTROLES · SOLITARIO Y TU JUGADOR ONLINE
+WASD: movimiento. Espacio: ataque básico. Q/E: movimientos de especie. R: técnica de clase.
+1,2,3,4,5,6,7,8,9,0: espacios 1–10 de la barra; también puedes pulsarlos con el mouse.
+F: recoger, abrir cofres, puertas, obstáculos, eventos y escaleras. Mantén F cerca de un aliado caído para rescatarlo.
+Shift: esquiva. H: poción. X: mochila. K: libro de técnicas. M: mapa. Esc: pausa.
+Éter: botón junto a la barra o desde la mochila.
+Los cambios de preparación solo se aceptan fuera de combate. Los movimientos del mismo nombre comparten su recarga aunque ocupen varias ranuras.
+
+COOPERATIVO LOCAL
+P1: WASD; Espacio/Q/E/R; Shift izquierdo; F; 1 poción.
+P2: flechas; N/B/V/C; Shift derecho; H interactuar; 2 poción.
+P3: IJKL; O/U/Y/P; punto y coma; T interactuar; 3 poción.
+P4: teclado numérico 8/5/4/6; 0/7/9/3; decimal; Enter; 1 poción.
+En local se desactivan las teclas numéricas de la barra para evitar conflictos con estos controles. La barra incluye un selector de jugador: elige P1–P4 para lanzar con el mouse sus habilidades extra. El libro permite configurar a cada jugador local.
+
+COOPERATIVO ONLINE
+Hasta cuatro personas; cada una elige Pokémon y clase. Todos deben usar esta versión 6.1 (protocolo 7). El anfitrión valida habilidades, costes, botín, puertas y preparación. PeerJS/WebRTC depende de la conectividad de las redes. El protocolo se prueba con cuatro participantes simulados; sigue pendiente una sesión real en cuatro dispositivos/redes. Incluye reconexión del invitado mediante el botón «Reconectar al equipo», mientras el anfitrión y la pestaña del invitado permanezcan abiertos. La recarga de página pierde esa sesión. No incluye migración de anfitrión ni suspensión online. La creación real de sala funcionó en pruebas, pero no se pudo establecer el canal con un segundo participante. net-config.js permite configurar servicio/ICE propios; no hay TURN propio aprovisionado.
+
+PROGRESIÓN CONSERVADA
+Pikachu, Eevee, Bulbasaur, Charmander y Squirtle son gratuitos. 74 especies base reclutables; 69 de pago. 146 formas no legendarias jugables dentro de la partida.
+Líneas de tres fases: evolucionan al nivel 16 y 36. Líneas de dos fases: nivel 26. Eevee elige Vaporeon, Jolteon o Flareon. Puedes posponer.
+Jefes desde el piso 10 cada cinco pisos. Kanto, Alto Mando, Blue con tres oleadas, un ave y Mewtwo en el piso 80.
+
+DOCUMENTACIÓN
+Informe-creativo-Ecos-de-la-Mazmorra.md: decisiones, comprobaciones, límites y mejoras recomendadas.
+CATALOGO-MT.csv: coste, potencia, rareza y primer piso de cada MT.
+TECNICAS-CLASE.csv: técnica por especie y clase.
+BALANCE-CAMPANA.csv: simulación de progresión, no tasa de victorias ni prueba humana de combate.
+GUIA-EVOLUCIONES.csv: líneas y niveles de evolución.
+CREDITOS.txt: procedencia de recursos y bibliotecas.

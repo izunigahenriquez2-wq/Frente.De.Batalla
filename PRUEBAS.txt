@@ -1,0 +1,55 @@
+VERSIÓN 8 — resultados actuales en Informe-creativo-Ecos-de-la-Mazmorra.md.
+Pruebas: verify-v8, verify-online-integration, verify-combat-v7, verify-v6-extended y verify-techniques-balance.
+La prueba verify-render3d es histórica y no aplica a la versión 2D.
+
+HISTÓRICO:
+VERIFICACIÓN · REVISIÓN 7
+
+Ejecutar desde cualquier directorio con Node.js:
+node game/tests/verify-combat-v7.cjs
+node game/tests/verify-v5.cjs
+node game/tests/verify-network.cjs
+node game/tests/verify-v6.cjs
+node game/tests/verify-v6-extended.cjs
+node game/tests/verify-online-integration.cjs
+node game/tests/verify-render3d.cjs
+node game/tests/verify-techniques-balance.cjs
+
+verify-v5 comprueba la base anterior; verify-v6 integra la extensión actual. El ensayo de campaña se puede repetir con:
+node game/tests/balance-campaign.cjs
+
+Pruebas nuevas:
+- Escaleras/llaves alcanzables; puertas y atajos opcionales; MT respetan primer piso.
+- Colisión cambia al abrir; llave consumida una vez; no cerrar sobre un actor.
+- Obstáculos con solución alternativa y coste de PM.
+- Las 1.606 combinaciones de forma jugable/clase referencian movimientos reales.
+- Síntesis inmediata y Acua Aro gradual; falta de PM impide lanzar.
+- 10 espacios; MT compatibles; concesiones de equipo; recargas compartidas.
+- Suspensión conserva enemigos alejados, niebla, cofres, inventario, técnicas y proyectiles.
+- La derrota elimina la suspensión correspondiente.
+- Mensajes de estado incluyen puertas y movimientos; acciones inválidas rechazadas.
+- 240 pisos adicionales con tres semillas fijas; 22 especializaciones ejecutadas.
+- Controles de cooperativo local, barras de otros jugadores y proyección compatible.
+- Curva analítica de campaña a 35%, 60% y 100% de enemigos derrotados.
+
+Verificación en navegador:
+- Menú, selector, animación B/W, barra y libro de técnicas.
+- Suspender, recargar la página, continuar con recursos conservados.
+- Vista inclinada compatible al no estar disponible WebGL.
+
+Límites:
+No valida una campaña completa jugada por personas, ni cuatro dispositivos/redes reales.
+El navegador de pruebas tiene WebGL desactivado: la ruta 3D acelerada no tiene validación visual en hardware. La vista compatible es una proyección Canvas, no 3D acelerado.
+
+NUEVO EN 6.1
+- Cuatro instancias de simulación: inventario, habilidades, pausa, mensajes antiguos, reconexión al mismo personaje y cambio de piso. El transporte es un doble determinista.
+- Three.js real para geometría/cámara en 16 biomas; dispositivo GPU sustituido. No mide FPS ni verifica dibujo acelerado.
+- 55 ensayos de recursos, seis mejoras con efectos distintos, caducidad, básico gratuito y requisito de PS de Tambor.
+- Iconos existentes para 588 definiciones de habilidades.
+- Prueba real de sala: anfitrión conectado; invitado no estableció canal, incluso al reintentar. No se declara aprobado el online real.
+
+La revisión visual final tras las últimas correcciones quedó bloqueada por la política de acceso del navegador al reabrir la vista previa. No se declara validada visualmente toda la revisión 6.1.
+
+V7: 19 perfiles de jefe, tres fases, patrones, ventanas de recuperación, nivel dinámico +5, impacto de técnicas, tambaleo y XP nula sin recompensa.
+Prueba visual: barra de casillas y escenario compatible visibles; canvas Phaser oculto con display:none. WebGL no disponible en el navegador de prueba, por lo que la rasterización 3D real requiere comprobación en un equipo con GPU.
+Balance analítico: victorias instantáneas, no estima destreza, tiempo, muertes ni economía real; Blue solo se contabiliza parcialmente. No sustituye partidas humanas completas.

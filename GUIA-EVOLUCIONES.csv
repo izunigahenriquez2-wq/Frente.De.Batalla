@@ -1,0 +1,186 @@
+﻿ID;Pokemon;Raiz;Evoluciones;Nivel;Reclutable;Q1;Q2;E1;E2
+1;Bulbasaur;1;2;16;True;Somnífero;Gigadrenado;Rayo Solar;Bomba Lodo
+2;Ivysaur;1;3;36;False;Somnífero;Gigadrenado;Rayo Solar;Bomba Lodo
+3;Venusaur;1;;36;False;Somnífero;Gigadrenado;Rayo Solar;Bomba Lodo
+4;Charmander;4;5;16;True;Lanzallamas;Llamarada;Giro Fuego;Nitrocarga
+5;Charmeleon;4;6;36;False;Lanzallamas;Llamarada;Giro Fuego;Nitrocarga
+6;Charizard;4;;36;False;Lanzallamas;Llamarada;Giro Fuego;Nitrocarga
+7;Squirtle;7;8;16;True;Hidrobomba;Hidropulso;Surf;Protección
+8;Wartortle;7;9;36;False;Hidrobomba;Hidropulso;Surf;Protección
+9;Blastoise;7;;36;False;Hidrobomba;Hidropulso;Surf;Protección
+10;Caterpie;10;11;16;True;Disparo Demora;Electrotela;Placaje;Protección
+11;Metapod;10;12;36;False;Disparo Demora;Electrotela;Fortaleza;Defensa Férrea
+12;Butterfree;10;;36;False;Golpe Aéreo;Despejar;Disparo Demora;Viento Afín
+13;Weedle;13;14;16;True;Picotazo Veneno;Disparo Demora;Electrotela;Protección
+14;Kakuna;13;15;36;False;Disparo Demora;Electrotela;Fortaleza;Defensa Férrea
+15;Beedrill;13;;36;False;Tijera X;Bomba Lodo;Pin Misil;Picotazo Veneno
+16;Pidgey;16;17;16;True;Golpe Aéreo;Vuelo;Canon;Meteoros
+17;Pidgeotto;16;18;36;False;Golpe Aéreo;Vuelo;Canon;Meteoros
+18;Pidgeot;16;;36;False;Golpe Aéreo;Vuelo;Canon;Meteoros
+19;Rattata;19;20;26;True;Canon;Meteoros;Corte;Ataque Rápido
+20;Raticate;19;;26;False;Fuerza;Canon;Meteoros;Corte
+21;Spearow;21;22;26;True;Golpe Aéreo;Vuelo;Canon;Meteoros
+22;Fearow;21;;26;False;Golpe Aéreo;Vuelo;Canon;Meteoros
+23;Ekans;23;24;26;True;Bomba Lodo;Onda Tóxica;Picotazo Veneno;Tóxico
+24;Arbok;23;;26;False;Bomba Lodo;Onda Tóxica;Picotazo Veneno;Tóxico
+25;Pikachu;172;26;36;True;Rayo;Electrotela;Trueno;Agilidad
+26;Raichu;172;;36;False;Rayo;Electrotela;Trueno;Agilidad
+27;Sandshrew;27;28;26;True;Excavar;Terratemblor;Disparo Lodo;Terremoto
+28;Sandslash;27;;26;False;Excavar;Terratemblor;Disparo Lodo;Terremoto
+29;Nidoran♀;29;30;16;True;Bomba Lodo;Picotazo Veneno;Tóxico;Excavar
+30;Nidorina;29;31;36;False;Bomba Lodo;Picotazo Veneno;Tóxico;Excavar
+31;Nidoqueen;29;;36;False;Excavar;Terratemblor;Bomba Lodo;Disparo Lodo
+32;Nidoran♂;32;33;16;True;Bomba Lodo;Picotazo Veneno;Tóxico;Excavar
+33;Nidorino;32;34;36;False;Bomba Lodo;Picotazo Veneno;Tóxico;Excavar
+34;Nidoking;32;;36;False;Excavar;Terratemblor;Bomba Lodo;Disparo Lodo
+35;Clefairy;173;36;36;False;Luz Lunar;Demolición;Puño Drenaje;Excavar
+36;Clefable;173;;36;False;Luz Lunar;Demolición;Puño Drenaje;Excavar
+37;Vulpix;37;38;26;True;Rueda Fuego;Lanzallamas;Onda Ígnea;Nitrocarga
+38;Ninetales;37;;26;False;Rueda Fuego;Lanzallamas;Onda Ígnea;Nitrocarga
+39;Jigglypuff;174;40;36;False;Fuerza;Vozarrón;Canon;Meteoros
+40;Wigglytuff;174;;36;False;Fuerza;Vozarrón;Canon;Meteoros
+41;Zubat;41;42;16;True;Golpe Aéreo;Vuelo;Bomba Lodo;Despejar
+42;Golbat;41;169;36;False;Golpe Aéreo;Vuelo;Bomba Lodo;Despejar
+43;Oddish;43;44;16;True;Gigadrenado;Energibola;Bomba Lodo;Hoja Afilada
+44;Gloom;43;45,182;36;False;Gigadrenado;Energibola;Bomba Lodo;Hoja Afilada
+45;Vileplume;43;;36;False;Gigadrenado;Energibola;Bomba Lodo;Hoja Afilada
+46;Paras;46;47;26;True;Gigadrenado;Chupavidas;Tijera X;Energibola
+47;Parasect;46;;26;False;Gigadrenado;Chupavidas;Tijera X;Energibola
+48;Venonat;48;49;26;True;Chupavidas;Bomba Lodo;Polvo Veneno;Disparo Demora
+49;Venomoth;48;;26;False;Chupavidas;Bomba Lodo;Onda Tóxica;Polvo Veneno
+50;Diglett;50;51;26;True;Excavar;Terratemblor;Disparo Lodo;Terremoto
+51;Dugtrio;50;;26;False;Excavar;Terratemblor;Disparo Lodo;Terremoto
+52;Meowth;52;53;26;True;Cuchillada;Vozarrón;Canon;Meteoros
+53;Persian;52;;26;False;Cuchillada;Vozarrón;Canon;Meteoros
+54;Psyduck;54;55;26;True;Rayo Burbuja;Surf;Hidropulso;Hidrobomba
+55;Golduck;54;;26;False;Rayo Burbuja;Surf;Hidropulso;Acua Jet
+56;Mankey;56;57;16;True;Demolición;Puño Drenaje;Golpe Roca;Corpulencia
+57;Primeape;56;979;36;False;Demolición;Puño Drenaje;Golpe Roca;Corpulencia
+58;Growlithe;58;59;26;True;Rueda Fuego;Lanzallamas;Onda Ígnea;Nitrocarga
+59;Arcanine;58;;26;False;Rueda Fuego;Lanzallamas;Onda Ígnea;Nitrocarga
+60;Poliwag;60;61;16;True;Rayo Burbuja;Surf;Hidropulso;Hidrobomba
+61;Poliwhirl;60;62,186;36;False;Rayo Burbuja;Surf;Hidropulso;Hidrobomba
+62;Poliwrath;60;;36;False;Demolición;Puño Drenaje;Rayo Burbuja;Surf
+63;Abra;63;64;16;True;Psíquico;Bola Sombra;Recuperación;Paz Mental
+64;Kadabra;63;65;36;False;Psíquico;Bola Sombra;Recuperación;Paz Mental
+65;Alakazam;63;;36;False;Psíquico;Bola Sombra;Recuperación;Paz Mental
+66;Machop;66;67;16;True;Demolición;Golpe Roca;Corpulencia;Avalancha
+67;Machoke;66;68;36;False;Demolición;Golpe Roca;Corpulencia;Avalancha
+68;Machamp;66;;36;False;Demolición;Puño Drenaje;Golpe Roca;Corpulencia
+69;Bellsprout;69;70;16;True;Gigadrenado;Energibola;Bomba Lodo;Hoja Afilada
+70;Weepinbell;69;71;36;False;Gigadrenado;Energibola;Bomba Lodo;Hoja Afilada
+71;Victreebel;69;;36;False;Gigadrenado;Energibola;Bomba Lodo;Hoja Afilada
+72;Tentacool;72;73;26;True;Rayo Burbuja;Bomba Lodo;Surf;Hidropulso
+73;Tentacruel;72;;26;False;Rayo Burbuja;Bomba Lodo;Surf;Hidropulso
+74;Geodude;74;75;16;True;Avalancha;Excavar;Terratemblor;Tumba Rocas
+75;Graveler;74;76;36;False;Avalancha;Excavar;Terratemblor;Tumba Rocas
+76;Golem;74;;36;False;Avalancha;Excavar;Terratemblor;Tumba Rocas
+77;Ponyta;77;78;26;True;Rueda Fuego;Lanzallamas;Onda Ígnea;Nitrocarga
+78;Rapidash;77;;26;False;Rueda Fuego;Lanzallamas;Onda Ígnea;Nitrocarga
+79;Slowpoke;79;80,199;26;True;Rayo Burbuja;Psíquico;Surf;Hidropulso
+80;Slowbro;79;;26;False;Rayo Burbuja;Psíquico;Surf;Hidropulso
+81;Magnemite;81;82;16;True;Rayo;Chispazo;Electrotela;Defensa Férrea
+82;Magneton;81;462;36;False;Rayo;Chispazo;Electrotela;Defensa Férrea
+83;Farfetch'd;83;;26;True;Cuchillada;Golpe Aéreo;Vuelo;Canon
+84;Doduo;84;85;26;True;Golpe Aéreo;Vuelo;Canon;Meteoros
+85;Dodrio;84;;26;False;Golpe Aéreo;Vuelo;Canon;Meteoros
+86;Seel;86;87;26;True;Rayo Burbuja;Surf;Hidropulso;Acua Jet
+87;Dewgong;86;;26;False;Rayo Burbuja;Rayo Hielo;Surf;Hidropulso
+88;Grimer;88;89;26;True;Bomba Lodo;Onda Tóxica;Armadura Ácida;Gas Venenoso
+89;Muk;88;;26;False;Bomba Lodo;Onda Tóxica;Armadura Ácida;Gas Venenoso
+90;Shellder;90;91;26;True;Rayo Burbuja;Surf;Hidropulso;Hidrobomba
+91;Cloyster;90;;26;False;Rayo Burbuja;Rayo Hielo;Surf;Hidropulso
+92;Gastly;92;93;16;True;Bola Sombra;Bomba Lodo;Hipnosis;Pulso Umbrío
+93;Haunter;92;94;36;False;Bola Sombra;Bomba Lodo;Hipnosis;Pulso Umbrío
+94;Gengar;92;;36;False;Bola Sombra;Bomba Lodo;Hipnosis;Pulso Umbrío
+95;Onix;95;208;26;True;Avalancha;Terremoto;Defensa Férrea;Tumba Rocas
+96;Drowzee;96;97;26;True;Psíquico;Confusión;Barrera;Paz Mental
+97;Hypno;96;;26;False;Psíquico;Confusión;Barrera;Paz Mental
+98;Krabby;98;99;26;True;Rayo Burbuja;Surf;Hidropulso;Martillazo
+99;Kingler;98;;26;False;Rayo Burbuja;Surf;Hidropulso;Martillazo
+100;Voltorb;100;101;26;True;Chispazo;Rayo;Electrotela;Trueno
+101;Electrode;100;;26;False;Chispazo;Rayo;Electrotela;Trueno
+102;Exeggcute;102;103;26;True;Gigadrenado;Energibola;Psíquico;Confusión
+103;Exeggutor;102;;26;False;Gigadrenado;Energibola;Psíquico;Confusión
+104;Cubone;104;105;26;True;Excavar;Terratemblor;Terremoto;Bofetón Lodo
+105;Marowak;104;;26;False;Excavar;Terratemblor;Terremoto;Bofetón Lodo
+106;Hitmonlee;236;;26;False;Demolición;Puño Drenaje;Corpulencia;Agilidad
+107;Hitmonchan;236;;26;False;Demolición;Puño Drenaje;Corpulencia;Agilidad
+108;Lickitung;108;463;26;True;Fuerza;Canon;Corte;Placaje
+109;Koffing;109;110;26;True;Bomba Lodo;Onda Tóxica;Gas Venenoso;Tóxico
+110;Weezing;109;;26;False;Bomba Lodo;Onda Tóxica;Gas Venenoso;Tóxico
+111;Rhyhorn;111;112;16;True;Avalancha;Excavar;Terratemblor;Tumba Rocas
+112;Rhydon;111;464;36;False;Avalancha;Excavar;Terratemblor;Tumba Rocas
+113;Chansey;440;242;36;False;Ovocuración;Pulso Cura;Pantalla de Luz;Velo Sagrado
+114;Tangela;114;465;26;True;Gigadrenado;Energibola;Látigo Cepa;Rayo Solar
+115;Kangaskhan;115;;26;True;Fuerza;Canon;Corte;Hiperrayo
+116;Horsea;116;117;16;True;Rayo Burbuja;Surf;Hidropulso;Hidrobomba
+117;Seadra;116;230;36;False;Rayo Burbuja;Surf;Hidropulso;Hidrobomba
+118;Goldeen;118;119;26;True;Rayo Burbuja;Surf;Hidropulso;Hidrobomba
+119;Seaking;118;;26;False;Rayo Burbuja;Surf;Hidropulso;Hidrobomba
+120;Staryu;120;121;26;True;Rayo Burbuja;Surf;Hidropulso;Hidrobomba
+121;Starmie;120;;26;False;Rayo Burbuja;Psíquico;Surf;Hidropulso
+122;Mr. Mime;439;;26;False;Psíquico;Confusión;Barrera;Paz Mental
+123;Scyther;123;212,900;26;True;Tijera X;Golpe Aéreo;Danza Espada;Agilidad
+124;Jynx;238;;26;False;Rayo Hielo;Psíquico;Viento Hielo;Confusión
+125;Electabuzz;239;466;36;False;Rayo;Chispazo;Agilidad;Pantalla de Luz
+126;Magmar;240;467;36;False;Lanzallamas;Llamarada;Giro Fuego;Rueda Fuego
+127;Pinsir;127;;26;True;Tijera X;Disparo Demora;Demolición;Avalancha
+128;Tauros;128;;26;True;Fuerza;Canon;Placaje;Hiperrayo
+129;Magikarp;129;130;26;True;Hidrobomba;Hidropulso;Danza Dragón;Terremoto
+130;Gyarados;129;;26;False;Hidrobomba;Hidropulso;Danza Dragón;Terremoto
+131;Lapras;131;;26;True;Rayo Burbuja;Rayo Hielo;Surf;Hidropulso
+132;Ditto;132;;26;True;Transformación;Protección;Protección;Meteoros
+133;Eevee;133;134,135,136,700,196,197,470,471;26;True;Meteoros;Ataque Rápido;Bola Sombra;Paz Mental
+134;Vaporeon;133;;26;False;Hidrobomba;Hidropulso;Acua Aro;Surf
+135;Jolteon;133;;26;False;Rayo;Electrotela;Agilidad;Trueno
+136;Flareon;133;;26;False;Lanzallamas;Llamarada;Giro Fuego;Nitrocarga
+137;Porygon;137;233;16;True;Psíquico;Canon;Recuperación;Agilidad
+138;Omanyte;138;139;26;True;Avalancha;Rayo Burbuja;Tumba Rocas;Surf
+139;Omastar;138;;26;False;Avalancha;Rayo Burbuja;Tumba Rocas;Surf
+140;Kabuto;140;141;26;True;Avalancha;Rayo Burbuja;Tumba Rocas;Surf
+141;Kabutops;140;;26;False;Avalancha;Rayo Burbuja;Tumba Rocas;Surf
+142;Aerodactyl;142;;26;True;Avalancha;Golpe Aéreo;Vuelo;Tumba Rocas
+143;Snorlax;446;;26;False;Fuerza;Vozarrón;Canon;Placaje
+144;Articuno;144;;26;False;Golpe Aéreo;Vuelo;Rayo Hielo;Viento Hielo
+145;Zapdos;145;;26;False;Chispazo;Golpe Aéreo;Vuelo;Rayo
+146;Moltres;146;;26;False;Golpe Aéreo;Lanzallamas;Vuelo;Onda Ígnea
+147;Dratini;147;148;16;True;Pulso Dragón;Hiperrayo;Danza Dragón;Trueno
+148;Dragonair;147;149;36;False;Pulso Dragón;Hiperrayo;Danza Dragón;Trueno
+149;Dragonite;147;;36;False;Pulso Dragón;Hiperrayo;Danza Dragón;Trueno
+150;Mewtwo;150;;26;False;Psíquico;Confusión;Agilidad;Barrera
+151;Mew;151;;26;False;Psíquico;Confusión;Agilidad;Barrera
+169;Crobat;41;;36;False;Golpe Aéreo;Vuelo;Bomba Lodo;Despejar
+172;Pichu;172;25;16;True;Rayo;Electrotela;Trueno;Agilidad
+173;Cleffa;173;35;16;True;Excavar;Bola Sombra;Lanzallamas;Vozarrón
+174;Igglybuff;174;39;16;True;Vozarrón;Canon;Meteoros;Eco Voz
+182;Bellossom;43;;36;False;Gigadrenado;Energibola;Hoja Afilada;Rayo Solar
+186;Politoed;60;;36;False;Rayo Burbuja;Surf;Hidropulso;Hidrobomba
+196;Espeon;133;;26;False;Psíquico;Bola Sombra;Paz Mental;Pantalla de Luz
+197;Umbreon;133;;26;False;Pulso Umbrío;Alarido;Luz Lunar;Tóxico
+199;Slowking;79;;26;False;Psíquico;Surf;Hidropulso;Confusión
+208;Steelix;95;;26;False;Avalancha;Terremoto;Defensa Férrea;Tumba Rocas
+212;Scizor;123;;26;False;Tijera X;Golpe Aéreo;Danza Espada;Agilidad
+230;Kingdra;116;;36;False;Rayo Burbuja;Pulso Dragón;Surf;Hidropulso
+233;Porygon2;137;474;36;False;Psíquico;Canon;Recuperación;Agilidad
+236;Tyrogue;236;106,107,237;26;True;Demolición;Puño Drenaje;Corpulencia;Agilidad
+237;Hitmontop;236;;26;False;Demolición;Puño Drenaje;Corpulencia;Agilidad
+238;Smoochum;238;124;26;True;Rayo Hielo;Psíquico;Viento Hielo;Confusión
+239;Elekid;239;125;16;True;Rayo;Chispazo;Agilidad;Pantalla de Luz
+240;Magby;240;126;16;True;Lanzallamas;Llamarada;Giro Fuego;Rueda Fuego
+242;Blissey;440;;36;False;Ovocuración;Pulso Cura;Pantalla de Luz;Velo Sagrado
+439;Mime Jr.;439;122;26;True;Psíquico;Confusión;Barrera;Paz Mental
+440;Happiny;440;113;16;True;Ovocuración;Pulso Cura;Pantalla de Luz;Velo Sagrado
+446;Munchlax;446;143;26;True;Fuerza;Vozarrón;Canon;Placaje
+462;Magnezone;81;;36;False;Rayo;Chispazo;Electrotela;Defensa Férrea
+463;Lickilicky;108;;26;False;Fuerza;Canon;Corte;Placaje
+464;Rhyperior;111;;36;False;Avalancha;Excavar;Terratemblor;Tumba Rocas
+465;Tangrowth;114;;26;False;Gigadrenado;Energibola;Látigo Cepa;Rayo Solar
+466;Electivire;239;;36;False;Rayo;Chispazo;Agilidad;Pantalla de Luz
+467;Magmortar;240;;36;False;Lanzallamas;Llamarada;Giro Fuego;Rueda Fuego
+470;Leafeon;133;;26;False;Gigadrenado;Rayo Solar;Danza Espada;Síntesis
+471;Glaceon;133;;26;False;Rayo Hielo;Ventisca;Viento Hielo;Protección
+474;Porygon-Z;137;;36;False;Psíquico;Canon;Recuperación;Agilidad
+700;Sylveon;133;;26;False;Vozarrón;Meteoros;Paz Mental;Deseo
+900;Kleavor;123;;26;False;Tijera X;Golpe Aéreo;Danza Espada;Agilidad
+979;Annihilape;56;;36;False;Demolición;Puño Drenaje;Bola Sombra;Garra Umbría
