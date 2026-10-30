@@ -1,0 +1,21 @@
+POKÉMON ECHOE'S · CORRECCIONES V9
+
+HUD
+- Retrato de Mundo Misterioso arriba a la izquierda con vida, maná y nivel. Cambia a "Pain" 0,5 s al recibir daño, a "Dizzy" mientras estás envenenado, "Stunned" si caes o duermes, "Worried" con menos del 25 % de PS y "Joyous" al subir de nivel.
+- Los compañeros muestran su retrato fijo (sin cambiar de expresión) junto a su vida y su estado (Envenenado, Caído, Dormido, Ralentizado).
+- Los estados poison/sleep/slow/haste ahora viajan en la instantánea online.
+
+Mochila y online
+- La mochila ya no se redibuja con cada instantánea del anfitrión (se perdían el scroll y los clics): solo se redibuja si cambia su contenido, y conserva el scroll.
+- Instantáneas del anfitrión a 20 Hz (antes 12,5) y la entrada del invitado se envía al instante al cambiar.
+
+Puertas
+- Una puerta cerrada solo se coloca en un pasillo real: las celdas laterales deben ser suelo y los muros de los extremos deben continuar. Se acabaron las puertas en una pared o con el hueco abierto al lado.
+
+Muerte y revivir
+- Si el anfitrión cae, la partida continúa. Solo termina cuando todos caen (si hay un jugador desconectado se esperan 45 s).
+- Quien tenga "Revivir" en la mochila lo usa sobre un aliado caído (F cerca) y lo levanta con el 50 % de PS.
+- Al subir la escalera los caídos ya no bloquean el avance y reviven en el nuevo piso (50 % de PS).
+
+Nombre y online
+- Nombre "Pokémon Echoe's" y canal de datos binario (los mensajes de mundo superaban el límite JSON de PeerJS).

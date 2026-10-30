@@ -1,0 +1,24 @@
+/* Pokémon Echoe's · HUD con retratos de Mundo Misterioso (v9) */
+body[data-screen="game"] .heroHud{top:12px!important;bottom:auto!important;left:12px!important;width:272px;min-width:272px;min-height:92px!important;padding:9px 12px 9px 98px!important;gap:3px;z-index:5}
+body[data-screen="game"] .heroHud .hudPortrait{display:none!important}
+body[data-screen="game"] .heroHud strong,body[data-screen="game"] .heroHud #className{margin-left:0!important}
+.faceBox{position:absolute;left:10px;top:10px;width:78px;height:78px;border:2px solid #d8c68c;border-radius:6px;background-color:#0b1d28;background-repeat:no-repeat;image-rendering:pixelated;box-shadow:0 0 0 2px #0b1d28,0 3px 10px #0007}
+.faceBox[data-emotion="Pain"]{border-color:#ee7b6e;box-shadow:0 0 0 2px #0b1d28,0 0 12px #ee7b6e}
+.faceBox[data-emotion="Dizzy"]{border-color:#b47ad8;box-shadow:0 0 0 2px #0b1d28,0 0 12px #a05cc8}
+.faceBox[data-emotion="Worried"]{border-color:#e8b95e}
+.faceStatus{font-style:normal;font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#e8c07a}
+.faceStatus.poison,.mateStatus.poison{color:#c98cf0}
+.faceStatus.down,.mateStatus.down{color:#ee9e99}
+.faceStatus[hidden],.mateStatus[hidden]{display:none}
+body[data-screen="game"] #party{top:160px!important;bottom:auto!important;left:12px!important;gap:6px;max-width:272px}
+.partyMember{display:grid!important;grid-template-columns:46px 1fr;column-gap:9px;align-items:center;min-width:200px!important}
+.partyMember>.mateFace{grid-row:1/span 5;grid-column:1;width:46px;height:46px;border:1px solid #d8c68c99;border-radius:5px;background-color:#0b1d28;background-repeat:no-repeat;image-rendering:pixelated}
+.partyMember>:not(.mateFace){grid-column:2;min-width:0}
+.partyMember.mateDown .mateFace{filter:grayscale(.8) brightness(.7)}
+.mateStatus{font-style:normal;font-size:8px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#e8c07a;margin-top:2px}
+@media(max-width:900px){body[data-screen="game"] .heroHud{width:215px;min-width:215px;min-height:72px!important;padding:6px 8px 6px 70px!important}.faceBox{width:56px;height:56px;left:7px;top:7px}body[data-screen="game"] #party{top:132px!important;left:8px!important}.partyMember{min-width:150px!important;grid-template-columns:34px 1fr}.partyMember>.mateFace{width:34px;height:34px}}
+@media(max-width:600px){body[data-screen="game"] .heroHud{width:170px;min-width:170px;padding-left:58px!important}.faceBox{width:46px;height:46px}body[data-screen="game"] #party{top:116px!important}.partyMember{min-width:125px!important;grid-template-columns:28px 1fr}.partyMember>.mateFace{width:28px;height:28px}}
+/* Mochila: sin saltos al dibujarse de nuevo y con desplazamiento táctil */
+#overlay{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.compactBag,.bagGrid{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.itemCard button,.itemCard select,.bagTabs button,.equipRow button{min-height:30px;touch-action:manipulation}

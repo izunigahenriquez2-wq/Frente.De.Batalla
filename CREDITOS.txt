@@ -109,3 +109,6 @@ VERSIÓN 8
 126 originales de Spriters Resource / Explorers of Sky: assets/sky/manifest.json conserva autor de extracción, URL y hash. Hojas y archivos originales sin atribuir autoría propia.
 PMDCollab/SpriteCollab: 224 actores; créditos individuales en assets/actors/<id>/credits.txt y metadatos de duración en actors-data.js.
 Los 16 atlas Sky derivan de celdas originales de 24 px; no contienen gráficos generados.
+
+RETRATOS DE MUNDO MISTERIOSO (v9)
+assets/pmdface/*.png: expresiones (Normal, Pain, Dizzy, Worried, Joyous, Stunned, Determined, Happy) de PMDCollab / SpriteCollab (https://sprites.pmdcollab.org), CC BY-NC 4.0. Autores por especie en assets/pmdface/CREDITS.txt.
