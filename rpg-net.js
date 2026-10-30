@@ -17,7 +17,7 @@ function watchSignal(peer){peer.on('disconnected',()=>{if(N.peer===peer&&!peer.d
 N.host=profile=>{
  N.close();if(!window.Peer){N.callbacks.error?.('No se cargó el módulo online. Comprueba la carpeta vendor.');return;}
  N.role='host';N.code=Math.random().toString(36).slice(2,8).toUpperCase();N.id='host';N.roster=[{pid:'host',profile:safeProfile(profile),ready:false}];
- const peer=N.peer=new Peer('ecos-rpg-'+N.code,options());watchSignal(peer);
+ const peer=N.peer=new Peer('ecos-rpg-'+N.code,options());watchSignal(peer);const wait=setTimeout(()=>{if(N.peer===peer&&!peer.open&&!N.running)N.callbacks.error?.('El servidor de salas no responde. Puede estar bloqueado por tu red, VPN o extensión (bloqueadores). Reintenta o prueba con otra conexión, por ejemplo datos móviles.');},12000);peer.on('open',()=>clearTimeout(wait));peer.on('error',()=>clearTimeout(wait));
  peer.on('open',()=>{if(N.peer===peer&&!N.running)N.lobby();});
  peer.on('error',e=>{if(N.peer!==peer)return;if(N.running&&['network','socket-error','socket-closed'].includes(e.type))N.callbacks.notice?.('Servidor de salas desconectado. La expedición continúa con los enlaces activos.');else peerError(e);});
  peer.on('connection',link=>{
@@ -60,7 +60,7 @@ N.host=profile=>{
  });
 };
 function connectGuest(){
- const peer=N.peer=new Peer(undefined,options());watchSignal(peer);let linked=false,rejected=false;
+ const peer=N.peer=new Peer(undefined,options());watchSignal(peer);let linked=false,rejected=false;const wait=setTimeout(()=>{if(N.peer===peer&&!peer.open&&!linked)N.callbacks.error?.('El servidor de salas no responde. Puede estar bloqueado por tu red, VPN o extensión (bloqueadores). Reintenta o prueba con otra conexión, por ejemplo datos móviles.');},12000);peer.on('open',()=>clearTimeout(wait));peer.on('error',()=>clearTimeout(wait));
  peer.on('error',e=>{if(N.peer===peer)peerError(e);});
  peer.on('open',()=>{
   if(N.peer!==peer||linked)return;linked=true;

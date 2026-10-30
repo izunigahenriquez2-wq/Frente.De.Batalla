@@ -19,3 +19,6 @@ Muerte y revivir
 
 Nombre y online
 - Nombre "Pokémon Echoe's" y canal de datos binario (los mensajes de mundo superaban el límite JSON de PeerJS).
+
+Sala online
+- Si el servidor de salas no responde en 12 s (al crear o al unirse) se muestra un aviso claro en vez de quedarse cargando.
