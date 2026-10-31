@@ -4,8 +4,11 @@ body[data-screen="game"] .heroHud .hudPortrait{display:none!important}
 body[data-screen="game"] .heroHud strong,body[data-screen="game"] .heroHud #className{margin-left:0!important}
 .faceBox{position:absolute;left:10px;top:10px;width:78px;height:78px;border:2px solid #d8c68c;border-radius:6px;background-color:#0b1d28;background-repeat:no-repeat;image-rendering:pixelated;box-shadow:0 0 0 2px #0b1d28,0 3px 10px #0007}
 .faceBox[data-emotion="Pain"]{border-color:#ee7b6e;box-shadow:0 0 0 2px #0b1d28,0 0 12px #ee7b6e}
-.faceBox[data-emotion="Dizzy"]{border-color:#b47ad8;box-shadow:0 0 0 2px #0b1d28,0 0 12px #a05cc8}
-.faceBox[data-emotion="Worried"]{border-color:#e8b95e}
+.faceBox[data-emotion="Crying"]{border-color:#b47ad8;box-shadow:0 0 0 2px #0b1d28,0 0 12px #a05cc8}
+.faceBox[data-emotion="Dizzy"]{border-color:#8fb7e8}
+.faceBox[data-emotion="Angry"]{border-color:#e0674f}
+.faceBox[data-emotion="Teary-Eyed"]{border-color:#e8b95e}
+.faceBox[data-emotion="Joyous"],.faceBox[data-emotion="Happy"]{border-color:#9bd98a;box-shadow:0 0 0 2px #0b1d28,0 0 12px #9bd98a}
 .faceStatus{font-style:normal;font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#e8c07a}
 .faceStatus.poison,.mateStatus.poison{color:#c98cf0}
 .faceStatus.down,.mateStatus.down{color:#ee9e99}
@@ -22,3 +25,16 @@ body[data-screen="game"] #party{top:160px!important;bottom:auto!important;left:1
 #overlay{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .compactBag,.bagGrid{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .itemCard button,.itemCard select,.bagTabs button,.equipRow button{min-height:30px;touch-action:manipulation}
+
+/* Panel de controles */
+.ctrlPresets{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;margin:10px 0}
+.ctrlPresets button{display:flex;flex-direction:column;gap:4px;text-align:left;padding:10px 12px}
+.ctrlPresets button small{font-size:10px;line-height:1.4;color:#b6ccc5;font-weight:600}
+.ctrlPresets button.selected{border-color:#e4c68b;background:#35504f}
+.ctrlGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;max-height:30vh;overflow-y:auto;padding-right:4px;overscroll-behavior:contain}
+.ctrlGrid section h3{font-size:13px;margin:4px 0 6px;color:#e4c68b}
+.ctrlRow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:3px 0;font-size:12px}
+.ctrlRow button{min-width:96px;padding:5px 10px;font-weight:800}
+.ctrlRow button.listening{border-color:#e4c68b;background:#5a4a2a;animation:ctrlBlink 1s infinite}
+.ctrlNote{font-size:11px;color:#e8c07a}
+@keyframes ctrlBlink{50%{opacity:.6}}

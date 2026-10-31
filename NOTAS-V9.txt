@@ -1,7 +1,8 @@
 POKÉMON ECHOE'S · CORRECCIONES V9
 
 HUD
-- Retrato de Mundo Misterioso arriba a la izquierda con vida, maná y nivel. Cambia a "Pain" 0,5 s al recibir daño, a "Dizzy" mientras estás envenenado, "Stunned" si caes o duermes, "Worried" con menos del 25 % de PS y "Joyous" al subir de nivel.
+- Retrato de Mundo Misterioso arriba a la izquierda con vida, maná y nivel. Expresiones (de mayor a menor prioridad):
+  Pain 0,5 s al recibir daño de enemigos o trampas · Joyous 0,5 s al usar una poción/objeto de curación y 2 s al evolucionar (el retrato pasa a la nueva forma) · Happy al interactuar con otro jugador (rescatar, entregar objetos) · Dizzy mientras duermes · Crying mientras estás envenenado · Teary-Eyed con 25 % de PS o menos (o caído) · Angry con 50 % o menos · Normal.
 - Los compañeros muestran su retrato fijo (sin cambiar de expresión) junto a su vida y su estado (Envenenado, Caído, Dormido, Ralentizado).
 - Los estados poison/sleep/slow/haste ahora viajan en la instantánea online.
 
@@ -22,3 +23,10 @@ Nombre y online
 
 Sala online
 - Si el servidor de salas no responde en 12 s (al crear o al unirse) se muestra un aviso claro en vez de quedarse cargando.
+
+Controles (botón «Controles» en el menú principal y en la cabecera durante la partida)
+- Clásico: WASD, Espacio, Q/E/R, números 5–0 para las MT, Shift para esquivar.
+- WASD + UIOP/JKLÑ: J K L = movimientos 1, 2 y técnica de clase; Ñ U I O P , = técnicas/MT 1–6. Libro de técnicas en B.
+- Flechas + ASDF/ZXCV: A S D = movimientos 1, 2 y técnica de clase; F Z X C V G = técnicas/MT 1–6. Interactuar en Intro, poción en Q, mochila en I.
+- Personalizado: pulsa una casilla y luego la tecla; si ya estaba en uso, las dos acciones se intercambian. Se guarda en el navegador.
+- En cooperativo local el jugador 1 usa siempre el esquema clásico (para no chocar con el jugador 2).

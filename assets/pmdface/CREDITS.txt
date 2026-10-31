@@ -1,4 +1,4 @@
-Retratos de Pokémon Mystery Dungeon: PMDCollab / SpriteCollab (https://sprites.pmdcollab.org), licencia CC BY-NC 4.0 salvo indicación contraria. Autores por especie (id de Discord/nombre en la columna 2):
+Retratos de Pokémon Mystery Dungeon: PMDCollab / SpriteCollab (https://sprites.pmdcollab.org), licencia CC BY-NC 4.0 salvo indicación contraria. Autores por especie:
 
 #1
 2020-10-07 17:58:43.324438	CHUNSOFT	CUR	Unspecified	Angry,Crying,Determined,Dizzy,Happy,Inspired,Joyous,Normal,Pain,Sad,Shouting,Sigh,Stunned,Surprised,Teary-Eyed,Worried
