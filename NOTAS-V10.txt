@@ -1,0 +1,15 @@
+POKÉMON ECHOE'S · NOTAS V10 · COMBATE COHERENTE
+
+- Cada especie tiene Básico + Q + E propios (a partir de sus movimientos reales y, si no, de sus ataques insignia/competitivos).
+- Físico = contacto con efecto de impacto; Especial = proyectil/rayo a distancia. Las descripciones lo indican.
+- Al subir de nivel (o evolucionar) aparece una tarjeta: eliges qué movimiento (Q o E) reemplazas, o no aprendes.
+  La E sigue bloqueada hasta el Nv. 8.
+- Técnica de clase (R) única por clase, ya no es un movimiento de Pokémon:
+  Guardián Muro Vivo · Atacante Frenesí · Apoyo Pulso Vital · Explorador Rastreo · Mago Nova Arcana ·
+  Asesino Paso Sombrío · Alquimista Mezcla Volátil · Ingeniero Torreta Voltorb · Bardo Canto Inspirador ·
+  Cronomante Distorsión Temporal · Invocador Eco Compañero.
+- MT: pool curado, sin repetición dentro de una partida y solo las que algún jugador puede aprender.
+- Sustituto: deja un peluche que provoca (Mofa) a los enemigos cercanos y absorbe golpes 9 s.
+- Mofa, Fuego Fatuo y Maldición ahora funcionan de verdad.
+- Efectos nuevos de movimientos: PMDCollab/RawAsset (ver CREDITOS.txt). El peluche es arte propio.
+- Protocolo de red 10: todos los jugadores deben tener la misma versión.

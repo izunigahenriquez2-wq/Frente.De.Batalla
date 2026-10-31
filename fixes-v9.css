@@ -38,3 +38,13 @@ body[data-screen="game"] #party{top:160px!important;bottom:auto!important;left:1
 .ctrlRow button.listening{border-color:#e4c68b;background:#5a4a2a;animation:ctrlBlink 1s infinite}
 .ctrlNote{font-size:11px;color:#e8c07a}
 @keyframes ctrlBlink{50%{opacity:.6}}
+
+/* v10 · tarjeta de aprendizaje de movimientos */
+.learnCard{position:fixed;left:50%;top:150px;transform:translateX(-50%);z-index:30;width:min(520px,94vw);background:rgba(18,22,30,.96);border:1px solid #d9b45a;border-radius:10px;padding:10px 12px;color:#eee3c4;box-shadow:0 6px 24px #000a;font-size:13px}
+.learnCard[hidden]{display:none}
+.learnCard .learnHead{display:flex;justify-content:space-between;margin-bottom:4px}
+.learnCard .learnMove strong{color:#ffd978;font-size:15px}.learnCard .learnMove small{display:block;color:#9fb6c9}.learnCard .learnMove p{margin:3px 0 8px}
+.learnCard .learnPick{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.learnCard .learnPick button{display:flex;flex-direction:column;gap:2px;text-align:left;padding:7px 8px;min-height:58px}
+.learnCard .learnPick small{color:#9fb6c9}.learnCard .learnPick em{font-style:normal;font-size:11px;color:#9fb6c9}
+.learnCard .learnPick button:disabled{opacity:.45}
