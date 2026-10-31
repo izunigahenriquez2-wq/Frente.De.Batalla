@@ -13,3 +13,22 @@ POKÉMON ECHOE'S · NOTAS V10 · COMBATE COHERENTE
 - Mofa, Fuego Fatuo y Maldición ahora funcionan de verdad.
 - Efectos nuevos de movimientos: PMDCollab/RawAsset (ver CREDITOS.txt). El peluche es arte propio.
 - Protocolo de red 10: todos los jugadores deben tener la misma versión.
+
+BIOMAS (48 nuevos)
+- Cada tramo de 5 pisos tiene ahora 3-5 versiones (la original + 2-4 nuevas). La versión se elige por la semilla de la
+  partida, así todos los jugadores ven el mismo bioma. Ejemplo: Galerías de Hielo / Monte Gélido / Bosque Escarchado /
+  Bosque de Carámbanos / Sendero Nevado. Cada uno trae su propio set de enemigos según su tipo.
+- Teselas: PMDCollab/RawAsset (TileDtef). Datos en biomes-v10-data.js, imágenes en assets/tiles/.
+
+IDENTIDAD POR TIPO Y POR CLASE
+- Tabla de tipos: ×1.3 si es débil, ×0.75 si resiste, ×0.5 si es inmune. Vale para tus movimientos contra enemigos
+  (según el tipo del movimiento usado) y para los golpes que recibes.
+- Habilidad natural al interactuar con atajos (F): Planta/Bicho/Fuego/Volador abren lianas;
+  Roca/Tierra/Lucha/Acero/Dragón abren derrumbes (6 PM en vez de 22).
+  Eléctrico, Psíquico y Fantasma abren una puerta cerrada sin llave (una vez por piso y jugador).
+- Inmunidades: Veneno/Acero ignoran el veneno; Tierra ignora aturdimiento; Agua/Fuego se quitan las quemaduras;
+  Hielo se recupera de la lentitud; Volador/Fantasma no pisan pinchos ni lazos; Psíquico y Fantasma perciben trampas;
+  Planta se regenera quieta.
+- Clases: Apoyo rescata un 40 % más rápido; Alquimista cura un 30 % más con pociones; Ingeniero desactiva trampas
+  al acercarse y no sufre pinchos; Explorador ve trampas desde lejos. Alquimista y Mago también abren atajos.
+- Los iconos de movimientos ahora se eligen por tipo (ya no faltan imágenes).

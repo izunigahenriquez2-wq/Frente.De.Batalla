@@ -112,3 +112,5 @@ Los 16 atlas Sky derivan de celdas originales de 24 px; no contienen gráficos g
 
 RETRATOS DE MUNDO MISTERIOSO (v9)
 assets/pmdface/*.png: expresiones (Normal, Pain, Dizzy, Worried, Joyous, Stunned, Determined, Happy) de PMDCollab / SpriteCollab (https://sprites.pmdcollab.org), CC BY-NC 4.0. Autores por especie en assets/pmdface/CREDITS.txt.
+
+Biomas v10: teselas TileDtef de PMDCollab/RawAsset (Pokémon Mystery Dungeon, © Nintendo/Creatures/Game Freak/Spike Chunsoft; arte de la comunidad PMDCollab). Peluche de Sustituto: dibujo propio.
