@@ -14,7 +14,7 @@ I.dungeon_key={name:'Llave de mazmorra',type:'key',icon:'Key_Brown.None',desc:'A
 for(const n of ECOS_TECH.tms){const m=M[n];I['tm_'+n]={name:'MT · '+m.name,type:'use',icon:'tm_case',desc:m.rarity+' · potencia '+m.power+' · '+m.mana+' PM. Enseña el movimiento durante esta partida. Compatibilidad por especie; disponible desde piso '+m.floor+'.',technique:n};}
 for(const [k,it] of Object.entries(I))if(!A.icons[k]){const im=new Image();im.src='assets/items/'+(it.icon||k)+'.png';A.icons[k]=im;}
 const classMove=a=>window.ECOS_V10?.classTech(a)||(a=>{const entry=ECOS_TECH.classes[a.id]?.[a.job]||{move:'protect',grant:true},m=M[entry.move];return{...m,source:'class',slug:entry.move,grant:entry.grant,desc:m.desc+(entry.grant?' Técnica concedida por la clase en este RPG.':'')};})(a);
-const available=a=>[...new Set([...(a.learned||[]),...a.gear.map(k=>gearMoves[k]).filter(Boolean)])];
+const available=a=>[...new Set([...(a.learned||[]),...a.gear.flatMap(k=>I[k]?.parts||[k]).map(k=>gearMoves[k]).filter(Boolean)])];
 function slots(a){return [...(A.v8?.speciesMoves(a)||S(a).moves).map(m=>({...m,source:'species'})),classMove(a),...Array.from({length:6},(_,i)=>{const key=a.loadout?.[i];return available(a).includes(key)?{...M[key],slug:key,source:'tm'}:null;})];}
 function S(a){return RPG_SPECIES[a.id];}
 const moveByName=new Map(Object.values(M).map(m=>[m.name,m]));

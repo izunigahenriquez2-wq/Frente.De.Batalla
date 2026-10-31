@@ -21,8 +21,7 @@ BIOMAS (48 nuevos)
 - Teselas: PMDCollab/RawAsset (TileDtef). Datos en biomes-v10-data.js, imágenes en assets/tiles/.
 
 IDENTIDAD POR TIPO Y POR CLASE
-- Tabla de tipos: ×1.3 si es débil, ×0.75 si resiste, ×0.5 si es inmune. Vale para tus movimientos contra enemigos
-  (según el tipo del movimiento usado) y para los golpes que recibes.
+- No hay tabla de tipos: el daño no cambia según el tipo (decisión del equipo).
 - Habilidad natural al interactuar con atajos (F): Planta/Bicho/Fuego/Volador abren lianas;
   Roca/Tierra/Lucha/Acero/Dragón abren derrumbes (6 PM en vez de 22).
   Eléctrico, Psíquico y Fantasma abren una puerta cerrada sin llave (una vez por piso y jugador).
@@ -32,3 +31,14 @@ IDENTIDAD POR TIPO Y POR CLASE
 - Clases: Apoyo rescata un 40 % más rápido; Alquimista cura un 30 % más con pociones; Ingeniero desactiva trampas
   al acercarse y no sufre pinchos; Explorador ve trampas desde lejos. Alquimista y Mago también abren atajos.
 - Los iconos de movimientos ahora se eligen por tipo (ya no faltan imágenes).
+
+FUSIÓN DE OBJETOS (estilo Tácticas)
+- Mochila > «⚗ Fusionar objetos». Elige dos objetos de equipo (o dos copias del mismo) y se combinan en uno solo
+  con un 25 % más de efecto que la suma, que ocupa UNA ranura (de 3). Una fusión no se puede volver a fusionar.
+- 171 recetas posibles (con nombre propio en las más lógicas). Heredan los movimientos de barra y las sinergias de
+  sus dos piezas. Funciona también online.
+- Así los objetos repetidos dejan de ser basura: dos iguales siempre sirven para fusionar.
+
+ENEMIGOS
+- Starmie, Staryu, Clefairy/Clefable, Jigglypuff/Wigglytuff y Chansey curan a sus aliados con un temporizador propio
+  y ya SÍ atacan (antes la cura bloqueaba su ataque). Solo Magikarp sigue sin atacar.

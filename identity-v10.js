@@ -1,6 +1,5 @@
 'use strict';
 // Pokémon Echoe's · identidad por tipo y por clase (v10)
-// - Tabla de tipos: daño recibido y causado (×1.3 débil, ×0.75 resiste, ×0.5 inmune parcial).
 // - Habilidades naturales del Pokémon para abrir atajos y puertas.
 // - Inmunidades a trampas y estados según el tipo.
 // - Pasivas propias de cada clase.
@@ -25,41 +24,12 @@ const applyClassText=()=>{const C=window.RPG_CLASSES;if(!C)return;
 window.ECOS_ID10=function(A){
  applyClassText();
  const S=window.RPG_SPECIES,M=window.ECOS_TECH.moves,C=window.RPG_CLASSES,dist=A.distance;
- // ---------- tabla de tipos: ataque → [débiles, resistentes, inmunes] ----------
- const CH={
-  normal:[[],['rock','steel'],['ghost']],fire:[['grass','ice','bug','steel'],['fire','water','rock','dragon'],[]],
-  water:[['fire','ground','rock'],['water','grass','dragon'],[]],grass:[['water','ground','rock'],['fire','grass','poison','flying','bug','dragon','steel'],[]],
-  electric:[['water','flying'],['electric','grass','dragon'],['ground']],ice:[['grass','ground','flying','dragon'],['fire','water','ice','steel'],[]],
-  fighting:[['normal','ice','rock','dark','steel'],['poison','flying','psychic','bug','fairy'],['ghost']],poison:[['grass','fairy'],['poison','ground','rock','ghost'],['steel']],
-  ground:[['fire','electric','poison','rock','steel'],['grass','bug'],['flying']],flying:[['grass','fighting','bug'],['electric','rock','steel'],[]],
-  psychic:[['fighting','poison'],['psychic','steel'],['dark']],bug:[['grass','psychic','dark'],['fire','fighting','poison','flying','ghost','steel','fairy'],[]],
-  rock:[['fire','ice','flying','bug'],['fighting','ground','steel'],[]],ghost:[['psychic','ghost'],['dark'],['normal']],
-  dragon:[['dragon'],['steel'],['fairy']],dark:[['psychic','ghost'],['fighting','dark','fairy'],[]],steel:[['ice','rock','fairy'],['fire','water','electric','steel'],[]],
-  fairy:[['fighting','dragon','dark'],['fire','poison','steel'],[]]
- };
- const KIND={leaf:'grass',spark:'electric',water:'water',fire:'fire',flame:'fire',ice:'ice',psychic:'psychic',ghost:'ghost',poison:'poison',rock:'rock',dragon:'dragon',hit:'normal',swords:'normal',smash:'fighting',star:'normal'};
  const typesOf=x=>S[x?.id]?.types||[];
- function mult(att,defTypes){
-  if(!att||!CH[att]||!defTypes?.length)return 1;
-  const [weak,res,imm]=CH[att];let m=1;
-  for(const t of defTypes){if(imm.includes(t))m*=.5;else if(weak.includes(t))m*=1.3;else if(res.includes(t))m*=.75;}
-  return Math.max(.45,Math.min(1.7,m));
- }
- const old={hurt:A.hurt,damage:A.damage,interact:A.interact,useItem:A.useItem};
+ const old={damage:A.damage,interact:A.interact,useItem:A.useItem};
 
- // Daño causado por jugadores: el tipo es el del movimiento usado (o el del ataque básico).
- A.hurt=function(e,d,a,p){
-  if(a?.pid&&e&&!e.pid&&!e.boss){
-   const slug=p?.moveSlug||a.castingMove,t=M[slug]?.type||(!a.castingSkill?M[a.kit?.b]?.type:null),m=mult(t,typesOf(e));
-   if(m!==1)d*=m;
-   if(m>1.2&&e.hp>0&&!(e.sfxT>A.clock)){e.sfxT=A.clock+.5;A.fx('smash',e.x,e.y-10,1.1,.25);}
-  }
-  return old.hurt(e,d,a,p);
- };
- // Daño recibido por jugadores y estados que el tipo ignora.
+ // Estados que el tipo ignora (sin tabla de tipos: el daño no cambia según el tipo).
  A.damage=function(a,d,kind='hit',level,effect){
   if(a?.pid){
-   d*=mult(KIND[kind]||null,typesOf(a));
    const ty=typesOf(a);
    if(effect==='poison'&&(ty.includes('poison')||ty.includes('steel')))effect=undefined;
    if(effect==='stun'&&ty.includes('ground'))effect=undefined;
@@ -116,6 +86,6 @@ window.ECOS_ID10=function(A){
  const step=A.step;
  A.step=function(dt){step.call(this,dt);if(A.g&&A.state==='play'&&!A.g.paused&&!A.g.assetLoading&&A.NET.role!=='client'&&!A.g.ended)systems(dt);};
 
- window.ECOS_ID10_API={mult,natural,useLock,JOBS,trapProof,typesOf,NAME,VINE,ROCK,LOCK};
+ window.ECOS_ID10_API={natural,useLock,JOBS,trapProof,typesOf,NAME,VINE,ROCK,LOCK};
  A.id10=window.ECOS_ID10_API;
 };
