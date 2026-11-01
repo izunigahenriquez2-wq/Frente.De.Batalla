@@ -3,7 +3,7 @@ window.ECOS_COMBAT7=function(A){
  const old={enemy:A.enemy,enemyStep:A.enemyStep,hurt:A.hurt,fire:A.fire,cleanActor:A.cleanActor,gainXP:A.gainXP};
  const high=()=>Math.max(5,...A.players.filter(a=>!a.disconnected).map(a=>a.level));
  const levelFor=boss=>Math.max(Math.round(5+A.g.floor*.48)+(boss?4:0),high()+(boss?5:0));
- function scale(e){const level=e.boss?levelFor(true):Math.max(e.level,levelFor(false)+(e.id%3)-1);if(e.boss&&level<=e.level&&e.combatV7)return;const ratio=e.max?e.hp/e.max:1;e.level=level;const team=1+Math.max(0,A.players.filter(a=>!a.disconnected).length-1)*.6;e.max=Math.round((e.boss?420+level*37:(RPG_SPECIES[e.id]?.hp||100)*.42+level*6.5)*team);e.hp=e.max*ratio;e.bar=e.hp;e.damage=(e.boss?13:10)+level*(e.boss?.95:.9);e.combatV7=true;}
+ function scale(e){const level=e.boss?levelFor(true):Math.max(e.level,levelFor(false)+(e.id%3)-1);if(e.boss&&level<=e.level&&e.combatV7)return;const ratio=e.max?e.hp/e.max:1;e.level=level;const team=1+Math.max(0,A.players.filter(a=>!a.disconnected).length-1)*.6;e.max=Math.round((e.boss?420+level*37:(RPG_SPECIES[e.id]?.hp||100)*.42+level*6.5)*team*(e.hpMul||1));e.hp=e.max*ratio;e.bar=e.hp;e.damage=((e.boss?13:10)+level*(e.boss?.95:.9))*(e.dmgMul||1);e.combatV7=true;}
  A.enemy=function(...args){const e=old.enemy(...args);scale(e);if(e.boss){e.bossState='approach';e.stateTime=1.1;e.phase=1;e.moveIndex=-1;e.stagger=0;e.staggerHits={};e.recover=0;}return e;};
  A.gainXP=function(...args){old.gainXP(...args);for(const e of A.enemies)if(e.boss&&e.hp>0)scale(e);};
  A.fire=function(owner,angle,speed,damage,kind,x,y,options={}){return old.fire(owner,angle,speed,damage,kind,x,y,{...options,skill:options.skill??!!owner.castingSkill});};

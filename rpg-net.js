@@ -1,6 +1,6 @@
 'use strict';
 (()=>{
-const PROTOCOL=10;
+const PROTOCOL=11;
 const N={role:'none',peer:null,links:new Map(),roster:[],code:'',id:'host',running:false,callbacks:{},lastInput:0,resumeToken:'',profileData:null};
 // Tokens are private to each data channel. Never include them in lobby or world broadcasts.
 const sessions=new Map();

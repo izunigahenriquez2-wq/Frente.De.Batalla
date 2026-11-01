@@ -1,0 +1,19 @@
+/* Cuadros de diálogo al estilo Mystery Dungeon (v11) */
+.md{position:fixed;left:50%;bottom:150px;transform:translateX(-50%);width:min(760px,calc(100vw - 28px));z-index:60;display:flex;gap:14px;align-items:stretch;padding:12px 16px 14px 12px;border-radius:10px;
+ background:linear-gradient(180deg,#1b2b78f2,#101a52f5);border:3px solid #dfe9ff;box-shadow:0 0 0 2px #16205f,0 10px 30px #000a,inset 0 0 22px #3d56d055;color:#fff;font-family:'Nunito','Segoe UI',sans-serif;pointer-events:none;transition:opacity .18s}
+.md.hide{opacity:0;visibility:hidden}
+.md.pop{animation:mdPop .22s ease-out}
+.mdFace{flex:0 0 108px;width:108px;height:108px;border:3px solid #dfe9ff;border-radius:6px;background-color:#0a1040;background-repeat:no-repeat;image-rendering:pixelated;box-shadow:0 0 0 2px #16205f}
+.mdBody{position:relative;flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.mdName{align-self:flex-start;font-weight:800;font-size:15px;letter-spacing:.05em;color:#ffe680;text-shadow:1px 1px 0 #000;background:#0b1244;border:2px solid #dfe9ff;border-radius:5px;padding:1px 10px}
+.mdText{font-size:18px;line-height:1.35;font-weight:700;min-height:3.9em;text-shadow:1px 1px 0 #0a0f3a}
+.mdArrow{position:absolute;right:2px;bottom:-4px;color:#ffe680;font-size:15px;animation:mdBlink .7s steps(2) infinite}
+.md.menace{background:linear-gradient(180deg,#5a1218f4,#2a0709f6);border-color:#ffd0c8;box-shadow:0 0 0 2px #4a0a0f,0 0 34px #ff1e2a99,inset 0 0 26px #ff3a3a55;animation:mdPop .22s ease-out,mdShake .55s linear infinite}
+.md.menace .mdName{color:#ff9b8f;background:#2a0709;border-color:#ffd0c8}
+.md.menace .mdText{font-size:20px;letter-spacing:.01em;color:#fff3ee}
+.md.menace .mdFace{border-color:#ffd0c8;box-shadow:0 0 0 2px #4a0a0f,0 0 16px #ff3030aa;animation:mdFaceShake .12s linear infinite}
+@keyframes mdPop{from{transform:translateX(-50%) scale(.92);opacity:0}to{transform:translateX(-50%) scale(1);opacity:1}}
+@keyframes mdBlink{50%{opacity:0}}
+@keyframes mdShake{0%,100%{margin-left:0}25%{margin-left:-2px}75%{margin-left:2px}}
+@keyframes mdFaceShake{0%{transform:translate(0,0)}50%{transform:translate(1px,-1px)}100%{transform:translate(-1px,1px)}}
+@media (max-width:640px){.md{bottom:70px}.mdFace{flex-basis:76px;width:76px;height:76px}.mdText{font-size:15px}.md.menace .mdText{font-size:16px}}
