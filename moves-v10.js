@@ -9,7 +9,7 @@
 (()=>{
  const D=window.ECOS_V10_DATA,T=window.ECOS_TECH,M=T.moves,S=window.RPG_SPECIES;
  if(!D||!T||!S)return;
- window.ECOS_FX10=D.fx;D.fx.plush=['Substitute_Doll.png',32];
+ window.ECOS_FX10=D.fx;
  // 1. Movimientos nuevos y correcciones de coherencia.
  let nextId=1000;for(const m of Object.values(M))nextId=Math.max(nextId,(m.id||0)+1);
  for(const [slug,def] of Object.entries(D.moves)){const m=M[slug]||(M[slug]={id:nextId++});Object.assign(m,def);}
@@ -19,6 +19,8 @@
   if(m.power>0&&TEXT[m.mode])m.desc=(m.category==='physical'?'Físico. ':'Especial. ')+TEXT[m.mode];
   if(STATUS[m.mode])m.desc=STATUS[m.mode];
  }
+ const KIND11={absorb:'s_energy_green','dragon-dance':'b_dragon_dance','dragon-pulse':'b_dragon_pulse','dragon-claw':'s_claw_slash','outrage':'b_outrage','dragon-rage':'b_dragon_rage','draco-meteor':'b_draco_boom',acid:'b_acid','acid-armor':'b_acid_ring',toxic:'b_toxic','poison-gas':'b_poison_gas','sludge-wave':'b_poison_gas','sludge-bomb':'b_gunk_shot','gunk-shot':'b_gunk_shot','poison-jab':'b_poison_jab','poison-sting':'s_spikes_purple',pound:'s_impact_burst',tackle:'s_impact_burst',bite:'s_bite_teeth',crunch:'s_bite_teeth',sing:'s_sleep_zzz',hypnosis:'s_sleep_zzz','sleep-powder':'s_sleep_z',spore:'s_spore_ring','stun-spore':'s_spore_green',glare:'s_alert','shadow-ball':'s_orb_shadow',blizzard:'s_ice_crystals',thunder:'s_lightning_bolt','fire-spin':'s_fire_balls',eruption:'s_inferno_column','heat-wave':'s_fire_burst','mud-bomb':'s_mud_ball','tri-attack':'s_star_ring','dazzling-gleam':'s_nova_pink'};
+ for(const [s,k] of Object.entries(KIND11))if(M[s])M[s].kind=k;
  M.substitute.mode='decoy';M.substitute.kind='psychic';M.substitute.cool=16;M.substitute.mana=26;
  if(M.taunt)M.taunt.cool=14;
  // 2. MT: pool curado y compatibilidad por especie.
