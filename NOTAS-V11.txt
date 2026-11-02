@@ -1,0 +1,10 @@
+NOTAS V11 — Ecos de la Mazmorra y Tactics
+JEFES: fase 1 y fase 2 (a 50 % de vida huyen lejos, duermen, recuperan vida y vuelven con más ataques; Onix evoluciona a Steelix). Todos miden más que el jugador. Catálogo de ataques en bosses-v11.js (PATS).
+SALAS SECRETAS: desde el piso 8, puerta oculta que aparece al explorar ~50 % del piso. Subjefes: Lucario, Blaziken, Miltank, Kingler, Giratina Origen, Deoxys, Blastoise, Charizard/Venusaur, Mewtwo. Estilo Souls, 2 fases.
+IRONJAW: villano recurrente (pisos 6, 13, …) que persigue al equipo. Retrato de Mystery Dungeon y cuadros de texto amenazantes (#mdBox).
+OBJETOS (items-v11.js): ~89 iconos nuevos con efecto real (equipo, consumibles, semillas, orbes, gominolas por tipo, cristales). Sin objetos de evolución.
+EFECTOS: veneno/dragón/etc. en Echoe's (moves-v10.js, fx-v11-data.js) y Tactics (tactics-fx-v11.js).
+TACTICS: 34 fondos Amie (assets/tactics/bg) que rotan cada 3 rondas. No se tocó el modo de selección de iniciales.
+PERSONAJES: formas finales con animaciones extra de Ranger 3 (Venusaur, Charizard, Blastoise, Kingler, Blaziken, Lucario, Mewtwo, Articuno).
+INTERPRETACIÓN: «Escenario» (Mansión) → look de sala secreta; «Menú Estadísticas» → referencia para una interfaz de resumen (no implementada como pantalla aparte).
+PROTOCOL de red = 11.

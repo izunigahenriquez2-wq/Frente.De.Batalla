@@ -114,3 +114,15 @@ RETRATOS DE MUNDO MISTERIOSO (v9)
 assets/pmdface/*.png: expresiones (Normal, Pain, Dizzy, Worried, Joyous, Stunned, Determined, Happy) de PMDCollab / SpriteCollab (https://sprites.pmdcollab.org), CC BY-NC 4.0. Autores por especie en assets/pmdface/CREDITS.txt.
 
 Biomas v10: teselas TileDtef de PMDCollab/RawAsset (Pokémon Mystery Dungeon, © Nintendo/Creatures/Game Freak/Spike Chunsoft; arte de la comunidad PMDCollab). Peluche de Sustituto: dibujo propio.
+
+VERSIÓN 11 (baúl)
+- Efectos de ataque (veneno, dragón, cortes, impactos): hojas ripeadas de Pokémon Ranger 3 y Pokémon Mystery Dungeon: Exploradores del Cielo (Spriters Resource), recortadas en assets/fx/baul y assets/fx/sky. Peluche de Sustituto: dibujo propio.
+- Hojas de personajes de Pokémon Ranger 3: Guardian Signs (Spriters Resource; extracción por redblueyellow / Lemon / Pikachu Trainer) → assets/actors/<id>.
+- IronJaw (Feraligatr): hack «Pokémon Mystery Dungeon: Merchants VS Pirates» (extracción por Nidoking). Retrato Mystery Dungeon en assets/pmdface/ironjaw32.png.
+- Steelix personalizado: JoshR691 (Pokemon Generation 2 Customs); se evaluó pero no se usa por no casar con el estilo del resto.
+- Giratina Origen, Miltank: PMD Exploradores del Cielo. Deoxys y Mewtwo: Ranger 3.
+- Escenario Mansión Pokémon (Rojo Fuego / Verde Hoja): referencia visual de las salas secretas (baul/Escenario).
+- Fondos de Tactics: Pokémon-Amie de Pokémon X/Y (3DS), 34 fondos en assets/tactics/bg.
+- Iconos de objetos: hoja de objetos de Pokémon Mystery Dungeon 2 (Null, Spriters Resource) en assets/items/n_*.png, sin objetos de evolución.
+- Retratos y sprites: PMDCollab / SpriteCollab, CC BY-NC 4.0.
+Todo es material de aficionados sin fines de lucro; Pokémon © Nintendo / Creatures / Game Freak.
