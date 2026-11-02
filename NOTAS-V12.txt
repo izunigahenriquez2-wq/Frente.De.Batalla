@@ -1,0 +1,6 @@
+NOTAS V12
+MODO PRUEBAS: playtest-v12.js → ECOS_FREE_ALL=true desbloquea todos los personajes gratis (no se guarda como compra real; poner false para volver al reclutamiento normal). Pichu ya no es jugable: la línea es Pikachu → Raichu.
+EFECTOS: revisados los 115 efectos de ataque. Corregidos: Lengüetazo (lengua rosa nueva, assets/fx/baul/lick.png), Placaje/Golpe/Arañazo, Excavar, Tierra Viva, Martillazo (cangrejo), Fuerza Bruta.
+MAPA: biomes-v12.js sustituye en cada bioma (y variante) los enemigos que no encajan por otros del tipo adecuado y poder parecido; los mares solo tienen Pokémon de agua. Se quitó el montón de troncos como decoración.
+OBJETOS: las cajas, tiendas y eventos ya no dan objetos fusionados ni únicos; las fusiones se hacen en la mochila.
+PERSONAJES: animaciones extra (Barrido, Doble, Golpe, Salto, Dormir) también para pre-evoluciones: Bulbasaur/Ivysaur, Charmander/Charmeleon, Squirtle/Wartortle, Krabby, Geodude/Graveler, Eevee y sus evoluciones, Torchic, Riolu, Pikachu/Raichu. Los ataques de contacto alternan entre ellas (players-v12.js).
