@@ -30,3 +30,4 @@
 .sRow i{position:absolute;left:0;top:0;bottom:0;background:rgba(122,200,170,.22);border-radius:4px;z-index:0}.sRow span,.sRow b{position:relative;z-index:1}.sRow small{opacity:.65}
 .sDeath{color:#ffb0a0}.sAch{display:flex;flex-wrap:wrap;gap:6px}.sAch span{background:#3a3220;border:1px solid #c9a645;border-radius:12px;padding:2px 9px;font-size:12px}
 @media(max-width:820px){.sGrid{grid-template-columns:1fr}}
+.visitTalk{display:flex;gap:14px;align-items:flex-start;margin:10px 0}.visitFace{width:96px;height:96px;object-fit:contain;image-rendering:pixelated;background:#12313e;border:1px solid #779293;border-radius:8px;padding:4px}.visitBubble{flex:1;background:rgba(14,28,36,.9);border:1px solid #38596a;border-radius:10px;padding:6px 14px;font-size:14px;line-height:1.4}.visitBubble p{margin:.4em 0}

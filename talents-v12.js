@@ -14,6 +14,7 @@ window.ECOS_TALENTS12=function(A){
   if(host&&a._tf&&a._tfv===(a._tver||0)&&a._tfj===a.job)return a._tf;
   const f={},add=(fx,r)=>{for(const [k,v] of Object.entries(fx)){if(FLAG[k])f[k]=1;else f[k]=(f[k]||0)+v*r;}};
   add(TREE[a.job].passive.f,1);
+  if(a.techRank){f.rpow=(f.rpow||0)+.18*a.techRank;f.rcdr=(f.rcdr||0)+.05*a.techRank;}
   for(const [id,r] of Object.entries(a.tal||{})){const n=NODE[id];if(n&&id.startsWith(a.job+'.'))add(n.f,r);}
   if(host){a._tf=f;a._tfv=a._tver||0;a._tfj=a.job;}
   return f;
@@ -60,7 +61,7 @@ window.ECOS_TALENTS12=function(A){
   if(f.xp)a.xpBonus=(a.xpBonus||0)+f.xp;
  };
  A.makePlayer=function(...args){const a=old.makePlayer(...args);a.tal={};a._tver=0;return a;};
- A.cleanActor=function(a){const o=old.cleanActor(a);if(a.tal)o.tal=a.tal;return o;};
+ A.cleanActor=function(a){const o=old.cleanActor(a);if(a.tal)o.tal=a.tal;if(a.techRank)o.techRank=a.techRank;return o;};
  // ---------- tareas diferidas ----------
  const later=[];
  const status=(e,kind,t)=>{if(e.boss){if(kind==='sleep')return;if(kind==='stun')e.stun=Math.min(.35,t);else e[kind]=Math.max(e[kind]||0,t*.6);return;}e[kind]=Math.max(e[kind]||0,t);};
