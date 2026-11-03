@@ -61,6 +61,6 @@ window.ECOS_RISK12=function(A){
  const beginDiff=A.begin;A.begin=function(...x){const r=beginDiff.apply(this,x);if(A.g&&A.NET.role!=='client')A.g.diff=sel;return r;};
  // ---------- indicador ----------
  A.hud=function(){old.hud();if(!A.g)return;let b=$('riskBadge');if(!b){document.body.insertAdjacentHTML('beforeend','<div id="riskBadge"></div>');b=$('riskBadge');}
-  const m=fm(),cs=(A.me()?.curses||[]).map(k=>CURSES[k].n);b.innerHTML=`<span>${esc(D().n)}</span>${m?`<span class="m">${esc(m.n)} ×${m.rew}</span>`:''}${cs.map(c=>`<span class="c">☠ ${esc(c)}</span>`).join('')}`;b.hidden=false;};
+  const m=fm(),cs=(A.me()?.curses||[]).map(k=>CURSES[k].n);b.innerHTML=`${diffId()==='normal'?'':'<span>'+esc(D().n)+'</span>'}${m?`<span class="m">${esc(m.n)} ×${m.rew}</span>`:''}${cs.map(c=>`<span class="c">☠ ${esc(c)}</span>`).join('')}`;b.hidden=false;};
  A.risk={altar,DIFFS,MODS,CURSES,resolve,open,diff:diffId};
 };
