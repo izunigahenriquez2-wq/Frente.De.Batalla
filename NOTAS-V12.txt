@@ -14,3 +14,10 @@ PERSONAJES: animaciones extra (Barrido, Doble, Golpe, Salto, Dormir) también pa
 - Riesgo y recompensa (risk-v12.js): dificultad Relajado/Normal/Difícil/Pesadilla (pantalla de selección y sala online del anfitrión), altar cada 3 pisos con modificadores de piso (+botín) y maldiciones (+1 punto de talento).
 - Economía (economy-v12*.js): libro de recetas que se descubre, 6 fusiones legendarias de 3 objetos, tienda rotatoria cada 3 pisos con oferta, reciclaje a polvo y mejora de equipo hasta +3.
 - Pendiente para futuras tandas: más eventos/NPC por bioma y comportamientos de enemigos nuevos.
+
+== Tercera tanda v12 (equilibrio y vida en el mundo) ==
+- Equilibrio tras la partida de prueba: enemigos +30% vida y +25% daño, jefes +70% vida (con rampa: suave en los primeros pisos, pleno desde el piso 10, y crece después); nivel enemigo sube más rápido; daño mínimo por diferencia de nivel 0.8 (antes 0.45); subida de nivel más lenta (XP necesaria 60+22·nivel) y -25% de experiencia; sin puntos extra heredados cada 5 niveles; menos cofres de equipo (1 base, 2 con 3-4 jugadores) y de consumibles.
+- Espinas: -50% de valor, enfriamiento de 0,9 s, tope del 3,5% de vida del enemigo y solo 35% contra jefes. Fusión de dos objetos = 90% de la suma; legendarios = 85% de la suma de tres.
+- Dificultades: Relajado ×0.85, Difícil ×1.45 vida / ×1.35 daño, Pesadilla ×1.9 / ×1.7.
+- Vida en el mundo (world-v12.js): NPC con mini-historia por bioma en los pisos impares (16 historias, 39 desenlaces: curar, objetos, experiencia, revelar escaleras, escudos, emboscadas...). Fenómenos ambientales por tipo de bioma desde el piso 4 (zonas rojas telegrafiadas). Enemigos con comportamiento: excavador (rocas), explosivo (veneno/fantasma), sanador (planta/psíquico), furioso (lucha/fuego/dragón), manada (agua/eléctrico/hielo); cada uno lleva un icono junto al nombre.
+- Caras de diálogo: se generaron recortes de cabeza para 44 Pokémon sin cara PMD (incluido Miltank) a partir de sus retratos incluidos, en assets/pmdface.
