@@ -4,3 +4,13 @@ EFECTOS: revisados los 115 efectos de ataque. Corregidos: Lengüetazo (lengua ro
 MAPA: biomes-v12.js sustituye en cada bioma (y variante) los enemigos que no encajan por otros del tipo adecuado y poder parecido; los mares solo tienen Pokémon de agua. Se quitó el montón de troncos como decoración.
 OBJETOS: las cajas, tiendas y eventos ya no dan objetos fusionados ni únicos; las fusiones se hacen en la mochila.
 PERSONAJES: animaciones extra (Barrido, Doble, Golpe, Salto, Dormir) también para pre-evoluciones: Bulbasaur/Ivysaur, Charmander/Charmeleon, Squirtle/Wartortle, Krabby, Geodude/Graveler, Eevee y sus evoluciones, Torchic, Riolu, Pikachu/Raichu. Los ataques de contacto alternan entre ellas (players-v12.js).
+
+== Segunda tanda v12 (progresión, resumen, riesgo y economía) ==
+- Maestría de clase (talents-v12*.js/css): cada una de las 11 clases tiene pasiva propia, técnica R y árbol de 3 ramas × 5 escalones con 2 opciones (330 nodos). 1 punto por nivel desde el 5; piedra angular en el escalón 5. Pantalla "Maestría" (botón del HUD, tecla T, mochila) con tarjeta de Personaje y de Pokémon vinculado. Reinicio gratis (modo pruebas, ECOS_FREE_RESPEC).
+- Roles reales: tanque con aggro (Muro de Aggro), apoyo con auras, explorador con instinto de trampas, etc.
+- Franjas rojas de ataques enemigos sin flechas (phaser-renderer.js).
+- Resumen de partida (summary-v12.js): build, daño por fuente, daño recibido, causa de caída y logros. Viaja con el estado final en online.
+- Visitantes de mazmorra (sky-v8.js): retrato propio, diálogo por bioma y mejora real de la técnica de clase (rango 1–3) en vez de reenseñarla.
+- Riesgo y recompensa (risk-v12.js): dificultad Relajado/Normal/Difícil/Pesadilla (pantalla de selección y sala online del anfitrión), altar cada 3 pisos con modificadores de piso (+botín) y maldiciones (+1 punto de talento).
+- Economía (economy-v12*.js): libro de recetas que se descubre, 6 fusiones legendarias de 3 objetos, tienda rotatoria cada 3 pisos con oferta, reciclaje a polvo y mejora de equipo hasta +3.
+- Pendiente para futuras tandas: más eventos/NPC por bioma y comportamientos de enemigos nuevos.
