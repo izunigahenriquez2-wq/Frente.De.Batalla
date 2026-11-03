@@ -17,7 +17,7 @@
  const FLAG={second:'Segundo aliento: sobrevives a un golpe mortal una vez por piso',trapwise:'Ves las trampas de lejos',rTwice:'La técnica de clase se repite una vez a los 0,7 s'};
  /* arquetipos: 4 escalones × 2 opciones */
  const ARCH={
-  tank:{n:'Defensa',t:[[['Piel Curtida',{armor:.025}],['Vigor',{hp:.05}]],[['Provocador',{threat:.5}],['Espinas',{thorns:.12}]],[['Voluntad de Hierro',{regenPct:.004}],['Paso Firme',{speed:.03,armor:.01}]],[['Aura Protectora',{rShield:2,armor:.015}],['Eco del Impacto',{rBurst:.5,rStun:.4}]]]},
+  tank:{n:'Defensa',t:[[['Piel Curtida',{armor:.025}],['Vigor',{hp:.05}]],[['Provocador',{threat:.5}],['Espinas',{thorns:.06}]],[['Voluntad de Hierro',{regenPct:.004}],['Paso Firme',{speed:.03,armor:.01}]],[['Aura Protectora',{rShield:2,armor:.015}],['Eco del Impacto',{rBurst:.5,rStun:.4}]]]},
   bruiser:{n:'Combate cercano',t:[[['Golpe Pesado',{dmg:.04}],['Sed de Combate',{leech:.012}]],[['Furia Creciente',{lowHp:.06}],['Ímpetu',{speed:.03,dmg:.02}]],[['Rematador',{execute:.07}],['Piel de Guerra',{armor:.02,hp:.03}]],[['Ola de Choque',{rBurst:.6}],['Cadena de Victorias',{onKillHeal:.015,onKillCd:.4}]]]},
   striker:{n:'Críticos y remate',t:[[['Ojo Certero',{crit:.02}],['Filo Afilado',{dmg:.035}]],[['Remate Mortal',{execute:.08}],['Danza Sombría',{dodge:.02,speed:.02}]],[['Sangre Fría',{onKillMp:3,onKillCd:.3}],['Aliento Corto',{rcdr:.05,cdr:.02}]],[['Golpe Crítico',{crit:.03,dmg:.03}],['Rastro de Sangre',{leech:.015,onKillHeal:.01}]]]},
   caster:{n:'Magia',t:[[['Mente Clara',{mp:.06}],['Potencia Arcana',{skill:.04}]],[['Flujo de Maná',{mpRegen:.25}],['Concentración',{cdr:.025}]],[['Eco Arcano',{rpow:.06}],['Golpe Elemental',{mpOnHit:1}]],[['Sobrecarga',{skill:.05,rBurst:.5}],['Canalizar',{rcdr:.06,mpRegen:.2}]]]},
@@ -32,7 +32,7 @@
  const K=(n,f)=>[n,f];
  const JOBS={
   guardian:{role:'Tanque',passive:['Muro de Aggro','Los enemigos cercanos prefieren atacarte a ti y recibes menos daño.',{threat:2,armor:.05}],
-   br:[['Bastión','tank','Resiste y protege a todo el equipo.',K('Muro Eterno',{armor:.12,thorns:.3,rShield:2}),K('Ancla Viviente',{threat:1.5,second:1,hp:.12})],
+   br:[['Bastión','tank','Resiste y protege a todo el equipo.',K('Muro Eterno',{armor:.12,thorns:.15,rShield:2}),K('Ancla Viviente',{threat:1.5,second:1,hp:.12})],
        ['Vanguardia','bruiser','Avanza y rompe la línea enemiga.',K('Embestida Imparable',{rBurst:1,rStun:.8,dmg:.08}),K('Aplastaplanetas',{execute:.15,leech:.03,lowHp:.12})],
        ['Guardia Sagrada','healer','Escudos y recuperación.',K('Escudo del Alba',{auraHeal:.008,rShield:3}),K('Juramento Inquebrantable',{floorShield:10,regenPct:.008,armor:.06})]]},
   striker:{role:'Daño',passive:['Sed de Sangre','Los remates hacen más daño y derrotar enemigos acelera tus recargas.',{execute:.1,onKillCd:.3}],

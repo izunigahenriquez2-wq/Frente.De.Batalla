@@ -2,9 +2,11 @@
 /* v12 · Riesgo y recompensa: dificultad, modificadores de piso opcionales y altar de maldiciones. */
 window.ECOS_RISK12=function(A){
  const dist=A.distance,esc=A.escape,$=id=>document.getElementById(id),API=window.ECOS_V10;
- const DIFFS={relax:{n:'Relajado',hp:.8,dmg:.8,rew:.9,d:'Enemigos más blandos. Ideal para probar builds.'},normal:{n:'Normal',hp:1,dmg:1,rew:1,d:'La experiencia pensada.'},hard:{n:'Difícil',hp:1.3,dmg:1.25,rew:1.3,d:'Enemigos más duros; +30% de botín y experiencia.'},night:{n:'Pesadilla',hp:1.7,dmg:1.5,rew:1.7,d:'Para expertos; +70% de botín y experiencia.'}};
+ const DIFFS={relax:{n:'Relajado',hp:.85,dmg:.85,rew:.9,d:'Enemigos más blandos. Ideal para probar builds.'},normal:{n:'Normal',hp:1,dmg:1,rew:1,d:'La experiencia pensada.'},hard:{n:'Difícil',hp:1.45,dmg:1.35,rew:1.3,d:'Enemigos más duros; +30% de botín y experiencia.'},night:{n:'Pesadilla',hp:1.9,dmg:1.7,rew:1.7,d:'Para expertos; +70% de botín y experiencia.'}};
  const MODS={swift:{n:'Enemigos rápidos',d:'Se mueven un 25% más rápido.',rew:1.5,speed:1.25},armored:{n:'Enemigos acorazados',d:'+50% de vida.',rew:1.5,hp:1.5},brutal:{n:'Golpes brutales',d:'Recibes +30% de daño.',rew:1.4,dmg:1.3},horde:{n:'Horda',d:'Aparecen un 40% más de enemigos.',rew:1.6}};
  const CURSES={blood:{n:'Pacto de sangre',d:'−15% PS máx. · +18% daño',f:{hp:-.15,dmg:.18}},glass:{n:'Cristal',d:'+20% daño recibido · +10% crítico · +8% daño',f:{taken:.2,crit:.1,dmg:.08}},greed:{n:'Codicia',d:'+40% oro · +15% experiencia · enemigos +10% de vida',f:{gold:.4,xp:.15,foeHp:.1}},silence:{n:'Silencio',d:'−20% PM máx. · −12% recarga · +10% daño',f:{mp:-.2,cdr:.12,dmg:.1}}};
+ const BAL={hp:1.3,boss:1.7,dmg:1.25,xp:.75}; // equilibrio base: más duro que antes
+ const ramp=()=>{const f=A.g?.floor||1;return Math.min(1,(f+2)/12)*(1+Math.max(0,f-10)*.008);};
  const KEY='ecosDiff';let sel='normal';try{const v=localStorage.getItem(KEY);if(DIFFS[v])sel=v;}catch{}
  const old={enemy:A.enemy,damage:A.damage,stats:A.stats,gainXP:A.gainXP,award:A.award,generateFloor:A.generateFloor,interact:A.interact,hud:A.hud,requestAction:A.requestAction,netAction:A.NET.callbacks.action,packWorld:A.packWorld,packState:A.packState,applyWorld:A.applyWorld,applyState:A.applyState,cleanActor:A.cleanActor,makePlayer:A.makePlayer};
  const diffId=()=>A.g?.diff||sel,D=()=>DIFFS[diffId()]||DIFFS.normal,fm=()=>A.g?.floorMod?MODS[A.g.floorMod]:null;
@@ -18,14 +20,14 @@ window.ECOS_RISK12=function(A){
   if(!t)return;const lobby=t.classList?.contains('lobbyToolbar');t.insertAdjacentHTML(lobby?'afterend':'beforebegin',picker());wire();}
  const ov=$('overlay');if(ov)new MutationObserver(inject).observe(ov,{childList:true,subtree:true});
  // ---------- aplicación ----------
- A.enemy=function(...args){const e=old.enemy(...args),d=D(),m=fm(),c=A.g?.curseFoe||0;let h=d.hp*(1+c)*(m?.hp||1);if(h!==1){e.hp*=h;e.max*=h;if(e.bar!=null)e.bar*=h;}if(m?.speed&&e.baseSpeed)e.baseSpeed*=m.speed;return e;};
- A.damage=function(a,d,...r){if(A.g&&isP(a)){d*=D().dmg*(fm()?.dmg||1)*(1+(cf(a).taken||0));}return old.damage.call(this,a,d,...r);};
+ A.enemy=function(...args){const e=old.enemy(...args),d=D(),m=fm(),c=A.g?.curseFoe||0;let h=d.hp*(1+c)*(m?.hp||1)*(1+((e.boss?BAL.boss:BAL.hp)-1)*ramp());if(h!==1){e.hp*=h;e.max*=h;if(e.bar!=null)e.bar*=h;}if(m?.speed&&e.baseSpeed)e.baseSpeed*=m.speed;return e;};
+ A.damage=function(a,d,...r){if(A.g&&isP(a)){d*=(1+(BAL.dmg-1)*ramp())*D().dmg*(fm()?.dmg||1)*(1+(cf(a).taken||0));}return old.damage.call(this,a,d,...r);};
  A.stats=function(a){const ratio=a.max?a.hp/a.max:1;old.stats(a);const f=cf(a);if(!Object.keys(f).length)return;
   if(f.hp){a.max=Math.round(a.max*(1+f.hp));a.hp=Math.min(a.max,Math.max(1,a.max*ratio));}
   if(f.mp){a.maxMp=Math.round(a.maxMp*(1+f.mp));a.mp=Math.min(a.mp??a.maxMp,a.maxMp);}
   if(f.dmg)a.damage*=1+f.dmg;if(f.crit)a.crit=Math.min(.65,(a.crit||0)+f.crit);if(f.cdr)a.cdr=Math.min(.45,(a.cdr||0)+f.cdr);};
  const rewardMul=()=>D().rew*(fm()?.rew||1);
- A.gainXP=function(a,x,...r){const f=cf(a);return old.gainXP.call(this,a,A.g?x*rewardMul()*(1+(f.xp||0)):x,...r);};
+ A.gainXP=function(a,x,...r){const f=cf(a);return old.gainXP.call(this,a,A.g?x*BAL.xp*rewardMul()*(1+(f.xp||0)):x,...r);};
  A.award=function(n,...r){let f=0;for(const a of A.players||[])f=Math.max(f,cf(a).gold||0);return old.award.call(this,A.g?Math.round(n*rewardMul()*(1+f)):n,...r);};
  A.makePlayer=function(...x){const a=old.makePlayer(...x);a.curses=[];return a;};
  A.cleanActor=function(a){const o=old.cleanActor(a);if(a.curses?.length)o.curses=a.curses;return o;};

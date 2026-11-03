@@ -7,7 +7,7 @@
  const I=window.RPG_ITEMS;if(!I)return;
  const STATS={damage:'daño',speed:'velocidad',hp:'vida',crit:'prob. de crítico',mana:'maná máx.',cdr:'enfriamiento',armor:'defensa',regen:'regeneración',mpRegen:'maná/s',skill:'potencia de movimientos',leech:'robo de vida',healing:'curación',xp:'experiencia',cost:'coste de maná',rescue:'velocidad de rescate',electric:'daño eléctrico'};
  const PCT=new Set(['regen','mpRegen']);
- const BOOST=1.25;
+ const BOOST=.9;
  const NAMES={
   'protein|choice_band':'Banda Furia','protein|scope_lens':'Cinta Letal','protein|quick_claw':'Garra Vehemente','protein|carbos':'Puño Veloz','protein|silk_scarf':'Peto Reforzado','protein|hard_stone':'Coraza de Combate',
   'choice_band|scope_lens':'Lente Fatal','choice_band|focus_band':'Cinta Implacable','carbos|quick_claw':'Pluma Relámpago','carbos|scope_lens':'Lente Ágil','carbos|bright_powder':'Polvo Veloz',
@@ -67,7 +67,7 @@ window.ECOS_FUSION10=function(A){
   const rec=ok?I[F.recipes[sel[0]+'|'+sel[1]]]:null,pick=sel.slice();
   const ov=$('overlay'),y=ov?.scrollTop||0;
   A.panel(`<div class="eyebrow">TALLER DE FUSIÓN · ${esc(a.name)}</div><h2>Fusionar objetos</h2>
-  <p>Elige dos objetos de equipo (o dos copias del mismo). Se combinan en uno solo con un 25 % más de efecto y ocupan una única ranura. No se pueden volver a fusionar.</p>
+  <p>Elige dos objetos de equipo (o dos copias del mismo). Se combinan en uno solo en una sola ranura con el 90 % de la suma de sus efectos (se pierde un 10 %). No se pueden volver a fusionar.</p>
   ${A.localMode==='local'?`<div class="bagTabs">${A.players.map(b=>`<button data-fuseplayer="${b.pid}" class="${a===b?'selected':''}">${esc(b.name)}</button>`).join('')}</div>`:''}
   <div class="bagGrid compactBag">${list.map(([k,n])=>{const it=I[k],n2=pick.filter(x=>x===k).length;return `<div class="itemCard ${n2?'equipped':''}">${A.iconTag(k)}<strong>${it.name} ×${n}</strong><p>${it.desc}</p><div class="miniActions"><button data-fusepick="${k}" ${pick.length>=2&&!n2||(n2>=n)?'disabled':''}>${n2?'Elegido ('+n2+')':'Elegir'}</button>${n2?`<button data-fuseunpick="${k}">Quitar</button>`:''}</div></div>`;}).join('')||'<p>Necesitas al menos dos objetos de equipo en la mochila.</p>'}</div>
   <div class="box fuseBox">${rec?`<b>${esc(rec.name)}</b><p>${esc(rec.desc)}</p>`:`<b>Resultado</b><p>${sel.length===2?'Esa combinación no es posible.':'Elige '+(2-sel.length)+' objeto(s) más.'}</p>`}</div>

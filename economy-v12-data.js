@@ -10,7 +10,7 @@
   {id:'tesoro_rey',n:'Tesoro del Rey',parts:['lucky_egg','amulet_coin','in_battle_herb'],t:'Experiencia y fortuna'},
   {id:'nucleo_arcano',n:'Núcleo Arcano',parts:['magnet','silver_powder','in_battle_herb'],t:'Maná y potencia'}
  ].filter(l=>l.parts.every(k=>I[k]));
- const PCT=F.STATS&&new Set(['regen','mpRegen']),BOOST=1.5,recipes={};
+ const PCT=F.STATS&&new Set(['regen','mpRegen']),BOOST=.85,recipes={};
  for(const l of L){
   const e={};for(const k of Object.keys(F.STATS)){const v=l.parts.reduce((s,p)=>s+(I[p][k]||0),0);if(v)e[k]=Math.round(v*(k==='cost'?1:BOOST)*1000)/1000;}
   const key='legend_'+l.id;

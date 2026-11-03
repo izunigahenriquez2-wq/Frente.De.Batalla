@@ -106,7 +106,7 @@ window.ECOS_TALENTS12=function(A){
   if(f.dodge&&!(a.inv>0)&&Math.random()<f.dodge){A.fx('hit',a.x,a.y-10,1.2,.3);return;}
   if(f.second&&a.secondUsed!==A.g.floor&&a.hp>1&&a.hp<=d){a.secondUsed=A.g.floor;d=a.hp-1;a.shield=Math.max(a.shield||0,3);a.inv=Math.max(a.inv||0,1);if(a.pid===A.myPid)A.toast('Segundo aliento: sobrevives por un pelo.');}
   const before=a.hp,r=old.damage.call(this,a,d,...rest);
-  if(f.thorns&&a.hp<before){const e=A.enemies.filter(x=>x.hp>0&&dist(a,x)<130).sort((x,y)=>dist(a,x)-dist(a,y))[0];if(e)A.hurt(e,(before-a.hp)*f.thorns,a,{thorns:true,skill:false});}
+  if(f.thorns&&a.hp<before&&A.clock>(a._thornT||0)){const e=A.enemies.filter(x=>x.hp>0&&dist(a,x)<130).sort((x,y)=>dist(a,x)-dist(a,y))[0];if(e){a._thornT=A.clock+.9;A.hurt(e,Math.min((before-a.hp)*f.thorns,e.max*.035)*(e.boss?.35:1),a,{thorns:true,skill:false});}}
   return r;
  };
  // ---------- aggro del tanque ----------
