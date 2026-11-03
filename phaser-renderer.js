@@ -19,7 +19,7 @@ function obj(name,id,x,y,scale=2,alpha=1){const im=A.objects[name],key=texture('
 const TCOL={fire:0xff7a3d,flame:0xff7a3d,ember:0xff7a3d,water:0x4aa8ff,leaf:0x6fd05a,grass:0x6fd05a,spark:0xffe14a,electric:0xffe14a,psychic:0xff6fd0,ghost:0x9a6bff,poison:0xb25cff,ice:0x8fe8ff,rock:0xc9a45a,ground:0xd0a050,fighting:0xe5533d,hit:0xffffff,normal:0xffffff,dragon:0x6a5cff,dark:0x8a7aa0,steel:0xb8c4d6,flying:0x9fd0ff,bug:0xa8c82a,fairy:0xffa6d9};
 const tcol=k=>TCOL[k]??0xffffff;
 const WSTART=new Map();
-/* Telegrafiado: todo ataque enemigo se ve ANTES de golpear: zona roja que se llena, borde del color del tipo y flechas que marcan la dirección. */
+/* Telegrafiado: todo ataque enemigo se ve ANTES de golpear: zona roja que se llena, borde del color del tipo y marcas que marcan la dirección. */
 function warnProgress(key,w,boss){let st=WSTART.get(key);if(!st||A.clock-st.last>.3)st={t0:A.clock,last:A.clock};st.last=A.clock;WSTART.set(key,st);return Math.min(1,(A.clock-st.t0)/(w.dur||(boss?1:.7)));}
 function drawWarning(G,e,w){
  const tc=tcol(e.kind||'hit'),prog=warnProgress(e.eid??e.x,w,e.boss),pulse=.5+.5*Math.sin(A.clock*16);
@@ -30,15 +30,11 @@ function drawWarning(G,e,w){
    G.fillStyle(0xff2a2a,.10+.12*pulse);G.beginPath().moveTo(ox+nx,oy+ny).lineTo(ox+c*length+nx,oy+s*length+ny).lineTo(ox+c*length-nx,oy+s*length-ny).lineTo(ox-nx,oy-ny).closePath().fillPath();
    const L=length*prog;G.fillStyle(0xff2a2a,.22+.2*prog);G.beginPath().moveTo(ox+nx,oy+ny).lineTo(ox+c*L+nx,oy+s*L+ny).lineTo(ox+c*L-nx,oy+s*L-ny).lineTo(ox-nx,oy-ny).closePath().fillPath();
    G.lineStyle(3,tc,.95);G.beginPath().moveTo(ox+nx,oy+ny).lineTo(ox+c*length+nx,oy+s*length+ny).lineTo(ox+c*length-nx,oy+s*length-ny).lineTo(ox-nx,oy-ny).closePath().strokePath();
-   /* flechas que corren en la dirección del ataque */
-   const off=(A.clock*520)%90;G.fillStyle(0xffffff,.8);
-   for(let d=off;d<length;d+=90){const px=ox+c*d,py=oy+s*d,k=Math.min(half*.75,16);G.beginPath().moveTo(px+c*k,py+s*k).lineTo(px-s*k*.8-c*k*.5,py+c*k*.8-s*k*.5).lineTo(px+s*k*.8-c*k*.5,py-c*k*.8-s*k*.5).closePath().fillPath();}
   }
  }else if(w.cone){
   const ang=w.angle,sp=w.spread||.8,r=w.r||170,ox=w.x??e.x,oy=w.y??e.y,n=14;
   const wedge=(rr,alpha,fill)=>{G.beginPath().moveTo(ox,oy);for(let i=0;i<=n;i++){const a=ang-sp/2+sp*i/n;G.lineTo(ox+Math.cos(a)*rr,oy+Math.sin(a)*rr);}G.closePath();if(fill)G.fillStyle(0xff2a2a,alpha).fillPath();else G.lineStyle(3,tc,.95).strokePath();};
   wedge(r,.10+.12*pulse,true);wedge(r*prog,.24+.2*prog,true);wedge(r,0,false);
-  const c=Math.cos(ang),s=Math.sin(ang),k=18;G.fillStyle(0xffffff,.85).beginPath().moveTo(ox+c*(r*.55+k),oy+s*(r*.55+k)).lineTo(ox+c*r*.55-s*k*.8,oy+s*r*.55+c*k*.8).lineTo(ox+c*r*.55+s*k*.8,oy+s*r*.55-c*k*.8).closePath().fillPath();
  }else{
   const r=w.r||90;
   G.fillStyle(0xff2a2a,.10+.10*pulse).fillCircle(w.x,w.y,r);G.fillStyle(0xff2a2a,.20+.2*prog).fillCircle(w.x,w.y,r*prog);
