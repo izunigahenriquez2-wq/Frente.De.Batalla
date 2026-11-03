@@ -22,3 +22,11 @@
 .mTier.key .mNode{border-color:#c9a645}.mTier.key .mNode.on{background:#5a4a1f}
 .masteryBtn{margin-left:6px}
 @media(max-width:820px){.mTop,.mTree{grid-template-columns:1fr}}
+.runSum{max-height:46vh;overflow:auto;text-align:left;margin:8px 0}
+.sCard{background:rgba(14,28,36,.9);border:1px solid #38596a;border-radius:10px;padding:8px 12px;margin-bottom:8px}
+.sCard h3{margin:0 0 4px}.sCard h4{margin:6px 0 3px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#9fd0e4}
+.sGrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:12px}.sGrid p{margin:.2em 0}
+.sRow{position:relative;display:flex;justify-content:space-between;gap:6px;padding:1px 4px;margin:2px 0;font-size:12px}
+.sRow i{position:absolute;left:0;top:0;bottom:0;background:rgba(122,200,170,.22);border-radius:4px;z-index:0}.sRow span,.sRow b{position:relative;z-index:1}.sRow small{opacity:.65}
+.sDeath{color:#ffb0a0}.sAch{display:flex;flex-wrap:wrap;gap:6px}.sAch span{background:#3a3220;border:1px solid #c9a645;border-radius:12px;padding:2px 9px;font-size:12px}
+@media(max-width:820px){.sGrid{grid-template-columns:1fr}}
