@@ -126,3 +126,5 @@ VERSIÓN 11 (baúl)
 - Iconos de objetos: hoja de objetos de Pokémon Mystery Dungeon 2 (Null, Spriters Resource) en assets/items/n_*.png, sin objetos de evolución.
 - Retratos y sprites: PMDCollab / SpriteCollab, CC BY-NC 4.0.
 Todo es material de aficionados sin fines de lucro; Pokémon © Nintendo / Creatures / Game Freak.
+
+Caras de diálogo de Miltank (assets/pmdface/241.png): hoja de retratos PMD aportada por el autor del proyecto (créditos de los artistas originales: PMDCollab/SpriteCollab).
