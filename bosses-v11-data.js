@@ -4,8 +4,8 @@
  const S=window.RPG_SPECIES,N=window.RPG_BOSS_NAMES;
  const mk=(id,name,kind,types,hp,speed)=>{if(!S[id])S[id]={name,kind,types,hp,speed,bst:600,price:0,rarity:'jefe',buyable:false,free:false,evos:[],at:100,moves:[]};N[id]=N[id]||name;};
  mk(448,'Lucario','star',['fighting','steel'],110,190);mk(257,'Blaziken','fire',['fire','fighting'],120,185);mk(386,'Deoxys','psychic',['psychic'],100,230);
- mk(241,'Miltank','star',['normal'],120,185);mk(487,'Giratina','ghost',['ghost','dragon'],150,170);mk(1487,'Giratina Origen','ghost',['ghost','dragon'],150,175);mk(1160,'IronJaw','water',['water','dark'],130,185);mk(208,'Steelix','rock',['steel','ground'],110,160);
- N[99]='Kingler';N[1160]='IronJaw';N[1487]='Giratina Origen';N[208]='Steelix';
+ mk(241,'Miltank','star',['normal'],120,185);mk(487,'Giratina','ghost',['ghost','dragon'],150,170);mk(1487,'Giratina Origen','ghost',['ghost','dragon'],150,175);mk(1150,'Mega Mewtwo Y','psychic',['psychic'],150,230);mk(1144,'Articuno de Galar','psychic',['psychic','flying'],110,200);mk(1145,'Zapdos de Galar','hit',['fighting','flying'],110,215);mk(1146,'Moltres de Galar','ghost',['dark','flying'],110,205);mk(1160,'IronJaw','water',['water','dark'],130,185);mk(208,'Steelix','rock',['steel','ground'],110,160);
+ N[99]='Kingler';N[1150]='Mega Mewtwo Y';N[1144]='Articuno de Galar';N[1145]='Zapdos de Galar';N[1146]='Moltres de Galar';N[487]='Giratina';N[1160]='IronJaw';N[1487]='Giratina Origen';N[208]='Steelix';
 
  // Efectos por tipo para cada función de ataque (claves de FX; las b_ y s_ vienen del baúl).
  window.ECOS_TYPEFX={
@@ -44,10 +44,10 @@
   68:{H:280,p1:['leap','charge','slam'],p2:['combo','star','barrage','pillars'],fxType:'hit'},
   94:{H:260,p1:['blink','ring','zones'],p2:['barrage','spiral','pull','summon'],fxType:'ghost'},
   149:{H:300,p1:['fan','charge','zones'],p2:['beam','rain','combo','tail'],fxType:'dragon'},
-  144:{H:290,p1:['fan','charge','ring'],p2:['rain','beam','spiral','star'],fxType:'ice'},
-  145:{H:290,p1:['fan','charge','ring'],p2:['rain','beam','spiral','star'],fxType:'spark'},
-  146:{H:290,p1:['fan','charge','ring'],p2:['rain','beam','spiral','star'],fxType:'fire'},
-  150:{H:290,p1:['blink','barrage','zones'],p2:['beam','star','pull','rain','summon'],fxType:'psychic'},
+  1144:{H:290,p1:['fan','charge','ring'],p2:['rain','beam','spiral','star'],fxType:'psychic'},
+  1145:{H:290,p1:['leap','charge','combo'],p2:['rain','star','spiral','combo'],fxType:'hit'},
+  1146:{H:290,p1:['fan','charge','ring'],p2:['rain','beam','spiral','star'],fxType:'ghost'},
+  150:{H:290,p1:['blink','barrage','zones'],p2:['beam','star','pull','rain','summon'],fxType:'psychic',evolve:1150,boost:{dmg:1.35,spd:1.15,hp:1}},
   3:{H:290,p1:['fan','zones','slam'],p2:['rain','pillars','summon','spiral'],fxType:'leaf'},
   9:{H:290,p1:['barrage','slam','zones'],p2:['beam','rain','pull','sweep'],fxType:'water'},
   6:{H:290,p1:['fan','charge','leap'],p2:['beam','rain','star','sweep'],fxType:'fire'}
@@ -80,10 +80,10 @@
   deoxys:{id:386,name:'Deoxys',title:'Visitante Cósmico',kind:'psychic',fxType:'psychic',H:270,hp:.85,dmg:.95,spd:215,p1:['blink','barrage','fan'],p2:['beam','star','pull','rain','combo'],
    nm:{blink:'Teletransporte',barrage:'Psicorrayo',fan:'Onda mental',beam:'Cañón cósmico',star:'Estrella meteórica',pull:'Agujero gravitatorio',rain:'Lluvia de meteoritos',combo:'Embestida galáctica'},
    drops:['meteorite','twisted_spoon'],say:{intro:[['Normal','Señal detectada. Organismos hostiles. Iniciando eliminación.']],phase2:[['Angry','Mutación completada. Poder máximo.']],death:[['Dizzy','Sistema… dañado… regresando… al espacio…']]}},
-  giratina:{id:1487,name:'Giratina Origen',title:'El Rey del Mundo Distorsión',kind:'ghost',fxType:'ghost',H:300,hp:.9,dmg:.95,spd:150,p1:['zones','fan','charge'],p2:['pull','star','rain','beam','summon'],
+  giratina:{id:487,evolve:1487,boost:{dmg:1.35,spd:1.15,hp:1},name:'Giratina',title:'El Rey del Mundo Distorsión',kind:'ghost',fxType:'ghost',H:300,hp:.9,dmg:.95,spd:150,p1:['zones','fan','charge'],p2:['pull','star','rain','beam','summon'],
    nm:{zones:'Sombra Vil',fan:'Pulso Umbrío',charge:'Garra Umbría',pull:'Vacío Absoluto',star:'Cuchilla Distorsión',rain:'Meteoros Oscuros',beam:'Aliento Distorsión',summon:'Sombras vagantes'},
    minions:[92,93],drops:['griseous_orb','spell_tag'],say:{intro:[['Angry','Este es mi mundo, mortal. Aquí no existen ni el tiempo ni el espacio.']],phase2:[['Angry','¡Contempla la distorsión absoluta!']],death:[['Pain','Regreso… al Mundo… Distorsión…']]}},
-  mewtwo:{id:150,name:'Mewtwo',title:'Mente Despertada',kind:'psychic',fxType:'psychic',H:280,hp:.9,dmg:.95,spd:200,p1:['barrage','blink','zones'],p2:['beam','star','pull','rain','summon'],
+  mewtwo:{id:150,evolve:1150,boost:{dmg:1.35,spd:1.15,hp:1},name:'Mewtwo',title:'Mente Despertada',kind:'psychic',fxType:'psychic',H:280,hp:.9,dmg:.95,spd:200,p1:['barrage','blink','zones'],p2:['beam','star','pull','rain','summon'],
    nm:{barrage:'Psicorrayo',blink:'Teletransporte',zones:'Psíquico',beam:'Onda Mental',star:'Estrella Psíquica',pull:'Telequinesis',rain:'Lluvia mental',summon:'Clones'},
    minions:[63,64],drops:['mind_crown','twisted_spoon'],say:{intro:[['Normal','Fui creado para luchar. Muéstrame de qué estás hecho.']],phase2:[['Angry','¡Nadie me ha vencido jamás! ¡Despierta, poder!']],death:[['Pain','Soy… más que un experimento…']]}}
  };

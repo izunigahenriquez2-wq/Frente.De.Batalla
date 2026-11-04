@@ -89,9 +89,9 @@ window.ECOS_BOSS11=function(A){
  function startSleep(e){e.bossState='sleep';e.stateTime=7;e.invuln=false;e.sleepDmg=0;e.zt=0;poseOf(e,'Sleep',false);}
  async function evolveBoss(e,id){try{await A.loadActor(id);}catch{}e.id=id;e.r=Math.round(e.bigH*.2);}
  function beginRoar(e){e.bossState='roar';e.stateTime=1.5;e.pose=null;e.invuln=true;e.phase=2;e.warning=null;const d=defOf(e);
-  if(d.evolve&&e.id!==d.evolve){e.name=RPG_BOSS_NAMES[d.evolve]||e.name;evolveBoss(e,d.evolve);A.fx('star',e.x,e.y,5,.9);e.hp=Math.max(e.hp,e.max*.75);}
+  if(d.evolve&&e.id!==d.evolve){e.name=RPG_BOSS_NAMES[d.evolve]||e.name;evolveBoss(e,d.evolve);A.fx('star',e.x,e.y,5,.9);e.hp=Math.max(e.hp,e.max*.75);const bo=d.boost||{dmg:1.3,spd:1.1};e.damage*=bo.dmg;e.baseSpeed*=bo.spd;e.tagIcon='⚡';}
   e.sched=[];poseOf(e,'Attack');A.toast(e.name+' · ¡fase 2!');A.fx('smash',e.x,e.y,4,.6);
-  if(e.dk==='iron')say(IRON.say.phase2,e.name,1160,{menace:true,patch:true});else if(d.say?.phase2)say(d.say.phase2,e.name,e.baseId>1000?e.baseId:(e.dk?d.id:e.baseId));
+  if(e.dk==='iron')say(IRON.say.phase2,e.name,1160,{menace:true,patch:true});else if(d.say?.phase2)say(d.say.phase2,e.name,d.evolve||(e.baseId>1000?e.baseId:(e.dk?d.id:e.baseId)));
   later(e,.45,()=>{haz(e,e.x,e.y,260,.4,'slam',1.4,.4);for(let i=0;i<16;i++)shot(e,i*Math.PI/8,240,'ring',46);});}
  function windMul(e){return (ph(e)>1?.82:1)*(e.rage?.9:1);}
  function plan(e,a){const d=defOf(e),dd=dist(e,a);let list=ph(e)>1?[...d.p1,...d.p2,...d.p2]:[...d.p1];

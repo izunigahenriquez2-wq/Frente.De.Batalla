@@ -15,4 +15,4 @@ window.ECOS_STAGES=[
  {id:0,name:'Ave legendaria',leader:'Encuentro legendario',zone:'Cumbre de las Tres Aves',tile:'SkyPeakSummitPass',kind:'spark',mode:'bird',move:'Poder ancestral',color:'#e4d5a2',pool:[41,92]},
  {id:150,name:'Mewtwo',leader:'Desafío final',zone:'Profundidades de la Cueva Celeste',tile:'SpacialRift1',kind:'psychic',mode:'final',move:'Psicoataque',color:'#c5adea',pool:[92,74]}
 ];
-window.ECOS_BIRDS=[{id:144,name:'Articuno',kind:'ice',tile:'IceAegisCave',move:'Ventisca',color:'#a0dce8'},{id:145,name:'Zapdos',kind:'spark',tile:'AmpPlains',move:'Trueno',color:'#f2dd80'},{id:146,name:'Moltres',kind:'fire',tile:'DarkCrater',move:'Llamarada',color:'#f0a37a'}];
+window.ECOS_BIRDS=[{id:1144,name:'Articuno de Galar',kind:'psychic',tile:'IceAegisCave',move:'Psicorrayo',color:'#b9a6e8'},{id:1145,name:'Zapdos de Galar',kind:'hit',tile:'AmpPlains',move:'Golpe Cruzado',color:'#f0a060'},{id:1146,name:'Moltres de Galar',kind:'ghost',tile:'DarkCrater',move:'Llama Oscura',color:'#e0607a'}];
