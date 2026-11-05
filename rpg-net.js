@@ -4,7 +4,7 @@ const PROTOCOL=11;
 const N={role:'none',peer:null,links:new Map(),roster:[],code:'',id:'host',running:false,callbacks:{},lastInput:0,resumeToken:'',profileData:null};
 // Tokens are private to each data channel. Never include them in lobby or world broadcasts.
 const sessions=new Map();
-const safeProfile=p=>({base:window.KANTO_DEX?.[+p?.base]?.buyable?+p.base:25,job:!!window.RPG_CLASSES?.[p?.job]?p.job:'striker',name:String(p?.name||'Explorador').replace(/[<>]/g,'').slice(0,18),shiny:!!p?.shiny});
+const safeProfile=p=>({base:window.KANTO_DEX?.[+p?.base]?.buyable?+p.base:25,job:!!window.RPG_CLASSES?.[p?.job]?p.job:'striker',name:String(p?.name||'Explorador').replace(/[<>]/g,'').slice(0,18),shiny:!!p?.shiny,alt:!!p?.alt&&!p?.shiny});
 const options=()=>({debug:0,...(window.ECOS_PEER_CONFIG||{})});
 const token=()=>window.crypto?.randomUUID?.()||Array.from({length:4},()=>Math.random().toString(36).slice(2)).join('');
 N.on=c=>N.callbacks=c;
