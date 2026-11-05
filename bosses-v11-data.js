@@ -4,8 +4,8 @@
  const S=window.RPG_SPECIES,N=window.RPG_BOSS_NAMES;
  const mk=(id,name,kind,types,hp,speed)=>{if(!S[id])S[id]={name,kind,types,hp,speed,bst:600,price:0,rarity:'jefe',buyable:false,free:false,evos:[],at:100,moves:[]};N[id]=N[id]||name;};
  mk(448,'Lucario','star',['fighting','steel'],110,190);mk(257,'Blaziken','fire',['fire','fighting'],120,185);mk(386,'Deoxys','psychic',['psychic'],100,230);
- mk(241,'Miltank','star',['normal'],120,185);mk(487,'Giratina','ghost',['ghost','dragon'],150,170);mk(1487,'Giratina Origen','ghost',['ghost','dragon'],150,175);mk(1150,'Mega Mewtwo Y','psychic',['psychic'],150,230);mk(1144,'Articuno de Galar','psychic',['psychic','flying'],110,200);mk(1145,'Zapdos de Galar','hit',['fighting','flying'],110,215);mk(1146,'Moltres de Galar','ghost',['dark','flying'],110,205);mk(1160,'IronJaw','water',['water','dark'],130,185);mk(208,'Steelix','rock',['steel','ground'],110,160);
- N[99]='Kingler';N[1150]='Mega Mewtwo Y';N[1144]='Articuno de Galar';N[1145]='Zapdos de Galar';N[1146]='Moltres de Galar';N[487]='Giratina';N[1160]='IronJaw';N[1487]='Giratina Origen';N[208]='Steelix';
+ mk(241,'Miltank','star',['normal'],120,185);mk(487,'Giratina','ghost',['ghost','dragon'],150,170);mk(1487,'Giratina Origen','ghost',['ghost','dragon'],150,175);mk(1150,'Mega Mewtwo Y','psychic',['psychic'],150,230);mk(1144,'Articuno de Galar','psychic',['psychic','flying'],110,200);mk(1146,'Moltres de Galar','ghost',['dark','flying'],110,205);mk(1160,'IronJaw','water',['water','dark'],130,185);mk(208,'Steelix','rock',['steel','ground'],110,160);
+ N[99]='Kingler';N[1150]='Mega Mewtwo Y';N[1144]='Articuno de Galar';N[1146]='Moltres de Galar';N[487]='Giratina';N[1160]='IronJaw';N[1487]='Giratina Origen';N[208]='Steelix';
 
  // Efectos por tipo para cada función de ataque (claves de FX; las b_ y s_ vienen del baúl).
  window.ECOS_TYPEFX={
@@ -45,7 +45,6 @@
   94:{H:260,p1:['blink','ring','zones'],p2:['barrage','spiral','pull','summon'],fxType:'ghost'},
   149:{H:300,p1:['fan','charge','zones'],p2:['beam','rain','combo','tail'],fxType:'dragon'},
   1144:{H:290,p1:['fan','charge','ring'],p2:['rain','beam','spiral','star'],fxType:'psychic'},
-  1145:{H:290,p1:['leap','charge','combo'],p2:['rain','star','spiral','combo'],fxType:'hit'},
   1146:{H:290,p1:['fan','charge','ring'],p2:['rain','beam','spiral','star'],fxType:'ghost'},
   150:{H:290,p1:['blink','barrage','zones'],p2:['beam','star','pull','rain','summon'],fxType:'psychic',evolve:1150,boost:{dmg:1.35,spd:1.15,hp:1}},
   3:{H:290,p1:['fan','zones','slam'],p2:['rain','pillars','summon','spiral'],fxType:'leaf'},

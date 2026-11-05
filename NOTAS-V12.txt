@@ -23,7 +23,7 @@ PERSONAJES: animaciones extra (Barrido, Doble, Golpe, Salto, Dormir) también pa
 - Caras de diálogo: se generaron recortes de cabeza para 44 Pokémon sin cara PMD (incluido Miltank) a partir de sus retratos incluidos, en assets/pmdface.
 
 == Cuarta tanda v12 (jefes, shiny, skins y Mew) ==
-- Jefes: Articuno, Zapdos y Moltres normales eliminados; solo versiones de Galar. Mewtwo evoluciona en fase 2 a Mega Mewtwo Y y Giratina a Forma Origen, con más daño y velocidad.
+- Jefes: Articuno, Zapdos y Moltres normales eliminados; solo quedan Articuno y Moltres de Galar (Zapdos Galar retirado por petición). Mewtwo evoluciona en fase 2 a Mega Mewtwo Y y Giratina a Forma Origen, con más daño y velocidad.
 - Shiny (shiny-v12.js): se compra en la tienda del gremio por línea evolutiva (precio según rareza), se activa en la selección de personaje, modo local y online; se mantiene al evolucionar. Especies sin sprite shiny (p. ej. Beedrill, Dragonair) usan el normal.
 - Skins alternativas (gratuitas): 93 especies con forma Altcolor/Alternate de PMDCollab y Pikachu Libre; botón en la selección y casilla en modo local. Las gorras de Ash no tienen sprite animado en PMDCollab, por eso no se incluyen.
 - Mew jugable (mew-v12.js, épico, tienda del gremio): Q Metrónomo (técnica aleatoria entre seis), E Transformación (8 s con el aspecto del enemigo cercano; su ataque básico pasa a ser el del enemigo, +35 % daño y escudo), pasiva Genoma Ancestral (+2 % daño por cada especie distinta derrotada, máx. 15).

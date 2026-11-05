@@ -130,4 +130,4 @@ Todo es material de aficionados sin fines de lucro; Pokémon © Nintendo / Creat
 Caras de diálogo de Miltank (assets/pmdface/241.png): hoja de retratos PMD aportada por el autor del proyecto (créditos de los artistas originales: PMDCollab/SpriteCollab).
 
 Skins shiny (assets/actors/2xxxx, assets/shiny) y skins alternativas (assets/actors/3xxxx, assets/alt): sprites animados de PMDCollab/SpriteCollab (CC BY-NC 4.0); los créditos de cada artista están en el credits.txt de cada carpeta de sprites.
-Artículos, Moltres y Zapdos de Galar, Mega Mewtwo Y y Giratina Origen: carpeta Ajustes aportada por el autor del proyecto (artistas originales: PMDCollab y Pokémon Ranger). Mew: PMDCollab.
+Articuno y Moltres de Galar, Mega Mewtwo Y y Giratina Origen: carpeta Ajustes aportada por el autor del proyecto (artistas originales: PMDCollab y Pokémon Ranger). Mew: PMDCollab.
