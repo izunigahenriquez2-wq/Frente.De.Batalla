@@ -45,7 +45,7 @@ N.host=profile=>{
    }else if(welcomed&&N.links.get(pid)===link){
     if(!N.running&&m.type==='profile'){const p=N.roster.find(p=>p.pid===pid);if(p){p.profile=safeProfile(m.profile);p.ready=false;N.lobby();}}
     else if(!N.running&&m.type==='ready'){const p=N.roster.find(p=>p.pid===pid);if(p){p.ready=!!m.ready;N.lobby();}}
-    else if(m.type==='input'){const mask=Number.isInteger(m.mask)?m.mask&4095:0;N.callbacks.input?.(pid,mask);}
+    else if(m.type==='input'){const mask=Number.isInteger(m.mask)?m.mask&8191:0;N.callbacks.input?.(pid,mask);}
     else if(m.type==='action'){
      const now=Date.now();recent=recent.filter(t=>now-t<1000);if(recent.length>=24)return;recent.push(now);
      if(['item','equip','talent','evolve','branch','drop','transfer','event','cast','loadout','gate','path','learn','fuse','skyvisit'].includes(m.action))N.callbacks.action?.(pid,m.action,String(m.key||'').slice(0,120));

@@ -39,3 +39,14 @@
 .shinyBtn{margin-top:6px}.shinyBtn.active{border-color:#ffe08a;background:#4a4220}.shinyArtwork{image-rendering:pixelated;width:auto;height:240px;max-height:46vh;object-fit:contain}.shinyLocal{display:block;font-size:12px;margin:2px 0}
 /* selector: la tira de personajes se ajusta en varias filas con scroll vertical (antes los primeros quedaban inalcanzables) */
 .characterStrip{flex-wrap:wrap;overflow-x:hidden;overflow-y:auto;max-height:152px;scrollbar-width:thin;align-content:flex-start}
+/* ranuras de uso rápido (curación y arrojable) a la derecha de las habilidades */
+.barRow{display:flex;align-items:stretch;gap:8px}.barRow .rpgActionBar{flex:1;min-width:0}
+#quickSlots{display:grid;grid-template-columns:repeat(2,62px);gap:4px;flex:0 0 auto}
+.quickSlot{position:relative;aspect-ratio:1;padding:4px!important;border:1px solid #7f9a8b!important;border-radius:3px!important;background:#18363f8c!important;display:flex;align-items:center;justify-content:center;color:#eee8d3!important;box-shadow:0 1px 3px #0006;cursor:pointer}
+.quickSlot:hover{border-color:#f0d490!important}.quickSlot.empty{opacity:.55}
+.quickSlot img{width:30px;height:30px;image-rendering:pixelated;filter:drop-shadow(0 1px 2px #000)}
+.quickSlot kbd{position:absolute;top:2px;left:4px;font:10px system-ui;color:#f5dc94}
+.quickSlot small{position:absolute;right:4px;bottom:2px;font-size:10px;color:#fff;text-shadow:0 1px 3px #000}
+.quickSlot em{position:absolute;left:0;right:0;top:2px;text-align:center;font:normal 8px system-ui;letter-spacing:.05em;color:#9fd3b5;pointer-events:none;text-transform:uppercase}
+.quickSlot .quickNone{font-size:20px;color:#9ab}
+@media(max-width:650px){#quickSlots{grid-template-columns:repeat(2,44px)}.quickSlot img{width:22px;height:22px}}
