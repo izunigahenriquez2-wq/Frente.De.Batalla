@@ -136,7 +136,7 @@ window.ECOS_ITEMS11_INIT=function(A){
   const it=I[key];
   if(c.perm){a.perm??={};const n=a.perm[c.perm]||0;if(n>=CAP){A.toast('Ya alcanzaste el máximo de esta mejora ('+CAP+').');return false;}a.perm[c.perm]=n+1;A.stats(a);A.fx('star',a.x,a.y,2.2,.6);A.toast(a.name+': '+it.name+' · mejora permanente '+(n+1)+'/'+CAP+'.');return true;}
   if(c.coins){for(const b of A.players)if(b===a)b.coins+=c.coins;A.fx('star',a.x,a.y,1.6,.5);A.toast('+'+c.coins+' monedas.');return true;}
-  if(c.chest){const got=[];if(c.chest==='cons')for(let i=0;i<3;i++)got.push(pickOf(X.common.filter(k=>!k.startsWith('gummi'))));else if(c.chest==='gear')got.push(pickOf(gearPool()));else{got.push(pickOf(X.rare),pickOf(X.rareUse));a.coins+=80;}for(const k of got)give(a,k);A.fx('star',a.x,a.y,2.4,.7);A.toast(a.name+' abrió el cofre: '+got.map(k=>I[k].name).join(', ')+'.');return true;}
+  if(c.chest){const got=[];if(c.chest==='cons')for(let i=0;i<3;i++)got.push(pickOf(X.common.filter(k=>!k.startsWith('gummi'))));else if(c.chest==='gear')got.push(A.lootRoll?A.lootRoll('chest',undefined,{min:'m'}).key:pickOf(gearPool()));else{got.push(pickOf(X.rare),pickOf(X.rareUse));a.coins+=80;}for(const k of got)give(a,k);A.fx('star',a.x,a.y,2.4,.7);A.toast(a.name+' abrió el cofre: '+got.map(k=>I[k].name).join(', ')+'.');return true;}
   if(c.throw){const e=near(a,560);if(!e){A.toast('No hay enemigos a tiro.');return false;}const d=dmgOf(a,c.throw.mul);
    const list=c.throw.pierce?A.enemies.filter(x=>x.hp>0&&A.seen(x)&&dist(a,x)<640&&Math.abs(Math.atan2(x.y-a.y,x.x-a.x)-Math.atan2(e.y-a.y,e.x-a.x))<.22).slice(0,c.throw.pierce):[e];
    for(const x of list){A.hurt(x,d,a);if(c.throw.status)status(x,c.throw.status,c.throw.t);A.fx('hit',x.x,x.y,1.2,.3);}

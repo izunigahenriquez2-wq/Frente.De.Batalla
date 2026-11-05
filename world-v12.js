@@ -30,7 +30,7 @@ window.ECOS_WORLD12=function(A){
   xp:a=>{A.gainXP(a,60+A.g.floor*4);},gold:a=>{a.gold=(a.gold||0)+30+A.g.floor*2;},
   reveal:a=>{A.g.stairsKnown=true;},shield:a=>{for(const b of A.players)b.shield=Math.max(b.shield||0,10+A.g.floor);},
   hurtxp:a=>{a.hp=Math.max(1,a.hp-a.max*.2);A.gainXP(a,90+A.g.floor*5);},
-  gear:a=>{const jobs=A.players.map(p=>p.job),pool=Object.keys(I).filter(k=>I[k].type==='gear'&&!I[k].fused&&!I[k].unique&&(!I[k].jobs||I[k].jobs.some(j=>jobs.includes(j))));if(pool.length){const k=A.pick(pool);a.bag[k]=(a.bag[k]||0)+1;}},
+  gear:a=>{const jobs=A.players.map(p=>p.job),pool=Object.keys(I).filter(k=>I[k].type==='gear'&&!I[k].fused&&!I[k].unique&&(!I[k].jobs||I[k].jobs.some(j=>jobs.includes(j))));if(pool.length){const k=A.lootRoll?A.lootRoll('event',undefined,{min:'m'}).key:A.pick(pool);a.bag[k]=(a.bag[k]||0)+1;A.lootFx?.(a,k);}},
   ambush:(a,n)=>{const st=A.stage(),pool=st.pool||[19],ps=A.g.spawnPoints.filter(p=>dist(p,n)>40&&dist(p,n)<420);for(let i=0;i<3;i++){const p=ps[Math.floor(Math.random()*ps.length)]||n;const e=A.enemy(pool[i%pool.length],p.x,p.y);A.enemies.push(e);}a.gold=(a.gold||0)+40+A.g.floor*2;}
  };
  const npc=()=>A.g?.npc12;

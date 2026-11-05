@@ -159,7 +159,7 @@ window.ECOS_BOSS11=function(A){
   A.hazards=[];A.shots=A.shots.filter(b=>!b.hostile);e.sched=[];
   const g=A.g,d=defOf(e),lvl=e.level,ps=A.players.filter(p=>!p.disconnected);
   for(const p of ps){A.gainXP(p,Math.round(90+lvl*9));p.coins+=Math.round(60+lvl*3);}
-  const keys=[...(d.drops||[])];if(window.ECOS_ITEMS11?.rare)keys.push(pickOf(window.ECOS_ITEMS11.rare));
+  const keys=[];for(const k of (d.drops||[])){if(RPG_ITEMS[k]?.unique){if(A.lootMake&&Math.random()<(e.dk==='iron'?.6:.35))keys.push(A.lootMake('u',g.floor,{base:k}));}else keys.push(k);}if(A.lootRoll)keys.push(A.lootRoll('sub',g.floor).key);else if(window.ECOS_ITEMS11?.rare)keys.push(pickOf(window.ECOS_ITEMS11.rare));
   keys.forEach((k,i)=>{if(!RPG_ITEMS[k])return;const g2=Math.PI*2*i/keys.length;A.loot.push({lid:'sub'+e.eid+i,x:e.x+Math.cos(g2)*46,y:e.y+Math.sin(g2)*46,key:k,taken:false});});
   A.loot.push({lid:'sub'+e.eid+'x',x:e.x,y:e.y+50,key:'revive',taken:false});
   if(e.dk==='iron'){A.g.ironKills=(A.g.ironKills||0)+1;if(A.g.iron)A.g.iron.state='dead';say(IRON.say.death,e.name,1160,{menace:true,patch:true});A.toast('¡IronJaw ha sido derrotado! Por ahora…');}

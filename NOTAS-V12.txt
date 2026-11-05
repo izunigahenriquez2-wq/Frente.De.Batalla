@@ -27,3 +27,13 @@ PERSONAJES: animaciones extra (Barrido, Doble, Golpe, Salto, Dormir) también pa
 - Shiny (shiny-v12.js): se compra en la tienda del gremio por línea evolutiva (precio según rareza), se activa en la selección de personaje, modo local y online; se mantiene al evolucionar. Especies sin sprite shiny (p. ej. Beedrill, Dragonair) usan el normal.
 - Mew jugable (mew-v12.js, épico, tienda del gremio): Q Metrónomo (técnica aleatoria entre seis), E Transformación (8 s con el aspecto del enemigo cercano; su ataque básico pasa a ser el del enemigo, +35 % daño y escudo), pasiva Genoma Ancestral (+2 % daño por cada especie distinta derrotada, máx. 15).
 - Objetos de uso rápido (quick-v12.js): dos recuadros a la derecha de las habilidades. H = curación equipada, 4 = arrojable equipado (daño, sueño, ralentización, explosión). Clic en el recuadro cambia de objeto; si se agota pasa al siguiente. Teclas configurables en Controles; funciona en online.
+
+== Botín estilo Diablo (loot-v12-data.js, loot-v12-scale.js, loot-v12.js) ==
+- Cinco rarezas: Común (blanco, equipo base sin afijos, ajustado ×0,55 y fusionable), Mágico (azul, 1-2 afijos), Raro (amarillo, 3-4 afijos), Legendario (naranja, 4 afijos + aspecto de poder), Único (bronce, estadísticas fijas con ±10 % de variación + aspectos temáticos; salen de subjefes e IronJaw).
+- Cada pieza se codifica en su clave (L~base~rareza~nivel~afijos~aspectos~semilla): funciona igual en online sin enviar definiciones. El nivel de la pieza es el piso donde cae y escala un poco los afijos.
+- Ranuras de equipo: 6 (antes 3).
+- Probabilidades (Común/Mágico/Raro/Legendario/Único, %): cofre piso 1 = 58/30/9/2/0,1; piso 40 = 42/31/22/5/0,3; piso 80 = 26/33/33/7,5/0,4. Tienda = 0/54/40/6/0. Subjefe = 0/11/51/33/4,5. Jefe de piso = 0/0/33/53/13. Eventos de regalo = 37/41/18/5/0,2. Los enemigos comunes tienen 1,5 % de soltar una pieza Mágica o mejor, y los jefes de piso ahora sueltan siempre una pieza (Rara o mejor).
+- Afijos con peso propio (los potentes, como robo de vida o ahorro de maná, salen menos). Bases con peso (las crestas y piezas raras salen menos).
+- Aspectos: Azote de Jefes, Verdugo, Furia Desesperada, Golpe Afortunado, Sed de Sangre, Eco Arcano, Aura Vital, Frenesí.
+- Polvo al reciclar: Común 5, Mágico 10, Raro 20, Legendario 50, Único 100. Mejoras de taller funcionan con cualquier rareza. Las fusiones solo usan piezas Comunes.
+- La tienda cobra según rareza (Mágico ~36, Raro ~72, Legendario ~170 de oro, más un pequeño aumento por piso).

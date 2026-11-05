@@ -21,9 +21,9 @@ window.ECOS_ECON12=function(A){
  function legFuse(a,id){const r=LG.recipes[id];if(!a||!r||!A.g||A.g.ended||a.down||a.disconnected||(A.localMode==='online'&&A.g.paused))return false;
   if(!r.parts.every(p=>own(a,p)>=1))return false;
   const eq=r.parts.some(p=>a.gear.includes(p));for(const p of r.parts)remove(a,p);
-  a.bag[r.key]=(a.bag[r.key]||0)+1;if(eq&&a.gear.length<3)a.gear.push(r.key);
+  a.bag[r.key]=(a.bag[r.key]||0)+1;if(eq&&a.gear.length<6)a.gear.push(r.key);
   A.stats(a);A.fx('star',a.x,a.y,3,.9);A.toast(a.name+' forjó '+r.name+'.');return true;}
- function dustOf(k){const it=I[k];if(!it)return 0;if(it.legendary)return 40;if(it.fused)return 14;if(it.type==='gear')return 6;return it.type==='use'&&!/^(tm_|chest_|dungeon_key|revive)/.test(k)?1:0;}
+ function dustOf(k){const it=I[k];if(!it)return 0;if(it.inst)return window.ECOS_LOOT.RAR[it.rk].dust;if(it.legendary)return 40;if(it.fused)return 14;if(it.type==='gear')return 5;return it.type==='use'&&!/^(tm_|chest_|dungeon_key|revive)/.test(k)?1:0;}
  function recycle(a,k){if(!a||!A.g||A.g.ended||a.down||!I[k])return false;const d=dustOf(k),keep=a.gear.includes(k)?1:0;if(!d||own(a,k)<=keep)return false;a.bag[k]--;a.dust=(a.dust||0)+d;A.toast('Reciclaste '+I[k].name+': +'+d+' polvo.');return true;}
  function upgrade(a,k){if(!a||!A.g||A.g.ended||a.down||!I[k]||I[k].type!=='gear'||!(own(a,k)>0))return false;const lv=(a.up||{})[k]||0;if(lv>=3||(a.dust||0)<COST[lv])return false;a.dust-=COST[lv];(a.up??={})[k]=lv+1;a._tver=(a._tver||0)+1;A.stats(a);A.fx('star',a.x,a.y,2,.6);A.toast(I[k].name+' mejorado a +'+(lv+1)+'.');return true;}
  const H={legfuse:legFuse,recycle,upgrade};
@@ -41,8 +41,9 @@ window.ECOS_ECON12=function(A){
  window.ECOS_SHOP12=function(ev){const g=A.g,jobs=A.players.map(a=>a.job),epoch=Math.floor((g.floor-1)/3),rng=A.seeded((g.seed||1)+epoch*977),ps=A.seeded((g.seed||1)+g.floor*31);
   const pool=Object.keys(I).filter(k=>I[k].type==='gear'&&!I[k].fused&&!I[k].unique&&(!I[k].jobs||I[k].jobs.some(j=>jobs.includes(j)))).sort(),cons=['potion','super_potion','ether','oran_berry','sitrus_berry','leppa_berry','lum_berry','escape_rope','revive',...(window.ECOS_ITEMS11?.common||[])].filter(k=>I[k]);
   const pickN=(arr,n,r)=>{const c=arr.slice(),o=[];while(o.length<n&&c.length)o.push(c.splice(Math.floor(r()*c.length),1)[0]);return o;};
-  const gear=pickN(pool,3,rng),deal=gear[2],c=pickN(cons,2,ps);
-  return [{key:gear[0],price:30},{key:gear[1],price:30},{key:deal,price:21,deal:true},{key:c[0],price:12},{key:c[1],price:12}].filter(s=>s.key).map((s,i)=>({...s,taken:false,id:i}));};
+  const L=window.ECOS_LOOT,mk=o=>A.lootRoll('shop',g.floor,{rnd:rng,min:'m',jobs,...o}).key,gear=[mk(),mk(),mk({min:'m'})],c=pickN(cons,2,ps);
+  const price=(k,m=1)=>Math.round(({m:36,r:72,l:170,u:400}[L.rarityOf(I[k])]||30)*(1+g.floor*.012)*m);
+  return [{key:gear[0],price:price(gear[0])},{key:gear[1],price:price(gear[1])},{key:gear[2],price:price(gear[2],.7),deal:true},{key:c[0],price:12},{key:c[1],price:12}].filter(s=>s.key).map((s,i)=>({...s,taken:false,id:i}));};
  // ---------- libro y taller ----------
  const actor=()=>A.players.find(p=>p.pid===pid)||A.me();let pid=null;
  const tabs=cur=>`<div class="bagTabs"><button data-ecotab="book" class="${cur==='book'?'selected':''}">📖 Libro de recetas</button><button data-ecotab="shop" class="${cur==='shop'?'selected':''}">✦ Taller de polvo</button><button data-ecotab="fuse">⚗ Fusionar</button></div>`;

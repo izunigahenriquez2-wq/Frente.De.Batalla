@@ -33,7 +33,8 @@ window.ECOS_SUMMARY12=function(A){
   add('Intocable','Nunca caíste en esta expedición.',!R.down&&g.floor>=5);
   add('Una sola pieza','Terminaste un piso sin recibir daño.',g.floor>=3&&Object.keys(R.floorHits).length<g.floor-1);
   add('Maestro de clase','Gastaste 10 puntos de talento.',spentN>=10);
-  add('Coleccionista','Equipaste 4 o más objetos.',(a.gear||[]).length>=4);
+  add('Coleccionista','Equipaste las seis ranuras.',(a.gear||[]).length>=6);
+  add('Cazador de leyendas','Llevas una pieza Legendaria o Única.',(a.gear||[]).some(k=>['l','u'].includes(I[k]?.rk)));
   add('Fusionista','Llevas un objeto fusionado.',(a.gear||[]).some(k=>I[k]?.fused));
   add('Gran golpe','Recibiste un golpe de más de 80 de daño.',R.maxHit>80);
   add('Maratón','Más de 30 minutos de expedición.',g.time>=1800);
