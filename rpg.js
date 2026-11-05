@@ -65,7 +65,7 @@ function reveal(){if(!g)return;for(const a of active()){const tx=Math.floor(a.x/
 function move(a,dx,dy){const r=a.r||15;function free(x,y){return tileAt(x-r,y-r)&&tileAt(x+r,y-r)&&tileAt(x-r,y+r)&&tileAt(x+r,y+r);}if(free(a.x+dx,a.y))a.x+=dx;if(free(a.x,a.y+dy))a.y+=dy;}
 function nearTarget(a,max=700){let best=null,dd=max;for(const e of enemies)if(e.hp>0&&distance(a,e)<dd){dd=distance(a,e);best=e;}return best;}
 function fx(kind,x,y,size=1,total=.4){effects.push({kind,x,y,size,life:total,total});}
-const akey=a=>a.shiny&&actorArt[20000+a.id]?20000+a.id:a.alt&&actorArt[30000+a.id]?30000+a.id:a.id;
+const akey=a=>a.shiny&&actorArt[20000+a.id]?20000+a.id:a.id;
 function art(a,name){const K=akey(a);return actorArt[K]?.[name]||(['Shoot','Charge'].includes(name)?actorArt[K]?.Attack:null)||actorArt[K]?.Idle||actorArt[a.id]?.Walk;}
 function action(a,name,fn,duration=.4){if(a.action)return false;const anim=art(a,name);const total=duration,hit=anim?clamp(anim.dur.slice(0,Math.min(anim.hit,anim.dur.length-1)).reduce((x,y)=>x+y,0)/anim.total,.18,.7)*total:total*.3;a.action={name,t:0,total,hit,done:false,fn};return true;}
 function animate(a,dt){a.anim=(a.anim||0)+dt;a.hurt=Math.max(0,(a.hurt||0)-dt);a.flash=Math.max(0,(a.flash||0)-dt);if(a.action){const act=a.action;act.t+=dt;if(!act.done&&act.t>=act.hit){act.done=true;act.fn?.();}if(act.t>=act.total&&a.action===act)a.action=null;}}
