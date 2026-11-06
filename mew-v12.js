@@ -40,7 +40,7 @@ window.ECOS_MEW12=function(A){
    ['Esfera Aural',()=>{for(const e of near(a,520).slice(0,3)){A.hurt(e,dmg(a,1.45),a);A.fx('aura_sphere',e.x,e.y,2,.5);}}],
    ['Escudo y Recuperación',()=>{a.shield=Math.max(a.shield||0,4);a.hp=Math.min(a.max,a.hp+a.max*.22*(a.healPower||1));A.fx('water',a.x,a.y,3,.6);}],
    ['Terremoto',()=>{for(const e of near(a,270)){A.hurt(e,dmg(a,1.0),a);e.slow=Math.max(e.slow||0,2.5);}A.fx('quake',a.x,a.y,4,.65);}],
-   ['Lanzallamas',()=>{for(const e of near(a,300)){A.hurt(e,dmg(a,.85),a);e.burn=Math.max(e.burn||0,4);}A.fx('fire',a.x,a.y,3,.6);}]
+   ['Lanzallamas',()=>{oldCast.call(A.v4,a,{name:'Lanzallamas',mode:'cone',kind:'fire',type:'fire',power:100,mana:0,cool:1,slug:'flamethrower',category:'special'});}]
   ];
   const o=A.pick(opts);o[1]();if(a.pid===A.myPid)A.toast('Metrónomo → '+o[0]+'.');
  }

@@ -37,3 +37,12 @@ PERSONAJES: animaciones extra (Barrido, Doble, Golpe, Salto, Dormir) también pa
 - Aspectos: Azote de Jefes, Verdugo, Furia Desesperada, Golpe Afortunado, Sed de Sangre, Eco Arcano, Aura Vital, Frenesí.
 - Polvo al reciclar: Común 5, Mágico 10, Raro 20, Legendario 50, Único 100. Mejoras de taller funcionan con cualquier rareza. Las fusiones solo usan piezas Comunes.
 - La tienda cobra según rareza (Mágico ~36, Raro ~72, Legendario ~170 de oro, más un pequeño aumento por piso).
+
+== Correcciones tras pruebas (v12, ronda 3) ==
+- Lanzallamas (movimientos de tipo cono y el Lanzallamas del Metrónomo de Mew): ahora son 5 chorros grandes (tamaño 2,5) con explosión PMD al inicio y llamas a lo largo del cono; el daño total se mantiene (cada proyectil hace menos). Mew ya no hace un destello: lanza el mismo cono real.
+- Puertas (expedition-v6.js): una puerta solo se coloca si al cerrarla aísla de 10 a 450 casillas del mapa; esa zona recibe un cofre de bóveda con botín. Ya no hay puertas que se rodean gratis ni que no guardan nada. Las puertas con llave siguen necesitando la llave.
+- Guardería (index.html): 77 especies (Unown, Girafarig, Mewtwo, Rayquaza, etc.) caían a sprites gen. 5. Ahora usan hojas Mystery Dungeon (PMDCollab) generadas en pmd/<id>.png con el mismo formato que el resto (fila lateral, volteada, recortada). Las que no tienen Comer/Pose en PMDCollab usan las animaciones de respaldo.
+- Icono de Mew en el selector (assets/portraits/151.png): ahora es su sprite PMD a tamaño nativo, igual que el resto.
+- Previews animadas en el selector: assets/preview/<id>.gif (34 especies no Kanto) y assets/preview/s<id>.gif (todas las shiny), generadas de la animación Idle de PMDCollab (fila frontal, x escala entera). Si falta el archivo se usa el estático anterior.
+- Shiny que faltaban y se obtuvieron de PMDCollab: Beedrill, Dragonair, Articuno, Zapdos, Moltres, Mewtwo y Pichu (assets/actors/200xx). Ya tienen skin shiny todas las especies del juego.
+- Encanto, Tormento y Rayo Confuso mostraban "undefined" como descripción: corregido.

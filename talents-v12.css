@@ -60,3 +60,6 @@
 .itemCard.rar-u,.equipRow button.rar-u{box-shadow:0 0 14px color-mix(in srgb,var(--rar) 55%,transparent),inset 0 0 0 1px var(--rar);background-image:linear-gradient(160deg,#e2b26a1f,transparent 60%)}
 [data-eventchoice].rar{border-color:var(--rar)!important;color:var(--rar)}
 .recCard.rar,article.rar{border-color:var(--rar)!important}.recCard.rar h4,article.rar h4{color:var(--rar)}
+
+/* previews animadas (PMDCollab): tamaño natural, píxel nítido */
+.selectedArtwork.previewArt{image-rendering:pixelated;width:auto!important;height:auto!important;max-width:300px;max-height:min(300px,46vh);object-fit:contain!important;filter:drop-shadow(0 18px 8px #071b3360)!important}

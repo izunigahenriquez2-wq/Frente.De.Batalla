@@ -14,7 +14,7 @@
  let nextId=1000;for(const m of Object.values(M))nextId=Math.max(nextId,(m.id||0)+1);
  for(const [slug,def] of Object.entries(D.moves)){const m=M[slug]||(M[slug]={id:nextId++});Object.assign(m,def);}
  const TEXT={melee:'Golpe de contacto rápido.',cleave:'Golpe de contacto en arco frente a ti.',dash:'Embestida de contacto: te lanzas hacia delante y golpeas lo que encuentres.',shot:'Proyectil a distancia.',beam:'Rayo penetrante en línea recta.',fan:'Abanico de proyectiles.',wave:'Ráfaga ancha de proyectiles.',cone:'Chorro continuo en cono.',field:'Impacto de área a tu alrededor.'};
- const STATUS={taunt:'Mofa: los enemigos cercanos solo te atacan a ti durante 4 s.',burn:'Quema a los enemigos cercanos: daño continuo durante 6 s.',curse:'Maldice a los enemigos cercanos: veneno y lentitud. Cuesta el 12 % de tus PS.',decoy:'Deja un peluche de sustituto: provoca a los enemigos cercanos y absorbe sus golpes durante 9 s.'};
+ const STATUS={taunt:'Mofa: los enemigos cercanos solo te atacan a ti durante 4 s.',burn:'Quema a los enemigos cercanos: daño continuo durante 6 s.',curse:'Maldice a los enemigos cercanos: veneno y lentitud. Cuesta el 12 % de tus PS.',decoy:'Deja un peluche de sustituto: provoca a los enemigos cercanos y absorbe sus golpes durante 9 s.',slow:'Debilita a los enemigos cercanos: los ralentiza durante unos segundos.',sleep:'Confunde a los enemigos cercanos: pierden el rumbo y fallan sus ataques durante unos segundos.'};
  for(const m of Object.values(M)){
   if(m.power>0&&TEXT[m.mode])m.desc=(m.category==='physical'?'Físico. ':'Especial. ')+TEXT[m.mode];
   if(STATUS[m.mode])m.desc=STATUS[m.mode];

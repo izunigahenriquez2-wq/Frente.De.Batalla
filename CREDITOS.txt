@@ -131,3 +131,5 @@ Caras de diálogo de Miltank (assets/pmdface/241.png): hoja de retratos PMD apor
 
 Skins shiny (assets/actors/2xxxx, assets/shiny): sprites animados de PMDCollab/SpriteCollab (CC BY-NC 4.0); los créditos de cada artista están en el credits.txt de cada carpeta de sprites.
 Articuno y Moltres de Galar, Mega Mewtwo Y y Giratina Origen: carpeta Ajustes aportada por el autor del proyecto (artistas originales: PMDCollab y Pokémon Ranger). Mew: PMDCollab.
+
+Hojas de la Guardería (pmd/<id>.png de 77 especies añadidas), sprites shiny de Beedrill, Dragonair, Articuno, Zapdos, Moltres, Mewtwo y Pichu, y previews animadas del selector: PMDCollab/SpriteCollab (https://github.com/PMDCollab/SpriteCollab). Los créditos de cada autor están en el credits.txt de cada carpeta assets/actors/200xx.
