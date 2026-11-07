@@ -51,6 +51,7 @@
  gear('griseous_orb','Orbe Griseo','explorer_medal',{leech:.1,skill:.15},U);
  gear('mind_crown','Corona Mental','psy_ring',{skill:.25,mana:.2},U);
  gear('ironjaw_hook','Garfio de IronJaw','thorn_iron',{damage:.22,leech:.08},U);I.ironjaw_hook.icon='n_gold_fang';
+ gear('ironjaw_chest','Cofre del Capitán IronJaw','gold_gem',{damage:.18,crit:.14,xp:.25,leech:.06,armor:.08},U);I.ironjaw_chest.icon='n_gold_fang';
  gear('pirate_hat','Parche Pirata','dark_specs',{crit:.12,xp:.2,damage:.06},U);I.pirate_hat.icon='black_glasses';
  gear('charcoal','Carbón','rock_brown',{damage:.12},{...U,jobs:undefined});I.charcoal.type='gear';
  gear('twisted_spoon_g','Cuchara Torcida','moon_stone',{skill:.14},U);I.twisted_spoon_g.icon='twisted_spoon';

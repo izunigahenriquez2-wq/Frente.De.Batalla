@@ -48,7 +48,7 @@ window.ECOS_BOSS11=function(A){
   tick(e,dt){e.actT+=dt;const t=clamp(e.actT/.65,0,1);e.x=e.leapStart.x+(e.targetX-e.leapStart.x)*t;e.y=e.leapStart.y+(e.targetY-e.leapStart.y)*t;e.z=Math.sin(t*Math.PI)*110;},
   end(e){e.z=0;haz(e,e.x,e.y,150+25*(ph(e)-1),0,'slam',1.6,.4);A.fx('smash',e.x,e.y,3,.5);if(ph(e)>1)for(let i=0;i<12;i++)shot(e,i*Math.PI/6,230,'ring',44);}};
  PATS.blink={wind:.6,rec:1.1,pose:'Attack',max:900,run(e,a){const go=()=>{for(let k=0;k<8;k++){const g=rnd(0,Math.PI*2),x=a.x+Math.cos(g)*230,y=a.y+Math.sin(g)*230;if(A.tileAt(x,y)&&A.tileAt(x-e.r,y)&&A.tileAt(x+e.r,y)&&A.tileAt(x,y-e.r)&&A.tileAt(x,y+e.r)){A.fx('psychic',e.x,e.y,2,.4);e.x=x;e.y=y;e.prevX=x;e.prevY=y;A.fx('psychic',x,y,2,.4);break;}}};go();later(e,.5,()=>{const t=target(e)||a;aimAt(e,t);for(let i=0;i<5+ph(e);i++)shot(e,e.aimAngle+(i-(4+ph(e))/2)*.16,320,'shot',46);});if(ph(e)>1)later(e,1.1,()=>{go();later(e,.4,()=>{const t=target(e)||a;aimAt(e,t);for(let i=0;i<7;i++)shot(e,e.aimAngle+(i-3)*.15,340,'shot',46);});});return 0;}};
- PATS.summon={wind:1,rec:1.5,pose:'Double',run(e){const d=defOf(e),pool=d.minions||A.stage?.().pool||[19,41],n=Math.min(3-minions(e),ph(e)+1);for(let i=0;i<n;i++){const g=rnd(0,Math.PI*2),x=e.x+Math.cos(g)*170,y=e.y+Math.sin(g)*170;if(!A.tileAt(x,y))continue;const id=pickOf(pool),m=A.enemy(id,x,y);m.summoner=e.eid;A.enemies.push(m);A.loadActor(id).catch(()=>{});A.fx('star',x,y,2,.5);}return 0;}};
+ PATS.summon={wind:1,rec:1.5,pose:'Double',run(e){const d=defOf(e),pool=e.crew||d.minions||A.stage?.().pool||[19,41],n=Math.min(3-minions(e),ph(e)+1);for(let i=0;i<n;i++){const g=rnd(0,Math.PI*2),x=e.x+Math.cos(g)*170,y=e.y+Math.sin(g)*170;if(!A.tileAt(x,y))continue;const id=pickOf(pool),m=A.enemy(id,x,y);m.summoner=e.eid;A.enemies.push(m);A.loadActor(id).catch(()=>{});A.fx('star',x,y,2,.5);}return 0;}};
  PATS.pull={wind:1,rec:1.6,pose:'Rotate',pre(e){e.warning={x:e.x,y:e.y,r:650};},run(e){e.warning=null;e.actT=0;return 1.5;},
   tick(e,dt){for(const p of A.active()){const d=dist(p,e);if(d<650&&d>e.r+20)A.move(p,(e.x-p.x)/d*170*dt,(e.y-p.y)/d*170*dt);}},
   end(e){haz(e,e.x,e.y,190,0,'slam',1.7,.4);for(let i=0;i<16;i++)shot(e,i*Math.PI/8,240,'ring',46);}};
@@ -95,7 +95,7 @@ window.ECOS_BOSS11=function(A){
   later(e,.45,()=>{haz(e,e.x,e.y,260,.4,'slam',1.4,.4);for(let i=0;i<16;i++)shot(e,i*Math.PI/8,240,'ring',46);});}
  function windMul(e){return (ph(e)>1?.82:1)*(e.rage?.9:1);}
  function plan(e,a){const d=defOf(e),dd=dist(e,a);let list=ph(e)>1?[...d.p1,...d.p2,...d.p2]:[...d.p1];
-  list=list.filter(n=>{const P=PATS[n];return P&&(!P.min||dd>=P.min)&&(!P.max||dd<=P.max)&&n!==e.lastPat&&!(n==='summon'&&minions(e)>=3);});if(!list.length)list=['fan'];
+  list=list.filter(n=>{const P=PATS[n];return P&&(!P.min||dd>=P.min)&&(!P.max||dd<=P.max)&&n!==e.lastPat&&!(n==='summon'&&minions(e)>=3);});if(e.favor&&ph(e)>=1)for(const f of e.favor)if(PATS[f]&&list.includes(f))list.push(f,f);if(!list.length)list=['fan'];
   start(e,a,pickOf(list));}
  function start(e,a,n){const P=PATS[n],d=defOf(e);e.pattern=n;e.lastPat=n;e.moveName=(d.nm&&d.nm[n])||PN[n];aimAt(e,a);e.bossState='windup';e.stateTime=P.wind*windMul(e);e.pose=null;P.pre?.(e,a);}
  function finishAct(e,a){const P=PATS[e.pattern];if(P?.end&&P.end(e,a))return;e.bossState='recover';e.stateTime=(P?.rec||1.2)*(ph(e)>1?.72:1)*(e.rage?.85:1);e.pose=null;}
@@ -162,7 +162,7 @@ window.ECOS_BOSS11=function(A){
   const keys=[];for(const k of (d.drops||[])){if(RPG_ITEMS[k]?.unique){if(A.lootMake&&Math.random()<(e.dk==='iron'?.6:.35))keys.push(A.lootMake('u',g.floor,{base:k}));}else keys.push(k);}if(A.lootRoll)keys.push(A.lootRoll('sub',g.floor).key);else if(window.ECOS_ITEMS11?.rare)keys.push(pickOf(window.ECOS_ITEMS11.rare));
   keys.forEach((k,i)=>{if(!RPG_ITEMS[k])return;const g2=Math.PI*2*i/keys.length;A.loot.push({lid:'sub'+e.eid+i,x:e.x+Math.cos(g2)*46,y:e.y+Math.sin(g2)*46,key:k,taken:false});});
   A.loot.push({lid:'sub'+e.eid+'x',x:e.x,y:e.y+50,key:'revive',taken:false});
-  if(e.dk==='iron'){A.g.ironKills=(A.g.ironKills||0)+1;if(A.g.iron)A.g.iron.state='dead';say(IRON.say.death,e.name,1160,{menace:true,patch:true});A.toast('¡IronJaw ha sido derrotado! Por ahora…');}
+  if(e.dk==='iron'){A.g.ironKills=(A.g.ironKills||0)+1;if(A.g.iron)A.g.iron.state='dead';say(IRON.say.death,e.name,1160,{menace:true,patch:true});A.toast('¡IronJaw ha sido derrotado! Por ahora…');A.nemesisDefeat?.(e);}
   else{const dk=SUBS[e.dk];if(dk.say?.death)say(dk.say.death,dk.name,dk.id);A.toast(dk.name+' vencido. Se abre la salida de la sala secreta.');if(g.secret){g.secret.state='cleared';g.secret.exit={x:(g.secret.arena.x+g.secret.arena.w/2)*T,y:(g.secret.arena.y+g.secret.arena.h/2)*T};}}
  }
 
@@ -205,7 +205,7 @@ window.ECOS_BOSS11=function(A){
   if(i.state==='wait'){i.t-=dt;if(i.t<=0){const ps=A.active();if(!ps.length)return;const spots=(g.spawnPoints||[]).filter(p=>Math.min(...ps.map(q=>dist(p,q)))>850).sort((a,b)=>Math.min(...ps.map(q=>dist(b,q)))-Math.min(...ps.map(q=>dist(a,q))));const p=spots[0];if(!p){i.t=5;return;}
    const e=spawnBossEntity(IRON.id,p.x,p.y,'iron');e.level+=2+(g.ironN||0)*2;A.combat7.scale(e);e.hp=e.max;e.bar=e.hp;e.hunt=true;e.invuln=true;e.bossState='approach';e.stateTime=99;i.state='hunt';i.eid=e.eid;g.ironN=(g.ironN||0)+1;
    A.toast('¡Algo enorme recorre la mazmorra! IronJaw te ha olfateado…');}}
-  else if(i.state==='hunt'){const e=A.enemies.find(x=>x.eid===i.eid);if(!e||e.hp<=0){i.state='dead';return;}const a=target(e);if(a&&dist(e,a)<560&&e.hunt){e.hunt=false;e.bossState='intro';e.stateTime=0;const lines=(g.ironN||1)<=1?IRON.say.first:IRON.say.again;const t=say(lines,IRON.name,1160,{menace:true,patch:(g.ironN||1)>1});e.stateTime=(t||4)+.3;e.invuln=true;i.state='fight';}}}
+  else if(i.state==='hunt'){const e=A.enemies.find(x=>x.eid===i.eid);if(!e||e.hp<=0){i.state='dead';return;}const a=target(e);if(a&&dist(e,a)<560&&e.hunt){e.hunt=false;e.bossState='intro';e.stateTime=0;const lines=A.nemesisLines?.(e)||((g.ironN||1)<=1?IRON.say.first:IRON.say.again);const t=say(lines,IRON.name,1160,{menace:true,patch:(g.ironN||1)>1});e.stateTime=(t||4)+.3;e.invuln=true;i.state='fight';}}}
  // Si el equipo escapa por las escaleras con IronJaw vivo, se burla y volverá.
  A.nextFloor=function(...args){const prev=A.g?.iron;old.nextFloor.apply(this,args);const g=A.g;if(!g)return;ironInit();
   if(prev&&(prev.state==='fight'||prev.state==='hunt')&&A.NET.role!=='client'){g.dlgQ=[];say(IRON.say.escape,IRON.name,1160,{menace:true});if(!g.iron&&!A.bossFloor())g.iron={state:'wait',t:rnd(14,22)};}};

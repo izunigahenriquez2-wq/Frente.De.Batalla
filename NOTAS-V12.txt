@@ -53,3 +53,8 @@ PERSONAJES: animaciones extra (Barrido, Doble, Golpe, Salto, Dormir) también pa
 - Sigilo: los enemigos que se entierran muestran "SIGILO" (ni icono de sleep ni de paralizado al salir).
 - Placaje / Derribo: cualquier enemigo no jefe que tengas a menos de ~85 px carga contra ti tras un aviso de 0,55 s (daño x1,25, empuje, y queda aturdido 0,55 s). Enfriamiento 4,5–7 s.
 - Golpe desesperado: con ≤10 % de vida hace un golpe físico rápido (aviso 0,16 s, daño x1) cada 3,4 s si estás a <260 px.
+
+V13 · Némesis de IronJaw
+- IronJaw recuerda cómo moriste (especie, ataque, piso) y cambia de táctica y de secuaces según ello.
+- Cada derrota lo hace más rápido y fuerte; tras 3 derrotas hay escena final y botín único (Cofre del Capitán IronJaw) y título 'Azote de IronJaw'.
+- Memoria guardada en localStorage (ecos-nemesis-v13). Todos los scripts de dungeon.html pasan a ?v=13.

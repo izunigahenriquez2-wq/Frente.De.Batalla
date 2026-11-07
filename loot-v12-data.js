@@ -37,7 +37,7 @@
   frenz:{name:'Frenesí',desc:'Al derrotar a un enemigo obtienes 3 s de aceleración.'}
  };
  const ASPK=Object.keys(ASP);
- const UNIQ_ASP={crab_claw:['boss'],aura_band:['lucky'],blaze_band:['bers'],seed_pack:['aura'],dragon_scale:['exec'],shell_armor:['blood','aura'],meteorite:['manae'],griseous_orb:['blood'],mind_crown:['manae','lucky'],ironjaw_hook:['boss','blood'],pirate_hat:['lucky','frenz'],charcoal:['bers'],twisted_spoon:['manae'],spell_tag:['lucky'],miracle_seed:['aura','frenz']};
+ const UNIQ_ASP={crab_claw:['boss'],aura_band:['lucky'],blaze_band:['bers'],seed_pack:['aura'],dragon_scale:['exec'],shell_armor:['blood','aura'],meteorite:['manae'],griseous_orb:['blood'],mind_crown:['manae','lucky'],ironjaw_hook:['boss','blood'],ironjaw_chest:['boss','lucky','blood'],pirate_hat:['lucky','frenz'],charcoal:['bers'],twisted_spoon:['manae'],spell_tag:['lucky'],miracle_seed:['aura','frenz']};
  // Probabilidad de cada rareza según el origen y el piso (se normalizan).
  const WEIGHTS={
   chest:f=>({c:Math.max(18,58-.4*f),m:30+.05*f,r:9+.32*f,l:1.8+.075*f,u:.1+.004*f}),
