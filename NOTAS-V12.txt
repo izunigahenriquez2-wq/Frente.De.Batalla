@@ -58,3 +58,7 @@ V13 · Némesis de IronJaw
 - IronJaw recuerda cómo moriste (especie, ataque, piso) y cambia de táctica y de secuaces según ello.
 - Cada derrota lo hace más rápido y fuerte; tras 3 derrotas hay escena final y botín único (Cofre del Capitán IronJaw) y título 'Azote de IronJaw'.
 - Memoria guardada en localStorage (ecos-nemesis-v13). Todos los scripts de dungeon.html pasan a ?v=13.
+
+V13 · Puntos débiles e interrupción
+- Al bajar de 80/60/40/20 % PS los jefes muestran 2-3 puntos débiles orbitando; golpéalos desde su lado. Mientras existan, el jefe recibe poco daño; al romperlos todos queda aturdido 3.8 s y recibe +35 %.
+- Cuerno Estruendo (objeto común): interrumpe la huida o el sueño de un jefe (no se cura, aturdido 4.5 s, +35 % daño) y da XP y monedas.

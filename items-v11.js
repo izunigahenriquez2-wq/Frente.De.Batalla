@@ -73,6 +73,7 @@
  use('blue_flask','Pócima Azul','blue_flask','Recupera 60 PS y 60 PM.',{heal:60,mp:60});common.push('blue_flask');
  use('moomoo_milk','Leche Mu-Mu','golden_flask','Cura el 60 % de PS y limpia estados a todo el equipo cercano.',{ratio:.6,cleanse:true,team:420});I.moomoo_milk.icon='n_blue_flask';
  use('blast_seed','Semilla Explosiva','blast_seed','Lanza una explosión sobre el enemigo más cercano: gran daño en área.',{blast:{r:150,mul:3.2,range:560}});common.push('blast_seed');
+ use('noise_horn','Cuerno Estruendo','iron_horn','Un estruendo que interrumpe a un jefe que huye o duerme: lo aturde, evita que se cure y te recompensa. Guárdalo para ese momento.',{noise:{r:1400}});common.push('noise_horn');
  use('sleep_seed','Semilla Somnífera','sleep_seed','Duerme 6 s a los enemigos cercanos (no afecta a jefes).',{sleep:{r:230,t:6}});common.push('sleep_seed');
  use('thorn_green','Espina Venenosa','thorn_green','Lanzable: hiere al enemigo más cercano y lo envenena.',{throw:{mul:1.4,status:'poison',t:6}});common.push('thorn_green');
  use('thorn_pink','Espina Aturdidora','thorn_pink','Lanzable: hiere al enemigo más cercano y lo aturde 2 s.',{throw:{mul:1.2,status:'stun',t:2}});
@@ -143,6 +144,7 @@ window.ECOS_ITEMS11_INIT=function(A){
    for(const x of list){A.hurt(x,d,a);if(c.throw.status)status(x,c.throw.status,c.throw.t);A.fx('hit',x.x,x.y,1.2,.3);}
    A.fire(a,Math.atan2(e.y-a.y,e.x-a.x),700,0,'star',a.x,a.y,{life:.25,size:.8,hostile:false});return true;}
   if(c.blast){const e=near(a,c.blast.range);if(!e){A.toast('No hay enemigos a tiro.');return false;}for(const x of area(e,c.blast.r))A.hurt(x,dmgOf(a,c.blast.mul),a);A.fx('smash',e.x,e.y,3.2,.5);A.fx('fire',e.x,e.y,3,.5);return true;}
+  if(c.noise){const ok=A.noiseBlast?.(a,c.noise.r);if(!ok)A.toast('Nada que interrumpir: úsalo cuando un jefe huya o duerma.');return !!ok;}
   if(c.sleep||c.slow){const k=c.sleep?'sleep':'slow',v=c[k],list=area(a,v.r);if(!list.length){A.toast('No hay enemigos cerca.');return false;}for(const x of list)status(x,k,v.t);A.fx(k==='sleep'?'s_sleep_zzz':'s_ice_crystals',a.x,a.y,3.4,.8);return true;}
   if(c.reveal){const g=A.g,tx=Math.floor(a.x/T),ty=Math.floor(a.y/T),r=c.reveal.r;for(let y=Math.max(0,ty-r);y<=Math.min(g.mh-1,ty+r);y++)for(let x=Math.max(0,tx-r);x<=Math.min(g.mw-1,tx+r);x++)if((x-tx)**2+(y-ty)**2<=r*r&&!(g.secret&&y>=g.secret.arena.y-1))g.fog[A.tileIndex(x,y)]=1;g.stairsKnown=true;for(const t of g.traps||[])t.revealed=true;A.fx('discharge',a.x,a.y,3.6,.8);A.toast('El orbe revela el piso.');return true;}
   if(c.buff){if(a.buff>c.buff-1){A.toast('Ya tienes ese efecto.');return false;}a.buff=c.buff;A.fx('star',a.x,a.y,2.6,.6);return true;}
