@@ -16,6 +16,7 @@ window.ECOS_QUICK12=function(A){
  A.quickThrow=a=>{if(!a||a.down)return;const k=keyOf(a,'throw');if(!k){if(a.pid===A.myPid)A.toast('No tienes objetos arrojables.');return;}A.useItem(a,k);};
  A.quickSet=(a,spec)=>{if(!a)return;const [slot,val]=String(spec).split(':');if(slot!=='heal'&&slot!=='throw')return;const l=list(a,slot==='heal'?isHeal:isThrow,slot);if(!l.length)return;
   let next=val;if(val==='next'){const i=l.indexOf(keyOf(a,slot));next=l[(i+1)%l.length];}if(!l.includes(next))return;(a.quick??={})[slot]=next;};
+ const oldNetQuick=A.NET.callbacks.action;A.NET.callbacks.action=(pid,type,key)=>{if(type==='quick'){A.quickSet(A.players.find(p=>p.pid===pid),key);return;}return oldNetQuick?.(pid,type,key);};
  const cl=A.cleanActor;A.cleanActor=function(a){const o=cl(a);if(a.quick)o.quick=a.quick;return o;};
  const label=act=>window.ECOS_CONTROLS?.labelFor(act)||(act==='potion'?'H':'4');
  const shown=()=>{const sel=$('barPlayer');return A.localMode==='local'&&sel?A.players.find(p=>p.pid===sel.value)||A.me():A.me();};

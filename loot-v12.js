@@ -52,7 +52,7 @@ window.ECOS_LOOT12=function(A){
    const rk=L.rarityOf(it),card=el.closest('.itemCard')||el;
    card.classList.add('rar','rar-'+rk);card.style.setProperty('--rar',L.RAR[rk].color);card.dataset.rk=rank(rk);
   }
-  if(grid){const cards=[...grid.children];const w=c=>c.classList.contains('equipped')?100:c.dataset.rk!=null?+c.dataset.rk*10+5:0;cards.map((c,i)=>[c,i]).sort((x,y)=>w(y[0])-w(x[0])||x[1]-y[1]).forEach(([c])=>grid.appendChild(c));}
+  if(grid){const cards=[...grid.children];const w=c=>c.classList.contains('equipped')?100:c.dataset.rk!=null?+c.dataset.rk*10+5:0;const sorted=cards.map((c,i)=>[c,i]).sort((x,y)=>w(y[0])-w(x[0])||x[1]-y[1]).map(x=>x[0]);/* solo se reordena si el orden cambia: en online la mochila se refresca ~20 veces/s y mover los nodos cancelaba los clics del invitado */if(sorted.some((c,i)=>c!==cards[i]))sorted.forEach(c=>grid.appendChild(c));}
  }
  const mo=new MutationObserver(()=>{if(mo.t)return;mo.t=requestAnimationFrame(()=>{mo.t=0;for(const el of document.querySelectorAll('[data-itemkey]:not(.rar),[data-up]:not(.rar),[data-rc]:not(.rar)')){const it=I[el.dataset.itemkey||el.dataset.up||el.dataset.rc];if(!it||it.type!=='gear')continue;const rk=L.rarityOf(it);el.classList.add('rar','rar-'+rk);const tg=el.dataset.itemkey?el:(el.closest('article')||el);tg.classList.add('rar','rar-'+rk);tg.style.setProperty('--rar',L.RAR[rk].color);if(el.dataset.itemkey)el.dataset.tip=it.name+'\n'+it.desc;}});});
  mo.observe(document.body,{childList:true,subtree:true});

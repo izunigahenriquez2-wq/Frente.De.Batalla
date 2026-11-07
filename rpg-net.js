@@ -48,7 +48,7 @@ N.host=profile=>{
     else if(m.type==='input'){const mask=Number.isInteger(m.mask)?m.mask&8191:0;N.callbacks.input?.(pid,mask);}
     else if(m.type==='action'){
      const now=Date.now();recent=recent.filter(t=>now-t<1000);if(recent.length>=24)return;recent.push(now);
-     if(['item','equip','talent','evolve','branch','drop','transfer','event','cast','loadout','gate','path','learn','fuse','skyvisit'].includes(m.action))N.callbacks.action?.(pid,m.action,String(m.key||'').slice(0,120));
+     if(['item','equip','talent','evolve','branch','drop','transfer','event','cast','loadout','gate','path','learn','fuse','skyvisit','npc12','riskaltar','legfuse','recycle','upgrade','quick'].includes(m.action))N.callbacks.action?.(pid,m.action,String(m.key||'').slice(0,120));
     }
    }
   });

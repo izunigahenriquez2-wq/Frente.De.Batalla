@@ -46,3 +46,10 @@ PERSONAJES: animaciones extra (Barrido, Doble, Golpe, Salto, Dormir) también pa
 - Previews animadas en el selector: assets/preview/<id>.gif (34 especies no Kanto) y assets/preview/s<id>.gif (todas las shiny), generadas de la animación Idle de PMDCollab (fila frontal, x escala entera). Si falta el archivo se usa el estático anterior.
 - Shiny que faltaban y se obtuvieron de PMDCollab: Beedrill, Dragonair, Articuno, Zapdos, Moltres, Mewtwo y Pichu (assets/actors/200xx). Ya tienen skin shiny todas las especies del juego.
 - Encanto, Tormento y Rayo Confuso mostraban "undefined" como descripción: corregido.
+
+== Ronda 4: online, sigilo y combate ==
+- Inventario online (bug del tester): la mochila del invitado se reordenaba en cada snapshot del anfitrión (~20 veces/s) desde loot-v12.js (decorate), así que los botones Equipar/Usar se despegaban del DOM y los clics se perdían. Solo ocurría online. Ahora solo se reordena si el orden cambia. Reproducido con una sala real (anfitrión+invitado, servidor de señal local): antes "Element is not attached to the DOM", ahora 8/8 pulsaciones.
+- rpg-net.js: acciones permitidas al invitado ampliadas (quick, upgrade, recycle, legfuse, npc12, riskaltar); antes se descartaban en silencio. quick-v12.js: el anfitrión ya procesa 'quick' (ranuras de uso rápido del invitado).
+- Sigilo: los enemigos que se entierran muestran "SIGILO" (ni icono de sleep ni de paralizado al salir).
+- Placaje / Derribo: cualquier enemigo no jefe que tengas a menos de ~85 px carga contra ti tras un aviso de 0,55 s (daño x1,25, empuje, y queda aturdido 0,55 s). Enfriamiento 4,5–7 s.
+- Golpe desesperado: con ≤10 % de vida hace un golpe físico rápido (aviso 0,16 s, daño x1) cada 3,4 s si estás a <260 px.

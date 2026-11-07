@@ -53,7 +53,7 @@ window.ECOS_WORLD12=function(A){
  // ---------- enemigos con comportamiento ----------
  const ICON={burrow:'⛏',volatile:'💥',healer:'✚',frenzy:'🔥',pack:'🐾'},BYKIND={rock:['burrow',.35],poison:['volatile',.4],ghost:['volatile',.3],leaf:['healer',.3],psychic:['healer',.25],hit:['frenzy',.45],fire:['frenzy',.35],dragon:['frenzy',.3],water:['pack',.5],spark:['pack',.5],ice:['pack',.4]};
  A.enemy=function(...args){const e=old.enemy(...args);if(e.boss||!A.g||A.g.floor<3)return e;const b=BYKIND[A.stage()?.kind||e.kind];if(b&&Math.random()<b[1]){e.beh=b[0];e.tagIcon=ICON[b[0]];e.bT=2+Math.random()*5;e.bs0=e.baseSpeed;}return e;};
- A.cleanActor=function(a){const o=old.cleanActor(a);if(a.beh){o.beh=a.beh;o.tagIcon=a.tagIcon;if(a.burrow>0)o.burrow=a.burrow;}return o;};
+ A.cleanActor=function(a){const o=old.cleanActor(a);if(a.beh){o.beh=a.beh;o.tagIcon=a.tagIcon;if(a.burrow>0)o.burrow=a.burrow;if(a.quiet>0)o.quiet=Math.round(a.quiet*10)/10;}return o;};
  A.hurt=function(e,d,owner,p){if(e.burrow>0)return;const was=e.hp,r=old.hurt.call(this,e,d,owner,p);
   if(was>0&&e.hp<=0&&e.beh&&host()){
    if(e.beh==='volatile'){A.hazards.push({x:e.x,y:e.y,r:85,age:0,delay:.8,life:1.2,kind:e.kind,damage:e.damage*1.5,level:e.level,once:true,hits:[]});}
@@ -62,9 +62,10 @@ window.ECOS_WORLD12=function(A){
  A.enemyStep=function(e,dt){
   if(!e.beh||e.hp<=0||!host()||A.g?.ended)return old.enemyStep.call(this,e,dt);
   const live=A.active();
+  if(e.quiet>0)e.quiet-=dt;
   if(e.beh==='burrow'){
-   if(e.burrow>0){e.burrow-=dt;e.sleep=Math.max(e.sleep||0,dt*3);const t=live.sort((x,y)=>dist(e,x)-dist(e,y))[0];if(t){const d=dist(e,t)||1;A.move(e,(t.x-e.x)/d*240*dt,(t.y-e.y)/d*240*dt);}
-    if(e.burrow<=0){e.burrow=0;A.hazards.push({x:e.x,y:e.y,r:70,age:0,delay:.6,life:.95,kind:e.kind,damage:e.damage*1.3,level:e.level,once:true,hits:[]});e.stun=Math.max(e.stun||0,.9);}
+   if(e.burrow>0){e.burrow-=dt;const t=live.sort((x,y)=>dist(e,x)-dist(e,y))[0];if(t){const d=dist(e,t)||1;A.move(e,(t.x-e.x)/d*240*dt,(t.y-e.y)/d*240*dt);}
+    if(e.burrow<=0){e.burrow=0;A.hazards.push({x:e.x,y:e.y,r:70,age:0,delay:.6,life:.95,kind:e.kind,damage:e.damage*1.3,level:e.level,once:true,hits:[]});e.stun=Math.max(e.stun||0,.9);e.quiet=.9;}
     return;}
    e.bT-=dt;const t=live.sort((x,y)=>dist(e,x)-dist(e,y))[0];if(e.bT<=0&&t&&dist(e,t)<420&&dist(e,t)>90){e.burrow=1.3;e.bT=6+Math.random()*4;}
   }else if(e.beh==='healer'){e.bT-=dt;if(e.bT<=0){e.bT=3.2;const w=A.enemies.filter(o=>o!==e&&o.hp>0&&!o.boss&&o.hp<o.max*.8&&dist(o,e)<280).sort((x,y)=>x.hp/x.max-y.hp/y.max)[0];if(w){w.hp=Math.min(w.max,w.hp+w.max*.14);A.fx('star',w.x,w.y-10,1.2,.5);A.fx('star',e.x,e.y-10,1,.4);}}
@@ -77,5 +78,28 @@ window.ECOS_WORLD12=function(A){
   const live=A.active();if(!live.length)return;const t=live[Math.floor(Math.random()*live.length)],a=Math.random()*6.28,r=60+Math.random()*120,x=t.x+Math.cos(a)*r,y=t.y+Math.sin(a)*r;
   if(!A.tileAt(x,y)||A.enemies.some(e=>e.boss&&e.hp>0&&dist(e,{x,y})<80)&&false)return;
   const kind=A.stage()?.kind||'hit';A.hazards.push({x,y,r:70,age:0,delay:1.1,life:1.5,kind,damage:(6+g.floor*.8)*(1+(g.floor>20?.4:0)),level:Math.round(3+g.floor*.85),once:true,hits:[],ambient:true});};
+ // ---------- Placaje / Derribo y golpe desesperado ----------
+ // Si te acercas demasiado, el enemigo carga contra ti (con aviso). Con ≤10 % de vida hace un golpe físico rápido, casi sin aviso.
+ const prevStep=A.enemyStep;
+ function nearestPlayer(e){let best=null,bd=1e9;for(const p of A.active()){const d=dist(p,e);if(d<bd){bd=d;best=p;}}return best?{p:best,d:bd}:null;}
+ function knock(p,ang,px){const n=6,sx=Math.cos(ang)*px/n,sy=Math.sin(ang)*px/n;for(let i=0;i<n;i++)A.move(p,sx,sy);p.hurt=Math.max(p.hurt||0,.35);}
+ function tackle(e,dt){
+  const T=e.tk;
+  if(e.sleep>0||e.stun>0||e.burrow>0||e.rushWindup>0||e.rushTime>0||e.bossState){if(T){e.tk=null;e.warning=null;}return false;}
+  if(T){
+   e.anim=(e.anim||0)+dt;A.face(e,Math.cos(T.ang),Math.sin(T.ang));
+   if(T.ph==='wind'){e.moving=false;e.warning={line:true,angle:T.ang};T.t-=dt;if(T.t<=0){T.ph='dash';T.t=T.dash;e.warning=null;e.shotAnim=Math.max(e.shotAnim||0,T.dash);A.fx('hit',e.x,e.y,T.quick?1.2:1.6,.4);}return true;}
+   if(T.ph==='dash'){T.t-=dt;A.move(e,Math.cos(T.ang)*T.speed*dt,Math.sin(T.ang)*T.speed*dt);e.moving=true;
+    if(!T.hit)for(const b of A.active())if(dist(b,e)<b.r+e.r+6){T.hit=true;A.damage(b,e.damage*T.mult,e.kind,e.level);knock(b,T.ang,T.push);A.fx('hit',b.x,b.y,2,.35);}
+    if(T.t<=0||T.hit&&T.t<T.dash*.35){e.tk=null;e.moving=false;e.stun=Math.max(e.stun||0,T.quick?.25:.55);}return true;}
+   e.tk=null;return false;
+  }
+  e.tkCD=(e.tkCD??1.2+Math.random()*2.5)-dt;e.tkQCD=(e.tkQCD||0)-dt;
+  const n=nearestPlayer(e);if(!n||n.d>320||!A.clearLine(e,n.p))return false;
+  const ang=Math.atan2(n.p.y-e.y,n.p.x-e.x);
+  if(e.hp<=e.max*.1&&e.tkQCD<=0&&n.d<260){e.tkQCD=3.4;e.tkCD=Math.max(e.tkCD,1.5);e.tk={ph:'wind',t:.16,dash:.2,speed:720,mult:1,push:50,ang,quick:true};e.flash=.3;return true;}
+  if(n.d<e.r+n.p.r+85&&e.tkCD<=0){e.tkCD=4.5+Math.random()*2.5;e.tk={ph:'wind',t:.55,dash:.32,speed:430,mult:1.25,push:95,ang,quick:false};return true;}
+  return false;}
+ A.enemyStep=function(e,dt){if(e.hp>0&&!e.boss&&host()&&!A.g?.ended&&tackle(e,dt))return;return prevStep.call(this,e,dt);};
  A.world12={npc,open,ST,resolve};
 };
