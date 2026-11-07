@@ -75,3 +75,8 @@ V13 · Mundo
 - Clima por bioma (worldfx-v13.js): tormenta eléctrica (círculos marcados y rayo), nieve, calor (olas de calor con daño), lluvia (marea que ralentiza), niebla.
 - Insignias sobre enemigos según rol: ✚ sanador, ◎ controlador, » embestidor, ▣ guardián, ✹ bomba, ➶ hostigador.
 - Textos con humor en 15 objetos.
+
+V13 · Efectos y escudo (status-v13.js)
+- Iconos de efectos con segundos restantes sobre la barra de habilidades (Escudo, Agilidad, Frenesí, Ataque/At. Esp./Defensa ↑, Robo de vida, Sigilo, Veneno, Quemadura, Dormido, Ralentizado, Aturdido); tooltip con la descripción.
+- Escudo: barra azul sobre la barra de vida y segundos junto a los PS.
+- Equipar de otra clase ya no está deshabilitado: explica quién puede usarlo.
