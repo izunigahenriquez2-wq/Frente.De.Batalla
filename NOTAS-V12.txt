@@ -62,3 +62,8 @@ V13 · Némesis de IronJaw
 V13 · Puntos débiles e interrupción
 - Al bajar de 80/60/40/20 % PS los jefes muestran 2-3 puntos débiles orbitando; golpéalos desde su lado. Mientras existan, el jefe recibe poco daño; al romperlos todos queda aturdido 3.8 s y recibe +35 %.
 - Cuerno Estruendo (objeto común): interrumpe la huida o el sueño de un jefe (no se cura, aturdido 4.5 s, +35 % daño) y da XP y monedas.
+
+V13 · Mecánicas por jefe
+- Onix: 4 pilares sólidos; cada ~9 s tiembla el suelo y quien esté lejos de un pilar pierde 14 % PS; cada pilar aguanta 3 temblores y luego surgen nuevos.
+- Articuno (y de Galar): 3 braseros; ventisca periódica que ralentiza y daña a quien no esté cerca de un brasero.
+- Giratina: cada 16 s dimensión inversa 7 s: mapa girado 180° y controles invertidos (también online, la inversión la aplica el anfitrión).
