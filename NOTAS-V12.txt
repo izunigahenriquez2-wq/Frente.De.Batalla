@@ -67,3 +67,6 @@ V13 · Mecánicas por jefe
 - Onix: 4 pilares sólidos; cada ~9 s tiembla el suelo y quien esté lejos de un pilar pierde 14 % PS; cada pilar aguanta 3 temblores y luego surgen nuevos.
 - Articuno (y de Galar): 3 braseros; ventisca periódica que ralentiza y daña a quien no esté cerca de un brasero.
 - Giratina: cada 16 s dimensión inversa 7 s: mapa girado 180° y controles invertidos (también online, la inversión la aplica el anfitrión).
+
+V13 · Salas secretas con pistas
+- Ya no se abren solo por % explorado: hay una nota en el piso (F para leer, indica la dirección) y una pared agrietada junto a la puerta (F para abrirla). El % explorado queda como respaldo (80 %, o 50 % con Explorador).

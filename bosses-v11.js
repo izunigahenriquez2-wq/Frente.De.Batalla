@@ -188,7 +188,7 @@ window.ECOS_BOSS11=function(A){
   s.spawnAt=B.t+1.3;}
  function leaveSecret(){const g=A.g,s=g.secret;const team=A.players.filter(p=>!p.disconnected);team.forEach((p,i)=>{p.x=s.ret.x+(i%2)*46-23;p.y=s.ret.y+60+Math.floor(i/2)*46;p.prevX=p.x;p.prevY=p.y;});s.state='done';A.camera.x=s.ret.x;A.camera.y=s.ret.y;A.toast('Regresas a la mazmorra.');}
  function secretStep(dt){const g=A.g,s=g.secret;if(!s)return;
-  if(s.state==='hidden'){s.chk=(s.chk||0)-dt;if(s.chk<=0){s.chk=.6;const th=A.players.some(p=>p.job==='explorer')?.33:.5;if(explored()>=th){s.state='found';for(let y=-3;y<=3;y++)for(let x=-3;x<=3;x++)g.fog[A.tileIndex(Math.floor(s.door.x/T)+x,Math.floor(s.door.y/T)+y)]=1;A.toast('Has oído un eco tras la pared… ¡hay una puerta secreta en este piso!');A.fx('star',s.door.x,s.door.y,3,.8);}}}
+  if(s.state==='hidden'){s.chk=(s.chk||0)-dt;if(s.chk<=0){s.chk=.6;const th=A.players.some(p=>p.job==='explorer')?.5:.8;if(explored()>=th){s.state='found';for(let y=-3;y<=3;y++)for(let x=-3;x<=3;x++)g.fog[A.tileIndex(Math.floor(s.door.x/T)+x,Math.floor(s.door.y/T)+y)]=1;A.toast('Has oído un eco tras la pared… ¡hay una puerta secreta en este piso!');A.fx('star',s.door.x,s.door.y,3,.8);}}}
   if(s.state==='fight'&&s.spawnAt&&B.t>=s.spawnAt){s.spawnAt=0;const d=SUBS[s.key],cx=(s.arena.x+s.arena.w/2)*T,cy=(s.arena.y+5)*T,e=spawnBossEntity(d.id,cx,cy,s.key);e.level+=s.lap*3;A.combat7.scale(e);e.hp=e.max;e.bar=e.hp;
    say(d.say.intro,d.name,d.id);}}
  const downInteract=a=>A.players.some(b=>b.down&&!b.disconnected&&dist(a,b)<90);

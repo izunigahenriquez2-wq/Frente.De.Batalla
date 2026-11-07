@@ -104,5 +104,26 @@ window.ECOS_BOSSMECH13=function(A){
   for(const e of A.enemies||[]){if(e.hp<=0)continue;
    e.pil?.forEach((q,i)=>{if(q.u>0&&onScreen(q))obj('Block_Vault','pil-'+(e.eid||e.id)+'-'+i,q.x,q.y,2);});
    e.brz?.forEach((b,i)=>{if(onScreen(b))obj('Campfire.Flip','brz-'+(e.eid||e.id)+'-'+i,b.x,b.y,1.6);});}};
+
+ // ---- Sala secreta con pistas: nota + pared agrietada ----
+ const dir=(from,to)=>{const dx=to.x-from.x,dy=to.y-from.y;return Math.abs(dx)>Math.abs(dy)?(dx>0?'este':'oeste'):(dy>0?'sur':'norte');};
+ const NOTES=['«Una pared de la mazmorra respira distinto al %. Apoya la mano donde la piedra esté agrietada.»','«Quien dejó esta nota escuchó un eco hueco hacia el %… algo duerme tras la roca.»','«Si buscas al guardián escondido, rasca las grietas del %. No todo muro es tan sólido como parece.»'];
+ function ensureNote(){const g=A.g,s=g?.secret;if(!s||s.state!=='hidden'||s.note)return;
+  for(let t=0;t<400;t++){const x=2+Math.floor(Math.random()*(g.mw-4)),y=2+Math.floor(Math.random()*(g.mh-g.secret.arena.h-8));const k=A.tileIndex(x,y);
+   const px=x*T+24,py=y*T+24;if(g.map[k]!==0||Math.hypot(px-s.door.x,py-s.door.y)<500)continue;
+   s.note={x:px,y:py,read:false,text:NOTES[Math.floor(Math.random()*NOTES.length)].replace('%',dir({x:px,y:py},s.door))};return;}}
+ const oldInter=A.interact;
+ A.interact=function(a,dt,pressed,...r){const g=A.g,s=g?.secret;
+  if(pressed&&s&&s.state==='hidden'&&A.NET.role!=='client'&&a.hp>0&&!a.down){
+   if(s.note&&dist(a,s.note)<80){s.note.read=true;g.fog[A.tileIndex(Math.floor(s.door.x/T),Math.floor(s.door.y/T))]=1;A.toast(s.note.text);A.fx('star',s.note.x,s.note.y,2,.5);return;}
+   if(dist(a,s.door)<100){s.state='found';s.chk=99;for(let y=-3;y<=3;y++)for(let x=-3;x<=3;x++)g.fog[A.tileIndex(Math.floor(s.door.x/T)+x,Math.floor(s.door.y/T)+y)]=1;A.toast('La pared cede… ¡había una puerta secreta!');A.fx('smash',s.door.x,s.door.y,3,.6);return;}}
+  return oldInter.call(this,a,dt,pressed,...r);};
+ const oS3=A.step;
+ A.step=function(dt,...r){const out=oS3.call(this,dt,...r);if(A.NET.role!=='client')ensureNote();return out;};
+ const prev3=window.ECOS_BOSS11_DRAW;
+ window.ECOS_BOSS11_DRAW=function(api){prev3?.(api);const{obj,label,onScreen}=api,s=A.g?.secret;if(!s||s.state!=='hidden')return;
+  if(s.note&&onScreen(s.note)){obj('Tile_Wonder','secret-note',s.note.x,s.note.y,1.1);label('secret-note-label',s.note.read?'Nota (leída)':'F · Leer nota',s.note.x,s.note.y+34,'#e8d9a8');}
+  const near=A.players.some(p=>dist(p,s.door)<260);
+  if(near&&onScreen(s.door)){obj('Block_Vault','secret-crack',s.door.x,s.door.y,1.6);label('secret-crack-label','F · Pared agrietada',s.door.x,s.door.y+40,'#d6c3f2');}};
  A.bossmech13={spawnWP,breakAll};
 };
