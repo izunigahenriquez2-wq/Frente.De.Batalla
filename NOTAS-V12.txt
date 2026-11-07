@@ -80,3 +80,7 @@ V13 · Efectos y escudo (status-v13.js)
 - Iconos de efectos con segundos restantes sobre la barra de habilidades (Escudo, Agilidad, Frenesí, Ataque/At. Esp./Defensa ↑, Robo de vida, Sigilo, Veneno, Quemadura, Dormido, Ralentizado, Aturdido); tooltip con la descripción.
 - Escudo: barra azul sobre la barra de vida y segundos junto a los PS.
 - Equipar de otra clase ya no está deshabilitado: explica quién puede usarlo.
+
+V13 · Pisos especiales (floors-v13.js)
+- Desde el piso 3 (no jefe): piso de descanso antes de cada jefe (sin enemigos, regeneración, pozos/santuario), y al azar: tienda (sin enemigos, 2 tiendas), oleadas (3 oleadas; escaleras selladas hasta superarlas), interruptores (3 interruptores con F; escaleras selladas) y laberinto oscuro (visión limitada y brújula tras 45 s).
+- Recompensa al abrir escaleras: oro, XP y una poción. El estado se sincroniza online (packState).
