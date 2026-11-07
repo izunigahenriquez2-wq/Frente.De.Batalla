@@ -76,16 +76,17 @@
        ['Pacto','healer','Vida compartida.',K('Pacto de Sangre',{leech:.04,helperPow:.2}),K('Alma Compartida',{auraHeal:.008,second:1})],
        ['Dominio','control','Voluntad que somete.',K('Voluntad Dominante',{rStun:.8,rSlow:2}),K('Jaula de Almas',{rBurst:1,armor:.06})]]}
  };
- /* árbol plano: nodos con id, rango máximo y efectos */
- const TREE={};
+ /* v13 · árbol de clase estilo DotA 2: 7 escalones (niveles 10, 15, 20, 25, 30, 35 y 40), en cada uno eliges UNA de dos pasivas.
+    Las pasivas salen de las ramas de cada clase (más potentes: 1 punto equivale a ~2 rangos antiguos); el escalón 7 es la piedra angular. */
+ const TREE={},LVL=t=>5+5*t,scale=(f,m)=>{const o={};for(const [k,v] of Object.entries(f))o[k]=(typeof v==='number'&&!['second','trapwise','rTwice'].includes(k))?Math.round(v*m*1000)/1000:v;return o;};
  for(const [job,J] of Object.entries(JOBS)){
-  const branches=J.br.map(([name,arch,desc,kA,kB],bi)=>{
-   const A=ARCH[arch],tiers=A.t.map((pair,ti)=>pair.map(([n,f],oi)=>({id:`${job}.${bi}.${ti}.${oi}`,n,f,max:3,tier:ti+1,branch:bi,opt:oi})));
-   tiers.push([kA,kB].map(([n,f],oi)=>({id:`${job}.${bi}.4.${oi}`,n,f,max:1,tier:5,branch:bi,opt:oi,key:true})));
-   return {name,arch:A.n,desc,tiers};
-  });
-  TREE[job]={role:J.role,passive:{n:J.passive[0],d:J.passive[1],f:J.passive[2]},branches};
+  const tiers=[];
+  for(let t=1;t<=6;t++){const bi=(t-1)%3,ti=Math.floor((t-1)/3),A=ARCH[J.br[bi][1]];
+   tiers.push(A.t[ti].map(([n,f],oi)=>({id:`${job}.${t}.${oi}`,n,f:scale(f,2),max:1,tier:t,lvl:LVL(t),branch:0,opt:oi})));}
+  const kA=J.br[0][3],kB=J.br[2][4];
+  tiers.push([kA,kB].map(([n,f],oi)=>({id:`${job}.7.${oi}`,n,f,max:1,tier:7,lvl:LVL(7),branch:0,opt:oi,key:true})));
+  TREE[job]={role:J.role,passive:{n:J.passive[0],d:J.passive[1],f:J.passive[2]},tiers,branches:[{name:'Talentos de clase',arch:'Árbol de clase',desc:'Una pasiva por escalón, en los niveles 10, 15, 20, 25, 30, 35 y 40.',tiers}]};
  }
- const NODE={};for(const J of Object.values(TREE))for(const b of J.branches)for(const t of b.tiers)for(const n of t)NODE[n.id]=n;
- window.ECOS_TAL12={TREE,NODE,TXT,FLAG,need:t=>(t-1)*2};
+ const NODE={};for(const J of Object.values(TREE))for(const t of J.tiers)for(const n of t)NODE[n.id]=n;
+ window.ECOS_TAL12={TREE,NODE,TXT,FLAG,LVL,TIERS:7};
 })();

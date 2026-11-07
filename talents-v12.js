@@ -19,26 +19,26 @@ window.ECOS_TALENTS12=function(A){
   if(host){a._tf=f;a._tfv=a._tver||0;a._tfj=a.job;}
   return f;
  }
- const spent=a=>Object.values(a.tal||{}).reduce((x,y)=>x+y,0);
- const total=a=>Math.max(0,(a.level-5)+(a.points||0));
- const points=a=>Math.max(0,total(a)-spent(a));
- const inBranch=(a,b)=>Object.entries(a.tal||{}).reduce((s,[id,r])=>{const n=NODE[id];return s+(n&&id.startsWith(a.job+'.')&&n.branch===b?r:0)},0);
- function why(a,n){ // null = se puede invertir
-  const rank=a.tal?.[n.id]||0;
-  if(rank>=n.max)return 'max';
-  if(points(a)<=0)return 'puntos';
-  if(!rank){const sib=NODE[n.id.replace(/\.\d$/,'.'+(1-n.opt))];if((a.tal?.[sib.id]||0)>0)return 'bloqueado';}
-  if(inBranch(a,n.branch)<T.need(n.tier))return 'req';
+ const spent=a=>Object.keys(a.tal||{}).filter(id=>NODE[id]&&id.startsWith(a.job+'.')).length;
+ const unlocked=a=>Math.max(0,Math.min(T.TIERS,Math.floor((a.level||0)/5)-1));
+ const total=a=>unlocked(a);
+ const points=a=>Math.max(0,unlocked(a)-spent(a));
+ const chosen=(a,tier)=>Object.keys(a.tal||{}).find(id=>NODE[id]&&id.startsWith(a.job+'.')&&NODE[id].tier===tier);
+ function why(a,n){ // null = se puede elegir
+  if((a.tal?.[n.id]||0)>0)return 'max';
+  if(a.level<n.lvl)return 'nivel';
+  if(chosen(a,n.tier)&&!window.ECOS_FREE_RESPEC)return 'bloqueado';
   return null;
  }
  function learn(a,id){
   const n=NODE[id];if(!a||!n||!id.startsWith(a.job+'.'))return false;
   if(why(a,n))return false;
-  a.tal=a.tal||{};a.tal[id]=(a.tal[id]||0)+1;a._tver=(a._tver||0)+1;A.stats(a);
-  if(a.pid===A.myPid)A.toast(n.n+(n.max>1?' · rango '+a.tal[id]+'/'+n.max:''));
+  a.tal=a.tal||{};const prev=chosen(a,n.tier);if(prev)delete a.tal[prev];
+  a.tal[id]=1;a._tver=(a._tver||0)+1;A.stats(a);
+  if(a.pid===A.myPid)A.toast(n.n+' · talento de nivel '+n.lvl);
   return true;
  }
- function reset(a){if(!window.ECOS_FREE_RESPEC||!a)return false;a.tal={};a._tver=(a._tver||0)+1;A.stats(a);a.hp=Math.min(a.hp,a.max);if(a.pid===A.myPid)A.toast('Maestría reiniciada: puntos devueltos.');return true;}
+ function reset(a){if(!window.ECOS_FREE_RESPEC||!a)return false;a.tal={};a._tver=(a._tver||0)+1;A.stats(a);a.hp=Math.min(a.hp,a.max);if(a.pid===A.myPid)A.toast('Talentos reiniciados.');return true;}
  A.talent=function(a,key){
   if(typeof key!=='string'||!key.startsWith('tt:'))return; // los talentos numéricos antiguos ya no existen
   const k=key.slice(3);if(k==='reset')reset(a);else learn(a,k);
@@ -148,13 +148,13 @@ window.ECOS_TALENTS12=function(A){
   A.uiMode='mastery';A.keys.clear();if(A.localMode!=='online')A.g.paused=true;
   const J=TREE[a.job],c=C[a.job],pts=points(a),tech=techOf(a),f=agg(a),mon=S[a.id];
   const moves=(A.v8?.speciesMoves?.(a)||mon.moves||[]).slice(0,3).map(m=>esc(m.name)).join(' · ');
-  const branch=(b,bi)=>`<div class="mBranch"><h3>${esc(b.name)} <small>${inBranch(a,bi)} pts</small></h3><p class="mBdesc">${esc(b.arch)} · ${esc(b.desc)}</p>${b.tiers.map((tier,ti)=>`<div class="mTier ${tier[0].key?'key':''}"><span class="mReq">${tier[0].key?'Piedra angular':'Escalón '+(ti+1)} · requiere ${T.need(ti+1)} pts en la rama</span><div class="mOpts">${tier.map(n=>{const rank=a.tal?.[n.id]||0,w=why(a,n),cls=rank?'on':w==='bloqueado'?'blocked':w==='req'?'locked':w==='puntos'?'nopts':'ok';
-    return `<button class="mNode ${cls}" data-tt="${n.id}" ${w&&!rank||w==='max'?'':''} title="${esc(fmt(n.f,rank||1))}"><b>${esc(n.n)}</b><span class="mPips">${n.max>1?'●'.repeat(rank)+'○'.repeat(n.max-rank):(rank?'●':'○')}</span><small>${esc(fmt(n.f,rank||1))}</small></button>`;}).join('')}</div></div>`).join('')}</div>`;
+  const ladder=`<div class="mBranch"><h3>Talentos de clase <small>${spent(a)}/${T.TIERS}</small></h3><p class="mBdesc">Una pasiva por escalón. Se desbloquean en los niveles 10, 15, 20, 25, 30, 35 y 40.</p>${J.tiers.map((tier,ti)=>`<div class="mTier ${tier[0].key?'key':''}"><span class="mReq">${tier[0].key?'Piedra angular':'Escalón '+(ti+1)} · nivel ${tier[0].lvl}${a.level<tier[0].lvl?' · bloqueado':''}</span><div class="mOpts">${tier.map(n=>{const rank=a.tal?.[n.id]||0,w=why(a,n),cls=rank?'on':(w==='nivel'?'locked':(w==='bloqueado'?'blocked':'ok'));
+    return `<button class="mNode ${cls}" data-tt="${n.id}" title="${esc(fmt(n.f,1))}"><b>${esc(n.n)}</b><span class="mPips">${rank?'●':'○'}</span><small>${esc(fmt(n.f,1))}</small></button>`;}).join('')}</div></div>`).join('')}</div>`;
   A.panel(`<div class="mastery"><span class="eyebrow">MAESTRÍA · PERSONAJE</span><h2>${esc(a.name)} · ${esc(c.name)} <em class="mRole">${esc(J.role)}</em></h2>
    <div class="mTop"><div class="mCard"><b>Personaje</b><img src="assets/items/${c.icon}.png" alt=""><p><strong>${esc(c.name)}</strong> · Nv. ${a.level}</p><p><u>Pasiva:</u> <strong>${esc(J.passive.n)}</strong> — ${esc(J.passive.d)}</p>${tech?`<p><u>Técnica de clase (R):</u> <strong>${esc(tech.name)}</strong> — ${esc(tech.desc)}</p>`:''}</div>
    <div class="mCard"><b>Pokémon vinculado</b><p><strong>${esc(mon.name)}</strong> · Nv. ${a.level}</p><p>Movimientos: ${moves||'—'}</p><p class="mHint">El Pokémon aporta sus movimientos; el personaje aporta rol, pasiva y árbol. Los talentos mejoran a los dos.</p><button id="mDev">Técnicas del Pokémon</button></div>
-   <div class="mCard mPts"><b>${pts}</b><span>punto(s) de talento</span><small>1 por nivel. Cada escalón: una opción entre dos, hasta 3 rangos; la piedra angular es de rango 1.</small>${A.localMode==='local'?'<div class="actions">'+A.players.map(p=>`<button data-mp="${p.pid}" class="${p===a?'selected':''}">${esc(p.name)}</button>`).join('')+'</div>':''}</div></div>
-   <div class="mTree">${J.branches.map(branch).join('')}</div>
+   <div class="mCard mPts"><b>${pts}</b><span>punto(s) de talento</span><small>Un punto cada 5 niveles (10 a 40). En cada escalón eliges una de dos pasivas.</small>${A.localMode==='local'?'<div class="actions">'+A.players.map(p=>`<button data-mp="${p.pid}" class="${p===a?'selected':''}">${esc(p.name)}</button>`).join('')+'</div>':''}</div></div>
+   <div class="mTree">${ladder}</div>
    <div class="actions">${window.ECOS_FREE_RESPEC?'<button id="mReset">Reiniciar talentos (gratis en pruebas)</button>':''}<button id="mClose">Continuar explorando</button></div></div>`);
   document.querySelectorAll('[data-tt]').forEach(b=>b.onclick=()=>{send(a,'tt:'+b.dataset.tt);setTimeout(()=>{if(A.uiMode==='mastery')open(a.pid)},A.NET.role==='client'?320:0);});
   document.querySelectorAll('[data-mp]').forEach(b=>b.onclick=()=>open(b.dataset.mp));

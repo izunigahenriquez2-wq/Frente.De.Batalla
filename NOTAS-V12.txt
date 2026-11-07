@@ -84,3 +84,8 @@ V13 · Efectos y escudo (status-v13.js)
 V13 · Pisos especiales (floors-v13.js)
 - Desde el piso 3 (no jefe): piso de descanso antes de cada jefe (sin enemigos, regeneración, pozos/santuario), y al azar: tienda (sin enemigos, 2 tiendas), oleadas (3 oleadas; escaleras selladas hasta superarlas), interruptores (3 interruptores con F; escaleras selladas) y laberinto oscuro (visión limitada y brújula tras 45 s).
 - Recompensa al abrir escaleras: oro, XP y una poción. El estado se sincroniza online (packState).
+
+V14 · Rediseño (en curso)
+- Nombre: Pokémon Mundo Misterioso: Ecos.
+- Nivel máximo 40 (antes 60). Curva de XP: coste para pasar del nivel L al L+1 = 50 + 12,4·L (un piso completo cada vez da ~11.000 XP hasta el piso 70; Mewtwo está en el piso 80).
+- Talentos de clase estilo DotA 2: 7 escalones (niveles 10, 15, 20, 25, 30, 35 y 40), una pasiva de dos por escalón; el 7 es la piedra angular. Solo mejoran al personaje (clase), no al Pokémon.
