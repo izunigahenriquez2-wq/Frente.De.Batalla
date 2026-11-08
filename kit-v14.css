@@ -1,0 +1,4 @@
+/* V14 · Definitiva con medidor */
+#skills .rpgSlot.ultReady{border-color:#ffd877!important;box-shadow:0 0 0 1px #ffd877,0 0 14px #ffbf4aaa;animation:ultPulse14 1.1s ease-in-out infinite}
+#skills .rpgSlot.ultReady small{color:#ffe9a8;font-weight:800}
+@keyframes ultPulse14{50%{box-shadow:0 0 0 1px #fff2bd,0 0 22px #ffd45f}}
