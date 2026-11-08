@@ -2,3 +2,7 @@
 #skills .rpgSlot.ultReady{border-color:#ffd877!important;box-shadow:0 0 0 1px #ffd877,0 0 14px #ffbf4aaa;animation:ultPulse14 1.1s ease-in-out infinite}
 #skills .rpgSlot.ultReady small{color:#ffe9a8;font-weight:800}
 @keyframes ultPulse14{50%{box-shadow:0 0 0 1px #fff2bd,0 0 22px #ffd45f}}
+/* Naturalezas */
+.natureField{display:grid;gap:4px;margin:10px 0 2px}.natureField label{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#b9c9bf}
+.natureField select{width:100%;padding:7px 8px;border-radius:6px;background:#10222d;border:1px solid #6f8f85;color:#eef3ea;font:600 13px Nunito,system-ui,sans-serif}
+.natureField small{color:#e6cf93;font-size:12px}
