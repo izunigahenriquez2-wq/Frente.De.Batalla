@@ -75,15 +75,15 @@ window.ECOS_V10_INIT=function(A){
  function scan(a){
   if(a.disconnected)return;
   const k=a.kit||init(a),K=D.kits[a.id];
-  const queue=s=>{if(!k.seen.includes(s)&&s!==k.q&&s!==k.e){k.seen.push(s);a.learnQ.push(s);}};
+  const queue=s=>{if(!k.seen.includes(s))k.seen.push(s);}; // V14: ya no se ofrece sustituir Q/E; las técnicas nuevas llegan por cartas
   if(a.id!==k.sp){
    k.sp=a.id;if(K?.b)k.b=K.b;
    for(const [lv,s] of K?.l||[])if(lv<=a.level&&lv>a.level-9)queue(s);
-   k.lv=a.level;if(a.pid===A.myPid&&a.learnQ.length)A.toast(S[a.id].name+' puede aprender '+a.learnQ.length+' movimiento(s) nuevo(s).');
+   k.lv=a.level;
   }else if(a.level>k.lv){
    const before=a.learnQ.length;
    for(const [lv,s] of K?.l||[])if(lv>k.lv&&lv<=a.level)queue(s);
-   k.lv=a.level;if(a.pid===A.myPid&&a.learnQ.length>before)A.toast(a.name+' puede aprender '+M[a.learnQ[before]].name+'.');
+   k.lv=a.level;
   }
  }
  function learn(a,key){

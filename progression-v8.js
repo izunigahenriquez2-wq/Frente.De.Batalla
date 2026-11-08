@@ -9,7 +9,7 @@ window.ECOS_V8=function(A){
  function choose(a,key,slug){if(!a||!A.g||A.g.ended||a.down||a.disconnected||a.evolving||a.action||(A.localMode==='online'&&A.g.paused))return false;initialize(a);const offer=pending(a).find(x=>x.key===key);if(!offer||!offer.options.includes(slug))return false;a.speciesChoices[offer.slot-1]=slug;a.pathHistory[key]=slug;A.toast(RPG_SPECIES[a.id].name+' aprendió '+M[slug].name+' · '+(offer.slot===1?'Q':'E'));return true;}
  A.makePlayer=function(...args){const a=old.makePlayer(...args);initialize(a);return a;};
  A.stats=function(a){old.stats(a);initialize(a);};
- A.gainXP=function(a,n){const before=pending(a).length;old.gainXP(a,n);initialize(a);if(pending(a).length>before&&a.pid===A.myPid)A.toast('Nueva elección de técnica · abre Desarrollo');};
+ A.gainXP=function(a,n){const before=pending(a).length;old.gainXP(a,n);initialize(a);};
  A.cleanActor=function(a){const o=old.cleanActor(a);for(const k of ['speciesChoices','pathHistory','identityCD'])if(a[k]!==undefined)o[k]=a[k];return o;};
  const server=(a,key)=>{const [offer,slug]=String(key).split('|');return choose(a,offer,slug);};
  A.requestAction=function(type,key){if(type==='path'){if(A.NET.role==='client')A.NET.action(type,key);else server(A.me(),key);return;}old.requestAction(type,key);};

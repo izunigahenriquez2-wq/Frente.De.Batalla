@@ -157,7 +157,7 @@ window.ECOS_KIT14=function(A){
   const k=kit(a.id),d=k[key==='c'?'a':'u'],t=TXT[d.tpl],L=lvOf(a,key),plus=plusOf(a,key);
   return{name:d.name+(plus?' +':''),mode:'kit',kit:key,tpl:d.tpl,kind:k.kind,slug:'kit-'+key,source:'species',mana:key==='c'?MANA.a:0,cool:key==='c'?(COOL[d.tpl]||10):1,
    power:key==='c'?100:300,unlock:key==='c'?12:16,ult:key==='u',
-   desc:(key==='u'?'DEFINITIVA · se carga luchando. ':'')+t[0]+(L?' Nivel '+L+'/5.':'')+(plus?' '+t[1]+'.':(L>=5?' Nivel máximo: puedes evolucionarla (+).':''))};
+   desc:(key==='u'?'DEFINITIVA · se carga luchando. ':'')+t[0]+(L?' Nivel '+(L+1)+'/5.':'')+(plus?' '+t[1]+'.':(L>=4?' Nivel máximo: puedes evolucionarla (+).':''))};
  }
  // ---------- Ejecución ----------
  const pw=(a,m)=>P.power(a,m);
@@ -243,6 +243,6 @@ window.ECOS_KIT14=function(A){
   }
  }
  A.hud=function(){old.hud.call(this);try{decorate();}catch(e){}};
- A.v14=Object.assign(A.v14||{},{kit,skill,run,gate,addUlt,TXT,RUN,LINES,lv:lvOf,plus:plusOf});
+ A.v14=Object.assign(A.v14||{},{lineHit,kit,skill,run,gate,addUlt,TXT,RUN,LINES,lv:lvOf,plus:plusOf});
  window.ECOS_KIT=A.v14;
 };

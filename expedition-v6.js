@@ -15,7 +15,7 @@ for(const n of ECOS_TECH.tms){const m=M[n];I['tm_'+n]={name:'MT · '+m.name,type
 for(const [k,it] of Object.entries(I))if(!A.icons[k]){const im=new Image();im.src='assets/items/'+(it.icon||k)+'.png';A.icons[k]=im;}
 const classMove=a=>window.ECOS_V10?.classTech(a)||(a=>{const entry=ECOS_TECH.classes[a.id]?.[a.job]||{move:'protect',grant:true},m=M[entry.move];return{...m,source:'class',slug:entry.move,grant:entry.grant,desc:m.desc+(entry.grant?' Técnica concedida por la clase en este RPG.':'')};})(a);
 const available=a=>[...new Set([...(a.learned||[]),...a.gear.flatMap(k=>I[k]?.parts||[k]).map(k=>gearMoves[k]).filter(Boolean)])];
-function slots(a){return [...(A.v8?.speciesMoves(a)||S(a).moves).map(m=>({...m,source:'species'})),classMove(a),A.v14.skill(a,'c'),A.v14.skill(a,'u'),...Array.from({length:4},(_,i)=>{const key=a.loadout?.[i];return available(a).includes(key)?{...M[key],slug:key,source:'tm'}:null;})];}
+function slots(a){const list=[...(A.v8?.speciesMoves(a)||S(a).moves).map(m=>({...m,source:'species'})),classMove(a),A.v14.skill(a,'c'),A.v14.skill(a,'u'),...Array.from({length:4},(_,i)=>{const key=a.loadout?.[i];return available(a).includes(key)?{...M[key],slug:key,source:'tm'}:null;})];return A.v14.tune?A.v14.tune(a,list):list;}
 function S(a){return RPG_SPECIES[a.id];}
 const moveByName=new Map(Object.values(M).map(m=>[m.name,m]));
 function moveMultiplier(a,m){const category=m.category||moveByName.get(m.name)?.category||(['melee','cleave','dash'].includes(m.mode)?'physical':'special');return category==='physical'&&a.physicalBoost>0?a.physicalAmp||1:category==='special'&&a.specialBoost>0?a.specialAmp||1:1;}
@@ -56,7 +56,7 @@ A.generateFloor=function(){old.generateFloor();const g=A.g;g.gates=[];if(A.bossF
  }
  if(g.floor%2===0){const seen=reachable(g),candidates=[];for(let y=3;y<g.mh-3;y++)for(let x=3;x<g.mw-3;x++){const k=at(x,y);if(g.map[k]||occupied(x,y)||g.gates.some(d=>dist(d,{x:x*T+24,y:y*T+24})<200))continue;const sides=[[k-1,k+1],[k-g.mw,k+g.mw]].find(ns=>ns.every(n=>g.map[n]&&seen.has(n)));if(sides){const seenPath=new Set([sides[0]]),q=[[sides[0],0]];let short=false;for(let j=0;j<q.length;j++){const [n,d]=q[j];if(n===sides[1]){short=true;break;}if(d>=8)continue;for(const v of [n-1,n+1,n-g.mw,n+g.mw])if(g.map[v]&&!seenPath.has(v)){seenPath.add(v);q.push([v,d+1]);}}if(!short)candidates.push(k);}}for(let n=0;n<Math.min(2,candidates.length);n++){const i=Math.floor(rng()*candidates.length),k=candidates.splice(i,1)[0];g.gates.push({id:'shortcut'+n,kind:g.floor<=15?'vines':'rubble',open:false,locked:false,original:0,cells:[k],x:k%g.mw*T+24,y:Math.floor(k/g.mw)*T+24});}}
  // Replaces some budgeted consumables; no unlimited farming sources.
- const supply=g.chests.find(c=>c.id==='s0');if(supply)supply.key='ether';if(g.floor%2===1){const chest=g.chests.find(c=>c.id==='s1'),pick=window.ECOS_V10?.pickTM(g,rng);if(chest&&pick)chest.key='tm_'+pick;}
+ const supply=g.chests.find(c=>c.id==='s0');if(supply)supply.key='ether';
  // Closed doors do not hide enemy spawn points in inaccessible cells.
  const reachableNow=reachable(g);g.spawnPoints=(g.spawnPoints||[]).filter(p=>reachableNow.has(at(Math.floor(p.x/T),Math.floor(p.y/T))));
 };
