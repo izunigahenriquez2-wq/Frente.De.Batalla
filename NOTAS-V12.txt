@@ -85,7 +85,29 @@ V13 · Pisos especiales (floors-v13.js)
 - Desde el piso 3 (no jefe): piso de descanso antes de cada jefe (sin enemigos, regeneración, pozos/santuario), y al azar: tienda (sin enemigos, 2 tiendas), oleadas (3 oleadas; escaleras selladas hasta superarlas), interruptores (3 interruptores con F; escaleras selladas) y laberinto oscuro (visión limitada y brújula tras 45 s).
 - Recompensa al abrir escaleras: oro, XP y una poción. El estado se sincroniza online (packState).
 
-V14 · Rediseño (en curso)
+V14 · Rediseño
 - Nombre: Pokémon Mundo Misterioso: Ecos.
-- Nivel máximo 40 (antes 60). Curva de XP: coste para pasar del nivel L al L+1 = 50 + 12,4·L (un piso completo cada vez da ~11.000 XP hasta el piso 70; Mewtwo está en el piso 80).
+- Nivel máximo 40 (antes 60). Curva de XP: coste para pasar del nivel L al L+1 = 46 + 11,2·L (~10.800 XP en total). Limpiando pisos se alcanza el nivel 40 hacia el piso ~70; Mewtwo está en el piso 80.
 - Talentos de clase estilo DotA 2: 7 escalones (niveles 10, 15, 20, 25, 30, 35 y 40), una pasiva de dos por escalón; el 7 es la piedra angular. Solo mejoran al personaje (clase), no al Pokémon.
+
+V14 · Kit de habilidades (kit-v14.js)
+- Barra: básico (Espacio), Q, E (nivel 8), clase R, habilidad de especie C (nivel 12) y definitiva V (nivel 16), más hasta 4 técnicas extra (teclas 5-8). Cada especie tiene 3 habilidades + 1 definitiva propias, con un patrón de ataque distinto.
+- Definitiva: medidor 0-100 (empiezas en 30). Se llena golpeando (0,16 por golpe), eliminando enemigos (+3,5; élite/Alfa +10; jefe +15), recibiendo daño (proporcional a la vida perdida) y +0,8/s en combate. Aproximadamente una definitiva por piso.
+
+V14 · Patrones (patterns-v14.js)
+- Órbita, bumerán, minas, torreta, rastro, vórtice, cadena, rebote, meteoros, temblor, además de cono, carga, dash y melee. Todos con versión «+» (más proyectiles, alcance o área).
+
+V14 · Naturalezas (natures-v14.js)
+- Se eligen en la selección de personaje (también online); modifican estadísticas del juego (daño, velocidad, vida, PM, enfriamiento, crítico, etc.) con un punto fuerte y uno débil.
+
+V14 · Cartas de nivel (cards-v14.js)
+- Reemplazan las MT en cofres. Al subir de nivel: 3 cartas con descripción, relanzar limitado y vetar limitado. Mejoran cualquier habilidad (incluido el básico) hasta nivel 5, luego evolución «+» (x1,25 y efecto extra visible), o dan técnicas nuevas y mejoras de estadísticas. Sincronizadas online (acción 'card').
+
+V14 · Objetos
+- Solo 3 objetos equipables; cada uno rinde x1,8 para compensar.
+
+V14 · Alfas (alpha-v14.js)
+- Pokémon de piso más grande (x3,1), con aura, 3,8x de vida, 1,3x de daño, +3 niveles y botín propio (raro o mejor, a veces extra). Aparecen en ~55-90 % de los pisos desde el 3 (no en jefe/descanso/tienda); 2 posibles desde el piso 45. XP: 40 + 3·piso. Sincronizados online.
+
+V14 · Jefe final
+- Sigue siendo Mewtwo (piso 80); en la fase 2 evoluciona a Mega Mewtwo Y (id 1150) con ataques nuevos y bonificaciones.
