@@ -205,6 +205,7 @@ window.ECOS_KIT14=function(A){
   const key=m.kit,L=lvOf(a,key),plus=plusOf(a,key),k=kit(a.id),t=A.nearTarget?.(a),
    c={L,plus,tier:k.tier,k:k.kind,t,dm:(1+.14*L)*(plus?1.25:1)*(.94+.06*k.tier)};
   if(key==='u'){a.ult=0;a.ultFlash=1.4;A.fx('s_ring_white',a.x,a.y,3.5,.7);A.toast?.(S[a.id].name+' · '+m.name.toUpperCase()+'!');}
+  if(key!=='u'&&(L>=2||plus)){A.fx('s_ring_white',a.x,a.y,1.2+L*.22+(plus?1.1:0),.45);if(plus){A.fx('s_ring_white',a.x,a.y,3.2,.7);A.fx('synthesis',a.x,a.y-10,1.4,.6);}}
   (RUN[m.tpl]||RUN.nova)(a,c);
  }
  // Comprobaciones previas de castSlot: nivel y medidor.
