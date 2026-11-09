@@ -56,7 +56,7 @@ window.ECOS_CARDS14=function(A){
  function give(a,id){
   const [t,k]=id.split(':');init(a);
   if(t==='up'){const s=(a.skl[k]??={lv:0,plus:false});s.lv=Math.min(MAXLV,s.lv+1);const m=slotOf(a,k);A.toast?.((m?.name||k)+' → Nv. '+(s.lv+1));A.fx('star',a.x,a.y,2,.6);}
-  else if(t==='plus'){const s=(a.skl[k]??={lv:MAXLV,plus:false});s.plus=true;const m=slotOf(a,k);A.toast?.('¡'+(m?.name||k).replace(/ \+$/,'')+' evolucionó! (+)');A.fx('s_ring_white',a.x,a.y,3.4,.8);P.burst('star',a.x,a.y,3,.8);}
+  else if(t==='plus'){const s=(a.skl[k]??={lv:MAXLV,plus:false});s.plus=true;const m=slotOf(a,k);A.toast?.('¡'+(m?.name||k).replace(/ \+$/,'')+' evolucionó! (+)');A.fx('s_ring_white',a.x,a.y,3.4,.8);P.burst('star',a.x,a.y,3,.8);A.v14.plusBurst?.(a,{...(m||{}),name:((m&&m.name)||'')+' +'},3);}
   else if(t==='tech'){(a.learned??=[]).push(k);const i=(a.loadout||[]).findIndex(x=>!x);if(i>=0)a.loadout[i]=k;A.toast?.('Técnica nueva: '+M[k].name);A.fx('star',a.x,a.y,2,.6);}
   else if(t==='st'){a.cs[k]=(a.cs[k]||0)+1;A.toast?.(STATBY[k].n+' ×'+a.cs[k]);}
   else if(t==='lo'){if(k==='heal'){a.hp=Math.min(a.max,a.hp+a.max*.6);a.mp=Math.min(a.maxMp,a.mp+a.maxMp*.6);A.fx('synthesis',a.x,a.y,2,.6);}else A.v14.addUlt(a,50);}
@@ -112,7 +112,7 @@ window.ECOS_CARDS14=function(A){
  function describe(a,id){
   const [t,k]=id.split(':');
   if(t==='up'){const m=slotOf(a,k),L=lv(a,k),slot={b:'Ataque básico',q:'Q',e:'E',c:'C',u:'Definitiva'}[k]||'Técnica';return{tag:'Mejora · '+slot,title:m?.name||k,sub:'Nv. '+(L+1)+' → Nv. '+(L+2),text:STEP(L+2),icon:m};}
-  if(t==='plus'){const m=slotOf(a,k);return{tag:'Evolución',title:(m?.name||k).replace(/ \+$/,'')+' +',sub:'Nv. 5 · versión «+»',text:plusText(a,k,m),icon:m};}
+  if(t==='plus'){const m=slotOf(a,k);return{tag:'Evolución',title:(m?.name||k).replace(/ \+$/,'')+' +',sub:'Nv. 5 · versión «+»',text:plusText(a,k,m),icon:m&&{...m,name:m.name.replace(/ \+$/,'')+' +'}};}
   if(t==='tech'){const m=M[k];return{tag:'Técnica nueva',title:m.name,sub:(m.mana||0)+' PM · '+m.cool+' s'+(m.power?' · Potencia '+m.power:''),text:m.desc||'Una técnica que se suma a tu repertorio (espacios 5–8).',icon:{...m,slug:k}};}
   if(t==='st'){const s=STATBY[k],n=a.cs[k]||0;return{tag:'Pasiva',title:s.n,sub:n?'Tienes ×'+n:'Nueva',text:s.d,glyph:s.ic};}
   const s=LOOT[k];return{tag:'Botín',title:s.n,sub:'Un solo uso',text:s.d,glyph:s.ic};
