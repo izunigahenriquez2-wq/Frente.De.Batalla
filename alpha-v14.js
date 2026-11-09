@@ -4,7 +4,7 @@ window.ECOS_ALPHA14=function(A){
  const dist=A.distance,S=RPG_SPECIES;
  const COL={fire:'#ff7a3a',water:'#4aa8ff',leaf:'#6fdc6a',spark:'#ffe14a',psychic:'#e070ff',ghost:'#9a7cff',poison:'#b45cd6',ice:'#8fe8ff',rock:'#c4a46a',dragon:'#6a7bff',hit:'#ffd877',wave:'#9fe0ff',star:'#ffd877'};
  const old={nextFloor:A.nextFloor,hurt:A.hurt,step:A.step};
- const ok=g=>g&&!A.bossFloor()&&!g.secret&&!['rest','shop'].includes(g.v13?.kind);
+ const ok=g=>g&&!A.bossFloor()&&!(g.secret&&g.secret.state&&g.secret.state!=='hidden')&&!['rest','shop'].includes(g.v13?.kind);
  // ---------- aparición ----------
  function spawn(g){
   const bio=[...(window.RPG_BIOMES||[])].filter(b=>b.from<=g.floor).pop(),pool=bio?.pool||A.stage?.()?.pool||[19],elite=bio?.elite||[];const n=1+(g.floor>=45&&Math.random()<.4?1:0);
@@ -12,7 +12,7 @@ window.ECOS_ALPHA14=function(A){
   for(let k=0;k<n;k++){
    const evolved=elite.length&&Math.random()<.5,id=evolved?elite[Math.floor(Math.random()*elite.length)]:pool[Math.floor(Math.random()*pool.length)],p=spots[Math.floor(Math.random()*spots.length)];
    A.loadActor(id).catch(()=>{});
-   const e=A.enemy(id,p.x,p.y);e.alpha=true;e.scale=3.1;e.r=Math.round(e.r*1.7);e.hp=e.max=e.bar=e.max*5.5;e.damage=(e.damage||17)*1.5;e.level=(e.level||5)+3;
+   const e=A.enemy(id,p.x,p.y);e.alpha=true;e.scale=3.1;e.r=Math.round(e.r*1.7);e.hp=e.max=e.bar=e.max*3.8;e.damage=(e.damage||17)*1.3;e.level=(e.level||5)+3;
    if(e.baseSpeed)e.baseSpeed*=1.12;if(e.speed)e.speed*=1.12;e.alphaName='ALFA · '+(S[id]?.name||'?');e.rt=6+Math.random()*3;e.crew=pool;e.ph=0;A.enemies.push(e);
   }
   A.g.alphas=n;A.toast?.(n>1?'Dos Alfas merodean por este piso. Cuidado.':'Un Alfa merodea por este piso. Su botín vale la pena.');
@@ -39,7 +39,7 @@ window.ECOS_ALPHA14=function(A){
    const drop=(key,tag,dx)=>A.loot.push({lid:'al'+tag+(e.eid||Math.floor(e.x))+Math.floor(Math.random()*1e5),x:e.x+dx,y:e.y,key,taken:false});
    try{const r1=A.lootRoll('boss',undefined,{min:'r'});drop(r1.key,'a',-14);A.lootFx?.(A.me(),r1.key);if(Math.random()<.3)drop(A.lootRoll('event',undefined,{min:'m'}).key,'b',14);}catch(err){console.error(err);}
    drop(['ether','potion','oran_berry'][Math.floor(Math.random()*3)],'c',0);
-   for(const a of A.players)if(!a.down&&!a.disconnected){A.gainXP(a,14+(A.g?.floor||1)*1.1);A.v14?.addUlt?.(a,8);}
+   for(const a of A.players)if(!a.down&&!a.disconnected){A.gainXP(a,40+(A.g?.floor||1)*3);A.v14?.addUlt?.(a,8);}
    A.fx('star',e.x,e.y,4,1);A.toast?.('¡Alfa derrotado! Deja botín de calidad.');
   }
   return r;};

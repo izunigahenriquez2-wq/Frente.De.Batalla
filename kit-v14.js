@@ -219,7 +219,7 @@ window.ECOS_KIT14=function(A){
  const owner=o=>o?(A.players.includes(o)?o:A.players.find(p=>p.pid===o.pid)):null;
  const old={hurt:A.hurt,damage:A.damage,makePlayer:A.makePlayer,cleanActor:A.cleanActor,playerStep:A.playerStep,hud:A.hud};
  A.hurt=function(e,d,who,p){const alive=e.hp>0,r=old.hurt.call(this,e,d,who,p);const pl=owner(who);
-  if(pl&&alive&&d>0){addUlt(pl,p?.pattern?.04:p?.skill?.1:.12);if(e.hp<=0)addUlt(pl,e.boss?10:e.alpha||e.elite?6:2.2);}return r;};
+  if(pl&&alive&&d>0){addUlt(pl,p?.pattern?.05:p?.skill?.13:.16);if(e.hp<=0)addUlt(pl,e.boss?15:e.alpha||e.elite?10:3.5);}return r;};
  A.damage=function(a,d,...r){const before=a.hp,out=old.damage.call(this,a,d,...r);if(a&&before>a.hp)addUlt(a,(before-a.hp)/Math.max(1,a.max)*55);return out;};
  A.makePlayer=function(...args){const a=old.makePlayer(...args);a.ult=30;a.skl={};return a;};
  A.cleanActor=function(a){const o=old.cleanActor(a);for(const k of ['ult','ultFlash','skl'])if(a[k]!==undefined)o[k]=a[k];return o;};
@@ -227,7 +227,7 @@ window.ECOS_KIT14=function(A){
   if(a.ult===undefined)a.ult=30;if(!a.skl)a.skl={};
   const press=mask&~(a.oldInput||0);
   if(a.ultFlash>0)a.ultFlash=Math.max(0,a.ultFlash-dt);
-  if(A.NET.role!=='client'&&A.g&&!A.g.ended&&!a.down&&a.combat>0)addUlt(a,.5*dt);
+  if(A.NET.role!=='client'&&A.g&&!A.g.ended&&!a.down&&a.combat>0)addUlt(a,.8*dt);
   old.playerStep.call(this,a,mask,dt);
   if(!a.down&&A.v6?.castSlot){if(press&8192)A.v6.castSlot(a,4);if(press&16384)A.v6.castSlot(a,5);}
  };
