@@ -3,7 +3,8 @@ window.ECOS_ALPHA14=function(A){
  'use strict';
  const dist=A.distance,S=RPG_SPECIES;
  const COL={fire:'#ff7a3a',water:'#4aa8ff',leaf:'#6fdc6a',spark:'#ffe14a',psychic:'#e070ff',ghost:'#9a7cff',poison:'#b45cd6',ice:'#8fe8ff',rock:'#c4a46a',dragon:'#6a7bff',hit:'#ffd877',wave:'#9fe0ff',star:'#ffd877'};
- const old={nextFloor:A.nextFloor,hurt:A.hurt,step:A.step};
+ const old={nextFloor:A.nextFloor,hurt:A.hurt,step:A.step,cleanActor:A.cleanActor};
+ A.cleanActor=function(a){const o=old.cleanActor(a);if(a.alpha){o.alpha=true;o.scale=a.scale;o.alphaName=a.alphaName;}return o;};
  const ok=g=>g&&!A.bossFloor()&&!(g.secret&&g.secret.state&&g.secret.state!=='hidden')&&!['rest','shop'].includes(g.v13?.kind);
  // ---------- aparición ----------
  function spawn(g){
