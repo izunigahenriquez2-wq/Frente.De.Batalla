@@ -73,7 +73,7 @@ window.ECOS_CARDS14=function(A){
  A.makePlayer=function(...args){const a=old.makePlayer(...args);init(a);return a;};
  A.cleanActor=function(a){const o=old.cleanActor(a);for(const k of ['cards','cs'])if(a[k]!==undefined)o[k]=a[k];return o;};
  // ---------- Estadísticas de pasivas ----------
- A.stats=function(a){const ratio=a.max?a.hp/a.max:1;old.stats.call(this,a);const f=effects(a);if(!Object.keys(f).length)return;
+ A.stats=function(a){if(a.gear&&a.gear.length>(window.ECOS_GEAR_MAX||3))a.gear.length=window.ECOS_GEAR_MAX||3;const ratio=a.max?a.hp/a.max:1;old.stats.call(this,a);const f=effects(a);if(!Object.keys(f).length)return;
   if(f.dmg)a.damage*=1+f.dmg;if(f.skill)a.skillPower=(a.skillPower||1)+f.skill;if(f.speed)a.speed=Math.min(295,a.speed*(1+f.speed));
   if(f.hp){a.max=Math.round(a.max*(1+f.hp));a.hp=Math.min(a.max,Math.max(1,a.max*ratio));}if(f.crit)a.crit=Math.min(.65,(a.crit||0)+f.crit);if(f.cdr)a.cdr=Math.min(.45,(a.cdr||0)+f.cdr);
   if(f.armor)a.armor=Math.min(.45,(a.armor||0)+f.armor);if(f.mp){a.maxMp=Math.round(a.maxMp*(1+f.mp));}if(f.mpRegen)a.mpRegen=(a.mpRegen||0)+f.mpRegen;if(f.regen)a.regenRate=(a.regenRate||0)+f.regen;

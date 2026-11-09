@@ -21,7 +21,7 @@ window.ECOS_ECON12=function(A){
  function legFuse(a,id){const r=LG.recipes[id];if(!a||!r||!A.g||A.g.ended||a.down||a.disconnected||(A.localMode==='online'&&A.g.paused))return false;
   if(!r.parts.every(p=>own(a,p)>=1))return false;
   const eq=r.parts.some(p=>a.gear.includes(p));for(const p of r.parts)remove(a,p);
-  a.bag[r.key]=(a.bag[r.key]||0)+1;if(eq&&a.gear.length<6)a.gear.push(r.key);
+  a.bag[r.key]=(a.bag[r.key]||0)+1;if(eq&&a.gear.length<(window.ECOS_GEAR_MAX||3))a.gear.push(r.key);
   A.stats(a);A.fx('star',a.x,a.y,3,.9);A.toast(a.name+' forjó '+r.name+'.');return true;}
  function dustOf(k){const it=I[k];if(!it)return 0;if(it.inst)return window.ECOS_LOOT.RAR[it.rk].dust;if(it.legendary)return 40;if(it.fused)return 14;if(it.type==='gear')return 5;return it.type==='use'&&!/^(tm_|chest_|dungeon_key|revive)/.test(k)?1:0;}
  function recycle(a,k){if(!a||!A.g||A.g.ended||a.down||!I[k])return false;const d=dustOf(k),keep=a.gear.includes(k)?1:0;if(!d||own(a,k)<=keep)return false;a.bag[k]--;a.dust=(a.dust||0)+d;A.toast('Reciclaste '+I[k].name+': +'+d+' polvo.');return true;}

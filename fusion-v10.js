@@ -45,7 +45,7 @@ window.ECOS_FUSION10=function(A){
   a.bag[x]--;if(x!==y)a.bag[y]--;else a.bag[x]--;
   for(const k of new Set([x,y]))if((a.bag[k]||0)<=0&&a.gear.includes(k))a.gear.splice(a.gear.indexOf(k),1);
   a.bag[rec]=(a.bag[rec]||0)+1;
-  if(wasEquipped&&a.gear.length<6&&(!I[rec].jobs||I[rec].jobs.includes(a.job)))a.gear.push(rec);
+  if(wasEquipped&&a.gear.length<(window.ECOS_GEAR_MAX||3)&&(!I[rec].jobs||I[rec].jobs.includes(a.job)))a.gear.push(rec);
   A.stats(a);A.fx('star',a.x,a.y,2.2,.7);A.toast(a.name+' fusionó '+I[x].name+' y '+I[y].name+': '+I[rec].name+'.');
   return true;
  };
