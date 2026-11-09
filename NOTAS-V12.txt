@@ -98,7 +98,7 @@ V14 · Patrones (patterns-v14.js)
 - Órbita, bumerán, minas, torreta, rastro, vórtice, cadena, rebote, meteoros, temblor, además de cono, carga, dash y melee. Todos con versión «+» (más proyectiles, alcance o área).
 
 V14 · Naturalezas (natures-v14.js)
-- Se eligen en la selección de personaje (también online); modifican estadísticas del juego (daño, velocidad, vida, PM, enfriamiento, crítico, etc.) con un punto fuerte y uno débil.
+- Se eligen al preparar al explorador (también online). 25 naturalezas sobre cinco estadísticas de Ecos: Fuerza (daño), Pericia (poder de habilidades), Vigor (vida), Temple (armadura) y Agilidad (velocidad). 20 suben una y bajan otra; las 5 neutras dan una ventaja pequeña propia (XP, carga de definitiva, recarga, crítico, PM).
 
 V14 · Cartas de nivel (cards-v14.js)
 - Reemplazan las MT en cofres. Al subir de nivel: 3 cartas con descripción, relanzar limitado y vetar limitado. Mejoran cualquier habilidad (incluido el básico) hasta nivel 5, luego evolución «+» (x1,25 y efecto extra visible), o dan técnicas nuevas y mejoras de estadísticas. Sincronizadas online (acción 'card').
