@@ -87,12 +87,12 @@ V13 · Pisos especiales (floors-v13.js)
 
 V14 · Rediseño
 - Nombre: Pokémon Mundo Misterioso: Ecos.
-- Nivel máximo 40 (antes 60). Curva de XP: coste para pasar del nivel L al L+1 = 46 + 11,2·L (~10.800 XP en total). Limpiando pisos se alcanza el nivel 40 hacia el piso ~70; Mewtwo está en el piso 80.
+- Nivel máximo 40 (antes 60). Curva de XP: coste para pasar del nivel L al L+1 = 46 + 11,2·L + 0,22·(L-5)² (~13.500 XP en total). Con el bot de simulación el nivel 40 llega hacia el piso 66-70; Mewtwo está en el piso 80.
 - Talentos de clase estilo DotA 2: 7 escalones (niveles 10, 15, 20, 25, 30, 35 y 40), una pasiva de dos por escalón; el 7 es la piedra angular. Solo mejoran al personaje (clase), no al Pokémon.
 
 V14 · Kit de habilidades (kit-v14.js)
 - Barra: básico (Espacio), Q, E (nivel 8), clase R, habilidad de especie C (nivel 12) y definitiva V (nivel 16), más hasta 4 técnicas extra (teclas 5-8). Cada especie tiene 3 habilidades + 1 definitiva propias, con un patrón de ataque distinto.
-- Definitiva: medidor 0-100 (empiezas en 30). Se llena golpeando (0,16 por golpe), eliminando enemigos (+3,5; élite/Alfa +10; jefe +15), recibiendo daño (proporcional a la vida perdida) y +0,8/s en combate. Aproximadamente una definitiva por piso.
+- Definitiva: medidor 0-100 (empiezas en 30). Se llena golpeando (0,12 por golpe, con tope de 1,2/s), eliminando enemigos (+1,8; élite/Alfa +6; jefe +10), recibiendo daño (proporcional a la vida perdida) y +0,4/s en combate.
 
 V14 · Patrones (patterns-v14.js)
 - Órbita, bumerán, minas, torreta, rastro, vórtice, cadena, rebote, meteoros, temblor, además de cono, carga, dash y melee. Todos con versión «+» (más proyectiles, alcance o área).
@@ -111,3 +111,8 @@ V14 · Alfas (alpha-v14.js)
 
 V14 · Jefe final
 - Sigue siendo Mewtwo (piso 80); en la fase 2 evoluciona a Mega Mewtwo Y (id 1150) con ataques nuevos y bonificaciones.
+
+V14 · Equilibrio medido (balance-v14.js, tools/simbot.py, tools/simbatch2.sh, tools/simreport.py)
+- Simulaciones completas con un bot que pelea, abre cofres, elige cartas/talentos y equipa los 3 mejores objetos.
+- Vida de jefes x0,6 (piso 10), x0,85 (15), x1 (20) y +2,2 % por piso desde el 20 (x2,3 en el 80); daño del jefe del piso 10 x0,75.
+- Rampa de daño de enemigos normales: x0,55 en el piso 1 hasta x1 en el piso 12.
