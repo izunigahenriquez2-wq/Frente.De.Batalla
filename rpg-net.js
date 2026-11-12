@@ -1,6 +1,6 @@
 'use strict';
 (()=>{
-const PROTOCOL=11;
+const PROTOCOL=12;
 const N={role:'none',peer:null,links:new Map(),roster:[],code:'',id:'host',running:false,callbacks:{},lastInput:0,resumeToken:'',profileData:null};
 // Tokens are private to each data channel. Never include them in lobby or world broadcasts.
 const sessions=new Map();
@@ -45,14 +45,14 @@ N.host=profile=>{
    }else if(welcomed&&N.links.get(pid)===link){
     if(!N.running&&m.type==='profile'){const p=N.roster.find(p=>p.pid===pid);if(p){p.profile=safeProfile(m.profile);p.ready=false;N.lobby();}}
     else if(!N.running&&m.type==='ready'){const p=N.roster.find(p=>p.pid===pid);if(p){p.ready=!!m.ready;N.lobby();}}
-    else if(m.type==='input'){const mask=Number.isInteger(m.mask)?m.mask&8191:0;N.callbacks.input?.(pid,mask);}
+    else if(m.type==='input'){const mask=Number.isInteger(m.mask)?m.mask&32767:0;N.callbacks.input?.(pid,mask);}
     else if(m.type==='action'){
      const now=Date.now();recent=recent.filter(t=>now-t<1000);if(recent.length>=24)return;recent.push(now);
      if(['item','equip','talent','evolve','branch','drop','transfer','event','cast','loadout','gate','path','learn','fuse','skyvisit','npc12','riskaltar','card','legfuse','recycle','upgrade','quick'].includes(m.action))N.callbacks.action?.(pid,m.action,String(m.key||'').slice(0,120));
     }
    }
   });
-  link.on('close',()=>{clearTimeout(timer);if(rejected||N.peer!==peer||!welcomed||N.links.get(pid)!==link)return;N.links.delete(pid);
+  link.on('close',()=>{clearTimeout(timer);if(N.peer!==peer||!welcomed||N.links.get(pid)!==link)return;N.links.delete(pid);
    if(N.running){const p=N.roster.find(p=>p.pid===pid);if(p)p.disconnected=true;N.callbacks.left?.(pid);}
    else{N.roster=N.roster.filter(p=>p.pid!==pid);sessions.delete(sessionToken);N.lobby();}
   });
@@ -93,3 +93,4 @@ N.world=world=>{N.running=true;N.broadcast({type:'world',world});};
 N.state=state=>N.broadcast({type:'state',state});
 window.ECOS_NET=N;
 })();
+
