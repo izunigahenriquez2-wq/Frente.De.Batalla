@@ -1,0 +1,55 @@
+{
+  "controlled": true,
+  "results": [
+    {
+      "kind": "rapid",
+      "firstReadySeconds": 59.9,
+      "intervals": [
+        85.6,
+        84.4
+      ],
+      "sources": {
+        "combat": 91.97999999999746,
+        "hits": 138.00000000000387,
+        "kills": 40.019999999999
+      }
+    },
+    {
+      "kind": "heavy",
+      "firstReadySeconds": 59,
+      "intervals": [
+        86,
+        84
+      ],
+      "sources": {
+        "combat": 91.61999999999723,
+        "hits": 137.60000000000076,
+        "kills": 40.78000000000182
+      }
+    },
+    {
+      "kind": "support",
+      "firstReadySeconds": 60,
+      "intervals": [
+        88,
+        88
+      ],
+      "sources": {
+        "combat": 94.41999999999724,
+        "healing": 175.5800000000028
+      }
+    },
+    {
+      "kind": "tank",
+      "firstReadySeconds": 83,
+      "intervals": [
+        125.05,
+        125.05
+      ],
+      "sources": {
+        "combat": 133.19999999999908,
+        "damageTaken": 136.80000000000047
+      }
+    }
+  ]
+}

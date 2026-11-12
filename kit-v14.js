@@ -193,18 +193,18 @@ window.ECOS_KIT14=function(A){
   rush(a,c){const ang=aimAt(a,c.t),end=dash(a,ang,800,.3,1.2);lineHit(a,a.x,a.y,end.x,end.y,64,pw(a,2.4*c.dm),c.k);P.trail(a,{life:1.4,dmg:pw(a,1.2*c.dm),kind:c.k,w:56});const q=P.quake(a,{at:end,rings:c.plus?5:4,r0:120,dr:95,dmg:pw(a,3*c.dm),stun:1.2,kind:c.k});if(q)q.wait=.33;},
   beam(a,c){const ang=aimAt(a,c.t),n=c.plus?2:1;for(let i=0;i<n;i++){const an=ang+(n===2?(i?.22:-.22):0),ex=a.x+Math.cos(an)*720,ey=a.y+Math.sin(an)*720;A.effects.push({line:true,kind:c.k,x:a.x,y:a.y,ex,ey,life:.6,total:.6,size:3});lineHit(a,a.x,a.y,ex,ey,(c.plus?100:70),pw(a,4.5*c.dm),c.k);}P.burst(c.k,a.x+Math.cos(ang)*120,a.y+Math.sin(ang)*120,3,.5);},
   nova(a,c){P.quake(a,{rings:3,r0:90,dr:110,dmg:pw(a,3*c.dm),stun:1.6,kind:c.k});if(c.plus)P.meteors(a,{at:a,n:6,spread:220,dmg:pw(a,1.6*c.dm),r:90,kind:c.k});},
-  sanct(a,c){for(const b of A.active())if(dist(a,b)<420){b.hp=Math.min(b.max,b.hp+b.max*.45);b.shield=Math.max(b.shield||0,6);b.poison=0;b.burn=0;b.slow=0;if(c.plus){b.aquaRing=8;b.ringPower=1.2;}A.fx('synthesis',b.x,b.y,2,.7);}
+  sanct(a,c){for(const b of A.active())if(dist(a,b)<420){b.hp=Math.min(b.max,b.hp+b.max*(.35+.035*c.L)*(a.healPower||1));b.shield=Math.max(b.shield||0,5+.5*c.L);b.poison=0;b.burn=0;b.slow=0;if(c.plus){b.aquaRing=8;b.ringPower=1.2;}A.fx('synthesis',b.x,b.y,2,.7);}
    for(const e of foes())if(dist(a,e)<300){A.hurt(e,pw(a,1.5*c.dm),a,{skill:true,pattern:true});stat(e,'slow',3);}P.burst('psychic',a.x,a.y,4,.6);},
   legion(a,c){const n=3+(c.plus?2:0);for(let i=0;i<n;i++){const an=i*6.283/n;P.turret(a,{at:{x:a.x+Math.cos(an)*70,y:a.y+Math.sin(an)*70},life:12,rate:.45,dmg:pw(a,.9*c.dm),kind:c.k,max:6});}},
   petals(a,c){P.orbit(a,{n:8+(c.plus?3:0),r:110,w:3.6,life:7,dmg:pw(a,.6*c.dm),kind:c.k,tick:.35});const b=aimAt(a,c.t);for(let i=-1;i<=1;i++)P.boomerang(a,{angle:b+i*.5,range:420,dmg:pw(a,1.6*c.dm),kind:c.k});},
-  frost(a,c){for(const e of foes())if(dist(a,e)<340){stat(e,'stun',1.6);stat(e,'slow',5);A.hurt(e,pw(a,1.4*c.dm),a,{skill:true,pattern:true});}P.vortex(a,{at:a,r:320,life:4,pull:200,dmg:pw(a,.7*c.dm),kind:c.k});if(c.plus)P.quake(a,{rings:3,r0:120,dr:100,dmg:pw(a,1.5*c.dm),stun:.8,kind:c.k});P.burst(c.k,a.x,a.y,5,.7);},
-  rage(a,c){const t=c.plus?12:9;a.physicalBoost=t;a.physicalAmp=1.6;a.specialBoost=t;a.specialAmp=1.6;a.haste=Math.max(a.haste||0,t);a.frenzyLeech=Math.max(a.frenzyLeech||0,t);a.inv=Math.max(a.inv||0,.8);P.burst(c.k,a.x,a.y,3.5,.6);A.fx('s_ring_white',a.x,a.y,3.2,.6);},
+  frost(a,c){for(const e of foes())if(dist(a,e)<340){stat(e,'stun',1.6);stat(e,'slow',4+c.L*.5);A.hurt(e,pw(a,1.4*c.dm),a,{skill:true,pattern:true});}P.vortex(a,{at:a,r:320,life:4,pull:200,dmg:pw(a,.7*c.dm),kind:c.k});if(c.plus)P.quake(a,{rings:3,r0:120,dr:100,dmg:pw(a,1.5*c.dm),stun:.8,kind:c.k});P.burst(c.k,a.x,a.y,5,.7);},
+  rage(a,c){const t=7+c.L*.5+(c.plus?3:0);a.physicalBoost=t;a.physicalAmp=1.6;a.specialBoost=t;a.specialAmp=1.6;a.haste=Math.max(a.haste||0,t);a.frenzyLeech=Math.max(a.frenzyLeech||0,t);a.inv=Math.max(a.inv||0,.8);P.burst(c.k,a.x,a.y,3.5,.6);A.fx('s_ring_white',a.x,a.y,3.2,.6);},
   mirage(a,c){window.ECOS_V10?.special?.(a,{mode:'decoy'});if(c.plus)window.ECOS_V10?.special?.(a,{mode:'decoy'});for(const e of foes())if(dist(a,e)<300){stat(e,'stun',1.8);A.hurt(e,pw(a,2*c.dm),a,{skill:true,pattern:true});}a.inv=Math.max(a.inv||0,1);P.burst('psychic',a.x,a.y,3.5,.6);}
  };
  function run(a,m){
   const key=m.kit,L=lvOf(a,key),plus=plusOf(a,key),k=kit(a.id),t=A.nearTarget?.(a),
    c={L,plus,tier:k.tier,k:k.kind,t,dm:(1+.14*L)*(plus?1.25:1)*(.94+.06*k.tier)};
-  if(key==='u'){a.ult=0;a.ultFlash=1.4;A.fx('s_ring_white',a.x,a.y,3.5,.7);A.toast?.(S[a.id].name+' · '+m.name.toUpperCase()+'!');}
+  if(key==='u'){(a.ultAudit??={sources:{},uses:[],ready:[]}).uses.push(A.g?.time||0);a.ult=0;a.ultFlash=1.4;A.fx('s_ring_white',a.x,a.y,3.5,.7);A.toast?.(S[a.id].name+' · '+m.name.toUpperCase()+'!');}
   if(key!=='u'&&(L>=2||plus)){A.fx('s_ring_white',a.x,a.y,1.2+L*.22,.45);}
   (RUN[m.tpl]||RUN.nova)(a,c);
  }
@@ -216,20 +216,23 @@ window.ECOS_KIT14=function(A){
   return true;
  }
  // ---------- Medidor ----------
- const addUlt=(a,n)=>{if(!a||a.down||!(n>0))return;a.ult=Math.min(100,(a.ult||0)+n*(a.ultGain||1));};
+ const addUlt=(a,n,source='reward')=>{if(!a||a.down||a.disconnected||A.NET.role==='client'||!(n>0))return;const before=a.ult||0;a.ult=Math.min(100,before+n*(a.ultGain||1));const log=a.ultAudit??={sources:{},uses:[],ready:[]};log.sources[source]=(log.sources[source]||0)+a.ult-before;if(before<100&&a.ult>=100)log.ready.push(A.g?.time||0);};
+ const budget=(a,n,source)=>{const t=Math.min(n,a.uhBank??1.5);a.uhBank=(a.uhBank??1.5)-t;addUlt(a,t,source);};
+ const supportBefore=()=>A.active().map(actor=>({actor,hp:actor.hp,...Object.fromEntries(['shield','haste','buff','aquaRing','physicalBoost','specialBoost','defenseBoost'].map(k=>[k,actor[k]||0]))}));
+ const supportAfter=(a,before,ultimate=false)=>{if(!before)return;for(const s of before){const b=s.actor;if((b.shield||0)>s.shield)b.shieldOwner=ultimate||b===a?null:a.pid;if(ultimate||b===a||!A.players.some(p=>p.combat>0))continue;const heal=Math.max(0,b.hp-s.hp);if(heal)budget(a,heal/Math.max(1,b.max)*12,'healing');}};
  const owner=o=>o?(A.players.includes(o)?o:A.players.find(p=>p.pid===o.pid)):null;
  const old={hurt:A.hurt,damage:A.damage,makePlayer:A.makePlayer,cleanActor:A.cleanActor,playerStep:A.playerStep,hud:A.hud};
- A.hurt=function(e,d,who,p){const alive=e.hp>0,r=old.hurt.call(this,e,d,who,p);const pl=owner(who);
-  if(pl&&alive&&d>0){{const g=p?.pattern?.04:p?.skill?.1:.12,t=Math.min(g,pl.uhBank??1.5);pl.uhBank=(pl.uhBank??1.5)-t;addUlt(pl,t);}if(e.hp<=0)addUlt(pl,e.boss?10:e.alpha||e.elite?6:1.8);}return r;};
- A.damage=function(a,d,...r){const before=a.hp,out=old.damage.call(this,a,d,...r);if(a&&before>a.hp)addUlt(a,(before-a.hp)/Math.max(1,a.max)*55);return out;};
+ A.hurt=function(e,d,who,p){const before=e.hp,alive=e.hp>0,r=old.hurt.call(this,e,d,who,p);const pl=owner(who);
+  if(pl&&alive&&e.hp<before&&!e.ally&&!e.friendly&&e.owner==null&&!e.minionOf){budget(pl,Math.max(0,before-Math.max(0,e.hp))/Math.max(1,e.max||before)*6,'hits');if(e.hp<=0&&!e.alpha)for(const mate of A.active())if(dist(mate,e)<620)addUlt(mate,e.boss?10:e.elite?6:1.8,'kills');}return r;};
+ A.damage=function(a,d,...r){const before=a.hp,out=old.damage.call(this,a,d,...r);if(a&&before>a.hp){const loss=before-a.hp,t=Math.min(loss/Math.max(1,a.max)*20,a.udBank??4);a.udBank=(a.udBank??4)-t;addUlt(a,t,'damageTaken');const protector=a.shield>0&&A.players.find(p=>p.pid===a.shieldOwner);if(protector&&protector!==a)budget(protector,loss/Math.max(1,a.max)*8,'protection');}return out;};
  A.makePlayer=function(...args){const a=old.makePlayer(...args);a.ult=30;a.skl={};return a;};
  A.cleanActor=function(a){const o=old.cleanActor(a);for(const k of ['ult','ultFlash','skl'])if(a[k]!==undefined)o[k]=a[k];return o;};
  A.playerStep=function(a,mask,dt){
   if(a.ult===undefined)a.ult=30;if(!a.skl)a.skl={};
   const press=mask&~(a.oldInput||0);
-  a.uhBank=Math.min(1.5,(a.uhBank??1.5)+1.2*dt);
+  a.uhBank=Math.min(1.5,(a.uhBank??1.5)+1.2*dt);a.udBank=Math.min(4,(a.udBank??4)+.4*dt);
   if(a.ultFlash>0)a.ultFlash=Math.max(0,a.ultFlash-dt);
-  if(A.NET.role!=='client'&&A.g&&!A.g.ended&&!a.down&&a.combat>0)addUlt(a,.4*dt);
+  if(A.NET.role!=='client'&&A.g&&!A.g.ended&&!a.down&&A.players.some(p=>!p.down&&p.combat>0&&dist(a,p)<420))addUlt(a,.4*dt,'combat');
   old.playerStep.call(this,a,mask,dt);
   if(!a.down&&A.v6?.castSlot){if(press&8192)A.v6.castSlot(a,4);if(press&16384)A.v6.castSlot(a,5);}
  };
@@ -245,6 +248,7 @@ window.ECOS_KIT14=function(A){
   }
  }
  A.hud=function(){old.hud.call(this);try{decorate();}catch(e){}};
- A.v14=Object.assign(A.v14||{},{lineHit,kit,skill,run,gate,addUlt,TXT,RUN,LINES,lv:lvOf,plus:plusOf});
+ A.v14=Object.assign(A.v14||{},{lineHit,kit,skill,run,gate,addUlt,supportBefore,supportAfter,TXT,RUN,LINES,lv:lvOf,plus:plusOf});
  window.ECOS_KIT=A.v14;
 };
+

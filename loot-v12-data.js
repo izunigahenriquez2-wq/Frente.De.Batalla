@@ -44,6 +44,7 @@
   event:f=>({c:38,m:42,r:15+.1*f,l:3.2+.05*f,u:.25}),
   shop:f=>({c:0,m:Math.max(40,62-.3*f),r:33+.2*f,l:4+.08*f,u:0}),
   sub:f=>({c:0,m:12,r:54,l:30+.15*f,u:4+.03*f}),
+  alpha:f=>({c:0,m:0,r:85,l:15,u:0}), // Frequent minibosses use a separate reward table.
   boss:f=>({c:0,m:0,r:35,l:52+.1*f,u:13+.04*f})
  };
  const FACT={m:.5,r:.5,l:.55,u:.8};     // parte de las estadísticas originales de la base que conserva cada rareza
@@ -109,3 +110,4 @@
  const rarityOf=it=>!it?'c':it.rk||(it.unique?'u':it.legendary?'l':it.fused?'r':'c');
  window.ECOS_LOOT={RAR,BYID,AFF,ASP,ST,WEIGHTS,UNIQ_ASP,fmt,roll,make,rollRarity,rarityOf,isInst,hash,pickBase,build:k=>proxy[k]};
 })();
+

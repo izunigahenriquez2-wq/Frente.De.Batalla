@@ -31,7 +31,7 @@ window.ECOS_LOOT12=function(A){
     if(asp.frenz)owner.haste=Math.max(owner.haste||0,3);
    }
    if(e.boss&&!e.sub&&e.dk!=='iron')dropAt(e,A.lootRoll('boss').key,'b');
-   else if(!e.boss&&!e.sub&&Math.random()<.015)dropAt(e,A.lootRoll('event',undefined,{min:'m'}).key,'m');
+   else if(!e.boss&&!e.sub&&!e.alpha&&!e.minionOf&&Math.random()<.015)dropAt(e,A.lootRoll('event',undefined,{min:'m'}).key,'m');
   }
   return r;
  };
@@ -60,3 +60,4 @@ window.ECOS_LOOT12=function(A){
  A.bagView=function(){const r=oldBag.apply(this,arguments);decorate();return r;};
  A.lootDecorate=decorate;
 };
+

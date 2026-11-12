@@ -1,0 +1,183 @@
+{
+  "note": "Unassisted logic bot; not a full human campaign validation.",
+  "runs": [
+    {
+      "base": 25,
+      "job": "mage",
+      "seed": 1,
+      "assisted": false,
+      "ended": true,
+      "down": true,
+      "floor": 1,
+      "level": 5,
+      "time": 57.99999999999927,
+      "records": [
+        {
+          "floor": 1,
+          "level": 5,
+          "xp": 0,
+          "hp": 80,
+          "mp": 93,
+          "time": 0
+        }
+      ],
+      "ultimate": {
+        "sources": {
+          "combat": 14.00000000000199,
+          "hits": 29.24240312499802,
+          "damageTaken": 15.957596875000007,
+          "kills": 10.799999999999983
+        },
+        "uses": [],
+        "ready": [
+          43.13333333333345
+        ]
+      }
+    },
+    {
+      "base": 7,
+      "job": "guardian",
+      "seed": 2,
+      "assisted": false,
+      "ended": true,
+      "down": true,
+      "floor": 1,
+      "level": 5,
+      "time": 88.93333333333085,
+      "records": [
+        {
+          "floor": 1,
+          "level": 5,
+          "xp": 0,
+          "hp": 127,
+          "mp": 60,
+          "time": 0
+        }
+      ],
+      "ultimate": {
+        "sources": {
+          "combat": 17.133333333335656,
+          "damageTaken": 20.060234783145617,
+          "hits": 23.806431883518712,
+          "kills": 8.999999999999986
+        },
+        "uses": [],
+        "ready": [
+          50.16666666666638
+        ]
+      }
+    },
+    {
+      "base": 1,
+      "job": "support",
+      "seed": 3,
+      "assisted": false,
+      "ended": false,
+      "down": false,
+      "floor": 2,
+      "level": 5,
+      "time": 282.8333333333427,
+      "records": [
+        {
+          "floor": 1,
+          "level": 5,
+          "xp": 0,
+          "hp": 106,
+          "mp": 75,
+          "time": 0
+        },
+        {
+          "floor": 2,
+          "level": 5,
+          "xp": 60,
+          "hp": 106,
+          "mp": 75,
+          "time": 282.8333333333427
+        },
+        {
+          "stalled": true,
+          "floor": 2,
+          "time": 282.8333333333427
+        }
+      ],
+      "ultimate": {
+        "sources": {
+          "combat": 13.880000000002084,
+          "hits": 26.68612367322598,
+          "damageTaken": 16.83387632677197,
+          "kills": 12.59999999999998
+        },
+        "uses": [],
+        "ready": [
+          45.23333333333333
+        ]
+      }
+    },
+    {
+      "base": 133,
+      "job": "striker",
+      "seed": 4,
+      "assisted": false,
+      "ended": true,
+      "down": true,
+      "floor": 1,
+      "level": 5,
+      "time": 97.23333333333038,
+      "records": [
+        {
+          "floor": 1,
+          "level": 5,
+          "xp": 0,
+          "hp": 115,
+          "mp": 54,
+          "time": 0
+        }
+      ],
+      "ultimate": {
+        "sources": {
+          "combat": 16.11143348775201,
+          "damageTaken": 17.626666666666623,
+          "hits": 23.661899845581416,
+          "kills": 12.59999999999998
+        },
+        "uses": [],
+        "ready": [
+          48.666666666666465
+        ]
+      }
+    },
+    {
+      "base": 4,
+      "job": "mage",
+      "seed": 5,
+      "assisted": false,
+      "ended": true,
+      "down": true,
+      "floor": 1,
+      "level": 5,
+      "time": 50.19999999999971,
+      "records": [
+        {
+          "floor": 1,
+          "level": 5,
+          "xp": 0,
+          "hp": 82,
+          "mp": 93,
+          "time": 0
+        }
+      ],
+      "ultimate": {
+        "sources": {
+          "combat": 13.303663876576493,
+          "hits": 28.059637698626773,
+          "damageTaken": 16.03669842479674,
+          "kills": 12.59999999999998
+        },
+        "uses": [],
+        "ready": [
+          45.03333333333334
+        ]
+      }
+    }
+  ]
+}
