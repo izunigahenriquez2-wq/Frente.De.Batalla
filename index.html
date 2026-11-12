@@ -7335,15 +7335,26 @@ function tftBattle(teamA,teamB,seed,opts){
 const TFT_IDS=TFT_UNITS.map(u=>u.id);
 function tftNewGame(n,seed){
   const rng=tftRng(seed),E=TFT_ECON,G={rng,seed,n,round:0,pool:{},players:[],over:false,place:[],log:[]};G.legend=TFT_LEGENDS[(rng()*TFT_LEGENDS.length)|0];
-  for(const u of TFT_UNITS)G.pool[u.id]=E.pool[u.c-1];
+  for(const u of TFT_UNITS)G.pool[u.id]=TFT_OUT.includes(u.id)?0:E.pool[u.c-1];
   for(let i=0;i<n;i++)G.players.push({i,gold:E.startGold,level:E.startLevel,xp:0,hp:E.hp,bench:[],board:[],shop:[],lock:false,streak:0,alive:true,kc:0,bot:true,lastDmg:0,items:[]});
   for(const p of G.players){tftRoll(G,p,true);tftSetCap(G,p,TFT_STARTERS[(rng()*TFT_STARTERS.length)|0])}
   return G;
 }
 /* ---- Pokémon inicial (capitán): gratis, no ocupa espacio del tablero, no se puede vender ni mandar a la banca ---- */
-const TFT_STARTERS=[1,4,7,152,155,158,252,255,258,387,390,393];
+/* Iniciales: solo líneas cuyo Pokémon final tiene Mega con sprite en PMD (nada de legendarios), coste 2-3.
+   Charmander, Riolu, Abra, Swablu, Gastly, Ralts, Houndour, Meditite, Sableye, Mawile */
+const TFT_STARTERS=[4,447,63,333,92,280,228,307,302,303];
+/* Líneas retiradas de la tienda para equilibrar (coste 3 tenía 35 líneas): siguen existiendo para oleadas PvE, pero no salen en la tienda */
+const TFT_OUT=[304,387,220,255,328,252,390,349];   /* Aron, Turtwig, Swinub, Torchic, Trapinch, Treecko, Chimchar, Feebas */
+const TFT_FAV_W=3, TFT_FAV_PITY=.5, TFT_FAV_CAP=20;  /* sesgo de tienda hacia la línea del inicial */
 const tftBoardN=p=>{let n=0;for(const o of p.board)if(!o.cap)n++;return n};
-function tftStarterOpts(G,n){const L=TFT_STARTERS.slice(),o=[];for(let i=0;i<(n||3)&&L.length;i++)o.push(L.splice((G.rng()*L.length)|0,1)[0]);return o}
+function tftStarterOpts(G,n){  /* n opciones al azar, con roles distintos para que elegir sea comparar estilos de juego */
+  const L=TFT_STARTERS.slice(),o=[],roles=new Set();n=n||3;
+  while(o.length<n&&L.length){
+    const i=(G.rng()*L.length)|0,id=L.splice(i,1)[0],r=TFT_BY[id].r;
+    if(roles.has(r)&&L.some(x=>!roles.has(TFT_BY[x].r)))continue;
+    roles.add(r);o.push(id)}
+  return o}
 function tftSetCap(G,p,id){
   p.board=p.board.filter(o=>!o.cap);const U=TFT_BY[id]||null;if(!U)return null;
   const r=({Muro:0,Bruto:0,Veloz:1,Soporte:2,Control:2,Duelista:1,Mago:3,Francotirador:3})[U.r]||0;
@@ -7353,17 +7364,20 @@ const tftStage=r=>r<=3?1:1+Math.floor((r-4)/6)+1;  // etapa 2 = rondas 4-9 ...
 function tftRoll(G,p,free){
   if(!free){if(p.freeRolls>0)p.freeRolls--;else{const c=tftRollCost(G);if(p.gold<c)return false;p.gold-=c}}
   for(const s of p.shop)if(s)G.pool[s]++;
-  const od=TFT_ECON.odds[p.level]||TFT_ECON.odds[9];p.shop=[];
+  const od=TFT_ECON.odds[p.level]||TFT_ECON.odds[9];p.shop=[];let seen=0;
   for(let k=0;k<TFT_ECON.shop;k++){
     let x=G.rng()*100,c=0;for(;c<4;c++){if(x<od[c])break;x-=od[c]}
     let cand=TFT_UNITS.filter(u=>u.c===c+1&&G.pool[u.id]>0);
     while(!cand.length&&c>0){c--;cand=TFT_UNITS.filter(u=>u.c===c+1&&G.pool[u.id]>0)}
     if(!cand.length){p.shop.push(0);continue}
-    /* ponderado por copias restantes */
-    let tot=0;for(const u of cand)tot+=G.pool[u.id];let y=G.rng()*tot,pick=cand[0];
-    for(const u of cand){y-=G.pool[u.id];if(y<0){pick=u;break}}
+    /* ponderado por copias restantes; la línea del inicial pesa x3 (+0,5 por cada tienda sin verla) */
+    const wf=u=>{let w=G.pool[u.id];if(p.capId===u.id)w*=TFT_FAV_W+TFT_FAV_PITY*(p.miss||0);return w};
+    let tot=0;for(const u of cand)tot+=wf(u);let y=G.rng()*tot,pick=cand[0];
+    for(const u of cand){y-=wf(u);if(y<0){pick=u;break}}
+    if(pick.id===p.capId)seen=1;
     G.pool[pick.id]--;p.shop.push(pick.id);
   }
+  if(p.capId)p.miss=seen?0:Math.min(TFT_FAV_CAP,(p.miss||0)+1);
   return true;
 }
 let TFT_K=1;const tftKey=()=>TFT_K++;
@@ -8018,10 +8032,10 @@ function tfStart(){
   G.players[0].bot=false;G.profs=[{},{},{eco:1},{dup:10},{syn:2.5},{cost:2},{eco:1},{}];
   TFU.phase='starter';tfBuildUI();tfStarterPick();
 }
-/* elección del Pokémon inicial (1 de 3 al azar entre los 12 iniciales) */
+/* elección del Pokémon inicial (1 de 3 al azar entre los 10 iniciales, siempre con roles distintos) */
 function tfStarterPick(opts,end){
   const G=TFU.G,m=document.getElementById('tfModal');if(!m)return;opts=opts||tftStarterOpts(G,3);m.dataset.k='starter';TFU.sopts=opts;
-  m.innerHTML=`<div class="tf-stp"><div class="tf-stb"><h2>⭐ Elige tu Pokémon inicial</h2><p>Será el líder de tu equipo: pelea gratis, <b>no ocupa espacio</b> del tablero, no se vende y sube de ★ con copias de su línea.${end?' <b id="tfStT"></b>':''}</p><div class="tf-stc" id="tfStC">${opts.map(id=>`<button class="tf-stk" onclick="tfStarterGo(${id})">${tfCardHtml(id,1)}<span class="tf-stg">Elegir</span></button>`).join('')}</div></div></div>`;
+  m.innerHTML=`<div class="tf-stp"><div class="tf-stb"><h2>⭐ Elige tu Pokémon inicial</h2><p>Será el líder de tu equipo: pelea gratis, <b>no ocupa espacio</b> del tablero, no se vende y sube de ★ con copias de su línea. <b>Tu tienda mostrará más copias de su línea.</b>${end?' <b id="tfStT"></b>':''}</p><div class="tf-stc" id="tfStC">${opts.map(id=>`<button class="tf-stk" onclick="tfStarterGo(${id})">${tfCardHtml(id,1)}<span class="tf-stg">Elegir</span></button>`).join('')}</div></div></div>`;
   clearInterval(TFU.stIv);if(end){const f=()=>{const e=document.getElementById('tfStT');if(!e)return clearInterval(TFU.stIv);e.textContent='('+Math.max(0,Math.ceil((end-Date.now())/1000))+' s)'};f();TFU.stIv=setInterval(f,500)}
 }
 function tfStarterClose(){clearInterval(TFU.stIv);const m=document.getElementById('tfModal');if(m&&m.dataset.k==='starter'){m.innerHTML='';m.dataset.k=''}}
@@ -8318,7 +8332,7 @@ function tfRender(){
   if(typeof tnSyncLay==='function')tnSyncLay();
 }
 function tfTraitInfo(k){
-  const T=TFT_TRAITS[k],mem=TFT_UNITS.filter(u=>u.tr.includes(k));
+  const T=TFT_TRAITS[k],mem=TFT_UNITS.filter(u=>u.tr.includes(k)&&!TFT_OUT.includes(u.id));
   const fx=e=>Object.keys(e).map(x=>'+'+e[x]+(TF_EFF[x]||' '+x)).join(', ');
   const sh=document.getElementById('tfSheet');
   sh.innerHTML=`<div class="tf-modal" onclick="if(event.target===this)tfA('close')"><div class="tf-card"><button class="tf-x" onclick="tfA('close')">✕</button><h2 style="color:${TF_TC[k]||'#fff'}">${k}</h2>
