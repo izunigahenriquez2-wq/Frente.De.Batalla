@@ -1403,6 +1403,7 @@ button{-webkit-tap-highlight-color:transparent}
 /* ===== Tactics móvil v2: sin solapes, botón de pantalla completa ===== */
 .tf-tools .tf-fs{display:inline-block}
 .tf-ov:not(:empty)~.tf-odds{display:none}
+.tf-menu{justify-content:flex-start}.tf-menu::before,.tf-menu::after{content:'';flex:1 0 0;min-height:0}  /* centrado que no corta el título cuando el contenido no cabe */
 @media(max-width:560px){.tf-sum .sum-h{flex-wrap:wrap;row-gap:4px}.tf-sum .sum-c{order:3;flex:1 1 100%;flex-wrap:wrap;gap:4px}.tf-sum .sum-r{flex:1 1 0;min-width:0}}
 .tf-sc .ap{right:18px}.tf-sc .pb{max-width:calc(100% - 54px)}
 @media(max-width:899px){
