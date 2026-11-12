@@ -133,3 +133,7 @@ Skins shiny (assets/actors/2xxxx, assets/shiny): sprites animados de PMDCollab/S
 Articuno y Moltres de Galar, Mega Mewtwo Y y Giratina Origen: carpeta Ajustes aportada por el autor del proyecto (artistas originales: PMDCollab y Pokémon Ranger). Mew: PMDCollab.
 
 Hojas de la Guardería (pmd/<id>.png de 77 especies añadidas), sprites shiny de Beedrill, Dragonair, Articuno, Zapdos, Moltres, Mewtwo y Pichu, y previews animadas del selector: PMDCollab/SpriteCollab (https://github.com/PMDCollab/SpriteCollab). Los créditos de cada autor están en el credits.txt de cada carpeta assets/actors/200xx.
+
+Sprites Mega (Tactics): PMDCollab / SpriteCollab (https://github.com/PMDCollab/SpriteCollab), formas Mega de Charizard X, Lucario, Alakazam, Altaria, Gengar,
+Gardevoir, Houndoom, Medicham, Sableye y Mawile. Licencia CC BY-NC 4.0; los autores de cada sprite figuran en el archivo credits.txt de su carpeta en el repositorio.
+Convertidos con tools/gen_mega_sprites.py (recorte y atlas, sin modificar el dibujo).
