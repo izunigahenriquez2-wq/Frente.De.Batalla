@@ -7388,10 +7388,12 @@ function tftRoll(G,p,free){
   if(!free){if(p.freeRolls>0)p.freeRolls--;else{const c=tftRollCost(G);if(p.gold<c)return false;p.gold-=c}}
   for(const s of p.shop)if(s)G.pool[s]++;
   const od=TFT_ECON.odds[p.level]||TFT_ECON.odds[9];p.shop=[];let seen=0;
+  /* una línea que ya tienes en ★3 no vuelve a salir en tu tienda: no gastas rerolls ni huecos en copias inútiles */
+  const done=new Set();for(const o of p.board.concat(p.bench))if(o.star>=3)done.add(o.u);
   for(let k=0;k<TFT_ECON.shop;k++){
     let x=G.rng()*100,c=0;for(;c<4;c++){if(x<od[c])break;x-=od[c]}
-    let cand=TFT_UNITS.filter(u=>u.c===c+1&&G.pool[u.id]>0);
-    while(!cand.length&&c>0){c--;cand=TFT_UNITS.filter(u=>u.c===c+1&&G.pool[u.id]>0)}
+    let cand=TFT_UNITS.filter(u=>u.c===c+1&&G.pool[u.id]>0&&!done.has(u.id));
+    while(!cand.length&&c>0){c--;cand=TFT_UNITS.filter(u=>u.c===c+1&&G.pool[u.id]>0&&!done.has(u.id))}
     if(!cand.length){p.shop.push(0);continue}
     /* ponderado por copias restantes; la línea del inicial pesa x3 (+0,5 por cada tienda sin verla) */
     const wf=u=>{let w=G.pool[u.id];if(p.capId===u.id)w*=TFT_FAV_W+TFT_FAV_PITY*(p.miss||0);return w};
@@ -7422,6 +7424,7 @@ function tftMerge(G,p){
       const g=m[k].slice(0,3);
       g.sort((a,b)=>(b.cap?2:b.r>=0?1:0)-(a.cap?2:a.r>=0?1:0));      /* conserva la posición del que está en tablero */
       const keep=g[0];keep.star++;
+      if(keep.star>=3)for(let i=0;i<p.shop.length;i++)if(p.shop[i]===keep.u){G.pool[keep.u]++;p.shop[i]=0}   /* ★3 completado: sale de la tienda actual */
       for(const d of [g[1],g[2]]){tftReturn(p,d);let i=p.bench.indexOf(d);if(i>=0)p.bench.splice(i,1);else{i=p.board.indexOf(d);if(i>=0)p.board.splice(i,1)}}
       again=true;break}
   }
