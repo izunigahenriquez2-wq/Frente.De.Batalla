@@ -7187,6 +7187,20 @@ function tftApplyTraits(units,team,specs){
   return {act,mods};
 }
 
+/* ---- MEGAEVOLUCIÓN del inicial (★3): 7 s al empezar cada combate; cambia la habilidad, no el rol ---- */
+const TFT_MEGA_T=70;
+const TFT_MEGA_DEF={
+ 4:{n:'Charizard X',ab:'cx',abn:'Garra Dragón',d:'Ataque en área 110%+fuego (quemadura 3 s). +30% ataque, +20% vel., +25 armadura.',bf:{at:.3,as:.2},ar:25,mr:0,fx:'fire'},
+ 447:{n:'Lucario',ab:'aura',abn:'Esfera Aural',d:'Esfera que daña al objetivo y a 2 cercanos. +25% ataque, +25% vel., +15% daño.',bf:{at:.25,as:.25,dm:.15},ar:10,mr:10,fx:'aura'},
+ 63:{n:'Alakazam',ab:'psy',abn:'Psicoonda',d:'Onda psíquica en área que ralentiza 30% (3 s). +35% vel., +30% daño.',bf:{as:.35,dm:.3},ar:0,mr:20,fx:'psy'},
+ 333:{n:'Altaria',ab:'song',abn:'Canto Dragón',d:'Daña a 4 enemigos y da escudo a aliados cercanos. +40 RM.',bf:{at:.1},ar:0,mr:40,fx:'dragon'},
+ 92:{n:'Gengar',ab:'curse',abn:'Maldición Mega',d:'Gran golpe sombrío + maldición (daño en el tiempo) y aturde 1 s. +20% ataque/vel., +15% daño.',bf:{at:.2,as:.2,dm:.15},ar:0,mr:0,fx:'ghost'},
+ 280:{n:'Gardevoir',ab:'moon',abn:'Fuerza Lunar',d:'Cura y escuda a todo el equipo cercano. +30% ataque, +30 armadura y RM.',bf:{at:.3},ar:30,mr:30,fx:'fairy'},
+ 228:{n:'Houndoom',ab:'inferno',abn:'Llamarada Infernal',d:'Llamarada en área con quemadura. +30% daño, +25% vel., roba 25% de vida.',bf:{at:.2,as:.25,dm:.3},ar:0,mr:0,ls:.25,fx:'dark'},
+ 307:{n:'Medicham',ab:'zen',abn:'Palmeo Zen ×3',d:'Tres golpes zen rápidos que curan al usuario. +40% vel., +20 armadura.',bf:{as:.4,dm:.15},ar:20,mr:20,fx:'zen'},
+ 302:{n:'Sableye',ab:'dirty',abn:'Rebote Mágico + Juego Sucio',d:'Salta al enemigo más lejano, daño por su ataque, le baja 25% ataque y lo quema; escudo 12%. Refleja aturdimiento/ralentización. +30% vel., +20% daño.',bf:{as:.3,dm:.2},ar:15,mr:15,refl:1,fx:'dark'},
+ 303:{n:'Mawile',ab:'jaws',abn:'Mandíbula Doble',d:'Doble mordisco que aturde 1,5 s y da escudo propio. +50 armadura/RM, +25% ataque.',bf:{at:.25},ar:50,mr:50,fx:'steel'}
+};
 function tftBattle(teamA,teamB,seed,opts){
   opts=opts||{};const rng=tftRng(seed),log=opts.log?[]:null;
   const units=[],occ=new Array(HX_N).fill(-1);
@@ -7209,7 +7223,7 @@ function tftBattle(teamA,teamB,seed,opts){
       u.slow=(m.slow||0)/100;u.stunCh=(m.stun||0)/100;u.regen=(m.regen||0)/100;u.exec=(m.exec||0)/100;u.dr=Math.min(.6,(m.dr||0)/100);
       u.ap=(m.ap||0)/100;u.mana=Math.min(u.mmax-1,u.mana+(m.m0||0));u.manaG=m.mana||0;u.sh0=(m.shield||0)/100;u.back=m.back||0;u.pen=Math.min(.8,(m.pen||0)/100);
       u.revive=(m.revive||0)/100;
-      u.hp=u.maxhp;u.sh=0;u.shE=0;u.cd=0;u.mv=0;u.tgt=-1;u.lock=0;u.stunE=0;u.slE=0;u.slP=0;u.bf=[];u.dots=[];u.alive=true;u.dmg=0;u.heal=0;u.kills=0;
+      u.mega=(s0cap(specs[tm][i])&&u.star>=3&&TFT_MEGA_DEF[u.U.id])||null;u.megaOn=false;u.hp=u.maxhp;u.sh=0;u.shE=0;u.cd=0;u.mv=0;u.tgt=-1;u.lock=0;u.stunE=0;u.slE=0;u.slP=0;u.bf=[];u.dots=[];u.alive=true;u.dmg=0;u.heal=0;u.kills=0;
       u.cell=tftCell(tm,s2lr(specs[tm][i]),specs[tm][i].c);u.idx=units.length;units.push(u);
       if(u.sh0>0){u.sh=u.maxhp*u.sh0;u.shE=50}
       u.regenK=u.regen;
@@ -7217,6 +7231,7 @@ function tftBattle(teamA,teamB,seed,opts){
     if(opts.traits)opts.traits[tm]=act;
   }
   function s2lr(s){return s.r}
+  function s0cap(s){return !!s.cap}
   /* orden de actuación barajado una vez (evita ventaja al equipo 0) */
   const order=units.map((u,i)=>i);
   for(let i=order.length-1;i>0;i--){const j=(rng()*(i+1))|0;const t=order[i];order[i]=order[j];order[j]=t}
@@ -7246,6 +7261,7 @@ function tftBattle(teamA,teamB,seed,opts){
       d=d*ty*100/(100+def);
     }
     d*=1-v.dr;
+    if(src&&src.megaOn)d*=1+hasBuff(src,'dm');
     if(v.sh>0&&v.shE>tick){const a=Math.min(v.sh,d);v.sh-=a;d-=a}
     v.hp-=d;v.taken=(v.taken||0)+d;if(src)src.dmg+=d;
     if(log&&auto!==1)ev([tick,'h',src?src.idx:-1,v.idx,Math.round(d)]);
@@ -7257,6 +7273,8 @@ function tftBattle(teamA,teamB,seed,opts){
     return d;
   }
   function hurtRaw(src,v,x){if(!v.alive)return;const d=x*100/(100+v.ar);v.hp-=d;v.taken=(v.taken||0)+d;if(v.hp<=0)die(v,src)}
+  function stunU(src,v,until){if(v.megaOn&&v.mega.refl&&src&&src.alive&&src.tm!==v.tm){src.stunE=Math.max(src.stunE,until);return}v.stunE=Math.max(v.stunE,until)}
+  function slowU(src,v,e,p){if(v.megaOn&&v.mega.refl&&src&&src.alive&&src.tm!==v.tm){v=src}v.slE=e;v.slP=Math.max(v.slE>tick?v.slP:0,p)}
   function enemiesNear(u,cell,r){const L=[];for(const e of units)if(e.alive&&e.tm!==u.tm&&HX_D[cell][e.cell]<=r)L.push(e);return L}
   function alliesNear(u,cell,r){const L=[];for(const e of units)if(e.alive&&e.tm===u.tm&&HX_D[cell][e.cell]<=r)L.push(e);return L}
   const A_DMG=(u)=>u.ph?'p':'s';
@@ -7264,8 +7282,25 @@ function tftBattle(teamA,teamB,seed,opts){
   function cast(u){
     const t=u.tgt>=0&&units[u.tgt].alive?units[u.tgt]:null;
     const K=TFT_STAR.ap[u.st]*u.cm,at=curAt(u),P=1+u.ap,dk=A_DMG(u);
-    ev([tick,'c',u.idx,u.tgt,u.U.ab]);
-    switch(u.U.ab){
+    const AB=u.megaOn?u.mega.ab:u.U.ab;
+    ev([tick,'c',u.idx,u.tgt,AB]);
+    switch(AB){
+      case 'cx':if(t)for(const e of enemiesNear(u,t.cell,1)){hurt(u,e,(110*K+1.2*at)*P,dk);e.dots.push({e:tick+30,dps:(25*K+.3*at)*P,src:u})}break;
+      case 'aura':if(t){hurt(u,t,(100*K+1.2*at)*P,dk);const L=enemiesNear(u,t.cell,2).filter(e=>e!==t).sort((a,b)=>HX_D[t.cell][a.cell]-HX_D[t.cell][b.cell]||a.idx-b.idx).slice(0,2);for(const e of L)hurt(u,e,(60*K+.7*at)*P,dk)}break;
+      case 'psy':if(t)for(const e of enemiesNear(u,t.cell,2)){hurt(u,e,(100*K+1.15*at)*P,dk);slowU(u,e,tick+30,.3)}break;
+      case 'song':{const pool=units.filter(e=>e.alive&&e.tm!==u.tm).sort((a,b)=>HX_D[u.cell][a.cell]-HX_D[u.cell][b.cell]||a.idx-b.idx).slice(0,4);
+        for(const e of pool)hurt(u,e,(80*K+1.0*at)*P,dk);
+        for(const e of alliesNear(u,u.cell,2)){e.sh=Math.max(e.sh,0)+(40*K+.08*e.maxhp)*P;e.shE=tick+30}}break;
+      case 'curse':if(t){hurt(u,t,(110*K+1.3*at)*P,dk);if(t.alive){t.dots.push({e:tick+40,dps:(35*K+.4*at)*P,src:u});stunU(u,t,tick+10)}}break;
+      case 'moon':{const al=alliesNear(u,u.cell,3);for(const e of al){const h=(70*K+.5*at)*P;e.hp=Math.min(e.maxhp,e.hp+h);u.heal+=h;e.sh=Math.max(e.sh,0)+(40*K+.05*e.maxhp)*P;e.shE=tick+30}}break;
+      case 'inferno':if(t)for(const e of enemiesNear(u,t.cell,1)){hurt(u,e,(95*K+1.1*at)*P,dk);e.dots.push({e:tick+30,dps:(30*K+.35*at)*P,src:u})}break;
+      case 'zen':if(t)for(let i=0;i<3&&t.alive;i++){const d=hurt(u,t,(45*K+.6*at)*P,dk);const h=d*.5;u.hp=Math.min(u.maxhp,u.hp+h);u.heal+=h}break;
+      case 'dirty':{let far=null,fd=-1;for(const e of units)if(e.alive&&e.tm!==u.tm){const d=HX_D[u.cell][e.cell];if(d>fd){fd=d;far=e}}
+        if(far){const f=freeAdj(far.cell);if(f>=0){occ[u.cell]=-1;u.cell=f;occ[f]=u.idx;ev([tick,'m',u.idx,f])}
+          u.tgt=far.idx;hurt(u,far,(70*K+1.0*at+.7*curAt(far))*P,dk);
+          if(far.alive){far.bf.push({e:tick+40,at:-.25});far.dots.push({e:tick+30,dps:(25*K+.3*at)*P,src:u})}
+          u.sh=Math.max(u.sh,0)+u.maxhp*.12;u.shE=tick+30}}break;
+      case 'jaws':if(t){for(let i=0;i<2;i++)for(const e of enemiesNear(u,t.cell,i?0:1))hurt(u,e,(40*K+.55*at)*P,dk);if(t.alive)stunU(u,t,tick+15);u.sh=Math.max(u.sh,0)+u.maxhp*.15;u.shE=tick+30}break;
       case 'bolt':if(t)hurt(u,t,(90*K+1.3*at)*P,dk);break;
       case 'blast':if(t)for(const e of enemiesNear(u,t.cell,1))hurt(u,e,(70*K+1.0*at)*P,dk);break;
       case 'wave':if(t){const L=enemiesNear(u,t.cell,3).filter(e=>e!==t).sort((a,b)=>HX_D[t.cell][a.cell]-HX_D[t.cell][b.cell]||a.idx-b.idx).slice(0,2);
@@ -7280,11 +7315,11 @@ function tftBattle(teamA,teamB,seed,opts){
         if(best){const h=(120*K+.8*at)*P;best.hp=Math.min(best.maxhp,best.hp+h);u.heal+=h;
           for(const e of alliesNear(u,best.cell,1))if(e!==best){const g=h*.5;e.hp=Math.min(e.maxhp,e.hp+g);u.heal+=g}}}break;
       case 'shield':{const v=(90*K+.10*u.maxhp)*P;for(const e of alliesNear(u,u.cell,1)){e.sh=Math.max(e.sh,0)+v;e.shE=tick+40}}break;
-      case 'stun':if(t){hurt(u,t,(55*K+.9*at)*P,dk);t.stunE=Math.max(t.stunE,tick+15)}break;
-      case 'freeze':if(t)for(const e of enemiesNear(u,t.cell,1)){hurt(u,e,(50*K+.7*at)*P,dk);e.slE=tick+30;e.slP=Math.max(e.slE>tick?e.slP:0,.4)}break;
+      case 'stun':if(t){hurt(u,t,(55*K+.9*at)*P,dk);stunU(u,t,tick+15)}break;
+      case 'freeze':if(t)for(const e of enemiesNear(u,t.cell,1)){hurt(u,e,(50*K+.7*at)*P,dk);slowU(u,e,tick+30,.4)}break;
       case 'rally':for(const e of alliesNear(u,u.cell,2)){e.bf.push({e:tick+40,as:.3});e.hp=Math.min(e.maxhp,e.hp+40*K*P)}break;
       case 'poisonCloud':if(t)for(const e of enemiesNear(u,t.cell,2))e.dots.push({e:tick+40,dps:(30*K+.35*at)*P,src:u});break;
-      case 'quake':for(const e of enemiesNear(u,u.cell,1)){hurt(u,e,(60*K+.9*at)*P,dk);e.stunE=Math.max(e.stunE,tick+7)}break;
+      case 'quake':for(const e of enemiesNear(u,u.cell,1)){hurt(u,e,(60*K+.9*at)*P,dk);stunU(u,e,tick+7)}break;
       case 'selfBuff':u.bf.push({e:tick+50,at:.45,as:.3});u.hp=Math.min(u.maxhp,u.hp+u.maxhp*.12);break;
     }
   }
@@ -7303,8 +7338,12 @@ function tftBattle(teamA,teamB,seed,opts){
       if(far){const f=freeAdj(far.cell);if(f>=0){occ[u.cell]=-1;u.cell=f;occ[f]=u.idx}}}}
   for(const u of units)ev([0,'s',u.idx,u.cell,u.U.id,u.star,u.tm,Math.round(u.maxhp),u.s.k,u.boss?1:0,u.mmax,Math.round(u.mana)]);
   const rowOf=c=>(c/HX_C)|0;
+  function megaSet(u,on){const M=u.mega;if(on){u.megaOn=true;u.ar+=M.ar||0;u.mr+=M.mr||0;u.ls+=M.ls||0;u.bf.push(Object.assign({e:TFT_MEGA_T+1,mg:1},M.bf));u.mana=u.mmax;ev([tick,'M',u.idx,1])}
+    else{u.megaOn=false;u.ar-=M.ar||0;u.mr-=M.mr||0;u.ls-=M.ls||0;u.bf=u.bf.filter(b=>!b.mg);u.mana=0;ev([tick,'M',u.idx,0])}}
+  for(const u of units)if(u.mega)megaSet(u,true);
   while(tick<LAST&&alive[0]>0&&alive[1]>0){
     tick++;
+    if(tick===TFT_MEGA_T+1)for(const u of units)if(u.megaOn)megaSet(u,false);
     if(log&&tick%5===0)for(const u of units)if(u.alive)ev([tick,'H',u.idx,Math.round(u.hp),Math.round(u.sh),Math.round(u.mana)]);
     if(tick>SD&&(tick-SD)%10===0){const f=.04*(1+(tick-SD)/100);for(const u of units)if(u.alive){u.hp-=u.maxhp*f;if(u.hp<=0)die(u,null)}}
     for(const i of order){
@@ -7321,7 +7360,7 @@ function tftBattle(teamA,teamB,seed,opts){
       if(!t||!t.alive||(tick%TPS===0&&HX_D[u.cell][t.cell]>u.rg)){u.tgt=nearest(u);t=u.tgt>=0?units[u.tgt]:null}
       if(!t)continue;
       const d=HX_D[u.cell][t.cell];
-      if(u.mana>=u.mmax&&d<=Math.max(u.rg,1)+ (u.U.ab==='heal'||u.U.ab==='shield'||u.U.ab==='rally'||u.U.ab==='selfBuff'?9:0)){
+      if(u.mana>=u.mmax&&d<=Math.max(u.rg,1)+ (u.megaOn?(u.mega.ab==='moon'||u.mega.ab==='song'?9:0):(u.U.ab==='heal'||u.U.ab==='shield'||u.U.ab==='rally'||u.U.ab==='selfBuff'?9:0))){
         u.mana=0;u.lock=5;cast(u);continue}
       if(d<=u.rg){
         if(u.cd<=0){
@@ -7333,8 +7372,8 @@ function tftBattle(teamA,teamB,seed,opts){
             if(t.alive){
               if(u.burn>0)t.dots.push({e:tick+30,dps:curAt(u)*u.burn,src:u});
               if(u.poison>0)t.dots.push({e:tick+40,dps:curAt(u)*u.poison,src:u});
-              if(u.slow>0){t.slE=tick+30;t.slP=Math.max(t.slE>tick?t.slP:0,u.slow)}
-              if(u.stunCh>0&&rng()<u.stunCh)t.stunE=Math.max(t.stunE,tick+7);
+              if(u.slow>0)slowU(u,t,tick+30,u.slow);
+              if(u.stunCh>0&&rng()<u.stunCh)stunU(u,t,tick+7);
             }
           }
           u.mana=Math.min(u.mmax,u.mana+10+u.manaG);
@@ -7463,7 +7502,7 @@ function tftCreeps(round,G){
 }
 const TFT_PVE={1:1,2:2,3:3,9:9,16:16,20:20,23:23};
 const tftPveGold=R=>!TFT_PVE[R]?0:(R===9||R===16||R===20||R===23?3:2);   /* oro extra fijo por rondas PvE */
-function tftSpecs(p){const a=p.board.map(o=>({u:o.u,star:o.star,r:o.r,c:o.c,k:o.k,it:o.it||[]}));a.aug=p.aug||[];return a}
+function tftSpecs(p){const a=p.board.map(o=>({u:o.u,star:o.star,r:o.r,c:o.c,k:o.k,it:o.it||[],cap:o.cap?1:0}));a.aug=p.aug||[];return a}
 /* Avanza una ronda completa: combate de todos, daño, economía. */
 function tftPlayRound(G,opts){
   opts=opts||{};G.round++;const R=G.round,E=TFT_ECON,live=G.players.filter(p=>p.alive);
@@ -7926,9 +7965,26 @@ function tvUPos(B,u,now){
 function tvHitFx(B,u,v,now,delay){
   const T=TFT_BY[u.id],F=TFT_FXU[u.id];if(!F)return;
 }
+/* efectos visuales de la Megaevolución: aura (fondo), self=[efecto,escala] sobre el lanzador, tgt=[efecto,escala] sobre el objetivo, hit=efecto en cada impacto */
+const TFT_MEGA_V={
+ 4:{aura:'Mega_Background_Red',self:['Flare_Blitz_Charge_Front',1.6],tgt:['Fire_Blast',1.37],hit:'Fire_Spin_Front'},
+ 447:{aura:'Mega_Background_Light_Blue',self:['Focus_Energy',1.5],tgt:['Aura_Sphere',1.23],hit:'Focus_Blast_Hit'},
+ 63:{aura:'Mega_Background_Yellow',self:['Psych_Up',1.5],tgt:['Psycho_Cut_Hole',1.49],hit:'Psycho_Shift_Hit'},
+ 333:{aura:'Mega_Background_White',self:['Chatter_Waves',2.6],tgt:['Dragon_Pulse_Charge',1.04],hit:'Chatter_Notes'},
+ 92:{aura:'Mega_Background_Red',self:['Destiny_Bond',1.5],tgt:['Curse',1.23],hit:'Gunk_Shot_Hit'},
+ 280:{aura:'Mega_Background_White',self:['Lunar_Dance_Moon',2.6],tgt:null,hit:'Charm_Heart'},
+ 228:{aura:'Mega_Background_Red',self:['Nasty_Plot',1.4],tgt:['Flamethrower_2',1.37],hit:'Fire_Fang_Fang'},
+ 307:{aura:'Mega_Background_Yellow',self:['Focus_Energy',1.4],tgt:['Force_Palm_Hand',1.1],hit:'Arm_Thrust'},
+ 302:{aura:'Mega_Background_Light_Blue',self:['Taunt_Veins',1.5],tgt:['Torment',1.1],hit:'Thief_Hit'},
+ 303:{aura:'Mega_Background_Light_Blue',self:['Swords_Dance',1.6],tgt:['Giga_Impact_Front',1.23],hit:'Metal_Burst_Hit'}
+};
 function tvEvent(B,e,now){
   const k=e[1],U=B.u;
   if(k==='s'){U[e[2]]={idx:e[2],cell:e[3],fc:e[3],m0:0,m1:0,id:TFT_BY[e[4]].f[e[5]-1],base:e[4],star:e[5],tm:e[6],boss:e[9]||0,mm:e[10]||0,mn:e[11]||0,mnS:e[11]||0,hp:e[7],mx:e[7],hpS:e[7],sh:0,alive:1,an:'I',t0:now,once:0,face:0,flash:0,dead:0}}
+  else if(k==='M'){const u=U[e[2]];if(!u)return;const[a,b]=tvUPos(B,u,now);
+    if(e[3]){u.mega=1;u.id=TFT_MEGA[u.base];B.tx.push({s:'¡MEGAEVOLUCIÓN!',x:a,y:b-TV.R*2.4,t0:now,col:'#ff9de2',big:1});
+      const V=TFT_MEGA_V[u.base];if(V)tvFxAdd(B.fx,{n:V.aura,t0:now,dur:900,x:a,y:b-TV.R*.5,s:1.8})}
+    else{u.mega=0;u.id=TFT_BY[u.base].f[u.star-1];B.tx.push({s:'Fin de la Mega',x:a,y:b-TV.R*2,t0:now,col:'#cfd8ff',big:0,sm:1})}}
   else if(k==='m'){const u=U[e[2]];if(!u||!u.alive)return;u.fc=u.cell;u.cell=e[3];u.m0=now;u.m1=now+270}
   else if(k==='a'){
     const u=U[e[2]],v=U[e[3]];if(!u||!v)return;const F=TFT_FXU[u.base],bf=F.b;
@@ -7946,6 +8002,11 @@ function tvEvent(B,e,now){
     const u=U[e[2]];if(!u)return;const F=TFT_FXU[u.base],A=F.a,tpl=TFT_BY[u.base].ab;
     u.an=tvEnt(u.id,'C')?'C':'A';u.t0=now;u.once=1;u.cast=now;
     const v=U[e[3]];const[x1,y1]=tvUPos(B,u,now);
+    if(u.mega){const V=TFT_MEGA_V[u.base],MD=TFT_MEGA_DEF[u.base];if(v){const[x2]=tvUPos(B,v,now);u.face=x2>x1?1:-1}
+      B.tx.push({s:MD.abn,x:x1,y:y1-TV.R*2.1,t0:now,col:'#ffb3ec',big:0,sm:1});
+      if(V.self)tvFxAdd(B.fx,{n:V.self[0],t0:now+60,dur:800,x:x1,y:y1-TV.R*.5,s:V.self[1]});
+      if(V.tgt&&v)B.sch.push({at:now+220,fn:(n)=>{const[a,b]=tvUPos(B,v,n);tvFxAdd(B.fx,{n:V.tgt[0],t0:n,dur:800,x:a,y:b-TV.R*.5,s:V.tgt[1]})}});
+      return}
     if(v){const[x2]=tvUPos(B,v,now);u.face=x2>x1?1:-1}
     B.tx.push({s:F.n,x:x1,y:y1-TV.R*2.1,t0:now,col:'#9fe8ff',big:0,sm:1});
     const self={selfBuff:1.5,rally:2.4,shield:2.4,quake:2.6,heal:0};
@@ -7961,6 +8022,8 @@ function tvEvent(B,e,now){
   }
   else if(k==='h'){
     const u=U[e[2]],v=U[e[3]];if(!v)return;
+    if(u&&u.mega){const V=TFT_MEGA_V[u.base];B.sch.push({at:now+200,fn:(n)=>{const[a,b]=tvUPos(B,v,n);tvFxAdd(B.fx,{n:V.hit,t0:n,dur:500,x:a,y:b-TV.R*.5,s:1.3});
+      v.flash=n+160;B.tx.push({s:String(e[4]),x:a,y:b-TV.R*1.2,t0:n,col:'#ff9de2',big:1})}});return}
     const F=u?TFT_FXU[u.base]:null,tpl=u?TFT_BY[u.base].ab:'',A=F?F.a:['','',''],[x2,y2]=tvUPos(B,v,now);
     let delay=u&&['leap'].includes(tpl)?140:60,tr=0;
     if(u&&A[0]&&tpl!=='quake'&&tpl!=='leap'){const[x1,y1]=tvUPos(B,u,now),P=TFT_PRJ[A[0]];tr=Math.max(160,Math.hypot(x2-x1,y2-y1)/(TV.R*14)*1000);
@@ -7987,6 +8050,7 @@ function tvBattleDraw(B){
     const u=o.u,fadeA=u.alive?1:Math.max(0,1-(now-u.dead)/700);
     u.hpS+=(u.hp-u.hpS)*.2;u.mnS+=((u.mn||0)-u.mnS)*.2;
     tvShadow(o.x,o.y,u.boss?2.1:1);
+    if(u.mega&&u.alive){const V=TFT_MEGA_V[u.base],m=V&&TFT_FXM[V.aura],im=m&&tvFx(V.aura);if(im){const H=m[0],fr=Math.floor(now/90)%m[1],s=1.7*TV.R/20;cx.save();cx.globalAlpha=.65;cx.drawImage(im,fr*H,0,H,H,o.x-H*s/2,o.y-TV.R*.5-H*s/2,H*s,H*s);cx.restore()}}
     let code=u.an,once=u.once,t=(now-u.t0)*1;
     if(u.once&&t>(tvEnt(u.id,code)?tvEnt(u.id,code)[1][6].reduce((a,b)=>a+b,0):400)&&u.alive){u.once=0;u.an='I';code='I';once=0}
     if(!u.once&&u.alive)code=o.mv?'W':'I';
@@ -8387,7 +8451,7 @@ function tfSheet(){
    <div class="tf-ab"><b>${TFT_FXU[U.id].n}</b> <small>(Maná ${R.m0}/${R.mana})</small><p>${TF_TPL[U.ab]}</p></div>
    <div class="tf-sy">${U.tr.map(tfChip).join('')}</div>
    <div class="tf-eq">${(o.it||[]).map((x,i)=>`<span>${tfItChip(x,-1)}<small>${TFT_ITEMS[x].n}<br>${tfItFx(TFT_ITEMS[x].e)}</small><button onclick="tfUnequip(${i})">Quitar</button></span>`).join('')||'<small class="tf-mu">Sin objetos (máx. 3)</small>'}</div>
-   ${o.cap?'<div class="tf-capn">⭐ Tu Pokémon inicial: no ocupa espacio del tablero y no se vende. Sube de ★ con copias de su línea.</div>':`<button class="tf-sell" onclick="tfA('sell')">Vender por ${sell} ●</button>`}</div>`;
+   ${o.cap?'<div class="tf-capn">⭐ Tu Pokémon inicial: no ocupa espacio del tablero y no se vende. Sube de ★ con copias de su línea.</div>'+(TFT_MEGA_DEF[o.u]?`<div class="tf-capn">✨ <b>${o.star>=3?'Mega activa':'Al llegar a ★3'}:</b> se megaevoluciona ${TFT_MEGA_T/10} s al inicio de cada combate → <b>${TFT_MEGA_DEF[o.u].n}</b>, ${TFT_MEGA_DEF[o.u].abn}: ${TFT_MEGA_DEF[o.u].d}</div>`:''):`<button class="tf-sell" onclick="tfA('sell')">Vender por ${sell} ●</button>`}</div>`;
 }
 
 /* ---------- objetos ---------- */
